@@ -3,118 +3,71 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ArcadiaCorps Web</title>
+<title>GPT-4 Web</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
-  body { background: #0a0a0f; font-family: system-ui; }
- .card { background: #15151d; border: 1px solid #2a2a35; }
- .btn-gradient { background: linear-gradient(90deg, #3b82f6, #9333ea); }
- .active { border: 2px solid #3b82f6; }
+  body { background: #0a0a0f; }
+.card { background: #15151d; border: 1px solid #2a2a35; }
+.btn-gradient { background: linear-gradient(90deg, #3b82f6, #9333ea); }
 </style>
 </head>
-<body class="text-white">
+<body class="text-white font-sans">
 
-<div class="max-w-3xl mx-auto p-4">
-  <!-- Header -->
+<div class="max-w-2xl mx-auto p-4">
   <div class="flex items-center gap-2 mb-6">
     <span class="text-yellow-400 text-2xl">⚡</span>
-    <h1 class="text-2xl font-bold">ArcadiaCorps Web</h1>
+    <h1 class="text-2xl font-bold">GPT-4 Web</h1>
   </div>
 
-  <!-- Selector de IAs -->
-  <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
-    <div onclick="setIA('pollinations')" id="btn-pollinations" class="card p-3 rounded-xl cursor-pointer active">
-      <p class="font-bold">ChatGPT</p>
-      <p class="text-xs text-gray-400">Pollinations GPT-4o</p>
-    </div>
-    <div onclick="setIA('gemini')" id="btn-gemini" class="card p-3 rounded-xl cursor-pointer">
-      <p class="font-bold">Gemini</p>
-      <p class="text-xs text-gray-400">g-mini-ia</p>
-    </div>
-    <div onclick="setIA('cifumo')" id="btn-cifumo" class="card p-3 rounded-xl cursor-pointer">
-      <p class="font-bold">Cifumo</p>
-      <p class="text-xs text-gray-400">Gemini Chat</p>
-    </div>
-    <div onclick="setIA('riple')" id="btn-riple" class="card p-3 rounded-xl cursor-pointer">
-      <p class="font-bold">RoxyAI</p>
-      <p class="text-xs text-gray-400">Nekorinn</p>
-    </div>
-  </div>
-
-  <!-- Chat -->
-  <div id="chat" class="card rounded-xl p-4 h-[450px] overflow-y-auto mb-3">
+  <div id="chat" class="card rounded-xl p-4 h-[500px] overflow-y-auto mb-3">
     <div class="text-left mb-3">
-      <div class="inline-block p-3 rounded-2xl bg-gray-700">Hola 👋 Soy ArcadiaCorps. Elige una IA y pregúntame algo</div>
+      <div class="inline-block p-3 rounded-2xl bg-gray-700">Hola 👋 Soy GPT-4. ¿En qué te ayudo?</div>
     </div>
   </div>
 
-  <!-- Input -->
   <div class="flex gap-2">
-    <input id="mensaje" onkeypress="if(event.key==='Enter') enviar()" placeholder="Escribe tu consulta..."
+    <input id="mensaje" onkeypress="if(event.key==='Enter') enviar()" placeholder="Escribe algo para hablar con GPT-4..."
       class="flex-1 card rounded-xl px-4 py-3 outline-none">
     <button onclick="enviar()" class="btn-gradient px-5 rounded-xl font-bold">➤</button>
   </div>
 </div>
 
 <script>
-let iaActual = "pollinations";
-const proxy = "https://corsproxy.io/?"; // Para evitar error CORS
-
-function setIA(ia){
-  iaActual = ia;
-  document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
-  document.getElementById('btn-'+ia).classList.add('active');
-  agregarChat("ia", `Cambiado a ${ia}`);
-}
+const KEY = "sastuke"; // viene de Buffer.from('c2FzdWtl', 'base64')
+const SESSION = "12";
+const proxy = "https://corsproxy.io/?"; // para que no falle CORS
 
 async function enviar() {
   let texto = document.getElementById('mensaje').value;
   if(!texto) return;
+
   agregarChat("tu", texto);
   document.getElementById('mensaje').value = "";
-  agregarChat("ia", "🔄 Procesando...");
+  agregarChat("ia", "⏳ Procesando...");
 
-  let respuesta = "";
   try {
-    if(iaActual === "pollinations"){
-      let system = encodeURIComponent("Eres ChatGPT, un asistente inteligente y útil. Responde en español, claro y amable.");
-      const url = `https://text.pollinations.ai/${encodeURIComponent(texto)}?model=openai&system=${system}`;
-      const res = await fetch(proxy + encodeURIComponent(url));
-      respuesta = await res.text();
-    }
-    if(iaActual === "gemini"){
-      const body = {prompts: [texto], imageBase64List: [], mimeTypes: [], temperature: 0.7};
-      const res = await fetch(proxy + encodeURIComponent('https://g-mini-ia.vercel.app/api/gemini'), {
-        method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(body)
-      });
-      const data = await res.json();
-      respuesta = data.candidates[0].content.parts[0].text;
-    }
-    if(iaActual === "cifumo"){
-      const url = `https://rest.cifumo.biz.id/api/ai/gemini-chat?ask=${encodeURIComponent(texto)}`;
-      const res = await fetch(proxy + encodeURIComponent(url));
-      const data = await res.json();
-      respuesta = data.data;
-    }
-    if(iaActual === "riple"){
-      const url = `https://api.nekorinn.my.id/ai/ripleai?text=${encodeURIComponent(texto)}`;
-      const res = await fetch(proxy + encodeURIComponent(url));
-      const data = await res.json();
-      respuesta = data.result;
+    const url = `https://api.evogb.org/ai/gpt4-session?text=${encodeURIComponent(texto)}&session=${SESSION}&key=${KEY}`;
+    const res = await fetch(proxy + encodeURIComponent(url));
+    const json = await res.json();
+
+    document.getElementById('chat').lastChild.remove(); // quita "Procesando"
+
+    if (json.status) {
+      agregarChat("ia", json.result);
+    } else {
+      agregarChat("ia", "❌ No se pudo obtener respuesta");
     }
   } catch(e) {
-    respuesta = "❌ Error: " + e.message + ". Intenta con otra IA";
+    document.getElementById('chat').lastChild.remove();
+    agregarChat("ia", "❌ Error: " + e.message);
   }
-
-  document.getElementById('chat').lastChild.remove(); // quita "Procesando"
-  agregarChat("ia", respuesta);
 }
 
 function agregarChat(rol, texto) {
   let chat = document.getElementById('chat');
   let clase = rol === 'tu'? 'text-right' : 'text-left';
   let color = rol === 'tu'? 'bg-blue-600' : 'bg-gray-700';
-  chat.innerHTML += `<div class="mb-3 ${clase}"><div class="inline-block p-3 rounded-2xl ${color}">${texto}</div></div>`;
+  chat.innerHTML += `<div class="mb-3 ${clase}"><div class="inline-block p-3 rounded-2xl ${color} whitespace-pre-wrap">${texto}</div></div>`;
   chat.scrollTop = chat.scrollHeight;
 }
 </script>
