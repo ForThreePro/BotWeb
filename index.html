@@ -3,72 +3,75 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GPT-4 Web</title>
+<title>Generador BRAT Sticker</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
   body { background: #0a0a0f; }
 .card { background: #15151d; border: 1px solid #2a2a35; }
-.btn-gradient { background: linear-gradient(90deg, #3b82f6, #9333ea); }
+.btn-gradient { background: linear-gradient(90deg, #22c55e, #16a34a); }
 </style>
 </head>
 <body class="text-white font-sans">
 
-<div class="max-w-2xl mx-auto p-4">
+<div class="max-w-lg mx-auto p-4">
   <div class="flex items-center gap-2 mb-6">
-    <span class="text-yellow-400 text-2xl">⚡</span>
-    <h1 class="text-2xl font-bold">GPT-4 Web</h1>
+    <span class="text-2xl">🏷️</span>
+    <h1 class="text-2xl font-bold">Generador BRAT</h1>
   </div>
 
-  <div id="chat" class="card rounded-xl p-4 h-[500px] overflow-y-auto mb-3">
-    <div class="text-left mb-3">
-      <div class="inline-block p-3 rounded-2xl bg-gray-700">Hola 👋 Soy GPT-4. ¿En qué te ayudo?</div>
-    </div>
+  <div class="card rounded-xl p-6 mb-4">
+    <p class="text-gray-400 text-sm mb-3">Escribe el texto para tu sticker estilo brat</p>
+    <input id="texto" placeholder="ej: ArcadiaCorps" 
+      class="w-full card rounded-xl px-4 py-3 outline-none mb-3">
+    
+    <button onclick="generar()" class="btn-gradient w-full py-3 rounded-xl font-bold">
+      ✨ Generar Sticker
+    </button>
   </div>
 
-  <div class="flex gap-2">
-    <input id="mensaje" onkeypress="if(event.key==='Enter') enviar()" placeholder="Escribe algo para hablar con GPT-4..."
-      class="flex-1 card rounded-xl px-4 py-3 outline-none">
-    <button onclick="enviar()" class="btn-gradient px-5 rounded-xl font-bold">➤</button>
+  <!-- Resultado -->
+  <div id="resultado" class="card rounded-xl p-6 text-center hidden">
+    <p class="mb-3">Tu sticker:</p>
+    <img id="imgSticker" class="mx-auto bg-white rounded-lg mb-3"/>
+    <a id="btnDescargar" download="sticker.webp" 
+      class="btn-gradient px-5 py-2 rounded-xl inline-block font-bold">
+      ⬇️ Descargar .webp
+    </a>
   </div>
+
+  <p id="estado" class="text-center text-gray-400 mt-4"></p>
 </div>
 
 <script>
-const KEY = "sastuke"; // viene de Buffer.from('c2FzdWtl', 'base64')
-const SESSION = "12";
-const proxy = "https://corsproxy.io/?"; // para que no falle CORS
+const proxy = "https://api.allorigins.win/raw?url="; // Para evitar CORS
 
-async function enviar() {
-  let texto = document.getElementById('mensaje').value;
-  if(!texto) return;
+async function generar() {
+  let texto = document.getElementById('texto').value;
+  if(!texto) return alert('Escribe un texto');
 
-  agregarChat("tu", texto);
-  document.getElementById('mensaje').value = "";
-  agregarChat("ia", "⏳ Procesando...");
+  document.getElementById('estado').innerText = "⏳ Generando... espera 5s";
+  document.getElementById('resultado').classList.add('hidden');
+
+  let url = `https://kepolu-brat.hf.space/brat?q=${encodeURIComponent(texto)}`;
+  let proxyUrl = proxy + encodeURIComponent(url);
 
   try {
-    const url = `https://api.evogb.org/ai/gpt4-session?text=${encodeURIComponent(texto)}&session=${SESSION}&key=${KEY}`;
-    const res = await fetch(proxy + encodeURIComponent(url));
-    const json = await res.json();
+    // La API devuelve imagen/arraybuffer
+    const res = await fetch(proxyUrl);
+    if(!res.ok) throw new Error("Error " + res.status);
+    
+    const blob = await res.blob();
+    const imageUrl = URL.createObjectURL(blob);
 
-    document.getElementById('chat').lastChild.remove(); // quita "Procesando"
+    document.getElementById('imgSticker').src = imageUrl;
+    document.getElementById('btnDescargar').href = imageUrl;
+    document.getElementById('resultado').classList.remove('hidden');
+    document.getElementById('estado').innerText = "✅ Listo";
 
-    if (json.status) {
-      agregarChat("ia", json.result);
-    } else {
-      agregarChat("ia", "❌ No se pudo obtener respuesta");
-    }
   } catch(e) {
-    document.getElementById('chat').lastChild.remove();
-    agregarChat("ia", "❌ Error: " + e.message);
+    document.getElementById('estado').innerText = "❌ Error: " + e.message;
+    console.error(e);
   }
-}
-
-function agregarChat(rol, texto) {
-  let chat = document.getElementById('chat');
-  let clase = rol === 'tu'? 'text-right' : 'text-left';
-  let color = rol === 'tu'? 'bg-blue-600' : 'bg-gray-700';
-  chat.innerHTML += `<div class="mb-3 ${clase}"><div class="inline-block p-3 rounded-2xl ${color} whitespace-pre-wrap">${texto}</div></div>`;
-  chat.scrollTop = chat.scrollHeight;
 }
 </script>
 </body>
