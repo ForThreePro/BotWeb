@@ -3,17 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Generador BRAT Sticker</title>
+<title>Generador BRAT</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
-  body { background: #0a0a0f; }
-.card { background: #15151d; border: 1px solid #2a2a35; }
-.btn-gradient { background: linear-gradient(90deg, #22c55e, #16a34a); }
+  body { background: #0a0a0f; font-family: system-ui; }
+ .card { background: #15151d; border: 1px solid #2a2a35; }
+ .btn-gradient { background: linear-gradient(90deg, #22c55e, #16a34a); }
+ .btn-gradient:active { transform: scale(0.98); }
 </style>
 </head>
-<body class="text-white font-sans">
+<body class="text-white">
 
-<div class="max-w-lg mx-auto p-4">
+<div class="max-w-lg mx-auto p-4 min-h-screen flex flex-col justify-center">
   <div class="flex items-center gap-2 mb-6">
     <span class="text-2xl">🏷️</span>
     <h1 class="text-2xl font-bold">Generador BRAT</h1>
@@ -21,21 +22,21 @@
 
   <div class="card rounded-xl p-6 mb-4">
     <p class="text-gray-400 text-sm mb-3">Escribe el texto para tu sticker estilo brat</p>
-    <input id="texto" placeholder="ej: ArcadiaCorps" 
-      class="w-full card rounded-xl px-4 py-3 outline-none mb-3">
+    <input id="texto" onkeypress="if(event.key==='Enter') generar()" placeholder="ej: ArcadiaCorps" 
+      class="w-full card rounded-xl px-4 py-3 outline-none mb-4">
     
-    <button onclick="generar()" class="btn-gradient w-full py-3 rounded-xl font-bold">
+    <button onclick="generar()" id="btn" class="btn-gradient w-full py-3 rounded-xl font-bold">
       ✨ Generar Sticker
     </button>
   </div>
 
   <!-- Resultado -->
   <div id="resultado" class="card rounded-xl p-6 text-center hidden">
-    <p class="mb-3">Tu sticker:</p>
-    <img id="imgSticker" class="mx-auto bg-white rounded-lg mb-3"/>
-    <a id="btnDescargar" download="sticker.webp" 
-      class="btn-gradient px-5 py-2 rounded-xl inline-block font-bold">
-      ⬇️ Descargar .webp
+    <p class="mb-3 font-semibold">Tu sticker:</p>
+    <img id="imgSticker" class="mx-auto bg-white rounded-lg mb-4 max-w-[256px]"/>
+    <a id="btnDescargar" download="brat-sticker.webp" 
+      class="btn-gradient px-5 py-3 rounded-xl inline-block font-bold w-full">
+      ⬇️ Descargar.webp
     </a>
   </div>
 
@@ -43,21 +44,21 @@
 </div>
 
 <script>
-const proxy = "https://api.allorigins.win/raw?url="; // Para evitar CORS
-
 async function generar() {
-  let texto = document.getElementById('texto').value;
-  if(!texto) return alert('Escribe un texto');
+  let texto = document.getElementById('texto').value.trim();
+  if(!texto) return alert('Escribe un texto bro');
 
-  document.getElementById('estado').innerText = "⏳ Generando... espera 5s";
+  let btn = document.getElementById('btn');
+  btn.disabled = true;
+  btn.innerText = "⏳ Generando...";
+  document.getElementById('estado').innerText = "";
   document.getElementById('resultado').classList.add('hidden');
 
-  let url = `https://kepolu-brat.hf.space/brat?q=${encodeURIComponent(texto)}`;
-  let proxyUrl = proxy + encodeURIComponent(url);
+  // API que no da CORS
+  let url = `https://api.popcat.xyz/brat?q=${encodeURIComponent(texto)}`;
 
   try {
-    // La API devuelve imagen/arraybuffer
-    const res = await fetch(proxyUrl);
+    const res = await fetch(url);
     if(!res.ok) throw new Error("Error " + res.status);
     
     const blob = await res.blob();
@@ -71,6 +72,9 @@ async function generar() {
   } catch(e) {
     document.getElementById('estado').innerText = "❌ Error: " + e.message;
     console.error(e);
+  } finally {
+    btn.disabled = false;
+    btn.innerText = "✨ Generar Sticker";
   }
 }
 </script>
