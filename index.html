@@ -18,6 +18,7 @@
 .active-menu { background: #FFF5EB; color: var(--naranja); border-left: 3px solid var(--naranja); }
 .overlay { background: rgba(0,0,0,0.4); }
 .music-bar { background: #fff; border-top: 1px solid #E5E5E7; }
+.tiktok-embed { margin: 0 auto!important; }
 </style>
 </head>
 <body>
@@ -103,24 +104,37 @@
           <div class="card rounded-2xl p-5 text-center"><p class="text-3xl font-black text-orange-500">1000+</p><p class="text-sm text-gray-500">Ventas</p></div>
           <div class="card rounded-2xl p-5 text-center"><p class="text-3xl font-black text-orange-500">24/7</p><p class="text-sm text-gray-500">Soporte</p></div>
         </div>
-        <h3 class="text-2xl font-bold mb-4">💬 Reseñas de Clientes</h3>
-        <div class="grid md:grid-cols-2 gap-4 mb-6">
-          <div class="card rounded-2xl p-5"><p class="text-yellow-400 text-lg">⭐⭐</p><p class="mt-2">"Netflix me llegó en 2 minutos. Tan rápido como Garfield come lasaña!"</p><p class="text-xs text-gray-500 mt-3">- Carlos R. Lima</p></div>
-          <div class="card rounded-2xl p-5"><p class="text-yellow-400 text-lg">⭐⭐⭐⭐⭐</p><p class="mt-2">"Amo la temática de Garfield. Los mejores precios"</p><p class="text-xs text-gray-500 mt-3">- Ana M. Arequipa</p></div>
-        </div>
       </div>
 
-      <!-- SECCION GARFIELD NUEVA -->
+      <!-- SECCION GARFIELD CON TIKTOKS -->
       <div id="seccion-garfield" class="hidden">
         <div class="card rounded-2xl p-8 mb-6 bg-gradient-to-r from-orange-100 to-yellow-50">
           <h2 class="text-4xl font-black">🐱 Universo Garfield</h2>
-          <p class="text-gray-600 mt-2">Todo sobre el gato naranja más querido del mundo</p>
+          <p class="text-gray-600 mt-2">Los mejores momentos del gato naranja más querido</p>
+        </div>
+
+        <div class="card rounded-2xl p-6 mb-6">
+          <h3 class="text-2xl font-black mb-4">🎬 TikToks Virales de Garfield</h3>
+          <div class="grid md:grid-cols-2 gap-6 justify-items-center">
+
+            <!-- TIKTOK 1 -->
+            <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@usuario/video/ZS4pDXm7U" data-video-id="ZS4pDXm7U" style="max-width: 325px; min-width: 325px;" >
+              <section> </section>
+            </blockquote>
+
+            <!-- TIKTOK 2 -->
+            <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@usuario/video/ZS4pD5x3N" data-video-id="ZS4pD5x3N" style="max-width: 325px; min-width: 325px;" >
+              <section> </section>
+            </blockquote>
+
+          </div>
+          <script async src="https://www.tiktok.com/embed.js"></script>
         </div>
 
         <div class="grid md:grid-cols-2 gap-5 mb-6">
           <div class="card rounded-2xl p-6">
             <h3 class="text-2xl font-black mb-3">¿Quién es Garfield?</h3>
-            <p class="text-gray-600">Garfield es un gato naranja, gordo y perezoso creado por Jim Davis en 1978. Ama 3 cosas en la vida: <b>Lasaña, dormir y odiar los lunes</b>. Es el mejor amigo de Jon Arbuckle y odia a Odie el perro.</p>
+            <p class="text-gray-600">Garfield es un gato naranja, gordo y perezoso creado por Jim Davis en 1978. Ama 3 cosas: <b>Lasaña, dormir y odiar los lunes</b>.</p>
           </div>
           <div class="card rounded-2xl p-6">
             <h3 class="text-2xl font-black mb-3">Datos Curiosos</h3>
@@ -128,24 +142,12 @@
               <li>🍕 <b>Comida favorita:</b> Lasaña</li>
               <li>😴 <b>Odia:</b> Los lunes y las dietas</li>
               <li>📅 <b>Primer cómic:</b> 19 de Junio de 1978</li>
-              <li>🌍 <b>Idiomas:</b> Traducido a +45 idiomas</li>
             </ul>
-          </div>
-        </div>
-
-        <div class="card rounded-2xl p-6 mb-6">
-          <h3 class="text-2xl font-black mb-4">Frases Famosas de Garfield</h3>
-          <div class="grid md:grid-cols-2 gap-4">
-            <div class="bg-orange-50 p-4 rounded-xl"><p class="italic">"Odio los lunes."</p></div>
-            <div class="bg-orange-50 p-4 rounded-xl"><p class="italic">"La lasaña es mi pasión."</p></div>
-            <div class="bg-orange-50 p-4 rounded-xl"><p class="italic">"Dieta? Yo solo hago dieta de ver comida."</p></div>
-            <div class="bg-orange-50 p-4 rounded-xl"><p class="italic">"Dormir es mi superpoder."</p></div>
           </div>
         </div>
 
         <div class="card rounded-2xl p-6">
           <h3 class="text-2xl font-black mb-4">🎵 Tema de Garfield</h3>
-          <p class="text-gray-600 mb-4">Escucha el tema mientras navegas. Puedes pausarlo con el botón 🔊 de arriba.</p>
           <div class="bg-orange-50 p-4 rounded-xl flex items-center justify-between">
             <p class="font-bold">garfield.mp3</p>
             <button onclick="toggleMusic()" class="btn-primary px-4 py-2 rounded-lg font-bold">Play/Pause</button>
@@ -201,19 +203,17 @@ window.onload = function() {
     document.getElementById('loginScreen').classList.add('hidden');
     document.getElementById('dashboardScreen').classList.remove('hidden');
     mostrarSeccion('inicio', document.querySelector('.menu-item'));
-    music.volume = 0.3; // Volumen bajito
+    music.volume = 0.3;
   }
 }
 
 function toggleMusic() {
   if(music.paused) {
     music.play();
-    musicPlaying = true;
     document.getElementById('btnMusic').innerText = '🔊';
     document.getElementById('btnMusic2').innerText = 'Pausar';
   } else {
     music.pause();
-    musicPlaying = false;
     document.getElementById('btnMusic').innerText = '🔇';
     document.getElementById('btnMusic2').innerText = 'Reproducir';
   }
@@ -243,7 +243,7 @@ function login() {
     cargarPerfil();
     document.getElementById('loginScreen').classList.add('hidden');
     document.getElementById('dashboardScreen').classList.remove('hidden');
-    music.play().catch(()=>{}); // Intenta reproducir música
+    music.play().catch(()=>{});
   } else { alert('❌ Correo o contraseña incorrectos'); }
 }
 
