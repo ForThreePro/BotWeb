@@ -7,112 +7,119 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
   body { background: #0a0a0f; }
- .card { background: #15151d; border: 1px solid #2a2a35; }
- .btn-gradient { background: linear-gradient(90deg, #4f46e5, #9333ea); }
- .active-filter { background: linear-gradient(90deg, #4f46e5, #9333ea); }
+.card { background: #15151d; border: 1px solid #2a2a35; }
+.btn-gradient { background: linear-gradient(90deg, #4f46e5, #9333ea); }
+.active-filter { background: linear-gradient(90deg, #4f46e5, #9333ea); }
 </style>
 </head>
 <body class="text-white">
 
 <header class="card p-3 flex items-center justify-between sticky top-0 z-10">
   <div class="flex items-center gap-3">
-    <img src="https://i.ibb.co/QvK8kZ1A/arcadia-logo.png" class="w-9 h-9 rounded-lg"/>
+    <a href="index.html"><img src="https://i.ibb.co/QvK8kZ1A/arcadia-logo.png" class="w-9 h-9 rounded-lg"/></a>
     <h1 class="text-xl font-bold">Arcadia<span class="text-blue-400">Corps</span></h1>
   </div>
-  <button class="text-2xl">🔔</button>
+  <button onclick="enviarWhatsApp()" id="btnCarrito" class="card px-4 py-2 rounded-xl font-bold">🛒 Carrito 0</button>
 </header>
 
 <div class="p-4 max-w-6xl mx-auto">
-  <!-- BANNER -->
-  <div class="card rounded-2xl p-6 mb-6 flex-col md:flex-row items-center justify-between">
-    <div>
-      <p class="text-xs text-cyan-400 font-bold">CATÁLOGO OFICIAL</p>
-      <h2 class="text-3xl font-bold mt-1">Arma tu pack y ahorra</h2>
-      <p class="text-gray-400 text-sm mt-2 max-w-md">Elige Netflix, HBO Max, Disney+, música y más. Añade varios servicios al carrito y envía tu pedido completo por WhatsApp.</p>
-      <div class="flex gap-3 mt-4">
-        <button class="btn-gradient px-5 py-2 rounded-xl font-bold">Explorar catálogo</button>
-        <button onclick="window.location='pedidos.html'" class="card px-5 py-2 rounded-xl font-bold">🛒 Carrito 0</button>
-      </div>
-    </div>
-    <img src="https://i.ibb.co/7JkYk2L/logos.png" class="w-64 mt-4 md:mt-0"/>
+  <div class="card rounded-2xl p-6 mb-6">
+    <p class="text-xs text-cyan-400 font-bold">CATÁLOGO OFICIAL</p>
+    <h2 class="text-3xl font-bold mt-1">Arma tu pack y ahorra</h2>
+    <p class="text-gray-400 text-sm mt-2">Elige Streaming, Música y más. Añade al carrito y envía tu pedido por WhatsApp.</p>
   </div>
 
-  <h2 class="text-xl font-bold mb-1">Servicios más buscados</h2>
-  <p class="text-xs text-gray-400 mb-4">RECOMENDADOS</p>
+  <h2 class="text-2xl font-bold mb-4">Todos los productos</h2>
 
-  <!-- FILTROS -->
-  <div class="flex items-center justify-between mb-4">
-    <h2 class="text-2xl font-bold">Todos los productos</h2>
-    <input placeholder="🔍 Buscar producto..." class="card rounded-xl px-4 py-2 w-64 outline-none">
-  </div>
+  <!-- FILTROS POR CATEGORIA -->
   <div class="flex gap-2 mb-6 overflow-x-auto">
-    <button class="active-filter px-4 py-2 rounded-xl text-sm">Todos</button>
-    <button class="card px-4 py-2 rounded-xl text-sm">Streaming</button>
-    <button class="card px-4 py-2 rounded-xl text-sm">Música</button>
-    <button class="card px-4 py-2 rounded-xl text-sm">Software</button>
-    <button class="card px-4 py-2 rounded-xl text-sm">Educación</button>
-    <button class="card px-4 py-2 rounded-xl text-sm">Servicios</button>
+    <button onclick="filtrar('todos')" id="btn-todos" class="active-filter px-4 py-2 rounded-xl text-sm">Todos</button>
+    <button onclick="filtrar('streaming')" id="btn-streaming" class="card px-4 py-2 rounded-xl text-sm">Streaming</button>
+    <button onclick="filtrar('musica')" id="btn-musica" class="card px-4 py-2 rounded-xl text-sm">Música</button>
   </div>
 
-  <!-- STREAMING -->
-  <h3 class="text-lg font-bold mb-3">Streaming</h3>
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-    <div class="card rounded-xl p-4">
-      <div class="flex justify-between">
+  <!-- PRODUCTOS -->
+  <div id="productos">
+    <!-- STREAMING -->
+    <div class="producto streaming">
+      <div class="card rounded-xl p-4 mb-4">
         <span class="bg-red-500/20 text-red-400 text-xs px-2 py-1 rounded">-25%</span>
-        <span>♡</span>
+        <p class="text-2xl font-bold text-red-500 mt-2">N</p>
+        <p class="text-xs text-gray-400 mt-2">STREAMING</p>
+        <p class="font-bold">Netflix Premium 1 Pantalla</p>
+        <p class="text-xs">⭐ 4.9</p>
+        <p class="mt-2"><span class="text-xl font-bold">S/ 15.00</span></p>
+        <button onclick="agregarCarrito('Netflix Premium 1 Pantalla', 15)" class="btn-gradient w-full py-2 rounded-xl mt-3">Añadir al carrito</button>
       </div>
-      <p class="text-2xl font-bold text-red-500 mt-2">N</p>
-      <p class="text-xs text-gray-400 mt-2">STREAMING</p>
-      <p class="font-bold">Netflix Premium 1 Pantalla</p>
-      <p class="text-xs">⭐ 4.9</p>
-      <p class="mt-2"><span class="text-xl font-bold">S/ 15.00</span> <span class="line-through text-gray-500 text-sm">S/ 20.00</span></p>
-      <button class="btn-gradient w-full py-2 rounded-xl mt-3">Añadir al carrito</button>
     </div>
-
-    <div class="card rounded-xl p-4">
-      <div class="flex justify-between">
-        <span class="bg-gray-500/20 text-gray-400 text-xs px-2 py-1 rounded">Agotado</span>
-        <span>♡</span>
-      </div>
-      <p class="text-xl font-bold mt-4">HBO max</p>
-      <p class="text-xs text-gray-400 mt-2">STREAMING</p>
-      <p class="font-bold">HBO Max Premium</p>
-      <p class="text-xs">⭐ 4.8</p>
-      <p class="mt-2"><span class="text-xl font-bold">S/ 14.00</span> <span class="line-through text-gray-500 text-sm">S/ 18.00</span></p>
-      <button class="btn-gradient w-full py-2 rounded-xl mt-3 opacity-50">Añadir al carrito</button>
-    </div>
-
-    <div class="card rounded-xl p-4">
-      <div class="flex justify-between">
+    <div class="producto streaming">
+      <div class="card rounded-xl p-4 mb-4">
         <span class="bg-red-500/20 text-red-400 text-xs px-2 py-1 rounded">-25%</span>
-        <span>♡</span>
+        <p class="text-lg font-bold text-blue-400 mt-2">prime video</p>
+        <p class="text-xs text-gray-400 mt-2">STREAMING</p>
+        <p class="font-bold">Prime Video</p>
+        <p class="text-xs">⭐ 4.9</p>
+        <p class="mt-2"><span class="text-xl font-bold">S/ 12.00</span></p>
+        <button onclick="agregarCarrito('Prime Video', 12)" class="btn-gradient w-full py-2 rounded-xl mt-3">Añadir al carrito</button>
       </div>
-      <p class="text-lg font-bold text-blue-400 mt-2">prime video</p>
-      <p class="text-xs text-gray-400 mt-2">STREAMING</p>
-      <p class="font-bold">Prime Video</p>
-      <p class="text-xs">⭐ 4.9</p>
-      <p class="mt-2"><span class="text-xl font-bold">S/ 12.00</span> <span class="line-through text-gray-500 text-sm">S/ 14.00</span></p>
-      <button class="btn-gradient w-full py-2 rounded-xl mt-3">Añadir al carrito</button>
     </div>
-  </div>
-
-  <!-- MUSICA -->
-  <h3 class="text-lg font-bold mb-3">Música</h3>
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-    <div class="card rounded-xl p-4">
-      <div class="flex justify-between">
+    <!-- MUSICA -->
+    <div class="producto musica">
+      <div class="card rounded-xl p-4 mb-4">
         <span class="bg-red-500/20 text-red-400 text-xs px-2 py-1 rounded">-29%</span>
-        <span>♡</span>
+        <p class="text-2xl text-green-500 mt-2">●</p>
+        <p class="text-xs text-gray-400 mt-2">MÚSICA</p>
+        <p class="font-bold">Spotify Premium Individual</p>
+        <p class="text-xs">⭐ 4.9</p>
+        <p class="mt-2"><span class="text-xl font-bold">S/ 10.00</span></p>
+        <button onclick="agregarCarrito('Spotify Premium Individual', 10)" class="btn-gradient w-full py-2 rounded-xl mt-3">Añadir al carrito</button>
       </div>
-      <p class="text-2xl text-green-500 mt-2">●</p>
-      <p class="text-xs text-gray-400 mt-2">MÚSICA</p>
-      <p class="font-bold">Spotify Premium Individual</p>
-      <p class="text-xs">⭐ 4.9</p>
-      <p class="mt-2"><span class="text-xl font-bold">S/ 10.00</span> <span class="line-through text-gray-500 text-sm">S/ 14.00</span></p>
-      <button class="btn-gradient w-full py-2 rounded-xl mt-3">Añadir al carrito</button>
     </div>
   </div>
 </div>
+
+<script>
+let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+actualizarCarrito();
+
+function agregarCarrito(nombre, precio) {
+  carrito.push({nombre, precio});
+  localStorage.setItem('carrito', JSON.stringify(carrito));
+  actualizarCarrito();
+  alert('✅ ' + nombre + ' añadido al carrito');
+}
+
+function actualizarCarrito() {
+  document.getElementById('btnCarrito').innerText = `🛒 Carrito ${carrito.length}`;
+}
+
+function filtrar(categoria) {
+  document.querySelectorAll('.producto').forEach(p => p.style.display = 'none');
+  document.querySelectorAll('#btn-todos, #btn-streaming, #btn-musica').forEach(b => b.className = 'card px-4 py-2 rounded-xl text-sm');
+
+  if(categoria === 'todos') {
+    document.querySelectorAll('.producto').forEach(p => p.style.display = 'block');
+    document.getElementById('btn-todos').className = 'active-filter px-4 py-2 rounded-xl text-sm';
+  } else {
+    document.querySelectorAll('.' + categoria).forEach(p => p.style.display = 'block');
+    document.getElementById('btn-' + categoria).className = 'active-filter px-4 py-2 rounded-xl text-sm';
+  }
+}
+
+function enviarWhatsApp() {
+  if(carrito.length === 0) return alert('Tu carrito está vacío');
+  let usuario = JSON.parse(localStorage.getItem('usuario')) || {name: "Invitado", email: ""};
+  let total = carrito.reduce((sum, item) => sum + item.precio, 0);
+  let mensaje = `*NUEVO PEDIDO - EVENTOS GARFIELD*%0A`;
+  mensaje += `*Cliente:* ${usuario.name}%0A*Email:* ${usuario.email}%0A%0A*Productos:*%0A`;
+  carrito.forEach((item, i) => { mensaje += `${i+1}. ${item.nombre} - S/ ${item.precio}.00%0A`; });
+  mensaje += `%0A*TOTAL: S/ ${total}.00*`;
+
+  let numero = "51999999999"; // CAMBIA ESTE NUMERO
+  window.open(`https://wa.me/${numero}?text=${mensaje}`, '_blank');
+  localStorage.removeItem('carrito'); carrito = []; actualizarCarrito();
+  alert('Pedido enviado por WhatsApp!');
+}
+</script>
 </body>
 </html>
