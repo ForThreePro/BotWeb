@@ -5,107 +5,186 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Eventos Garfield</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-  :root{ --bg:#000; --card:#0A0A0A; --border:#1A1A1A; --naranja:#FF4500; }
-  body { background: var(--bg); font-family: 'Inter', sans-serif; color: #E5E5E5; }
-.card { background: var(--card); border: 1px solid var(--border); }
-.btn-primary { background: var(--naranja); color: #000; font-weight: 800; }
-.btn-primary:hover { background: #FF5A1A; box-shadow: 0 0 20px rgba(255,69,0,0.4); }
-.sidebar { background: #050505; border-right: 1px solid var(--border); }
-.menu-item { color: #888; }
-.menu-item:hover { background: #111; color: #fff; }
-.active-menu { background: #111; color: var(--naranja); border-left: 2px solid var(--naranja); }
-.overlay { background: rgba(0,0,0,0.8); }
+  :root{ --naranja:#FF6B00; --naranja2:#FF8C00; --gris:#F5F5F7; --texto:#1D1D1F; }
+  body { background: var(--gris); font-family: 'Inter', sans-serif; color: var(--texto); }
+.card { background: #fff; border: 1px solid #E5E5E7; }
+.btn-primary { background: linear-gradient(90deg, var(--naranja), var(--naranja2)); color: #fff; }
+.btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+.sidebar { background: #fff; border-right: 1px solid #E5E5E7; }
+.menu-item { color: #6E6E73; }
+.menu-item:hover { background: #FFF5EB; color: var(--naranja); }
+.active-menu { background: #FFF5EB; color: var(--naranja); border-left: 3px solid var(--naranja); }
+.overlay { background: rgba(0,0,0,0.4); }
+.music-bar { background: #fff; border-top: 1px solid #E5E5E7; }
 </style>
 </head>
 <body>
 
+<!-- MUSICA DE FONDO EN TODA LA WEB -->
+<audio id="bgMusic" src="garfield.mp3" loop autoplay></audio>
+
 <!-- LOGIN -->
 <div id="loginScreen" class="min-h-screen flex items-center justify-center p-4">
-  <div class="w-full max-w-sm">
-    <div class="text-center mb-10">
-      <h1 class="text-4xl font-black tracking-tight">GARFIELD<span class="text-orange-500">.</span></h1>
-      <p class="text-gray-500 text-sm mt-2">SERVICIOS DIGITALES PREMIUM</p>
+  <div class="w-full max-w-md">
+    <div class="text-center mb-8">
+      <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-500 to-orange-400 mx-auto flex items-center justify-center text-3xl font-black text-white mb-3">G</div>
+      <h1 class="text-3xl font-black">Eventos <span class="text-orange-500">Garfield</span></h1>
+      <p class="text-gray-500 text-sm">El gato más famoso del mundo 🍕</p>
     </div>
-    <div class="card rounded-2xl p-8">
-      <div class="flex bg-[#111] rounded-xl p-1 mb-6">
-        <button id="tabLogin" onclick="showTab('login')" class="flex-1 py-2.5 rounded-lg font-bold text-sm">LOGIN</button>
-        <button id="tabRegister" onclick="showTab('register')" class="flex-1 py-2.5 rounded-lg font-bold text-sm text-gray-500">REGISTER</button>
+    <div class="card rounded-2xl p-8 shadow-sm">
+      <div class="flex bg-gray-100 rounded-xl p-1 mb-6">
+        <button id="tabLogin" onclick="showTab('login')" class="flex-1 py-2.5 rounded-lg font-bold text-sm">Iniciar Sesión</button>
+        <button id="tabRegister" onclick="showTab('register')" class="flex-1 py-2.5 rounded-lg font-bold text-sm text-gray-500">Crear Cuenta</button>
       </div>
       <div id="formLogin">
-        <input id="email" type="email" placeholder="Email" class="w-full bg-[#111] border-[#222] rounded-lg px-4 py-3 mb-3 outline-none focus:border-orange-500">
-        <input id="password" type="password" placeholder="Password" class="w-full bg-[#111] border-[#222] rounded-lg px-4 py-3 mb-5 outline-none focus:border-orange-500">
-        <button onclick="login()" class="btn-primary w-full py-3 rounded-lg">SIGN IN</button>
+        <label class="text-sm font-semibold text-gray-600">Correo</label>
+        <input id="email" type="email" class="w-full bg-gray-50 border-gray-200 rounded-xl px-4 py-3 mt-2 mb-4 outline-none focus:border-orange-500">
+        <label class="text-sm font-semibold text-gray-600">Contraseña</label>
+        <input id="password" type="password" class="w-full bg-gray-50 border-gray-200 rounded-xl px-4 py-3 mt-2 mb-5 outline-none focus:border-orange-500">
+        <button onclick="login()" class="btn-primary w-full py-3 rounded-xl font-bold transition">INGRESAR</button>
       </div>
       <div id="formRegister" class="hidden">
-        <input id="name" type="text" placeholder="Full Name" class="w-full bg-[#111] border-[#222] rounded-lg px-4 py-3 mb-3 outline-none">
-        <input id="email2" type="email" placeholder="Email" class="w-full bg-[#111] border-[#222] rounded-lg px-4 py-3 mb-3 outline-none">
-        <input id="password2" type="password" placeholder="Password" class="w-full bg-[#111] border-[#222] rounded-lg px-4 py-3 mb-5 outline-none">
-        <button onclick="register()" class="btn-primary w-full py-3 rounded-lg">CREATE ACCOUNT</button>
+        <label class="text-sm font-semibold text-gray-600">Nombre</label>
+        <input id="name" type="text" class="w-full bg-gray-50 border-gray-200 rounded-xl px-4 py-3 mt-2 mb-4 outline-none">
+        <label class="text-sm font-semibold text-gray-600">Correo</label>
+        <input id="email2" type="email" class="w-full bg-gray-50 border-gray-200 rounded-xl px-4 py-3 mt-2 mb-4 outline-none">
+        <label class="text-sm font-semibold text-gray-600">Contraseña</label>
+        <input id="password2" type="password" class="w-full bg-gray-50 border-gray-200 rounded-xl px-4 py-3 mt-2 mb-5 outline-none">
+        <button onclick="register()" class="btn-primary w-full py-3 rounded-xl font-bold transition">CREAR CUENTA</button>
       </div>
     </div>
   </div>
 </div>
 
 <!-- DASHBOARD -->
-<div id="dashboardScreen" class="hidden min-h-screen">
-  <header class="card p-4 flex items-center justify-between sticky top-0 z-30">
+<div id="dashboardScreen" class="hidden min-h-screen pb-20">
+  <header class="card p-4 flex items-center justify-between sticky top-0 z-30 shadow-sm">
     <div class="flex items-center gap-4">
-      <button onclick="toggleSidebar()" class="text-2xl">☰</button>
-      <h1 class="text-xl font-black">GARFIELD<span class="text-orange-500">.</span></h1>
+      <button onclick="toggleSidebar()" class="text-2xl text-gray-600">☰</button>
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-orange-400 flex items-center justify-center text-lg font-black text-white">G</div>
+      <h1 class="text-xl font-black">Eventos <span class="text-orange-500">Garfield</span></h1>
     </div>
+    <button onclick="toggleMusic()" id="btnMusic" class="text-2xl">🔊</button>
   </header>
 
-  <div id="overlay" onclick="toggleSidebar()" class="overlay fixed inset-0 z-20 hidden"></div>
+  <div id="overlay" onclick="toggleSidebar()" class="overlay fixed inset-0 z-20 hidden md:hidden"></div>
 
   <div class="flex">
-    <aside id="sidebar" class="sidebar w-72 h-[calc(100vh-65px)] overflow-y-auto fixed left-0 top-[65px] z-20 transform -translate-x-full md:translate-x-0">
+    <aside id="sidebar" class="sidebar w-72 h-[calc(100vh-69px)] overflow-y-auto fixed left-0 top-[69px] z-20 transform -translate-x-full md:translate-x-0 shadow-sm">
       <div class="p-4">
-        <p class="text-xs text-gray-500 font-bold px-3 mb-2">MENU</p>
-        <a onclick="mostrarSeccion('inicio', this)" class="menu-item flex items-center gap-3 px-3 py-3 rounded-lg cursor-pointer active-menu font-semibold">Home</a>
-        <a onclick="mostrarSeccion('perfil', this)" class="menu-item flex items-center gap-3 px-3 py-3 rounded-lg cursor-pointer font-semibold">Profile</a>
-        <a href="tienda.html" class="menu-item flex items-center gap-3 px-3 py-3 rounded-lg font-semibold">Store</a>
-        <p class="text-xs text-gray-500 font-bold px-3 mt-6 mb-2">SUPPORT</p>
-        <a href="https://wa.me/51999999" target="_blank" class="menu-item flex items-center gap-3 px-3 py-3 rounded-lg font-semibold">WhatsApp</a>
-        <button onclick="logout()" class="w-full text-red-500 py-3 rounded-lg font-bold mt-6 text-left px-3">Logout</button>
+        <p class="text-xs text-gray-400 font-bold px-3 mb-2">PORTAL</p>
+        <a onclick="mostrarSeccion('inicio', this)" class="menu-item flex items-center gap-3 px-3 py-3 rounded-xl cursor-pointer active-menu font-semibold">🏠 Inicio</a>
+        <a onclick="mostrarSeccion('garfield', this)" class="menu-item flex items-center gap-3 px-3 py-3 rounded-xl cursor-pointer font-semibold">🐱 Universo Garfield</a>
+        <a onclick="mostrarSeccion('perfil', this)" class="menu-item flex items-center gap-3 px-3 py-3 rounded-xl cursor-pointer font-semibold">⚪ Mi Perfil</a>
+
+        <p class="text-xs text-gray-400 font-bold px-3 mt-6 mb-2">REDES</p>
+        <a href="https://wa.me/51999999" target="_blank" class="menu-item flex items-center gap-3 px-3 py-3 rounded-xl font-semibold">📢 Canal WhatsApp</a>
+        <a href="https://chat.whatsapp.com/xxxxx" target="_blank" class="menu-item flex items-center gap-3 px-3 py-3 rounded-xl font-semibold">👥 Comunidad</a>
+
+        <p class="text-xs text-gray-400 font-bold px-3 mt-6 mb-2">TIENDA</p>
+        <a href="tienda.html" class="menu-item flex items-center gap-3 px-3 py-3 rounded-xl font-semibold">🛍️ Ver Productos</a>
+
+        <button onclick="logout()" class="w-full text-red-500 py-3 rounded-xl font-bold mt-6 text-left px-3 hover:bg-red-50">Cerrar Sesión</button>
       </div>
     </aside>
 
     <main class="w-full p-5 md:ml-72">
       <!-- INICIO -->
       <div id="seccion-inicio">
-        <div class="card rounded-2xl p-8 mb-6">
-          <h2 class="text-5xl font-black">EVENTOS GARFIELD</h2>
-          <p class="text-gray-400 mt-3 text-lg">La tienda #1 de servicios digitales en Perú. Entrega inmediata 24/7.</p>
+        <div class="card rounded-2xl p-8 mb-6 bg-gradient-to-r from-orange-50 to-white">
+          <h2 class="text-4xl font-black">Bienvenido a Eventos Garfield 🎭</h2>
+          <p class="text-gray-600 mt-3 text-lg">La tienda #1 de servicios digitales. Con el espíritu de Garfield: Lasaña, lunes y buena vibra.</p>
+          <button onclick="toggleMusic()" class="btn-primary px-5 py-2.5 rounded-xl font-bold mt-4">🎵 Reproducir Tema de Garfield</button>
         </div>
-        <div class="grid grid-cols-3 gap-4 mb-8">
-          <div class="card rounded-xl p-5"><p class="text-3xl font-black text-orange-500">500+</p><p class="text-sm text-gray-500">Clientes</p></div>
-          <div class="card rounded-xl p-5"><p class="text-3xl font-black text-orange-500">1000+</p><p class="text-sm text-gray-500">Ventas</p></div>
-          <div class="card rounded-xl p-5"><p class="text-3xl font-black text-orange-500">24/7</p><p class="text-sm text-gray-500">Soporte</p></div>
+        <div class="grid grid-cols-3 gap-4 mb-6">
+          <div class="card rounded-2xl p-5 text-center"><p class="text-3xl font-black text-orange-500">500+</p><p class="text-sm text-gray-500">Clientes Felices</p></div>
+          <div class="card rounded-2xl p-5 text-center"><p class="text-3xl font-black text-orange-500">1000+</p><p class="text-sm text-gray-500">Ventas</p></div>
+          <div class="card rounded-2xl p-5 text-center"><p class="text-3xl font-black text-orange-500">24/7</p><p class="text-sm text-gray-500">Soporte</p></div>
         </div>
-        <h3 class="text-2xl font-bold mb-4">Testimonials</h3>
-        <div class="grid md:grid-cols-2 gap-4">
-          <div class="card rounded-xl p-5"><p>"Me entregaron Netflix en 2 minutos. 10/10"</p><p class="text-xs text-gray-500 mt-3">- Carlos R.</p></div>
-          <div class="card rounded-xl p-5"><p>"Los mejores precios de Lima. Totalmente recomendado."</p><p class="text-xs text-gray-500 mt-3">- Ana M.</p></div>
+        <h3 class="text-2xl font-bold mb-4">💬 Reseñas de Clientes</h3>
+        <div class="grid md:grid-cols-2 gap-4 mb-6">
+          <div class="card rounded-2xl p-5"><p class="text-yellow-400 text-lg">⭐⭐</p><p class="mt-2">"Netflix me llegó en 2 minutos. Tan rápido como Garfield come lasaña!"</p><p class="text-xs text-gray-500 mt-3">- Carlos R. Lima</p></div>
+          <div class="card rounded-2xl p-5"><p class="text-yellow-400 text-lg">⭐⭐⭐⭐⭐</p><p class="mt-2">"Amo la temática de Garfield. Los mejores precios"</p><p class="text-xs text-gray-500 mt-3">- Ana M. Arequipa</p></div>
+        </div>
+      </div>
+
+      <!-- SECCION GARFIELD NUEVA -->
+      <div id="seccion-garfield" class="hidden">
+        <div class="card rounded-2xl p-8 mb-6 bg-gradient-to-r from-orange-100 to-yellow-50">
+          <h2 class="text-4xl font-black">🐱 Universo Garfield</h2>
+          <p class="text-gray-600 mt-2">Todo sobre el gato naranja más querido del mundo</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-5 mb-6">
+          <div class="card rounded-2xl p-6">
+            <h3 class="text-2xl font-black mb-3">¿Quién es Garfield?</h3>
+            <p class="text-gray-600">Garfield es un gato naranja, gordo y perezoso creado por Jim Davis en 1978. Ama 3 cosas en la vida: <b>Lasaña, dormir y odiar los lunes</b>. Es el mejor amigo de Jon Arbuckle y odia a Odie el perro.</p>
+          </div>
+          <div class="card rounded-2xl p-6">
+            <h3 class="text-2xl font-black mb-3">Datos Curiosos</h3>
+            <ul class="space-y-2 text-gray-600">
+              <li>🍕 <b>Comida favorita:</b> Lasaña</li>
+              <li>😴 <b>Odia:</b> Los lunes y las dietas</li>
+              <li>📅 <b>Primer cómic:</b> 19 de Junio de 1978</li>
+              <li>🌍 <b>Idiomas:</b> Traducido a +45 idiomas</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card rounded-2xl p-6 mb-6">
+          <h3 class="text-2xl font-black mb-4">Frases Famosas de Garfield</h3>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="bg-orange-50 p-4 rounded-xl"><p class="italic">"Odio los lunes."</p></div>
+            <div class="bg-orange-50 p-4 rounded-xl"><p class="italic">"La lasaña es mi pasión."</p></div>
+            <div class="bg-orange-50 p-4 rounded-xl"><p class="italic">"Dieta? Yo solo hago dieta de ver comida."</p></div>
+            <div class="bg-orange-50 p-4 rounded-xl"><p class="italic">"Dormir es mi superpoder."</p></div>
+          </div>
+        </div>
+
+        <div class="card rounded-2xl p-6">
+          <h3 class="text-2xl font-black mb-4">🎵 Tema de Garfield</h3>
+          <p class="text-gray-600 mb-4">Escucha el tema mientras navegas. Puedes pausarlo con el botón 🔊 de arriba.</p>
+          <div class="bg-orange-50 p-4 rounded-xl flex items-center justify-between">
+            <p class="font-bold">garfield.mp3</p>
+            <button onclick="toggleMusic()" class="btn-primary px-4 py-2 rounded-lg font-bold">Play/Pause</button>
+          </div>
         </div>
       </div>
 
       <!-- PERFIL -->
       <div id="seccion-perfil" class="hidden">
-        <div class="card rounded-2xl p-8 max-w-xl">
-          <h2 class="text-3xl font-black mb-6">My Profile</h2>
+        <div class="card rounded-2xl p-8 max-w-2xl shadow-sm">
+          <h2 class="text-3xl font-black mb-6">Mi Perfil</h2>
           <div class="flex items-center gap-5 mb-6">
-            <img id="fotoPerfil" src="https://via.placeholder.com/90/000/FF4500" class="w-24 h-24 rounded-xl border-2 border-orange-500"/>
-            <input type="file" id="inputFoto" accept="image/*" class="text-sm text-gray-400">
+            <img id="fotoPerfil" src="https://via.placeholder.com/90/F5F5F7/FF6B00" class="w-24 h-24 rounded-2xl border-4 border-orange-500"/>
+            <input type="file" id="inputFoto" accept="image/*" class="text-sm">
           </div>
-          <input id="perfilNombre" type="text" placeholder="Name" class="w-full bg-[#111] border-[#222] rounded-lg px-4 py-3 mb-3 outline-none">
-          <input id="perfilCorreo" type="email" placeholder="Email" class="w-full bg-[#111] border-[#222] rounded-lg px-4 py-3 mb-3 outline-none">
-          <input id="perfilPass" type="password" placeholder="Password" class="w-full bg-[#111] border-[#222] rounded-lg px-4 py-3 mb-5 outline-none">
-          <button onclick="guardarPerfil()" class="btn-primary w-full py-3 rounded-lg">SAVE CHANGES</button>
+          <label class="text-sm font-semibold text-gray-600">Nombre Completo</label>
+          <input id="perfilNombre" type="text" class="w-full bg-gray-50 border-gray-200 rounded-xl px-4 py-3 mt-2 mb-4 outline-none">
+          <label class="text-sm font-semibold text-gray-600">Correo Electrónico</label>
+          <input id="perfilCorreo" type="email" class="w-full bg-gray-50 border-gray-200 rounded-xl px-4 py-3 mt-2 mb-4 outline-none">
+          <label class="text-sm font-semibold text-gray-600">Contraseña</label>
+          <input id="perfilPass" type="password" class="w-full bg-gray-50 border-gray-200 rounded-xl px-4 py-3 mt-2 mb-5 outline-none">
+          <button onclick="guardarPerfil()" class="btn-primary w-full py-3 rounded-xl font-bold transition">GUARDAR CAMBIOS</button>
         </div>
       </div>
     </main>
+  </div>
+
+  <!-- BARRA DE MUSICA FIJA -->
+  <div class="music-bar fixed bottom-0 left-0 right-0 p-3 z-40">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-lg bg-orange-500 flex items-center justify-center text-white">🎵</div>
+        <div>
+          <p class="font-bold text-sm">Tema de Garfield</p>
+          <p class="text-xs text-gray-500">Reproduciendo...</p>
+        </div>
+      </div>
+      <button onclick="toggleMusic()" id="btnMusic2" class="btn-primary px-4 py-2 rounded-lg font-bold text-sm">Pausar</button>
+    </div>
   </div>
 </div>
 
@@ -113,6 +192,8 @@
 let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 let usuario = JSON.parse(localStorage.getItem('usuario')) || {};
 let sidebarOpen = false;
+let musicPlaying = true;
+const music = document.getElementById('bgMusic');
 
 window.onload = function() {
   if(usuario.email && usuario.password) {
@@ -120,6 +201,21 @@ window.onload = function() {
     document.getElementById('loginScreen').classList.add('hidden');
     document.getElementById('dashboardScreen').classList.remove('hidden');
     mostrarSeccion('inicio', document.querySelector('.menu-item'));
+    music.volume = 0.3; // Volumen bajito
+  }
+}
+
+function toggleMusic() {
+  if(music.paused) {
+    music.play();
+    musicPlaying = true;
+    document.getElementById('btnMusic').innerText = '🔊';
+    document.getElementById('btnMusic2').innerText = 'Pausar';
+  } else {
+    music.pause();
+    musicPlaying = false;
+    document.getElementById('btnMusic').innerText = '🔇';
+    document.getElementById('btnMusic2').innerText = 'Reproducir';
   }
 }
 
@@ -132,10 +228,12 @@ function toggleSidebar() {
 function showTab(tab) {
   document.getElementById('formLogin').classList.toggle('hidden', tab!== 'login');
   document.getElementById('formRegister').classList.toggle('hidden', tab!== 'register');
-  document.getElementById('tabLogin').classList.toggle('bg-orange-500', tab === 'login');
-  document.getElementById('tabLogin').classList.toggle('text-black', tab === 'login');
-  document.getElementById('tabRegister').classList.toggle('bg-orange-500', tab === 'register');
-  document.getElementById('tabRegister').classList.toggle('text-black', tab === 'register');
+  document.getElementById('tabLogin').classList.toggle('bg-white', tab === 'login');
+  document.getElementById('tabLogin').classList.toggle('shadow', tab === 'login');
+  document.getElementById('tabRegister').classList.toggle('bg-white', tab === 'register');
+  document.getElementById('tabRegister').classList.toggle('shadow', tab === 'register');
+  document.getElementById('tabLogin').classList.toggle('text-gray-500', tab!== 'login');
+  document.getElementById('tabRegister').classList.toggle('text-gray-500', tab!== 'register');
 }
 
 function login() {
@@ -145,7 +243,8 @@ function login() {
     cargarPerfil();
     document.getElementById('loginScreen').classList.add('hidden');
     document.getElementById('dashboardScreen').classList.remove('hidden');
-  } else { alert('❌ Invalid credentials'); }
+    music.play().catch(()=>{}); // Intenta reproducir música
+  } else { alert('❌ Correo o contraseña incorrectos'); }
 }
 
 function register() {
@@ -153,11 +252,12 @@ function register() {
   usuario.email = document.getElementById('email2').value;
   usuario.password = document.getElementById('password2').value;
   localStorage.setItem('usuario', JSON.stringify(usuario));
-  alert('✅ Account created');
+  alert('✅ Cuenta creada: ' + usuario.name);
   showTab('login');
 }
 
 function logout() {
+  music.pause();
   localStorage.removeItem('usuario');
   localStorage.removeItem('carrito');
   location.reload();
@@ -165,6 +265,7 @@ function logout() {
 
 function mostrarSeccion(sec, el) {
   document.getElementById('seccion-inicio').classList.add('hidden');
+  document.getElementById('seccion-garfield').classList.add('hidden');
   document.getElementById('seccion-perfil').classList.add('hidden');
   document.getElementById('seccion-' + sec).classList.remove('hidden');
   document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active-menu'));
@@ -184,7 +285,7 @@ function guardarPerfil() {
   usuario.email = document.getElementById('perfilCorreo').value;
   usuario.password = document.getElementById('perfilPass').value;
   localStorage.setItem('usuario', JSON.stringify(usuario));
-  alert('✅ Profile saved');
+  alert('✅ Perfil guardado correctamente');
 }
 
 document.getElementById('inputFoto').onchange = function(e) {
