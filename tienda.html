@@ -3,91 +3,134 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Store - Eventos Garfield</title>
+<title>Tienda - Eventos Garfield</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root{ --bg:#000; --card:#0A0A0A; --border:#1A1A1A; --naranja:#FF4500; }
-  body { background: var(--bg); font-family: 'Inter', sans-serif; color: #E5E5E5; }
-.card { background: var(--card); border: 1px solid var(--border); }
-.btn-primary { background: var(--naranja); color: #000; font-weight: 800; }
-.btn-primary:hover { background: #FF5A1A; }
-.filter-btn { background: #111; }
-.filter-active { background: var(--naranja); color: #000; }
-.card-product:hover { border-color: var(--naranja); }
+  :root{ --naranja:#FF6B00; --naranja2:#FF8C00; --gris:#F5F5F7; --texto:#1D1D1F; }
+  body { background: var(--gris); font-family: 'Inter', sans-serif; color: var(--texto); }
+.card { background: #fff; border: 1px solid #E5E5E7; }
+.btn-primary { background: linear-gradient(90deg, var(--naranja), var(--naranja2)); color: #fff; }
+.filter-btn { background: #fff; border: 1px solid #E5E5E7; }
+.filter-active { background: var(--naranja); color: #fff; border-color: var(--naranja); }
+.music-bar { background: #fff; border-top: 1px solid #E5E5E7; }
 </style>
 </head>
 <body>
 
-<header class="card p-4 flex items-center justify-between sticky top-0 z-20">
-  <a href="index.html" class="text-xl font-black">GARFIELD<span class="text-orange-500">.</span></a>
-  <button onclick="enviarWhatsApp()" id="btnCarrito" class="card px-4 py-2 rounded-lg font-bold">Cart 0</button>
+<!-- MUSICA DE FONDO -->
+<audio id="bgMusic" src="garfield.mp3" loop autoplay></audio>
+
+<header class="card p-4 flex items-center justify-between sticky top-0 z-20 shadow-sm">
+  <a href="index.html" class="flex items-center gap-2">
+    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-orange-400 flex items-center justify-center text-lg font-black text-white">G</div>
+    <h1 class="text-xl font-black">Eventos <span class="text-orange-500">Garfield</span></h1>
+  </a>
+  <div class="flex items-center gap-3">
+    <button onclick="toggleMusic()" id="btnMusic" class="text-2xl">🔊</button>
+    <button onclick="enviarWhatsApp()" id="btnCarrito" class="card px-5 py-2.5 rounded-xl font-bold">🛒 Carrito 0</button>
+  </div>
 </header>
 
-<div class="p-5 max-w-7xl mx-auto">
-  <h2 class="text-4xl font-black mb-2">STORE</h2>
-  <p class="text-gray-400 mb-6">Choose your digital services. Instant delivery.</p>
-
-  <div class="flex gap-2 mb-6">
-    <button onclick="filtrar('todos')" id="btn-todos" class="filter-btn filter-active px-4 py-2 rounded-lg text-sm font-bold">All</button>
-    <button onclick="filtrar('streaming')" id="btn-streaming" class="filter-btn px-4 py-2 rounded-lg text-sm font-bold text-gray-400">Streaming</button>
-    <button onclick="filtrar('musica')" id="btn-musica" class="filter-btn px-4 py-2 rounded-lg text-sm font-bold text-gray-400">Music</button>
+<div class="p-5 max-w-7xl mx-auto pb-24">
+  <div class="card rounded-2xl p-8 mb-6 bg-gradient-to-r from-orange-50 to-white">
+    <span class="bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-xs font-bold">CATÁLOGO 2026</span>
+    <h2 class="text-4xl font-black mt-4">Arma tu pack como Garfield 🍕</h2>
+    <p class="text-gray-600 mt-3">Servicios digitales con la actitud de Garfield: Rápido y sin lunes.</p>
   </div>
 
-  <div id="productos" class="grid md:grid-cols-4 gap-4">
-    <div class="producto streaming card card-product rounded-xl p-5 transition">
-      <p class="text-xs text-orange-500 font-bold">-25% OFF</p>
-      <p class="text-4xl font-black text-red-500 mt-2">N</p>
-      <p class="text-xs text-gray-500 mt-2">STREAMING</p>
-      <p class="font-bold text-lg">Netflix 1 Screen</p>
-      <p class="text-2xl font-black text-orange-500 mt-3">S/15.00</p>
-      <button onclick="agregarCarrito('Netflix 1 Screen', 15)" class="btn-primary w-full py-2.5 rounded-lg mt-4">ADD TO CART</button>
+  <div class="flex gap-3 mb-6 overflow-x-auto pb-2">
+    <button onclick="filtrar('todos')" id="btn-todos" class="filter-btn filter-active px-5 py-2.5 rounded-xl text-sm font-bold">Todos</button>
+    <button onclick="filtrar('streaming')" id="btn-streaming" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600">Streaming</button>
+    <button onclick="filtrar('musica')" id="btn-musica" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600">Música</button>
+  </div>
+
+  <div id="productos" class="grid md:grid-cols-3 gap-5">
+    <div class="producto streaming card rounded-2xl p-6 transition shadow-sm">
+      <span class="bg-orange-100 text-orange-600 text-xs px-3 py-1 rounded-full font-bold">-25%</span>
+      <p class="text-4xl font-black text-red-500 mt-3">N</p>
+      <p class="text-xs text-gray-500 mt-2 uppercase">Streaming</p>
+      <p class="font-bold text-xl mt-1">Netflix Premium 1 Pantalla</p>
+      <p class="text-sm text-yellow-500 mt-1">⭐ 4.9 · Entrega inmediata</p>
+      <p class="mt-4"><span class="text-3xl font-black text-orange-500">S/ 15.00</span></p>
+      <button onclick="agregarCarrito('Netflix Premium 1 Pantalla', 15)" class="btn-primary w-full py-3.5 rounded-xl mt-4 font-bold transition">AÑADIR AL CARRITO</button>
     </div>
-    <div class="producto musica card-product rounded-xl p-5 transition">
-      <p class="text-xs text-orange-500 font-bold">-29% OFF</p>
-      <p class="text-4xl text-green-500 mt-2">●</p>
-      <p class="text-xs text-gray-500 mt-2">MUSIC</p>
-      <p class="font-bold text-lg">Spotify Premium</p>
-      <p class="text-2xl font-black text-orange-500 mt-3">S/10.00</p>
-      <button onclick="agregarCarrito('Spotify Premium', 10)" class="btn-primary w-full py-2.5 rounded-lg mt-4">ADD TO CART</button>
+    <div class="producto musica card rounded-2xl p-6 transition shadow-sm">
+      <span class="bg-orange-100 text-orange-600 text-xs px-3 py-1 rounded-full font-bold">-29%</span>
+      <p class="text-4xl text-green-500 mt-3">●</p>
+      <p class="text-xs text-gray-500 mt-2 uppercase">Música</p>
+      <p class="font-bold text-xl mt-1">Spotify Premium Individual</p>
+      <p class="text-sm text-yellow-500 mt-1">⭐ 4.9 · Entrega inmediata</p>
+      <p class="mt-4"><span class="text-3xl font-black text-orange-500">S/ 10.00</span></p>
+      <button onclick="agregarCarrito('Spotify Premium Individual', 10)" class="btn-primary w-full py-3.5 rounded-xl mt-4 font-bold transition">AÑADIR AL CARRITO</button>
     </div>
+  </div>
+</div>
+
+<!-- BARRA DE MUSICA FIJA -->
+<div class="music-bar fixed bottom-0 left-0 right-0 p-3 z-40">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-lg bg-orange-500 flex items-center justify-center text-white">🎵</div>
+      <div>
+        <p class="font-bold text-sm">Tema de Garfield</p>
+        <p class="text-xs text-gray-500">Reproduciendo...</p>
+      </div>
+    </div>
+    <button onclick="toggleMusic()" id="btnMusic2" class="btn-primary px-4 py-2 rounded-lg font-bold text-sm">Pausar</button>
   </div>
 </div>
 
 <script>
 let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+const music = document.getElementById('bgMusic');
+music.volume = 0.3;
 actualizarCarrito();
+
+function toggleMusic() {
+  if(music.paused) {
+    music.play();
+    document.getElementById('btnMusic').innerText = '🔊';
+    document.getElementById('btnMusic2').innerText = 'Pausar';
+  } else {
+    music.pause();
+    document.getElementById('btnMusic').innerText = '🔇';
+    document.getElementById('btnMusic2').innerText = 'Reproducir';
+  }
+}
 
 function agregarCarrito(nombre, precio) {
   carrito.push({nombre, precio});
   localStorage.setItem('carrito', JSON.stringify(carrito));
   actualizarCarrito();
+  alert('✅ ' + nombre + ' añadido al carrito');
 }
 
 function actualizarCarrito() {
-  document.getElementById('btnCarrito').innerText = `Cart ${carrito.length}`;
+  document.getElementById('btnCarrito').innerText = `🛒 Carrito ${carrito.length}`;
 }
 
 function filtrar(categoria) {
   document.querySelectorAll('.producto').forEach(p => p.style.display = 'none');
-  document.querySelectorAll('.filter-btn').forEach(b => b.className = 'filter-btn px-4 py-2 rounded-lg text-sm font-bold text-gray-400');
+  document.querySelectorAll('.filter-btn').forEach(b => b.className = 'filter-btn px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600');
   if(categoria === 'todos') {
     document.querySelectorAll('.producto').forEach(p => p.style.display = 'block');
-    document.getElementById('btn-todos').className = 'filter-btn filter-active px-4 py-2 rounded-lg text-sm font-bold';
+    document.getElementById('btn-todos').className = 'filter-btn filter-active px-5 py-2.5 rounded-xl text-sm font-bold';
   } else {
     document.querySelectorAll('.' + categoria).forEach(p => p.style.display = 'block');
-    document.getElementById('btn-' + categoria).className = 'filter-btn filter-active px-4 py-2 rounded-lg text-sm font-bold';
+    document.getElementById('btn-' + categoria).className = 'filter-btn filter-active px-5 py-2.5 rounded-xl text-sm font-bold';
   }
 }
 
 function enviarWhatsApp() {
-  if(carrito.length === 0) return alert('Cart empty');
-  let usuario = JSON.parse(localStorage.getItem('usuario')) || {name: "Guest", email: ""};
+  if(carrito.length === 0) return alert('Tu carrito está vacío');
+  let usuario = JSON.parse(localStorage.getItem('usuario')) || {name: "Invitado", email: ""};
   let total = carrito.reduce((sum, item) => sum + item.precio, 0);
-  let mensaje = `*ORDER - GARFIELD*%0A*Client:* ${usuario.name}%0A%0A`;
+  let mensaje = `*NUEVO PEDIDO - EVENTOS GARFIELD*%0A*Cliente:* ${usuario.name}%0A*Email:* ${usuario.email}%0A%0A*Productos:*%0A`;
   carrito.forEach((item, i) => { mensaje += `${i+1}. ${item.nombre} - S/ ${item.precio}.00%0A`; });
   mensaje += `%0A*TOTAL: S/ ${total}.00*`;
-  window.open(`https://wa.me/51999999?text=${mensaje}`, '_blank');
+  let numero = "51999999"; // CAMBIA ESTE NUMERO
+  window.open(`https://wa.me/${numero}?text=${mensaje}`, '_blank');
   localStorage.removeItem('carrito'); carrito = []; actualizarCarrito();
 }
 </script>
