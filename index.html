@@ -3,58 +3,46 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Eventos Garfield | Servicios Digitales Premium</title>
+<title>Eventos Garfield</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-  :root{ --naranja: #FF6B00; --naranja2: #FF8C00; --fondo: #07070B; --card: #111118; }
-  body { background: radial-gradient(1200px 800px at 10% -10%, rgba(255,107,0,0.15), transparent 60%),
-                    radial-gradient(1000px 600px at 110% 10%, rgba(147,51,234,0.12), transparent 60%),
-                    var(--fondo);
-         font-family: 'Montserrat', sans-serif; color: #fff; overflow-x: hidden; }
- .glass { background: rgba(17, 17, 24, 0.55); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.08); }
- .btn-gradient { background: linear-gradient(90deg, var(--naranja), var(--naranja2)); box-shadow: 0 8px 30px rgba(255,107,0,0.35); }
- .btn-gradient:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(255,107,0,0.5); }
- .sidebar { background: rgba(7, 7, 11, 0.9); backdrop-filter: blur(24px); border-right: 1px solid rgba(255,107,0,0.15); transition: transform 0.35s cubic-bezier(.4,0,.2,1); }
- .menu-item { transition: all 0.25s; }
- .menu-item:hover { background: rgba(255,107,0,0.12); transform: translateX(6px); }
- .active-menu { background: linear-gradient(90deg, rgba(255,107,0,0.25), rgba(255,140,0,0.15)); border-left: 3px solid var(--naranja); }
- .overlay { background: rgba(0,0,0,0.65); backdrop-filter: blur(6px); }
- .badge { background: linear-gradient(90deg, rgba(255,107,0,0.2), rgba(147,51,234,0.2)); border: 1px solid rgba(255,107,0,0.3); }
-  @media (min-width: 768px) { #overlay { display: none!important; } }
+  :root{ --bg:#000; --card:#0A0A0A; --border:#1A1A1A; --naranja:#FF4500; }
+  body { background: var(--bg); font-family: 'Inter', sans-serif; color: #E5E5E5; }
+.card { background: var(--card); border: 1px solid var(--border); }
+.btn-primary { background: var(--naranja); color: #000; font-weight: 800; }
+.btn-primary:hover { background: #FF5A1A; box-shadow: 0 0 20px rgba(255,69,0,0.4); }
+.sidebar { background: #050505; border-right: 1px solid var(--border); }
+.menu-item { color: #888; }
+.menu-item:hover { background: #111; color: #fff; }
+.active-menu { background: #111; color: var(--naranja); border-left: 2px solid var(--naranja); }
+.overlay { background: rgba(0,0,0,0.8); }
 </style>
 </head>
 <body>
 
 <!-- LOGIN -->
 <div id="loginScreen" class="min-h-screen flex items-center justify-center p-4">
-  <div class="w-full max-w-md">
-    <div class="flex items-center gap-3 mb-8 justify-center">
-      <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500 to-purple-600 flex items-center justify-center text-2xl font-black">G</div>
-      <h1 class="text-3xl font-black">EVENTOS <span class="text-orange-500">GARFIELD</span></h1>
+  <div class="w-full max-w-sm">
+    <div class="text-center mb-10">
+      <h1 class="text-4xl font-black tracking-tight">GARFIELD<span class="text-orange-500">.</span></h1>
+      <p class="text-gray-500 text-sm mt-2">SERVICIOS DIGITALES PREMIUM</p>
     </div>
-    <div class="glass rounded-3xl p-8 shadow-2xl">
-      <h2 class="text-3xl font-extrabold mb-2">Bienvenido</h2>
-      <p class="text-gray-400 text-sm mb-6">Inicia sesión para continuar</p>
-      <div class="glass rounded-2xl p-1 flex mb-5">
-        <button id="tabLogin" onclick="showTab('login')" class="flex-1 py-2.5 rounded-xl font-bold active-menu">Iniciar sesión</button>
-        <button id="tabRegister" onclick="showTab('register')" class="flex-1 py-2.5 rounded-xl font-bold text-gray-400">Crear cuenta</button>
+    <div class="card rounded-2xl p-8">
+      <div class="flex bg-[#111] rounded-xl p-1 mb-6">
+        <button id="tabLogin" onclick="showTab('login')" class="flex-1 py-2.5 rounded-lg font-bold text-sm">LOGIN</button>
+        <button id="tabRegister" onclick="showTab('register')" class="flex-1 py-2.5 rounded-lg font-bold text-sm text-gray-500">REGISTER</button>
       </div>
       <div id="formLogin">
-        <label class="text-sm font-semibold text-gray-300">Correo electrónico</label>
-        <input id="email" type="email" placeholder="tu@email.com" class="w-full glass rounded-xl px-4 py-3 mt-2 mb-4 outline-none focus:border-orange-500 border border-transparent">
-        <label class="text-sm font-semibold text-gray-300">Contraseña</label>
-        <input id="password" type="password" placeholder="••••" class="w-full glass rounded-xl px-4 py-3 mt-2 mb-5 outline-none focus:border-orange-500 border border-transparent">
-        <button onclick="login()" class="btn-gradient w-full py-3.5 rounded-xl font-extrabold transition">ACCEDER</button>
+        <input id="email" type="email" placeholder="Email" class="w-full bg-[#111] border-[#222] rounded-lg px-4 py-3 mb-3 outline-none focus:border-orange-500">
+        <input id="password" type="password" placeholder="Password" class="w-full bg-[#111] border-[#222] rounded-lg px-4 py-3 mb-5 outline-none focus:border-orange-500">
+        <button onclick="login()" class="btn-primary w-full py-3 rounded-lg">SIGN IN</button>
       </div>
       <div id="formRegister" class="hidden">
-        <label class="text-sm font-semibold text-gray-300">Nombre completo</label>
-        <input id="name" type="text" class="w-full glass rounded-xl px-4 py-3 mt-2 mb-4 outline-none">
-        <label class="text-sm font-semibold text-gray-300">Correo electrónico</label>
-        <input id="email2" type="email" class="w-full glass rounded-xl px-4 py-3 mt-2 mb-4 outline-none">
-        <label class="text-sm font-semibold text-gray-300">Contraseña</label>
-        <input id="password2" type="password" class="w-full glass rounded-xl px-4 py-3 mt-2 mb-5 outline-none">
-        <button onclick="register()" class="btn-gradient w-full py-3.5 rounded-xl font-extrabold transition">CREAR CUENTA</button>
+        <input id="name" type="text" placeholder="Full Name" class="w-full bg-[#111] border-[#222] rounded-lg px-4 py-3 mb-3 outline-none">
+        <input id="email2" type="email" placeholder="Email" class="w-full bg-[#111] border-[#222] rounded-lg px-4 py-3 mb-3 outline-none">
+        <input id="password2" type="password" placeholder="Password" class="w-full bg-[#111] border-[#222] rounded-lg px-4 py-3 mb-5 outline-none">
+        <button onclick="register()" class="btn-primary w-full py-3 rounded-lg">CREATE ACCOUNT</button>
       </div>
     </div>
   </div>
@@ -62,89 +50,59 @@
 
 <!-- DASHBOARD -->
 <div id="dashboardScreen" class="hidden min-h-screen">
-  <header class="glass p-4 flex items-center justify-between sticky top-0 z-30">
-    <div class="flex items-center gap-3">
-      <button onclick="toggleSidebar()" class="text-2xl p-2 rounded-xl hover:bg-white/5">☰</button>
-      <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-purple-600 flex items-center justify-center font-black">G</div>
-      <h1 class="text-lg font-black">EVENTOS <span class="text-orange-500">GARFIELD</span></h1>
+  <header class="card p-4 flex items-center justify-between sticky top-0 z-30">
+    <div class="flex items-center gap-4">
+      <button onclick="toggleSidebar()" class="text-2xl">☰</button>
+      <h1 class="text-xl font-black">GARFIELD<span class="text-orange-500">.</span></h1>
     </div>
   </header>
 
-  <div id="overlay" onclick="toggleSidebar()" class="overlay fixed inset-0 z-20 hidden md:hidden"></div>
+  <div id="overlay" onclick="toggleSidebar()" class="overlay fixed inset-0 z-20 hidden"></div>
 
   <div class="flex">
-    <aside id="sidebar" class="sidebar w-80 h-[calc(100vh-68px)] overflow-y-auto fixed left-0 top-[68px] z-20 transform -translate-x-full md:translate-x-0">
+    <aside id="sidebar" class="sidebar w-72 h-[calc(100vh-65px)] overflow-y-auto fixed left-0 top-[65px] z-20 transform -translate-x-full md:translate-x-0">
       <div class="p-4">
-        <div class="glass rounded-2xl p-4 mb-4">
-          <p class="text-xs text-orange-400 font-bold tracking-widest">PORTAL</p>
-          <div class="mt-3 space-y-1">
-            <a onclick="mostrarSeccion('inicio', this)" class="menu-item flex items-center gap-3 px-4 py-3 rounded-xl cursor-pointer active-menu font-semibold">🏠 Inicio</a>
-            <a onclick="mostrarSeccion('perfil', this)" class="menu-item flex items-center gap-3 px-4 py-3 rounded-xl cursor-pointer font-semibold">⚪ Mi perfil</a>
-          </div>
-        </div>
-        <div class="glass rounded-2xl p-4 mb-4">
-          <p class="text-xs text-orange-400 font-bold tracking-widest">REDES OFICIALES</p>
-          <div class="mt-3 space-y-1">
-            <a href="https://wa.me/51999999" target="_blank" class="menu-item flex items-center gap-3 px-4 py-3 rounded-xl font-semibold">📢 Canal WhatsApp</a>
-            <a href="https://chat.whatsapp.com/xxxxx" target="_blank" class="menu-item flex items-center gap-3 px-4 py-3 rounded-xl font-semibold">👥 Comunidad</a>
-          </div>
-        </div>
-        <div class="glass rounded-2xl p-4 mb-4">
-          <p class="text-xs text-orange-400 font-bold tracking-widest">TIENDA</p>
-          <div class="mt-3 space-y-1">
-            <a href="tienda.html" class="menu-item flex items-center gap-3 px-4 py-3 rounded-xl font-semibold">🛍️ Ver Catálogo</a>
-          </div>
-        </div>
-        <button onclick="logout()" class="w-full bg-red-500/10 text-red-400 py-3.5 rounded-xl font-bold hover:bg-red-500/20 transition">Cerrar sesión</button>
+        <p class="text-xs text-gray-500 font-bold px-3 mb-2">MENU</p>
+        <a onclick="mostrarSeccion('inicio', this)" class="menu-item flex items-center gap-3 px-3 py-3 rounded-lg cursor-pointer active-menu font-semibold">Home</a>
+        <a onclick="mostrarSeccion('perfil', this)" class="menu-item flex items-center gap-3 px-3 py-3 rounded-lg cursor-pointer font-semibold">Profile</a>
+        <a href="tienda.html" class="menu-item flex items-center gap-3 px-3 py-3 rounded-lg font-semibold">Store</a>
+        <p class="text-xs text-gray-500 font-bold px-3 mt-6 mb-2">SUPPORT</p>
+        <a href="https://wa.me/51999999" target="_blank" class="menu-item flex items-center gap-3 px-3 py-3 rounded-lg font-semibold">WhatsApp</a>
+        <button onclick="logout()" class="w-full text-red-500 py-3 rounded-lg font-bold mt-6 text-left px-3">Logout</button>
       </div>
     </aside>
 
-    <main class="w-full p-4 md:ml-80">
+    <main class="w-full p-5 md:ml-72">
       <!-- INICIO -->
       <div id="seccion-inicio">
-        <div class="glass rounded-3xl p-8 mb-6 bg-gradient-to-br from-orange-900/20 to-purple-900/20">
-          <span class="badge px-3 py-1 rounded-full text-xs font-bold">SERVICIOS PREMIUM</span>
-          <h2 class="text-4xl font-black mt-4">Eventos Garfield 🎭</h2>
-          <p class="text-gray-300 mt-3 text-lg">Streaming, Música, Software y más. Entrega inmediata 24/7. +1000 clientes satisfechos en todo Perú.</p>
+        <div class="card rounded-2xl p-8 mb-6">
+          <h2 class="text-5xl font-black">EVENTOS GARFIELD</h2>
+          <p class="text-gray-400 mt-3 text-lg">La tienda #1 de servicios digitales en Perú. Entrega inmediata 24/7.</p>
         </div>
-        <div class="grid grid-cols-3 gap-4 mb-6">
-          <div class="glass rounded-2xl p-5 text-center"><p class="text-4xl font-black text-orange-400">500+</p><p class="text-sm text-gray-400">Clientes Activos</p></div>
-          <div class="glass rounded-2xl p-5 text-center"><p class="text-4xl font-black text-purple-400">1000+</p><p class="text-sm text-gray-400">Ventas</p></div>
-          <div class="glass rounded-2xl p-5 text-center"><p class="text-4xl font-black text-pink-400">24/7</p><p class="text-sm text-gray-400">Soporte VIP</p></div>
+        <div class="grid grid-cols-3 gap-4 mb-8">
+          <div class="card rounded-xl p-5"><p class="text-3xl font-black text-orange-500">500+</p><p class="text-sm text-gray-500">Clientes</p></div>
+          <div class="card rounded-xl p-5"><p class="text-3xl font-black text-orange-500">1000+</p><p class="text-sm text-gray-500">Ventas</p></div>
+          <div class="card rounded-xl p-5"><p class="text-3xl font-black text-orange-500">24/7</p><p class="text-sm text-gray-500">Soporte</p></div>
         </div>
-        <h3 class="text-2xl font-black mb-4">💬 Lo que dicen nuestros clientes</h3>
-        <div class="grid md:grid-cols-2 gap-4 mb-6">
-          <div class="glass rounded-2xl p-5"><p class="text-yellow-400 text-xl">⭐</p><p class="mt-2">"Entrega en 3 minutos. 100% confiable y barato"</p><p class="text-xs text-gray-400 mt-3">- Carlos R. Lima</p></div>
-          <div class="glass rounded-2xl p-5"><p class="text-yellow-400 text-xl">⭐</p><p class="mt-2">"El mejor servicio de streaming del Perú. Recomendado"</p><p class="text-xs text-gray-400 mt-3">- Ana M. Arequipa</p></div>
-        </div>
-        <h3 class="text-2xl font-black mb-4">👨‍💻 Fundadores</h3>
+        <h3 class="text-2xl font-bold mb-4">Testimonials</h3>
         <div class="grid md:grid-cols-2 gap-4">
-          <div class="glass rounded-2xl p-5 flex items-center gap-4">
-            <img src="https://via.placeholder.com/60" class="w-16 h-16 rounded-2xl border-2 border-orange-500"/>
-            <div><p class="font-black text-lg">Lu</p><p class="text-sm text-gray-400">Co-Founder</p><a href="https://wa.me/51999999" target="_blank" class="text-sm text-green-400 font-bold">Contactar WhatsApp</a></div>
-          </div>
-          <div class="glass rounded-2xl p-5 flex items-center gap-4">
-            <img src="https://via.placeholder.com/60" class="w-16 h-16 rounded-2xl border-2 border-orange-500"/>
-            <div><p class="font-black text-lg">Whois</p><p class="text-sm text-gray-400">CEO</p><a href="https://wa.me/51999999" target="_blank" class="text-sm text-green-400 font-bold">Contactar WhatsApp</a></div>
-          </div>
+          <div class="card rounded-xl p-5"><p>"Me entregaron Netflix en 2 minutos. 10/10"</p><p class="text-xs text-gray-500 mt-3">- Carlos R.</p></div>
+          <div class="card rounded-xl p-5"><p>"Los mejores precios de Lima. Totalmente recomendado."</p><p class="text-xs text-gray-500 mt-3">- Ana M.</p></div>
         </div>
       </div>
 
       <!-- PERFIL -->
       <div id="seccion-perfil" class="hidden">
-        <div class="glass rounded-3xl p-8 max-w-2xl">
-          <h2 class="text-3xl font-black mb-6">Mi Perfil</h2>
+        <div class="card rounded-2xl p-8 max-w-xl">
+          <h2 class="text-3xl font-black mb-6">My Profile</h2>
           <div class="flex items-center gap-5 mb-6">
-            <img id="fotoPerfil" src="https://via.placeholder.com/90" class="w-24 h-24 rounded-2xl border-4 border-orange-500"/>
-            <input type="file" id="inputFoto" accept="image/*" class="text-sm">
+            <img id="fotoPerfil" src="https://via.placeholder.com/90/000/FF4500" class="w-24 h-24 rounded-xl border-2 border-orange-500"/>
+            <input type="file" id="inputFoto" accept="image/*" class="text-sm text-gray-400">
           </div>
-          <label class="text-sm font-semibold text-gray-300">Nombre completo</label>
-          <input id="perfilNombre" type="text" class="w-full glass rounded-xl px-4 py-3 mt-2 mb-4 outline-none">
-          <label class="text-sm font-semibold text-gray-300">Correo electrónico</label>
-          <input id="perfilCorreo" type="email" class="w-full glass rounded-xl px-4 py-3 mt-2 mb-4 outline-none">
-          <label class="text-sm font-semibold text-gray-300">Contraseña</label>
-          <input id="perfilPass" type="password" class="w-full glass rounded-xl px-4 py-3 mt-2 mb-5 outline-none">
-          <button onclick="guardarPerfil()" class="btn-gradient w-full py-3.5 rounded-xl font-extrabold transition">GUARDAR CAMBIOS</button>
+          <input id="perfilNombre" type="text" placeholder="Name" class="w-full bg-[#111] border-[#222] rounded-lg px-4 py-3 mb-3 outline-none">
+          <input id="perfilCorreo" type="email" placeholder="Email" class="w-full bg-[#111] border-[#222] rounded-lg px-4 py-3 mb-3 outline-none">
+          <input id="perfilPass" type="password" placeholder="Password" class="w-full bg-[#111] border-[#222] rounded-lg px-4 py-3 mb-5 outline-none">
+          <button onclick="guardarPerfil()" class="btn-primary w-full py-3 rounded-lg">SAVE CHANGES</button>
         </div>
       </div>
     </main>
@@ -174,10 +132,10 @@ function toggleSidebar() {
 function showTab(tab) {
   document.getElementById('formLogin').classList.toggle('hidden', tab!== 'login');
   document.getElementById('formRegister').classList.toggle('hidden', tab!== 'register');
-  document.getElementById('tabLogin').classList.toggle('active-menu', tab === 'login');
-  document.getElementById('tabRegister').classList.toggle('active-menu', tab === 'register');
-  document.getElementById('tabLogin').classList.toggle('text-gray-400', tab!== 'login');
-  document.getElementById('tabRegister').classList.toggle('text-gray-400', tab!== 'register');
+  document.getElementById('tabLogin').classList.toggle('bg-orange-500', tab === 'login');
+  document.getElementById('tabLogin').classList.toggle('text-black', tab === 'login');
+  document.getElementById('tabRegister').classList.toggle('bg-orange-500', tab === 'register');
+  document.getElementById('tabRegister').classList.toggle('text-black', tab === 'register');
 }
 
 function login() {
@@ -187,8 +145,7 @@ function login() {
     cargarPerfil();
     document.getElementById('loginScreen').classList.add('hidden');
     document.getElementById('dashboardScreen').classList.remove('hidden');
-    mostrarSeccion('inicio', document.querySelector('.menu-item'));
-  } else { alert('❌ Correo o contraseña incorrectos'); }
+  } else { alert('❌ Invalid credentials'); }
 }
 
 function register() {
@@ -196,16 +153,14 @@ function register() {
   usuario.email = document.getElementById('email2').value;
   usuario.password = document.getElementById('password2').value;
   localStorage.setItem('usuario', JSON.stringify(usuario));
-  alert('✅ Cuenta creada: ' + usuario.name);
+  alert('✅ Account created');
   showTab('login');
 }
 
 function logout() {
   localStorage.removeItem('usuario');
   localStorage.removeItem('carrito');
-  carrito = []; usuario = {};
-  document.getElementById('dashboardScreen').classList.add('hidden');
-  document.getElementById('loginScreen').classList.remove('hidden');
+  location.reload();
 }
 
 function mostrarSeccion(sec, el) {
@@ -229,7 +184,7 @@ function guardarPerfil() {
   usuario.email = document.getElementById('perfilCorreo').value;
   usuario.password = document.getElementById('perfilPass').value;
   localStorage.setItem('usuario', JSON.stringify(usuario));
-  alert('✅ Perfil guardado correctamente');
+  alert('✅ Profile saved');
 }
 
 document.getElementById('inputFoto').onchange = function(e) {
