@@ -9,6 +9,7 @@
   body { background: #0a0a0f; font-family: 'Inter', system-ui; }
 .card { background: #15151d; border: 1px solid #2a2a35; }
 .btn-gradient { background: linear-gradient(90deg, #4f46e5, #9333ea); }
+.btn-gradient:hover { opacity: 0.9; }
 .sidebar { background: #0f0f15; border-right: 1px solid #2a2a35; }
 .menu-item { transition: all 0.2s; }
 .menu-item:hover { background: #1e1e28; }
@@ -26,6 +27,7 @@
     </div>
     <div class="card rounded-2xl p-6">
       <h2 class="text-2xl font-bold mb-1">Bienvenido</h2>
+      <p class="text-gray-400 text-sm mb-4">Accede o crea una cuenta</p>
       <div class="card rounded-xl p-1 flex mb-4">
         <button id="tabLogin" onclick="showTab('login')" class="flex-1 py-2 rounded-lg font-semibold active-menu">Iniciar sesión</button>
         <button id="tabRegister" onclick="showTab('register')" class="flex-1 py-2 rounded-lg font-semibold text-gray-400">Crear cuenta</button>
@@ -61,7 +63,6 @@
   </header>
 
   <div class="flex">
-    <!-- SIDEBAR NUEVO -->
     <aside id="sidebar" class="sidebar w-72 h-[calc(100vh-64px)] overflow-y-auto fixed left-0 p-3">
       <details open class="card rounded-xl p-2 mb-2">
         <summary class="font-semibold cursor-pointer flex items-center gap-2">👑 PORTAL</summary>
@@ -70,7 +71,6 @@
           <a onclick="mostrarSeccion('perfil')" class="menu-item flex items-center gap-3 px-3 py-2 rounded-lg cursor-pointer">⚪ Mi perfil</a>
         </div>
       </details>
-
       <details class="card rounded-xl p-2 mb-2">
         <summary class="font-semibold cursor-pointer flex items-center gap-2">🌐 REDES</summary>
         <div class="mt-2 space-y-1 pl-2">
@@ -82,14 +82,12 @@
           </a>
         </div>
       </details>
-
       <details class="card rounded-xl p-2 mb-2">
         <summary class="font-semibold cursor-pointer flex items-center gap-2">🎭 EVENTOS GARFIELD</summary>
         <div class="mt-2 space-y-1 pl-2">
           <a href="tienda.html" class="menu-item flex items-center gap-3 px-3 py-2 rounded-lg">🛍️ Tienda</a>
         </div>
       </details>
-
       <details class="card rounded-xl p-2 mb-2">
         <summary class="font-semibold cursor-pointer flex items-center gap-2">⚙️ SERVICIOS</summary>
         <div class="mt-2 space-y-1 pl-2">
@@ -97,55 +95,40 @@
           <a class="menu-item flex items-center gap-3 px-3 py-2 rounded-lg">🎫 Mis tickets</a>
         </div>
       </details>
-
       <button onclick="logout()" class="w-full bg-red-500/20 text-red-400 py-3 rounded-xl font-bold mt-4">Cerrar sesión</button>
     </aside>
 
-    <!-- CONTENIDO DINAMICO -->
     <main class="ml-0 md:ml-72 p-4 w-full">
-
-      <!-- SECCION INICIO -->
+      <!-- INICIO -->
       <div id="seccion-inicio">
         <div class="card rounded-2xl p-6 mb-4 bg-gradient-to-r from-purple-900/40 to-blue-900/40">
           <h2 class="text-3xl font-bold">Bienvenido a Eventos Garfield 🎭</h2>
           <p class="text-gray-300 mt-2">Somos la mejor tienda de servicios digitales. Streaming, Música, Software y más al mejor precio. Atención 24/7 por WhatsApp.</p>
         </div>
-
-        <!-- CONTADOR -->
         <div class="grid grid-cols-3 gap-4 mb-6">
           <div class="card rounded-xl p-4 text-center"><p class="text-3xl font-bold text-cyan-400">500+</p><p class="text-sm text-gray-400">Clientes Felices</p></div>
           <div class="card rounded-xl p-4 text-center"><p class="text-3xl font-bold text-purple-400">1000+</p><p class="text-sm text-gray-400">Ventas Realizadas</p></div>
           <div class="card rounded-xl p-4 text-center"><p class="text-3xl font-bold text-pink-400">24/7</p><p class="text-sm text-gray-400">Soporte</p></div>
         </div>
-
-        <!-- RESEÑAS -->
         <h3 class="text-xl font-bold mb-3">💬 Reseñas de Clientes</h3>
         <div class="grid md:grid-cols-2 gap-4 mb-6">
           <div class="card rounded-xl p-4"><p class="text-yellow-400">⭐</p><p>"Excelente servicio, Netflix me llegó en 2 minutos"</p><p class="text-xs text-gray-400 mt-2">- Carlos R.</p></div>
-          <div class="card rounded-xl p-4"><p class="text-yellow-400">⭐⭐⭐⭐</p><p>"Los mejores precios de Lima. 100% recomendado"</p><p class="text-xs text-gray-400 mt-2">- Ana M.</p></div>
+          <div class="card rounded-xl p-4"><p class="text-yellow-400">⭐</p><p>"Los mejores precios de Lima. 100% recomendado"</p><p class="text-xs text-gray-400 mt-2">- Ana M.</p></div>
         </div>
-
-        <!-- CONTACTOS CREADORES -->
         <h3 class="text-xl font-bold mb-3">👨‍💻 Creadores</h3>
         <div class="grid md:grid-cols-2 gap-4">
           <div class="card rounded-xl p-4 flex items-center gap-3">
             <img src="https://via.placeholder.com/50" class="w-12 h-12 rounded-full"/>
-            <div>
-              <p class="font-bold">Lu</p>
-              <a href="https://wa.me/51999999" target="_blank" class="text-sm text-green-400">Contactar por WhatsApp</a>
-            </div>
+            <div><p class="font-bold">Lu</p><a href="https://wa.me/51999999" target="_blank" class="text-sm text-green-400">Contactar por WhatsApp</a></div>
           </div>
           <div class="card rounded-xl p-4 flex items-center gap-3">
             <img src="https://via.placeholder.com/50" class="w-12 h-12 rounded-full"/>
-            <div>
-              <p class="font-bold">Whois</p>
-              <a href="https://wa.me/51999999" target="_blank" class="text-sm text-green-400">Contactar por WhatsApp</a>
-            </div>
+            <div><p class="font-bold">Whois</p><a href="https://wa.me/51999999" target="_blank" class="text-sm text-green-400">Contactar por WhatsApp</a></div>
           </div>
         </div>
       </div>
 
-      <!-- SECCION PERFIL -->
+      <!-- PERFIL -->
       <div id="seccion-perfil" class="hidden">
         <div class="card rounded-2xl p-6 max-w-xl">
           <h2 class="text-2xl font-bold mb-4">Mi Perfil</h2>
@@ -162,7 +145,6 @@
           <button onclick="guardarPerfil()" class="btn-gradient w-full py-3 rounded-xl font-bold">Guardar Cambios</button>
         </div>
       </div>
-
     </main>
   </div>
 </div>
@@ -170,6 +152,14 @@
 <script>
 let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 let usuario = JSON.parse(localStorage.getItem('usuario')) || {};
+
+window.onload = function() {
+  if(usuario.email && usuario.password) {
+    cargarPerfil();
+    document.getElementById('loginScreen').classList.add('hidden');
+    document.getElementById('dashboardScreen').classList.remove('hidden');
+  }
+}
 
 function showTab(tab) {
   document.getElementById('formLogin').classList.toggle('hidden', tab!== 'login');
@@ -181,13 +171,13 @@ function showTab(tab) {
 }
 
 function login() {
-  usuario.email = document.getElementById('email').value;
-  usuario.password = document.getElementById('password').value;
-  usuario.name = usuario.email.split('@')[0];
-  localStorage.setItem('usuario', JSON.stringify(usuario));
-  cargarPerfil();
-  document.getElementById('loginScreen').classList.add('hidden');
-  document.getElementById('dashboardScreen').classList.remove('hidden');
+  let email = document.getElementById('email').value;
+  let pass = document.getElementById('password').value;
+  if(usuario.email === email && usuario.password === pass) {
+    cargarPerfil();
+    document.getElementById('loginScreen').classList.add('hidden');
+    document.getElementById('dashboardScreen').classList.remove('hidden');
+  } else { alert('❌ Correo o contraseña incorrectos'); }
 }
 
 function register() {
@@ -195,11 +185,14 @@ function register() {
   usuario.email = document.getElementById('email2').value;
   usuario.password = document.getElementById('password2').value;
   localStorage.setItem('usuario', JSON.stringify(usuario));
-  alert('✅ Cuenta creada');
+  alert('✅ Cuenta creada: ' + usuario.name);
   showTab('login');
 }
 
 function logout() {
+  localStorage.removeItem('usuario');
+  localStorage.removeItem('carrito');
+  carrito = []; usuario = {};
   document.getElementById('dashboardScreen').classList.add('hidden');
   document.getElementById('loginScreen').classList.remove('hidden');
 }
@@ -212,6 +205,8 @@ function mostrarSeccion(sec) {
   document.getElementById('seccion-inicio').classList.add('hidden');
   document.getElementById('seccion-perfil').classList.add('hidden');
   document.getElementById('seccion-' + sec).classList.remove('hidden');
+  document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active-menu'));
+  event.target.classList.add('active-menu');
 }
 
 function cargarPerfil() {
