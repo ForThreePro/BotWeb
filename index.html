@@ -3,146 +3,138 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ArcadiaCorps</title>
+<title>Eventos Garfield</title>
 <script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-  body { background: #0a0a0f; font-family: 'Inter', system-ui; }
-.card { background: #15151d; border: 1px solid #2a2a35; }
-.btn-gradient { background: linear-gradient(90deg, #4f46e5, #9333ea); }
-.btn-gradient:hover { opacity: 0.9; }
-.sidebar { background: #0f0f15; border-right: 1px solid #2a2a35; }
-.menu-item { transition: all 0.2s; }
-.menu-item:hover { background: #1e1e28; }
-.active-menu { background: linear-gradient(90deg, #1e1b4b, #312e81); }
+  body { background: linear-gradient(135deg, #0a0a0f 0%, #1a0a1f 100%); font-family: 'Poppins', sans-serif; }
+.glass { background: rgba(21, 21, 29, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
+.btn-gradient { background: linear-gradient(90deg, #ff6b00, #ff9500); box-shadow: 0 0 15px rgba(255,107,0,0.4); }
+.btn-gradient:hover { transform: scale(1.02); box-shadow: 0 0 25px rgba(255,107,0,0.6); }
+.sidebar { background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(20px); border-right: 1px solid rgba(255,107,0,0.2); }
+.menu-item { transition: all 0.3s; }
+.menu-item:hover { background: rgba(255,107,0,0.1); transform: translateX(5px); }
+.active-menu { background: linear-gradient(90deg, rgba(255,107,0,0.3), rgba(255,149,0,0.2)); border-left: 3px solid #ff6b00; }
+@media (max-width: 768px) { #sidebar { display: none; } }
 </style>
 </head>
 <body class="text-white">
 
-<!-- PANTALLA 1: LOGIN -->
+<!-- LOGIN -->
 <div id="loginScreen" class="min-h-screen flex items-center justify-center p-4">
   <div class="w-full max-w-md">
-    <div class="flex items-center gap-3 mb-6">
-      <img src="https://i.ibb.co/QvK8kZ1A/arcadia-logo.png" class="w-12 h-12 rounded-xl"/>
-      <h1 class="text-2xl font-bold">Arcadia<span class="text-blue-400">Corps</span></h1>
+    <div class="flex items-center gap-3 mb-6 justify-center">
+      <img src="https://i.ibb.co/QvK8kZ1A/arcadia-logo.png" class="w-14 h-14 rounded-2xl shadow-lg shadow-orange-500/30"/>
+      <h1 class="text-3xl font-extrabold">Eventos <span class="text-orange-500">Garfield</span></h1>
     </div>
-    <div class="card rounded-2xl p-6">
+    <div class="glass rounded-2xl p-8">
       <h2 class="text-2xl font-bold mb-1">Bienvenido</h2>
-      <p class="text-gray-400 text-sm mb-4">Accede o crea una cuenta</p>
-      <div class="card rounded-xl p-1 flex mb-4">
+      <p class="text-gray-400 text-sm mb-4">Accede a tu cuenta</p>
+      <div class="glass rounded-xl p-1 flex mb-4">
         <button id="tabLogin" onclick="showTab('login')" class="flex-1 py-2 rounded-lg font-semibold active-menu">Iniciar sesión</button>
         <button id="tabRegister" onclick="showTab('register')" class="flex-1 py-2 rounded-lg font-semibold text-gray-400">Crear cuenta</button>
       </div>
       <div id="formLogin">
-        <label class="text-sm font-semibold">Correo electrónico</label>
-        <input id="email" type="text" class="w-full card rounded-xl px-4 py-3 mt-2 mb-3 outline-none">
+        <label class="text-sm font-semibold">Correo</label>
+        <input id="email" type="text" class="w-full glass rounded-xl px-4 py-3 mt-2 mb-3 outline-none">
         <label class="text-sm font-semibold">Contraseña</label>
-        <input id="password" type="password" class="w-full card rounded-xl px-4 py-3 mt-2 mb-3 outline-none">
-        <button onclick="login()" class="btn-gradient w-full py-3 rounded-xl font-bold">Iniciar sesión</button>
+        <input id="password" type="password" class="w-full glass rounded-xl px-4 py-3 mt-2 mb-3 outline-none">
+        <button onclick="login()" class="btn-gradient w-full py-3 rounded-xl font-bold transition">Iniciar sesión</button>
       </div>
       <div id="formRegister" class="hidden">
         <label class="text-sm font-semibold">Nombre</label>
-        <input id="name" type="text" class="w-full card rounded-xl px-4 py-3 mt-2 mb-3 outline-none">
-        <label class="text-sm font-semibold">Correo electrónico</label>
-        <input id="email2" type="text" class="w-full card rounded-xl px-4 py-3 mt-2 mb-3 outline-none">
+        <input id="name" type="text" class="w-full glass rounded-xl px-4 py-3 mt-2 mb-3 outline-none">
+        <label class="text-sm font-semibold">Correo</label>
+        <input id="email2" type="text" class="w-full glass rounded-xl px-4 py-3 mt-2 mb-3 outline-none">
         <label class="text-sm font-semibold">Contraseña</label>
-        <input id="password2" type="password" class="w-full card rounded-xl px-4 py-3 mt-2 mb-3 outline-none">
-        <button onclick="register()" class="btn-gradient w-full py-3 rounded-xl font-bold">Crear cuenta</button>
+        <input id="password2" type="password" class="w-full glass rounded-xl px-4 py-3 mt-2 mb-3 outline-none">
+        <button onclick="register()" class="btn-gradient w-full py-3 rounded-xl font-bold transition">Crear cuenta</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- PANTALLA 2: DASHBOARD -->
+<!-- DASHBOARD -->
 <div id="dashboardScreen" class="hidden min-h-screen">
-  <header class="card p-3 flex items-center justify-between sticky top-0 z-10">
+  <header class="glass p-4 flex items-center justify-between sticky top-0 z-20">
     <div class="flex items-center gap-3">
-      <button onclick="toggleSidebar()" class="text-2xl">☰</button>
-      <img src="https://i.ibb.co/QvK8kZ1A/arcadia-logo.png" class="w-9 h-9 rounded-lg"/>
-      <h1 class="text-xl font-bold">Arcadia<span class="text-blue-400">Corps</span></h1>
+      <button onclick="toggleSidebar()" class="text-2xl p-2 rounded-lg hover:bg-white/10">☰</button>
+      <img src="https://i.ibb.co/QvK8kZ1A/arcadia-logo.png" class="w-10 h-10 rounded-xl"/>
+      <h1 class="text-xl font-extrabold">Eventos <span class="text-orange-500">Garfield</span></h1>
     </div>
   </header>
 
   <div class="flex">
-    <aside id="sidebar" class="sidebar w-72 h-[calc(100vh-64px)] overflow-y-auto fixed left-0 p-3">
-      <details open class="card rounded-xl p-2 mb-2">
-        <summary class="font-semibold cursor-pointer flex items-center gap-2">👑 PORTAL</summary>
-        <div class="mt-2 space-y-1 pl-2">
-          <a onclick="mostrarSeccion('inicio')" class="menu-item flex items-center gap-3 px-3 py-2 rounded-lg cursor-pointer active-menu">🏠 Inicio</a>
-          <a onclick="mostrarSeccion('perfil')" class="menu-item flex items-center gap-3 px-3 py-2 rounded-lg cursor-pointer">⚪ Mi perfil</a>
+    <!-- SIDEBAR OCULTO EN MOBILE -->
+    <aside id="sidebar" class="sidebar w-72 h-[calc(100vh-72px)] overflow-y-auto fixed left-0 p-4 z-10">
+      <div class="glass rounded-xl p-3 mb-3">
+        <p class="text-xs text-orange-400 font-bold">👑 PORTAL</p>
+        <div class="mt-2 space-y-1">
+          <a onclick="mostrarSeccion('inicio', this)" class="menu-item flex items-center gap-3 px-3 py-2 rounded-lg cursor-pointer active-menu">🏠 Inicio</a>
+          <a onclick="mostrarSeccion('perfil', this)" class="menu-item flex items-center gap-3 px-3 py-2 rounded-lg cursor-pointer">⚪ Mi perfil</a>
         </div>
-      </details>
-      <details class="card rounded-xl p-2 mb-2">
-        <summary class="font-semibold cursor-pointer flex items-center gap-2">🌐 REDES</summary>
-        <div class="mt-2 space-y-1 pl-2">
-          <a href="https://wa.me/51999999" target="_blank" class="menu-item flex items-center gap-3 px-3 py-2 rounded-lg">
-            <span class="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center text-xs">W</span> Canal de WhatsApp
-          </a>
-          <a href="https://chat.whatsapp.com/xxxxx" target="_blank" class="menu-item flex items-center gap-3 px-3 py-2 rounded-lg">
-            <span class="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center text-xs">W</span> Comunidad WhatsApp
-          </a>
+      </div>
+      <div class="glass rounded-xl p-3 mb-3">
+        <p class="text-xs text-orange-400 font-bold">🌐 REDES</p>
+        <div class="mt-2 space-y-1">
+          <a href="https://wa.me/51999999" target="_blank" class="menu-item flex items-center gap-3 px-3 py-2 rounded-lg">📢 Canal WhatsApp</a>
+          <a href="https://chat.whatsapp.com/xxxxx" target="_blank" class="menu-item flex items-center gap-3 px-3 py-2 rounded-lg">👥 Comunidad WhatsApp</a>
         </div>
-      </details>
-      <details class="card rounded-xl p-2 mb-2">
-        <summary class="font-semibold cursor-pointer flex items-center gap-2">🎭 EVENTOS GARFIELD</summary>
-        <div class="mt-2 space-y-1 pl-2">
+      </div>
+      <div class="glass rounded-xl p-3 mb-3">
+        <p class="text-xs text-orange-400 font-bold">🎭 EVENTOS GARFIELD</p>
+        <div class="mt-2 space-y-1">
           <a href="tienda.html" class="menu-item flex items-center gap-3 px-3 py-2 rounded-lg">🛍️ Tienda</a>
         </div>
-      </details>
-      <details class="card rounded-xl p-2 mb-2">
-        <summary class="font-semibold cursor-pointer flex items-center gap-2">⚙️ SERVICIOS</summary>
-        <div class="mt-2 space-y-1 pl-2">
-          <a class="menu-item flex items-center gap-3 px-3 py-2 rounded-lg">🤖 Mis Sub-Bots</a>
-          <a class="menu-item flex items-center gap-3 px-3 py-2 rounded-lg">🎫 Mis tickets</a>
-        </div>
-      </details>
-      <button onclick="logout()" class="w-full bg-red-500/20 text-red-400 py-3 rounded-xl font-bold mt-4">Cerrar sesión</button>
+      </div>
+      <button onclick="logout()" class="w-full bg-red-500/20 text-red-400 py-3 rounded-xl font-bold mt-4 hover:bg-red-500/30 transition">Cerrar sesión</button>
     </aside>
 
     <main class="ml-0 md:ml-72 p-4 w-full">
       <!-- INICIO -->
       <div id="seccion-inicio">
-        <div class="card rounded-2xl p-6 mb-4 bg-gradient-to-r from-purple-900/40 to-blue-900/40">
-          <h2 class="text-3xl font-bold">Bienvenido a Eventos Garfield 🎭</h2>
-          <p class="text-gray-300 mt-2">Somos la mejor tienda de servicios digitales. Streaming, Música, Software y más al mejor precio. Atención 24/7 por WhatsApp.</p>
+        <div class="glass rounded-2xl p-8 mb-6 bg-gradient-to-r from-orange-900/30 to-purple-900/30">
+          <h2 class="text-4xl font-extrabold">Bienvenido a Eventos Garfield 🎭</h2>
+          <p class="text-gray-300 mt-3 text-lg">La tienda #1 de servicios digitales en Perú. Streaming, Música, Software y más. Entrega inmediata 24/7</p>
         </div>
         <div class="grid grid-cols-3 gap-4 mb-6">
-          <div class="card rounded-xl p-4 text-center"><p class="text-3xl font-bold text-cyan-400">500+</p><p class="text-sm text-gray-400">Clientes Felices</p></div>
-          <div class="card rounded-xl p-4 text-center"><p class="text-3xl font-bold text-purple-400">1000+</p><p class="text-sm text-gray-400">Ventas Realizadas</p></div>
-          <div class="card rounded-xl p-4 text-center"><p class="text-3xl font-bold text-pink-400">24/7</p><p class="text-sm text-gray-400">Soporte</p></div>
+          <div class="glass rounded-xl p-5 text-center"><p class="text-4xl font-extrabold text-orange-400">500+</p><p class="text-sm text-gray-400">Clientes Felices</p></div>
+          <div class="glass rounded-xl p-5 text-center"><p class="text-4xl font-extrabold text-purple-400">1000+</p><p class="text-sm text-gray-400">Ventas</p></div>
+          <div class="glass rounded-xl p-5 text-center"><p class="text-4xl font-extrabold text-pink-400">24/7</p><p class="text-sm text-gray-400">Soporte</p></div>
         </div>
-        <h3 class="text-xl font-bold mb-3">💬 Reseñas de Clientes</h3>
+        <h3 class="text-2xl font-bold mb-4">💬 Reseñas</h3>
         <div class="grid md:grid-cols-2 gap-4 mb-6">
-          <div class="card rounded-xl p-4"><p class="text-yellow-400">⭐</p><p>"Excelente servicio, Netflix me llegó en 2 minutos"</p><p class="text-xs text-gray-400 mt-2">- Carlos R.</p></div>
-          <div class="card rounded-xl p-4"><p class="text-yellow-400">⭐</p><p>"Los mejores precios de Lima. 100% recomendado"</p><p class="text-xs text-gray-400 mt-2">- Ana M.</p></div>
+          <div class="glass rounded-xl p-5"><p class="text-yellow-400 text-lg">⭐</p><p class="mt-2">"Netflix me llegó en 2 minutos. El mejor!"</p><p class="text-xs text-gray-400 mt-3">- Carlos R.</p></div>
+          <div class="glass rounded-xl p-5"><p class="text-yellow-400 text-lg">⭐</p><p class="mt-2">"Precios increíbles y atención 24/7"</p><p class="text-xs text-gray-400 mt-3">- Ana M.</p></div>
         </div>
-        <h3 class="text-xl font-bold mb-3">👨‍💻 Creadores</h3>
+        <h3 class="text-2xl font-bold mb-4">👨‍💻 Creadores</h3>
         <div class="grid md:grid-cols-2 gap-4">
-          <div class="card rounded-xl p-4 flex items-center gap-3">
-            <img src="https://via.placeholder.com/50" class="w-12 h-12 rounded-full"/>
-            <div><p class="font-bold">Lu</p><a href="https://wa.me/51999999" target="_blank" class="text-sm text-green-400">Contactar por WhatsApp</a></div>
+          <div class="glass rounded-xl p-5 flex items-center gap-4">
+            <img src="https://via.placeholder.com/60" class="w-14 h-14 rounded-full border-2 border-orange-500"/>
+            <div><p class="font-bold text-lg">Lu</p><a href="https://wa.me/51999999" target="_blank" class="text-sm text-green-400 font-semibold">Contactar WhatsApp</a></div>
           </div>
-          <div class="card rounded-xl p-4 flex items-center gap-3">
-            <img src="https://via.placeholder.com/50" class="w-12 h-12 rounded-full"/>
-            <div><p class="font-bold">Whois</p><a href="https://wa.me/51999999" target="_blank" class="text-sm text-green-400">Contactar por WhatsApp</a></div>
+          <div class="glass rounded-xl p-5 flex items-center gap-4">
+            <img src="https://via.placeholder.com/60" class="w-14 h-14 rounded-full border-2 border-orange-500"/>
+            <div><p class="font-bold text-lg">Whois</p><a href="https://wa.me/51999999" target="_blank" class="text-sm text-green-400 font-semibold">Contactar WhatsApp</a></div>
           </div>
         </div>
       </div>
 
       <!-- PERFIL -->
       <div id="seccion-perfil" class="hidden">
-        <div class="card rounded-2xl p-6 max-w-xl">
-          <h2 class="text-2xl font-bold mb-4">Mi Perfil</h2>
-          <div class="flex items-center gap-4 mb-4">
-            <img id="fotoPerfil" src="https://via.placeholder.com/80" class="w-20 h-20 rounded-full"/>
+        <div class="glass rounded-2xl p-8 max-w-xl">
+          <h2 class="text-3xl font-bold mb-6">Mi Perfil</h2>
+          <div class="flex items-center gap-4 mb-5">
+            <img id="fotoPerfil" src="https://via.placeholder.com/90" class="w-24 h-24 rounded-full border-4 border-orange-500"/>
             <input type="file" id="inputFoto" accept="image/*" class="text-sm">
           </div>
           <label class="text-sm font-semibold">Nombre</label>
-          <input id="perfilNombre" type="text" class="w-full card rounded-xl px-4 py-3 mt-2 mb-3 outline-none">
+          <input id="perfilNombre" type="text" class="w-full glass rounded-xl px-4 py-3 mt-2 mb-4 outline-none">
           <label class="text-sm font-semibold">Correo</label>
-          <input id="perfilCorreo" type="text" class="w-full card rounded-xl px-4 py-3 mt-2 mb-3 outline-none">
+          <input id="perfilCorreo" type="text" class="w-full glass rounded-xl px-4 py-3 mt-2 mb-4 outline-none">
           <label class="text-sm font-semibold">Contraseña</label>
-          <input id="perfilPass" type="password" class="w-full card rounded-xl px-4 py-3 mt-2 mb-3 outline-none">
-          <button onclick="guardarPerfil()" class="btn-gradient w-full py-3 rounded-xl font-bold">Guardar Cambios</button>
+          <input id="perfilPass" type="password" class="w-full glass rounded-xl px-4 py-3 mt-2 mb-4 outline-none">
+          <button onclick="guardarPerfil()" class="btn-gradient w-full py-3 rounded-xl font-bold transition">Guardar Cambios</button>
         </div>
       </div>
     </main>
@@ -158,6 +150,7 @@ window.onload = function() {
     cargarPerfil();
     document.getElementById('loginScreen').classList.add('hidden');
     document.getElementById('dashboardScreen').classList.remove('hidden');
+    mostrarSeccion('inicio', document.querySelector('.menu-item')); // FUERZA INICIO
   }
 }
 
@@ -177,6 +170,7 @@ function login() {
     cargarPerfil();
     document.getElementById('loginScreen').classList.add('hidden');
     document.getElementById('dashboardScreen').classList.remove('hidden');
+    mostrarSeccion('inicio', document.querySelector('.menu-item'));
   } else { alert('❌ Correo o contraseña incorrectos'); }
 }
 
@@ -201,12 +195,13 @@ function toggleSidebar() {
   document.getElementById('sidebar').classList.toggle('hidden');
 }
 
-function mostrarSeccion(sec) {
+function mostrarSeccion(sec, el) {
   document.getElementById('seccion-inicio').classList.add('hidden');
   document.getElementById('seccion-perfil').classList.add('hidden');
   document.getElementById('seccion-' + sec).classList.remove('hidden');
   document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active-menu'));
-  event.target.classList.add('active-menu');
+  if(el) el.classList.add('active-menu');
+  if(window.innerWidth < 768) document.getElementById('sidebar').classList.add('hidden'); // Cierra menu en mobile
 }
 
 function cargarPerfil() {
