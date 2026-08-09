@@ -35,25 +35,34 @@
   .hero-title{font-size:28px; font-weight:700; margin:8px 0}
   .btn{background:var(--gradient); border:none; padding:12px 20px; border-radius:12px; color:#fff; font-weight:700; cursor:pointer}
   .section-title{font-size:20px; font-weight:700; margin-bottom:16px}
-  .filters{display:flex; gap:8px; overflow-x:auto; padding-bottom:10px; margin-bottom:20px}
-  .filter-btn{background:var(--card); border:1px solid var(--card-border); color:var(--text-muted); padding:8px 16px; border-radius:10px; font-size:13px; font-weight:600; cursor:pointer}
-  .filter-btn.active{background:var(--gradient); color:#fff; border:none}
   .products-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:16px}
-  .product{background:var(--card); border:1px solid var(--card-border); border-radius:16px; padding:16px; position:relative}
+  .product{background:var(--card); border:1px solid var(--card-border); border-radius:16px; padding:16px}
   .prod-cat{font-size:10px; color:var(--green); font-weight:700; letter-spacing:1px}
   .prod-name{font-size:15px; font-weight:700; margin:6px 0}
-  .prod-price{font-size:18px; font-weight:700; color:var(--green)}
+  .prod-price{font-size:14px; color:var(--text-muted)}
   .add-btn{width:100%; background:var(--gradient); border:none; padding:10px; border-radius:10px; color:#fff; font-weight:700; margin-top:12px; cursor:pointer}
   
-  /* CARRITO NUEVO */
+  /* CARRITO */
   .cart-sidebar{position:fixed; right:-400px; top:0; width:380px; height:100%; background:#0a0a12; border-left:1px solid var(--card-border); transition:.4s; z-index:200; padding:20px; display:flex; flex-direction:column}
   .cart-sidebar.active{right:0}
   .cart-header{display:flex; justify-content:space-between; align-items:center; margin-bottom:20px}
   .cart-close{font-size:24px; cursor:pointer; color:var(--text-muted)}
   .cart-item{display:flex; justify-content:space-between; align-items:center; padding:12px; background:var(--card); border-radius:10px; margin-bottom:10px}
-  .cart-item-info{flex:1}
   .cart-delete{background:transparent; border:none; color:#ff3b30; font-size:18px; cursor:pointer; padding:4px 8px}
   .checkout-btn{width:100%; padding:16px; background:#25D366; color:#fff; border:none; border-radius:12px; font-size:16px; font-weight:700; cursor:pointer}
+
+  /* MODAL PRECIOS */
+  .modal{position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); display:none; z-index:300; align-items:center; justify-content:center; padding:20px}
+  .modal.active{display:flex}
+  .modal-content{background:var(--card); border:1px solid var(--card-border); border-radius:20px; padding:20px; max-width:500px; width:100%; max-height:85vh; overflow-y:auto}
+  .modal-header{display:flex; justify-content:space-between; align-items:center; margin-bottom:16px}
+  .country-tabs{display:flex; gap:6px; overflow-x:auto; margin-bottom:16px; padding-bottom:8px}
+  .country-tab{background:var(--card-border); border:none; color:var(--text-muted); padding:8px 12px; border-radius:8px; font-size:12px; font-weight:700; cursor:pointer; white-space:nowrap}
+  .country-tab.active{background:var(--gradient); color:#fff}
+  .price-section{margin-bottom:16px}
+  .price-title{font-size:12px; font-weight:700; color:var(--green); margin-bottom:8px}
+  .price-row{display:flex; justify-content:space-between; padding:8px; background:#0a0a12; border-radius:8px; margin-bottom:6px; font-size:13px}
+  .info-text{font-size:11px; color:var(--text-muted); background:#0a0a12; padding:10px; border-radius:8px; margin-top:12px}
 </style>
 </head>
 <body>
@@ -71,7 +80,7 @@
 <div class="overlay" onclick="toggleMenu(); toggleCart()"></div>
 <div class="side-menu" id="side-menu">
   <div class="menu-group"><div class="menu-header">📦 PORTAL</div><a href="index.html" class="menu-item"><span class="menu-icon">🏠</span> Inicio</a></div>
-  <div class="menu-group"><div class="menu-header">🌐 REDES</div><a href="redes.html" class="menu-item"><span class="menu-icon">💚</span> Canal de WhatsApp</a><a href="redes.html" class="menu-item"><span class="menu-icon">💚</span> Comunidad WhatsApp</a></div>
+  <div class="menu-group"><div class="menu-header">🌐 REDES</div><a href="redes.html" class="menu-item"><span class="menu-icon">💚</span> Canal de WhatsApp</a></div>
   <div class="menu-group"><div class="menu-header">🛍️ GARFIELD SHOP</div><a href="shop.html" class="menu-item active"><span class="menu-icon">🛒</span> Tienda</a></div>
 </div>
 
@@ -79,52 +88,42 @@
   <div class="hero-card">
     <div class="hero-label">CATÁLOGO OFICIAL</div>
     <div class="hero-title">Arma tu pack y ahorra</div>
-    <button class="btn" onclick="document.getElementById('productos').scrollIntoView()">Explorar catálogo</button>
   </div>
 
-  <div id="productos">
-    <div class="section-title">Productos</div>
-    
-    <!-- FILTROS -->
-    <div class="filters">
-      <button class="filter-btn active" onclick="filterCat('all')">Todos</button>
-      <button class="filter-btn" onclick="filterCat('freefire')">Free Fire</button>
+  <div class="section-title">Productos</div>
+  <div class="products-grid">
+    <!-- DIAMANTES -->
+    <div class="product">
+      <div class="prod-cat">FREE FIRE</div>
+      <div class="prod-name">Diamantes FF</div>
+      <div class="prod-price">Elige tu país y cantidad</div>
+      <button class="add-btn" onclick="openModal('diamantes')">Ver</button>
     </div>
 
-    <div class="products-grid">
-      <!-- FREE FIRE -->
-      <div class="product" data-cat="freefire">
-        <div class="prod-cat">FREE FIRE</div>
-        <div class="prod-name">Diamantes FF</div>
-        <div><span class="prod-price">Desde S/ 9.90</span></div>
-        <button class="add-btn" onclick="addToCart('Diamantes FF', 9.90)">Añadir</button>
-      </div>
+    <div class="product">
+      <div class="prod-cat">FREE FIRE</div>
+      <div class="prod-name">Spam FF</div>
+      <div class="prod-price">S/ 15.00</div>
+      <button class="add-btn" onclick="addToCart('Spam FF', 15.00)">Añadir</button>
+    </div>
 
-      <div class="product" data-cat="freefire">
-        <div class="prod-cat">FREE FIRE</div>
-        <div class="prod-name">Spam FF</div>
-        <div><span class="prod-price">S/ 15.00</span></div>
-        <button class="add-btn" onclick="addToCart('Spam FF', 15.00)">Añadir</button>
-      </div>
+    <div class="product">
+      <div class="prod-cat">FREE FIRE</div>
+      <div class="prod-name">Design FF</div>
+      <div class="prod-price">S/ 25.00</div>
+      <button class="add-btn" onclick="addToCart('Design FF', 25.00)">Añadir</button>
+    </div>
 
-      <div class="product" data-cat="freefire">
-        <div class="prod-cat">FREE FIRE</div>
-        <div class="prod-name">Design FF</div>
-        <div><span class="prod-price">S/ 25.00</span></div>
-        <button class="add-btn" onclick="addToCart('Design FF', 25.00)">Añadir</button>
-      </div>
-
-      <div class="product" data-cat="freefire">
-        <div class="prod-cat">FREE FIRE</div>
-        <div class="prod-name">Bots FF</div>
-        <div><span class="prod-price">S/ 30.00</span></div>
-        <button class="add-btn" onclick="addToCart('Bots FF', 30.00)">Añadir</button>
-      </div>
+    <div class="product">
+      <div class="prod-cat">FREE FIRE</div>
+      <div class="prod-name">Bots FF</div>
+      <div class="prod-price">S/ 30.00</div>
+      <button class="add-btn" onclick="addToCart('Bots FF', 30.00)">Añadir</button>
     </div>
   </div>
 </div>
 
-<!-- CARRITO LATERAL -->
+<!-- CARRITO -->
 <div class="cart-sidebar" id="cart">
   <div class="cart-header">
     <h3>Tu Carrito</h3>
@@ -135,9 +134,39 @@
   <button class="checkout-btn" onclick="checkoutWhatsApp()">Pedir por WhatsApp</button>
 </div>
 
+<!-- MODAL DIAMANTES -->
+<div class="modal" id="modal-diamantes">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>💎 Precios de Diamantes</h3>
+      <div class="cart-close" onclick="closeModal('diamantes')">✕</div>
+    </div>
+    
+    <div class="country-tabs">
+      <button class="country-tab active" onclick="showCountry('cl')">🇨🇱 Chile</button>
+      <button class="country-tab" onclick="showCountry('ar')">🇦🇷 Argentina</button>
+      <button class="country-tab" onclick="showCountry('mx')">🇲🇽 Mexico</button>
+      <button class="country-tab" onclick="showCountry('bo')">🇧🇴 Bolivia</button>
+      <button class="country-tab" onclick="showCountry('uy')">🇺🇾 Uruguay</button>
+      <button class="country-tab" onclick="showCountry('pe')">🇵🇪 Peru</button>
+    </div>
+
+    <div id="prices-container"></div>
+  </div>
+</div>
+
 <script>
   let cart = []; 
-  const WHATSAPP = "51999999999";
+  const WHATSAPP = "51999999";
+
+  const precios = {
+    cl: {simbolo:'$', nombre:'Chile', con:{110:875,341:2450,572:4200,1166:7000,2398:12600,6160:32200}, sin:{110:1225,341:3500,572:5250,1166:9100,2398:18200,6160:44100}},
+    ar: {simbolo:'$', nombre:'Argentina', con:{110:1300,341:3380,572:5720,1166:9880,2398:18200,6160:46800}, sin:{110:1820,341:4680,572:7800,1166:13520,2398:27040,6160:65520}},
+    mx: {simbolo:'$', nombre:'Mexico', con:{110:18.75,341:52.50,572:90,1166:150,2398:270,6160:690}, sin:{110:26.25,341:75,572:112.5,1166:195,2398:390,6160:945}},
+    bo: {simbolo:'$', nombre:'Bolivia', con:{110:11.25,341:31.5,572:54,1166:90,2398:162,6160:414}, sin:{110:15.75,341:45,572:67.5,1166:117,2398:234,6160:567}},
+    uy: {simbolo:'$', nombre:'Uruguay', con:{110:37.5,341:105,572:180,1166:300,2398:540,6160:1380}, sin:{110:52.5,341:150,572:225,1166:390,2398:780,6160:1890}},
+    pe: {simbolo:'S/', nombre:'Peru', con:{110:2.50,341:7.00,572:12.00,1166:20.00,2398:36.00,6160:92.00}, sin:{110:3.50,341:10.00,572:15.00,1166:26.00,2398:52.00,6160:126.00}}
+  };
 
   function toggleMenu(){document.getElementById('side-menu').classList.toggle('active');document.querySelector('.overlay').classList.toggle('active');document.querySelector('.hamburger').classList.toggle('active');}
   function toggleCart(){document.getElementById('cart').classList.toggle('active');document.querySelector('.overlay').classList.toggle('active');}
@@ -149,10 +178,7 @@
     updateCart();
   }
   
-  function removeItem(index){
-    cart.splice(index, 1);
-    updateCart();
-  }
+  function removeItem(index){cart.splice(index, 1); updateCart();}
 
   function updateCart(){
     document.getElementById('cart-count').innerText = cart.reduce((a,b)=>a+b.qty,0); 
@@ -160,10 +186,7 @@
       "<p style='color:var(--text-muted)'>Carrito vacío</p>" : 
       cart.map((i, index) => `
         <div class="cart-item">
-          <div class="cart-item-info">
-            <b>${i.name}</b>
-            <div style="font-size:12px; color:var(--text-muted)">x${i.qty} - S/ ${(i.price * i.qty).toFixed(2)}</div>
-          </div>
+          <div><b>${i.name}</b><div style="font-size:12px; color:var(--text-muted)">x${i.qty} - S/ ${(i.price * i.qty).toFixed(2)}</div></div>
           <button class="cart-delete" onclick="removeItem(${index})">🗑️</button>
         </div>
       `).join(''); 
@@ -178,12 +201,38 @@
     window.open(`https://wa.me/${WHATSAPP}?text=${msg}`, '_blank');
   }
 
-  function filterCat(cat){
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  function openModal(tipo){
+    document.getElementById('modal-'+tipo).classList.add('active');
+    document.querySelector('.overlay').classList.add('active');
+    showCountry('cl');
+  }
+  function closeModal(tipo){
+    document.getElementById('modal-'+tipo).classList.remove('active');
+    document.querySelector('.overlay').classList.remove('active');
+  }
+
+  function showCountry(pais){
+    document.querySelectorAll('.country-tab').forEach(t => t.classList.remove('active'));
     event.target.classList.add('active');
-    document.querySelectorAll('.product').forEach(p => {
-      p.style.display = (cat === 'all' || p.dataset.cat === cat) ? 'block' : 'none';
-    });
+    
+    const data = precios[pais];
+    let html = '';
+    
+    html += `<div class="price-section"><div class="price-title">❗ CON STOCK ❗</div>`;
+    for(let [cant, precio] of Object.entries(data.con)){
+      html += `<div class="price-row"><span>${cant}💎</span><span>${data.simbolo}${precio}</span></div>`;
+    }
+    html += `</div>`;
+    
+    html += `<div class="price-section"><div class="price-title">❗ SIN STOCK ❗</div>`;
+    for(let [cant, precio] of Object.entries(data.sin)){
+      html += `<div class="price-row"><span>${cant}💎</span><span>${data.simbolo}${precio}</span></div>`;
+    }
+    html += `</div>`;
+    
+    html += `<div class="info-text">Mas Información: Para saber tu stock mandarme su id para verificar. Las recargas en las mañanas y noches. Tardes no suelo responder mucho.</div>`;
+    
+    document.getElementById('prices-container').innerHTML = html;
   }
 </script>
 </body>
