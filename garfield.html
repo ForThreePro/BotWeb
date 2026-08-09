@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Garfield Store - Zona Garfield</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 20; }
+  .overlay.active { display: block; }
+</style>
+</head>
+<body class="bg-[#000] text-white font-sans">
+  <div class="h-8 bg-blue-600 w-full"></div>
+  <header class="sticky top-8 z-40 bg-[#0A0A0A]/80 backdrop-blur border-b border-white/5 h-14">
+    <div class="flex items-center justify-between px-4 h-full">
+      <div class="flex items-center gap-3">
+        <button onclick="toggleSidebar()" class="p-2 rounded-lg hover:bg-white/5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg></button>
+        <div class="flex items-center gap-2"><div class="w-9 h-9 rounded-lg bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center font-bold text-lg">G</div><h1 class="text-lg font-semibold">Garfield<span class="text-green-400">Store</span></h1></div>
+      </div>
+      <button class="p-2 rounded-xl bg-[#111]">🔔</button>
+    </div>
+  </header>
+  <div id="overlay" class="overlay" onclick="toggleSidebar()"></div>
+
+  <div class="flex">
+    <aside id="sidebar" class="fixed md:static inset-y-0 left-0 z-30 w-64 bg-[#0A0A0A] border-r border-white/5 -translate-x-full md:translate-x-0 transition-transform duration-300">
+      <div class="p-4 space-y-3">
+        <div class="rounded-xl bg-[#111] p-2">
+          <button onclick="toggleSection('portal')" class="w-full flex items-center justify-between text-xs tracking-wider text-white/70"><span class="flex items-center gap-2">🏠 PORTAL</span><span id="arrow-portal">▲</span></button>
+          <div id="portal" class="mt-2 space-y-1">
+            <a href="index.html" class="block px-3 py-2 rounded-lg text-sm hover:bg-white/5">Inicio</a>
+            <a href="garfield.html" class="block px-3 py-2 rounded-lg text-sm bg-gradient-to-r from-purple-600/30 to-blue-600/30">Zona Garfield</a>
+          </div>
+        </div>
+        <div class="rounded-xl bg-[#111] p-2">
+          <button onclick="toggleSection('redes')" class="w-full flex items-center justify-between text-xs tracking-wider text-white/70"><span class="flex items-center gap-2">💬 REDES</span><span id="arrow-redes">▼</span></button>
+          <div id="redes" class="mt-2 space-y-1 hidden"><a href="redes.html" class="block px-3 py-2 rounded-lg text-sm hover:bg-white/5">Canal de WhatsApp</a><a href="redes.html" class="block px-3 py-2 rounded-lg text-sm hover:bg-white/5">Comunidad WhatsApp</a></div>
+        </div>
+        <div class="rounded-xl bg-[#111] p-2">
+          <button onclick="toggleSection('shop')" class="w-full flex items-center justify-between text-xs tracking-wider text-white/70"><span class="flex items-center gap-2">🛍️ GARFIELD SHOP</span><span id="arrow-shop">▼</span></button>
+          <div id="shop" class="mt-2 space-y-1 hidden"><a href="tienda.html" class="block px-3 py-2 rounded-lg text-sm hover:bg-white/5">Tienda</a><a href="productos.html" class="block px-3 py-2 rounded-lg text-sm hover:bg-white/5">Productos</a></div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="flex-1 p-6 space-y-6">
+      <div class="flex items-center gap-3"><div class="p-3 rounded-xl bg-gradient-to-br from-orange-500 to-yellow-400 text-2xl">😼</div><h2 class="text-2xl font-bold">Zona Garfield</h2></div>
+      <p class="text-white/60">Las mejores fotos y videos de Garfield para ti</p>
+      <div><h3 class="text-lg font-semibold mb-3">Galería de Fotos</h3><div class="grid grid-cols-2 md:grid-cols-4 gap-4"><img src="garfield1.jpg" alt="Garfield" class="w-full h-40 object-cover rounded-2xl border-white/5 hover:scale-105 transition"><img src="garfield2.jpg" alt="Garfield" class="w-full h-40 object-cover rounded-2xl border-white/5 hover:scale-105 transition"><img src="garfield3.jpg" alt="Garfield" class="w-full h-40 object-cover rounded-2xl border-white/5 hover:scale-105 transition"><img src="garfield4.jpg" alt="Garfield" class="w-full h-40 object-cover rounded-2xl border-white/5 hover:scale-105 transition"></div></div>
+      <div><h3 class="text-lg font-semibold mb-3">Videos</h3><div class="grid md:grid-cols-2 gap-4"><div class="bg-[#0A0A0A] border-white/5 rounded-2xl p-3"><video src="1.mp4" controls class="w-full rounded-xl"></video><p class="text-sm text-white/60 mt-2">Video 1</p></div><div class="bg-[#0A0A0A] border-white/5 rounded-2xl p-3"><video src="2.mp4" controls class="w-full rounded-xl"></video><p class="text-sm text-white/60 mt-2">Video 2</p></div></div></div>
+    </main>
+  </div>
+
+<script>
+function toggleSidebar(){ const sidebar = document.getElementById('sidebar'); const overlay = document.getElementById('overlay'); sidebar.classList.toggle('-translate-x-full'); overlay.classList.toggle('active'); }
+function toggleSection(id){ document.getElementById(id).classList.toggle('hidden'); document.getElementById('arrow-'+id).innerText = document.getElementById(id).classList.contains('hidden')? '▼' : '▲'; }
+document.querySelectorAll('#sidebar a').forEach(link => { link.addEventListener('click', () => { if(window.innerWidth < 768){ toggleSidebar(); } }) })
+</script>
+</body>
+</html>
