@@ -9,16 +9,17 @@
 <style>
   :root{ --naranja:#FF6B00; --naranja2:#FF8C00; --gris:#F5F5F7; --texto:#1D1D1F; }
   body { background: var(--gris); font-family: 'Inter', sans-serif; color: var(--texto); }
-.card { background: #fff; border: 1px solid #E5E5E7; }
+.card { background: #fff; border: 1px solid #E5E5E7; transition: all 0.2s; }
+.card:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
 .btn-primary { background: linear-gradient(90deg, var(--naranja), var(--naranja2)); color: #fff; }
-.filter-btn { background: #fff; border: 1px solid #E5E5E7; white-space: nowrap; }
+.filter-btn { background: #fff; border: 1px solid #E5E5E7; white-space: nowrap; transition: all 0.2s; }
 .filter-active { background: var(--naranja); color: #fff; border-color: var(--naranja); }
 </style>
 </head>
 <body>
 
 <header class="card p-4 flex items-center justify-between sticky top-0 z-30 shadow-sm">
-  <a href="index.html" class="flex items-center gap-2">
+  <a href="index.html" class="flex items-center gap-3">
     <img src="https://i.imgur.com/TU_IMAGEN_AQUI.png" class="w-10 h-10 rounded-xl object-cover">
     <h1 class="text-xl font-black"><span class="text-orange-500">Garfield</span> Store</h1>
   </a>
@@ -26,6 +27,12 @@
 </header>
 
 <div class="p-5 max-w-7xl mx-auto pb-10">
+  <div class="card rounded-2xl p-8 mb-6 bg-gradient-to-r from-orange-50 to-white">
+    <span class="bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-xs font-bold">CATÁLOGO 2026</span>
+    <h2 class="text-4xl font-black mt-4">Arma tu pack como Garfield 🍕</h2>
+  </div>
+
+  <!-- FILTROS -->
   <div class="flex gap-3 mb-6 overflow-x-auto pb-2">
     <button onclick="filtrar('todos')" id="btn-todos" class="filter-btn filter-active px-5 py-2.5 rounded-xl text-sm font-bold">Todos</button>
     <button onclick="filtrar('streaming')" id="btn-streaming" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600">Streaming</button>
@@ -41,31 +48,118 @@
     <button onclick="filtrar('pase')" id="btn-pase" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600">Pase Élite</button>
   </div>
 
+  <!-- PRODUCTOS -->
   <div id="productos" class="grid md:grid-cols-3 gap-5">
-    <a href="producto-streaming.html" class="producto streaming card rounded-2xl p-6"><p class="text-4xl font-black text-red-500">N</p><p class="font-bold text-xl mt-1">Netflix Premium</p><p class="mt-4"><span class="text-3xl font-black text-orange-500">S/ 15.00</span></p></a>
-    <a href="producto-musica.html" class="producto musica card rounded-2xl p-6"><p class="text-4xl text-green-500">●</p><p class="font-bold text-xl mt-1">Spotify Premium</p><p class="mt-4"><span class="text-3xl font-black text-orange-500">S/ 10.00</span></p></a>
-    <a href="producto-bots.html" class="producto bots card rounded-2xl p-6"><p class="text-4xl">🤖</p><p class="font-bold text-xl mt-1">Bots</p><p class="mt-4"><span class="text-3xl font-black text-orange-500">Desde S/ 3.00</span></p></a>
-    <a href="producto-spam.html" class="producto spam card rounded-2xl p-6"><p class="text-4xl">📢</p><p class="font-bold text-xl mt-1">Spam 3x3 Horas</p><p class="mt-4"><span class="text-3xl font-black text-orange-500">Desde S/ 5.50</span></p></a>
-    <a href="producto-design.html" class="producto design card rounded-2xl p-6"><p class="text-4xl">🖌️</p><p class="font-bold text-xl mt-1">Design Luu</p><p class="mt-4"><span class="text-3xl font-black text-orange-500">Desde S/ 3.00</span></p></a>
-    <a href="producto-numeros.html" class="producto numeros card rounded-2xl p-6"><p class="text-4xl">📱</p><p class="font-bold text-xl mt-1">Número USA</p><p class="mt-4"><span class="text-3xl font-black text-orange-500">S/ 25.00</span></p></a>
-    <a href="producto-seguidores.html" class="producto seguidores card rounded-2xl p-6"><p class="text-4xl">👥</p><p class="font-bold text-xl mt-1">Seguidores IG</p><p class="mt-4"><span class="text-3xl font-black text-orange-500">Desde S/ 2.00</span></p></a>
-    <a href="producto-vistas.html" class="producto vistas card rounded-2xl p-6"><p class="text-4xl">👁️</p><p class="font-bold text-xl mt-1">Vistas TikTok</p><p class="mt-4"><span class="text-3xl font-black text-orange-500">S/ 12.00</span></p></a>
-    <a href="producto-likes.html" class="producto likes card rounded-2xl p-6"><p class="text-4xl">❤️</p><p class="font-bold text-xl mt-1">Likes IG</p><p class="mt-4"><span class="text-3xl font-black text-orange-500">S/ 8.00</span></p></a>
-    <a href="producto-diamantes.html" class="producto diamantes card rounded-2xl p-6 md:col-span-3"><p class="text-4xl">💎</p><p class="font-bold text-2xl mt-1">Recargas Free Fire</p><p class="text-sm text-gray-500">PE, CL, AR, MX, BO, UY</p></a>
-    <a href="producto-pase.html" class="producto pase card rounded-2xl p-6"><p class="text-4xl">👑</p><p class="font-bold text-xl mt-1">Pase Élite</p><p class="mt-4"><span class="text-3xl font-black text-orange-500">S/ 20.00</span></p></a>
-    <a href="producto-otro.html" class="producto card rounded-2xl p-6"><p class="text-4xl">📦</p><p class="font-bold text-xl mt-1">Otros Servicios</p><p class="mt-4"><span class="text-3xl font-black text-orange-500">Consultar</span></p></a>
+    
+    <!-- GRUPO 1 -->
+    <a href="productos-grupo1.html#streaming" class="producto streaming card rounded-2xl p-6">
+      <span class="bg-orange-100 text-orange-600 text-xs px-3 py-1 rounded-full font-bold">STREAMING</span>
+      <p class="text-4xl font-black text-red-500 mt-3">N</p>
+      <p class="font-bold text-xl mt-1">Netflix Premium</p>
+      <p class="mt-4"><span class="text-3xl font-black text-orange-500">S/ 15.00</span></p>
+    </a>
+    
+    <a href="productos-grupo1.html#musica" class="producto musica card rounded-2xl p-6">
+      <span class="bg-orange-100 text-orange-600 text-xs px-3 py-1 rounded-full font-bold">MÚSICA</span>
+      <p class="text-4xl text-green-500 mt-3">●</p>
+      <p class="font-bold text-xl mt-1">Spotify Premium</p>
+      <p class="mt-4"><span class="text-3xl font-black text-orange-500">S/ 10.00</span></p>
+    </a>
+    
+    <a href="productos-grupo1.html#bots" class="producto bots card rounded-2xl p-6">
+      <span class="bg-orange-100 text-orange-600 text-xs px-3 py-1 rounded-full font-bold">BOTS</span>
+      <p class="text-4xl mt-3">🤖</p>
+      <p class="font-bold text-xl mt-1">Bots</p>
+      <p class="mt-4"><span class="text-3xl font-black text-orange-500">Desde S/ 3.00</span></p>
+    </a>
+    
+    <a href="productos-grupo1.html#spam" class="producto spam card rounded-2xl p-6">
+      <span class="bg-orange-100 text-orange-600 text-xs px-3 py-1 rounded-full font-bold">SPAM</span>
+      <p class="text-4xl mt-3">📢</p>
+      <p class="font-bold text-xl mt-1">Spam 3x3 Horas</p>
+      <p class="mt-4"><span class="text-3xl font-black text-orange-500">Desde S/ 5.50</span></p>
+    </a>
+    
+    <a href="productos-grupo1.html#design" class="producto design card rounded-2xl p-6">
+      <span class="bg-orange-100 text-orange-600 text-xs px-3 py-1 rounded-full font-bold">DESIGN</span>
+      <p class="text-4xl mt-3">🖌️</p>
+      <p class="font-bold text-xl mt-1">Design Luu</p>
+      <p class="mt-4"><span class="text-3xl font-black text-orange-500">Desde S/ 3.00</span></p>
+    </a>
+
+    <!-- GRUPO 2 -->
+    <a href="productos-grupo2.html#numeros" class="producto numeros card rounded-2xl p-6">
+      <span class="bg-orange-100 text-orange-600 text-xs px-3 py-1 rounded-full font-bold">NÚMEROS</span>
+      <p class="text-4xl mt-3">📱</p>
+      <p class="font-bold text-xl mt-1">Número USA</p>
+      <p class="mt-4"><span class="text-3xl font-black text-orange-500">S/ 25.00</span></p>
+    </a>
+    
+    <a href="productos-grupo2.html#seguidores" class="producto seguidores card rounded-2xl p-6">
+      <span class="bg-orange-100 text-orange-600 text-xs px-3 py-1 rounded-full font-bold">SEGUIDORES</span>
+      <p class="text-4xl mt-3">👥</p>
+      <p class="font-bold text-xl mt-1">Seguidores IG</p>
+      <p class="mt-4"><span class="text-3xl font-black text-orange-500">Desde S/ 2.00</span></p>
+    </a>
+    
+    <a href="productos-grupo2.html#vistas" class="producto vistas card rounded-2xl p-6">
+      <span class="bg-orange-100 text-orange-600 text-xs px-3 py-1 rounded-full font-bold">VISTAS</span>
+      <p class="text-4xl mt-3">👁️</p>
+      <p class="font-bold text-xl mt-1">Vistas TikTok</p>
+      <p class="mt-4"><span class="text-3xl font-black text-orange-500">S/ 12.00</span></p>
+    </a>
+    
+    <a href="productos-grupo2.html#likes" class="producto likes card rounded-2xl p-6">
+      <span class="bg-orange-100 text-orange-600 text-xs px-3 py-1 rounded-full font-bold">LIKES</span>
+      <p class="text-4xl mt-3">❤️</p>
+      <p class="font-bold text-xl mt-1">Likes IG</p>
+      <p class="mt-4"><span class="text-3xl font-black text-orange-500">S/ 8.00</span></p>
+    </a>
+    
+    <a href="productos-grupo2.html#diamantes" class="producto diamantes card rounded-2xl p-6 md:col-span-3">
+      <span class="bg-orange-100 text-orange-600 text-xs px-3 py-1 rounded-full font-bold">FREE FIRE</span>
+      <p class="text-4xl mt-3">💎</p>
+      <p class="font-bold text-2xl mt-1">Recargas Free Fire</p>
+      <p class="text-sm text-gray-500">PE, CL, AR, MX, BO, UY - Con Stock y Sin Stock</p>
+    </a>
+
+    <!-- GRUPO 3 -->
+    <a href="productos-grupo3.html#pase" class="producto pase card rounded-2xl p-6">
+      <span class="bg-orange-100 text-orange-600 text-xs px-3 py-1 rounded-full font-bold">FREE FIRE</span>
+      <p class="text-4xl mt-3">👑</p>
+      <p class="font-bold text-xl mt-1">Pase Élite</p>
+      <p class="mt-4"><span class="text-3xl font-black text-orange-500">S/ 20.00</span></p>
+    </a>
+    
+    <a href="productos-grupo3.html#otro" class="producto card rounded-2xl p-6">
+      <span class="bg-gray-100 text-gray-600 text-xs px-3 py-1 rounded-full font-bold">OTROS</span>
+      <p class="text-4xl mt-3">📦</p>
+      <p class="font-bold text-xl mt-1">Otros Servicios</p>
+      <p class="mt-4"><span class="text-3xl font-black text-orange-500">Consultar</span></p>
+    </a>
+
   </div>
 </div>
 
 <script>
 let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 actualizarCarrito();
-function actualizarCarrito() { document.getElementById('btnCarrito').innerText = `🛒 Carrito ${carrito.length}`; }
+
+function actualizarCarrito() { 
+  document.getElementById('btnCarrito').innerText = `🛒 Carrito ${carrito.length}`; 
+}
+
 function filtrar(categoria) {
   document.querySelectorAll('.producto').forEach(p => p.style.display = 'none');
   document.querySelectorAll('.filter-btn').forEach(b => b.className = 'filter-btn px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600');
-  if(categoria === 'todos') { document.querySelectorAll('.producto').forEach(p => p.style.display = 'block'); document.getElementById('btn-todos').className = 'filter-btn filter-active px-5 py-2.5 rounded-xl text-sm font-bold'; }
-  else { document.querySelectorAll('.' + categoria).forEach(p => p.style.display = 'block'); document.getElementById('btn-' + categoria).className = 'filter-btn filter-active px-5 py-2.5 rounded-xl text-sm font-bold'; }
+  
+  if(categoria === 'todos') { 
+    document.querySelectorAll('.producto').forEach(p => p.style.display = 'block'); 
+    document.getElementById('btn-todos').className = 'filter-btn filter-active px-5 py-2.5 rounded-xl text-sm font-bold'; 
+  } else { 
+    document.querySelectorAll('.' + categoria).forEach(p => p.style.display = 'block'); 
+    document.getElementById('btn-' + categoria).className = 'filter-btn filter-active px-5 py-2.5 rounded-xl text-sm font-bold'; 
+  }
 }
 </script>
 </body>
