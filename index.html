@@ -3,189 +3,222 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Garfield Store</title>
+<title>Garfield Store - Dashboard</title>
 <style>
   :root{
-    --bg:#000;
-    --bg-light:#f5f5f7;
-    --text:#1d1d1f;
-    --text-muted:#6e6e73;
-    --accent:#ff3b30;
-    --maxw:1200px;
+    --bg:#0a0a0f;
+    --card:#11121a;
+    --card-border:#1f2233;
+    --text:#fff;
+    --text-muted:#8a8fa3;
+    --accent:#00ff88;
+    --accent2:#3b82f6;
+    --gradient: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
   }
   *{margin:0;padding:0;box-sizing:border-box}
-  body{font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", Arial, sans-serif; color:var(--text); background:#fff}
-  nav{position:fixed; top:0; width:100%; backdrop-filter: blur(20px); background:rgba(0,0,0,0.7); z-index:100}
-  .container{max-width:var(--maxw); margin:0 auto; padding:0 20px}
-  .nav-wrap{display:flex; justify-content:space-between; align-items:center; height:60px; color:#fff}
-  .logo{font-weight:700; font-size:22px}
-  .nav-right{display:flex; gap:20px; align-items:center}
-  .cart-btn{position:relative; cursor:pointer; font-size:14px; background:var(--accent); padding:8px 16px; border-radius:20px; border:none; color:#fff}
-  .cart-count{position:absolute; top:-6px; right:-6px; background:#fff; color:var(--accent); font-size:11px; font-weight:700; border-radius:50%; width:18px; height:18px; display:flex; align-items:center; justify-content:center}
-
-  .hero{height:100vh; background: url('https://files.evogb.win/sRJ0HB.jpg') center/cover no-repeat; display:flex; align-items:center; justify-content:center; text-align:center; position:relative}
-  .hero::after{content:''; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.45)}
-  .hero-content{position:relative; z-index:2; color:#fff}
-  .hero h1{font-size:64px; font-weight:700; letter-spacing:-2px}
-  .hero p{font-size:22px; margin:18px 0 30px}
-  .btn{padding:14px 24px; border-radius:980px; font-size:17px; font-weight:600; text-decoration:none; transition:.2s; border:none; cursor:pointer}
-  .btn-primary{background:var(--accent); color:#fff}
-  .btn-primary:hover{background:#ff5144}
-
-  .banner-section{padding:0; margin:0}
-  .banner-section img{width:100%; height:auto; display:block}
-
-  .section{padding:100px 20px}
-  .section h2{font-size:48px; font-weight:700; text-align:center; margin-bottom:16px}
-  .section p.sub{font-size:20px; color:var(--text-muted); text-align:center; max-width:700px; margin:0 auto 60px}
+  body{font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", Arial, sans-serif; background:var(--bg); color:var(--text)}
   
-  .products{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:30px}
-  .product{background:#fff; border-radius:20px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,.08); transition:.3s}
-  .product:hover{transform:translateY(-6px)}
-  .product img{width:100%; height:300px; object-fit:cover}
-  .product-info{padding:20px}
-  .product-info h3{font-size:20px; margin-bottom:8px}
-  .product-info p{color:var(--text-muted); font-size:14px; margin-bottom:12px}
-  .price{font-size:22px; font-weight:700; color:var(--accent); margin-bottom:16px}
-  .add-btn{width:100%; padding:12px; background:#000; color:#fff; border:none; border-radius:12px; font-weight:600; cursor:pointer}
-  .add-btn:hover{background:#333}
+  /* NAV */
+  nav{position:sticky; top:0; background:rgba(10,10,15,0.8); backdrop-filter: blur(20px); border-bottom:1px solid var(--card-border); z-index:100}
+  .nav-wrap{display:flex; justify-content:space-between; align-items:center; padding:14px 20px}
+  .nav-left{display:flex; align-items:center; gap:12px}
+  .logo-img{width:40px; height:40px; border-radius:12px; background:var(--gradient); display:flex; align-items:center; justify-content:center; font-weight:700}
+  .logo-text{font-size:18px; font-weight:700} .logo-text span{color:var(--accent)}
+  .hamburger{width:28px; height:20px; cursor:pointer; display:flex; flex-direction:column; justify-content:space-between}
+  .hamburger span{height:3px; background:#fff; border-radius:2px; transition:.3s}
+  .hamburger.active span:nth-child(1){transform:rotate(45deg) translate(6px,6px)}
+  .hamburger.active span:nth-child(2){opacity:0}
+  .hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(6px,-6px)}
+  .bell{width:40px; height:40px; border:1px solid var(--card-border); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:20px}
 
-  .cart-sidebar{position:fixed; right:-400px; top:0; width:380px; height:100%; background:#fff; box-shadow:-5px 0 30px rgba(0,0,0,.2); transition:.3s; z-index:200; padding:20px; display:flex; flex-direction:column}
-  .cart-sidebar.active{right:0}
-  .cart-header{display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #eee; padding-bottom:15px}
-  .close-cart{font-size:24px; cursor:pointer; background:none; border:none}
-  .cart-items{flex:1; overflow-y:auto; margin:20px 0}
-  .cart-item{display:flex; gap:12px; margin-bottom:15px; padding-bottom:15px; border-bottom:1px solid #f5f5f5}
-  .cart-item img{width:70px; height:70px; object-fit:cover; border-radius:10px}
-  .cart-total{font-size:20px; font-weight:700; text-align:right; margin-bottom:15px}
-  .checkout-btn{width:100%; padding:16px; background:#25D366; color:#fff; border:none; border-radius:12px; font-size:16px; font-weight:700; cursor:pointer}
-  .checkout-btn:hover{background:#1ebe5b}
-  .overlay{position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); display:none; z-index:150}
+  /* MENU LATERAL */
+  .side-menu{position:fixed; top:0; left:-100%; width:280px; height:100%; background:rgba(17,18,26,0.95); backdrop-filter: blur(30px); z-index:150; transition:.4s; padding:80px 20px; border-right:1px solid var(--card-border)}
+  .side-menu.active{left:0}
+  .side-menu a{display:block; color:#fff; font-size:18px; font-weight:600; text-decoration:none; padding:16px; border-radius:12px; margin-bottom:8px}
+  .side-menu a:hover{background:var(--card-border)}
+  .overlay{position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); display:none; z-index:140}
   .overlay.active{display:block}
 
-  footer{background:#000; padding:40px 20px; color:#a1a1a6; text-align:center}
-  @media(max-width:768px){.hero h1{font-size:42px} .cart-sidebar{width:100%; right:-100%}}
+  .container{max-width:800px; margin:0 auto; padding:20px}
+
+  /* CARDS */
+  .card{background:var(--card); border:1px solid var(--card-border); border-radius:20px; padding:20px; margin-bottom:16px}
+  .card-header{display:flex; align-items:center; gap:12px; margin-bottom:16px}
+  .card-icon{width:48px; height:48px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:24px}
+  .icon-blue{background:rgba(59,130,246,0.2)}
+  .icon-green{background:rgba(0,255,136,0.2)}
+  .icon-purple{background:rgba(139,92,246,0.2)}
+
+  .stats{display:grid; grid-template-columns:1fr 1fr; gap:16px}
+  .stat-label{font-size:12px; color:var(--text-muted); text-transform:uppercase}
+  .stat-value{font-size:28px; font-weight:700; color:var(--accent)}
+  .stat-sub{font-size:12px; color:var(--text-muted)}
+
+  /* STAFF */
+  .section-title{font-size:20px; font-weight:700; margin-bottom:8px}
+  .section-sub{color:var(--text-muted); font-size:14px; margin-bottom:16px}
+  .staff-grid{display:flex; gap:16px; overflow-x:auto; padding-bottom:10px}
+  .staff-card{min-width:160px; background:var(--card); border:1px solid var(--card-border); border-radius:16px; padding:20px; text-align:center; cursor:pointer}
+  .staff-avatar{width:80px; height:80px; border-radius:20px; background:var(--gradient); margin:0 auto 12px; display:flex; align-items:center; justify-content:center; font-size:32px; font-weight:700}
+  .staff-name{font-weight:700; font-size:16px}
+  .staff-role{font-size:12px; color:var(--text-muted); text-transform:uppercase}
+
+  /* RESEÑAS */
+  .stars{color:#fbbf24; font-size:18px}
+  .review-card{background:var(--card); border:1px solid var(--card-border); border-radius:16px; padding:16px; margin-bottom:12px}
+  .review-header{display:flex; justify-content:space-between; align-items:center; margin-bottom:8px}
+  .review-user{display:flex; align-items:center; gap:10px}
+  .user-avatar{width:36px; height:36px; border-radius:10px; background:var(--gradient); display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700}
+  .review-input{width:100%; background:#0a0a0f; border:1px solid var(--card-border); border-radius:12px; padding:14px; color:#fff; margin:12px 0}
+  .btn-gradient{width:100%; padding:14px; border:none; border-radius:12px; background:var(--gradient); color:#fff; font-weight:700; font-size:16px; cursor:pointer}
+
+  .fab{position:fixed; bottom:20px; right:20px; width:56px; height:56px; border-radius:16px; background:var(--gradient); display:flex; align-items:center; justify-content:center; font-size:24px; cursor:pointer; box-shadow:0 10px 30px rgba(59,130,246,0.4)}
 </style>
 </head>
 <body>
 
 <nav>
-  <div class="container nav-wrap">
-    <div class="logo">Garfield Store</div>
-    <div class="nav-right">
-      <button class="cart-btn" onclick="toggleCart()">
-        Carrito <span class="cart-count" id="cart-count">0</span>
-      </button>
+  <div class="nav-wrap">
+    <div class="nav-left">
+      <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+      <div class="logo-img">G</div>
+      <div class="logo-text">Garfield<span>Store</span></div>
     </div>
+    <div class="bell">🔔</div>
   </div>
 </nav>
 
-<section class="hero">
-  <div class="hero-content">
-    <h1>Garfield Store</h1>
-    <p>Estilo. Comodidad. Actitud.</p>
-    <a href="#productos" class="btn btn-primary">Ver colección</a>
-  </div>
-</section>
-
-<!-- TU NUEVA IMAGEN "FOTO INICIO" -->
-<section class="banner-section">
-  <img src="https://files.evogb.win/2gepcp.jpg" alt="Foto Inicio Garfield Store">
-</section>
-
-<section id="productos" class="section">
-  <div class="container">
-    <h2>Productos Destacados</h2>
-    <p class="sub">Calidad premium. Envíos a todo Perú.</p>
-    <div class="products" id="products-grid"></div>
-  </div>
-</section>
-
-<div class="overlay" onclick="toggleCart()"></div>
-<div class="cart-sidebar" id="cart">
-  <div class="cart-header">
-    <h3>Tu Carrito</h3>
-    <button class="close-cart" onclick="toggleCart()">×</button>
-  </div>
-  <div class="cart-items" id="cart-items"></div>
-  <div class="cart-total">Total: S/ <span id="cart-total">0.00</span></div>
-  <button class="checkout-btn" onclick="checkoutWhatsApp()">Pedir por WhatsApp</button>
+<div class="overlay" onclick="toggleMenu()"></div>
+<div class="side-menu" id="side-menu">
+  <a href="#">Inicio</a>
+  <a href="#productos">Productos</a>
+  <a href="#staff">Staff</a>
+  <a href="#reseñas">Reseñas</a>
+  <a href="#contacto">Contacto WhatsApp</a>
 </div>
 
-<footer>
-  © 2026 Garfield Store. Lima, Perú
-</footer>
+<div class="container">
 
-<script>
-  const WHATSAPP_NUMBER = "51999999999"; // <-- CAMBIA ESTO POR TU NUMERO
+  <!-- CARD 1: BANNER -->
+  <div class="card">
+    <img src="https://files.evogb.win/sRJ0HB.jpg" style="width:100%; border-radius:16px">
+  </div>
 
-  const products = [
-    {id:1, name:"Polo Garfield Classic", price:59.90, img:"https://files.evogb.win/2gepcp.jpg", desc:"Algodón 100% premium"},
-    {id:2, name:"Hoodie Negro Garfield", price:129.90, img:"https://via.placeholder.com/400x400/000000/ffffff?text=Hoodie", desc:"Franela gruesa"},
-    {id:3, name:"Gorra Bordada", price:45.00, img:"https://via.placeholder.com/400x400/f5f5f7/000?text=Gorra", desc:"Ajustable"},
-    {id:4, name:"Pack 2 Polos", price:99.90, img:"https://via.placeholder.com/400x400/ff3b30/ffffff?text=Pack", desc:"Ahorra 20 soles"}
-  ];
+  <!-- CARD 2: TIEMPO ACTIVO -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon icon-blue">⏱️</div>
+      <div>
+        <div class="stat-label">TIEMPO ACTIVO</div>
+      </div>
+    </div>
+    <div class="stats">
+      <div><div class="stat-value" id="dias">0</div><div class="stat-sub">DÍAS</div></div>
+      <div><div class="stat-value" id="horas">14</div><div class="stat-sub">HORAS</div></div>
+      <div><div class="stat-value" id="min">20</div><div class="stat-sub">MIN</div></div>
+      <div><div class="stat-value" id="seg">35</div><div class="stat-sub">SEG</div></div>
+    </div>
+  </div>
 
-  let cart = [];
+  <!-- CARD 3: USUARIOS -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon icon-green">👥</div>
+      <div>
+        <div class="stat-label">USUARIOS REGISTRADOS</div>
+        <div class="stat-value">127</div>
+        <div class="stat-sub">PERSONAS</div>
+      </div>
+    </div>
+    <div style="margin-top:12px">
+      <div class="stat-label">ESTADO DE LA TIENDA</div>
+      <div class="stat-value" style="font-size:20px">En línea</div>
+      <div class="stat-sub">GARFIELD BOT ACTIVO</div>
+    </div>
+  </div>
 
-  function renderProducts(){
-    const grid = document.getElementById('products-grid');
-    grid.innerHTML = products.map(p => `
-      <div class="product">
-        <img src="${p.img}" alt="${p.name}">
-        <div class="product-info">
-          <h3>${p.name}</h3>
-          <p>${p.desc}</p>
-          <div class="price">S/ ${p.price.toFixed(2)}</div>
-          <button class="add-btn" onclick="addToCart(${p.id})">Agregar al carrito</button>
+  <!-- CARD 4: STAFF -->
+  <div id="staff">
+    <div class="section-title">Creadores y Staff</div>
+    <div class="section-sub">Desliza y toca una tarjeta para abrir WhatsApp</div>
+    <div class="staff-grid">
+      <div class="staff-card" onclick="openWhatsApp('Zemo')">
+        <div class="staff-avatar">Z</div>
+        <div class="staff-name">Zemo</div>
+        <div class="staff-role">CREADOR</div>
+      </div>
+      <div class="staff-card" onclick="openWhatsApp('Smtíh')">
+        <div class="staff-avatar">S</div>
+        <div class="staff-name">Smtíh</div>
+        <div class="staff-role">OWNER</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 5: RESEÑAS -->
+  <div id="reseñas" style="margin-top:30px">
+    <div style="display:flex; justify-content:space-between; align-items:center">
+      <div>
+        <div class="section-title">Reseñas reales</div>
+        <div class="section-sub">Opiniones de la comunidad</div>
+      </div>
+      <div style="text-align:right">
+        <div class="stat-value">5.0</div>
+        <div class="stars">★★★★★</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <select class="review-input">
+        <option>★★★ · 5</option>
+        <option>★★★★☆ · 4</option>
+      </select>
+      <button class="btn-gradient">Publicar reseña</button>
+      <textarea class="review-input" placeholder="Cuéntanos tu experiencia..."></textarea>
+      <div class="stat-sub">La reseña aparecerá cuando Admin la apruebe.</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <div class="stars">★★★★★</div>
+      </div>
+      <p>Los mejores productos de Lima. Envío rapidísimo 🔥</p>
+      <div class="review-user" style="margin-top:12px">
+        <div class="user-avatar">i</div>
+        <div>
+          <div style="font-weight:600">imperioarcadia2016</div>
+          <div class="stat-sub">8/8/2026</div>
         </div>
       </div>
-    `).join('');
-  }
+    </div>
+  </div>
 
-  function addToCart(id){
-    const product = products.find(p => p.id === id);
-    const item = cart.find(i => i.id === id);
-    if(item){ item.qty++; } else { cart.push({...product, qty:1}) }
-    updateCart();
-  }
+</div>
 
-  function updateCart(){
-    document.getElementById('cart-count').innerText = cart.reduce((a,b)=>a+b.qty,0);
-    const cartItems = document.getElementById('cart-items');
-    if(cart.length === 0){ cartItems.innerHTML = "<p style='text-align:center; color:#999'>Tu carrito está vacío</p>"; }
-    else {
-      cartItems.innerHTML = cart.map(item => `
-        <div class="cart-item">
-          <img src="${item.img}">
-          <div class="cart-item-info">
-            <h4>${item.name}</h4>
-            <p>S/ ${item.price.toFixed(2)} x ${item.qty}</p>
-          </div>
-        </div>
-      `).join('');
-    }
-    const total = cart.reduce((a,b)=>a + b.price*b.qty,0);
-    document.getElementById('cart-total').innerText = total.toFixed(2);
-  }
+<div class="fab" onclick="openWhatsApp('Ventas')">✨</div>
 
-  function toggleCart(){
-    document.getElementById('cart').classList.toggle('active');
+<script>
+  function toggleMenu(){
+    document.getElementById('side-menu').classList.toggle('active');
     document.querySelector('.overlay').classList.toggle('active');
+    document.querySelector('.hamburger').classList.toggle('active');
   }
-
-  function checkoutWhatsApp(){
-    if(cart.length === 0) return alert("Tu carrito está vacío");
-    let message = "Hola Garfield Store! 👋 Quiero hacer este pedido:%0A%0A";
-    cart.forEach(item => {
-      message += `• ${item.name} x${item.qty} - S/ ${(item.price*item.qty).toFixed(2)}%0A`;
-    });
-    const total = cart.reduce((a,b)=>a + b.price*b.qty,0);
-    message += `%0A*Total: S/ ${total.toFixed(2)}*%0A%0A¿Me confirman disponibilidad y envío?`;
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
+  function openWhatsApp(nombre){
+    window.open(`https://wa.me/51999999999?text=Hola ${nombre}, te escribo desde Garfield Store`, '_blank');
   }
-
-  renderProducts();
+  
+  // Contador
+  let seg = 35, min = 20, horas = 14, dias = 0;
+  setInterval(()=>{
+    seg++;
+    if(seg==60){seg=0; min++}
+    if(min==60){min=0; horas++}
+    if(horas==24){horas=0; dias++}
+    document.getElementById('seg').innerText = seg.toString().padStart(2,'0');
+    document.getElementById('min').innerText = min.toString().padStart(2,'0');
+    document.getElementById('horas').innerText = horas;
+    document.getElementById('dias').innerText = dias;
+  },1000)
 </script>
 
 </body>
