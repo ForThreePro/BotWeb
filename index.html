@@ -8,9 +8,9 @@
 </head>
 <body>
   <header>
-    <div class="logo">Garfield <span style="color:var(--purple-light)">Store</span></div>
+    <div class="logo">Garfield <span>Store</span></div>
     <nav>
-      <a href="index.html">Inicio</a>
+      <a href="index.html" class="active">Inicio</a>
       <a href="shop.html">Tienda</a>
       <a href="redes.html">Redes</a>
       <a href="love.html">Love</a>
@@ -20,13 +20,37 @@
   <main class="content">
     <section class="hero">
       <h1>Garfield <span>Store</span></h1>
-      <p>Todo Garfield en un solo lugar</p>
+      <p>Todo Garfield en un solo lugar 🐱</p>
+      <div class="stats">
+        <div class="stat-box"><h3 id="visitas">0</h3><p>Visitas</p></div>
+        <div class="stat-box"><h3 id="tiempo">00:00</h3><p>En línea</p></div>
+      </div>
     </section>
+
     <section class="glass-card">
-      <h2>Destacados</h2>
-      <div class="video-grid">
-        <video src="1.mp4" controls></video>
-        <video src="2.mp4" controls></video>
+      <h2>FAQ - Preguntas Frecuentes</h2>
+      <div class="faq">
+        <details><summary>¿Cómo compro diamantes?</summary><p>Agrega al carrito en Tienda y paga por WhatsApp. Te llegan al instante.</p></details>
+        <details><summary>¿Hacen envíos?</summary><p>Todo es digital. Te lo enviamos por WhatsApp en 5 minutos.</p></details>
+        <details><summary>¿Tienen garantía?</summary><p>Sí, 100% garantía Garfield. Si falla te devolvemos.</p></details>
+      </div>
+    </section>
+
+    <section class="glass-card">
+      <h2>Creadores</h2>
+      <div class="creadores">
+        <div class="creador">
+          <img src="https://i.pravatar.cc/100?u=1" alt="Creador">
+          <h3>Garfield Boss</h3>
+          <p>Fundador y CEO</p>
+          <a href="https://wa.me/51XXXXXXXXX" class="btn-wa">WhatsApp</a>
+        </div>
+        <div class="creador">
+          <img src="https://i.pravatar.cc/100?u=2" alt="Creador">
+          <h3>Odie Dev</h3>
+          <p>Desarrollador</p>
+          <a href="https://wa.me/51XXXXXXXXX" class="btn-wa">WhatsApp</a>
+        </div>
       </div>
     </section>
   </main>
