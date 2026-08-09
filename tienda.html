@@ -7,23 +7,27 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-  :root{ --naranja:#FF6B00; --naranja2:#FF8C00; --gris:#F5F5F7; --texto:#1D1D1F; }
+  :root{ --naranja:#FF6B00; --naranja2:#FF8C00; --gris:#F5F5F7; --texto:#1D1D1F; --verde:#25D366; }
   body { background: var(--gris); font-family: 'Inter', sans-serif; color: var(--texto); }
-.card { background: #fff; border: 1px solid #E5E5E7; transition: all 0.2s; }
-.card:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+.card { background: #fff; border: 1px solid #E5E5E7; transition: all 0.3s; }
+.card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(255,107,0,0.15); }
 .btn-primary { background: linear-gradient(90deg, var(--naranja), var(--naranja2)); color: #fff; }
-.filter-btn { background: #fff; border: 1px solid #E5E5E7; white-space: nowrap; transition: all 0.2s; }
-.filter-active { background: var(--naranja); color: #fff; border-color: var(--naranja); }
+.btn-whatsapp { background: var(--verde); color: #fff; }
+.filter-btn { background: #fff; border: 2px solid #E5E5E7; white-space: nowrap; }
+.filter-active { background: var(--naranja); color: #fff; border-color: var(--naranja); box-shadow: 0 4px 12px rgba(255,107,0,0.3); }
+.popup { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 50; backdrop-filter: blur(5px); }
+.popup-content { animation: slideUp 0.3s ease; }
+@keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
 </style>
 </head>
 <body>
 
 <header class="card p-4 flex items-center justify-between sticky top-0 z-30 shadow-sm">
   <a href="index.html" class="flex items-center gap-3">
-    <img src="https://i.imgur.com/TU_IMAGEN_AQUI.png" class="w-10 h-10 rounded-xl object-cover">
+    <img src="https://i.imgur.com/wa_image_7763882126055199045.png" class="w-10 h-10 rounded-xl object-cover">
     <h1 class="text-xl font-black"><span class="text-orange-500">Garfield</span> Store</h1>
   </a>
-  <a href="producto-carrito.html" id="btnCarrito" class="card px-5 py-2.5 rounded-xl font-bold">🛒 Carrito 0</a>
+  <button onclick="abrirCarrito()" id="btnCarrito" class="card px-5 py-2.5 rounded-xl font-bold">🛒 Carrito 0</button>
 </header>
 
 <div class="p-5 max-w-7xl mx-auto pb-10">
@@ -32,7 +36,7 @@
     <h2 class="text-4xl font-black mt-4">Arma tu pack como Garfield 🍕</h2>
   </div>
 
-  <!-- FILTROS -->
+  <!-- FILTROS MEJORADOS -->
   <div class="flex gap-3 mb-6 overflow-x-auto pb-2">
     <button onclick="filtrar('todos')" id="btn-todos" class="filter-btn filter-active px-5 py-2.5 rounded-xl text-sm font-bold">Todos</button>
     <button onclick="filtrar('streaming')" id="btn-streaming" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600">Streaming</button>
@@ -48,119 +52,179 @@
     <button onclick="filtrar('pase')" id="btn-pase" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600">Pase Élite</button>
   </div>
 
-  <!-- PRODUCTOS -->
+  <!-- TODOS LOS PRODUCTOS AQUI -->
   <div id="productos" class="grid md:grid-cols-3 gap-5">
-    
-    <!-- GRUPO 1 -->
-    <a href="productos-grupo1.html#streaming" class="producto streaming card rounded-2xl p-6">
+
+    <!-- 1 STREAMING -->
+    <div class="producto streaming card rounded-2xl p-6">
       <span class="bg-orange-100 text-orange-600 text-xs px-3 py-1 rounded-full font-bold">STREAMING</span>
       <p class="text-4xl font-black text-red-500 mt-3">N</p>
       <p class="font-bold text-xl mt-1">Netflix Premium</p>
+      <p class="text-sm text-gray-500">1 Pantalla - 30 días</p>
       <p class="mt-4"><span class="text-3xl font-black text-orange-500">S/ 15.00</span></p>
-    </a>
-    
-    <a href="productos-grupo1.html#musica" class="producto musica card rounded-2xl p-6">
+      <button onclick="abrirPopup('Netflix Premium 1 Pantalla', 15)" class="btn-primary w-full py-3 rounded-xl mt-4 font-bold">Comprar Ahora</button>
+    </div>
+
+    <!-- 2 MUSICA -->
+    <div class="producto musica card rounded-2xl p-6">
       <span class="bg-orange-100 text-orange-600 text-xs px-3 py-1 rounded-full font-bold">MÚSICA</span>
       <p class="text-4xl text-green-500 mt-3">●</p>
       <p class="font-bold text-xl mt-1">Spotify Premium</p>
+      <p class="text-sm text-gray-500">Individual - 30 días</p>
       <p class="mt-4"><span class="text-3xl font-black text-orange-500">S/ 10.00</span></p>
-    </a>
-    
-    <a href="productos-grupo1.html#bots" class="producto bots card rounded-2xl p-6">
+      <button onclick="abrirPopup('Spotify Premium Individual', 10)" class="btn-primary w-full py-3 rounded-xl mt-4 font-bold">Comprar Ahora</button>
+    </div>
+
+    <!-- 3 BOTS -->
+    <div class="producto bots card rounded-2xl p-6">
       <span class="bg-orange-100 text-orange-600 text-xs px-3 py-1 rounded-full font-bold">BOTS</span>
       <p class="text-4xl mt-3">🤖</p>
-      <p class="font-bold text-xl mt-1">Bots</p>
-      <p class="mt-4"><span class="text-3xl font-black text-orange-500">Desde S/ 3.00</span></p>
-    </a>
-    
-    <a href="productos-grupo1.html#spam" class="producto spam card rounded-2xl p-6">
+      <p class="font-bold text-xl mt-1">Bot Mensual</p>
+      <p class="text-sm text-gray-500">Respuestas automáticas</p>
+      <p class="mt-4"><span class="text-3xl font-black text-orange-500">S/ 3.00</span></p>
+      <button onclick="abrirPopup('Bot Mensual', 3)" class="btn-primary w-full py-3 rounded-xl mt-4 font-bold">Comprar Ahora</button>
+    </div>
+
+    <!-- 4 SPAM -->
+    <div class="producto spam card rounded-2xl p-6">
       <span class="bg-orange-100 text-orange-600 text-xs px-3 py-1 rounded-full font-bold">SPAM</span>
       <p class="text-4xl mt-3">📢</p>
       <p class="font-bold text-xl mt-1">Spam 3x3 Horas</p>
+      <p class="text-sm text-gray-500">3 días, 5 días, 1 semana</p>
       <p class="mt-4"><span class="text-3xl font-black text-orange-500">Desde S/ 5.50</span></p>
-    </a>
-    
-    <a href="productos-grupo1.html#design" class="producto design card rounded-2xl p-6">
+      <button onclick="abrirPopup('Spam 3 Dias', 5.50)" class="btn-primary w-full py-3 rounded-xl mt-4 font-bold">Comprar Ahora</button>
+    </div>
+
+    <!-- 5 DESIGN -->
+    <div class="producto design card rounded-2xl p-6">
       <span class="bg-orange-100 text-orange-600 text-xs px-3 py-1 rounded-full font-bold">DESIGN</span>
       <p class="text-4xl mt-3">🖌️</p>
       <p class="font-bold text-xl mt-1">Design Luu</p>
+      <p class="text-sm text-gray-500">Logos, Plantillas, Jersey</p>
       <p class="mt-4"><span class="text-3xl font-black text-orange-500">Desde S/ 3.00</span></p>
-    </a>
+      <button onclick="abrirPopup('Tex Logo', 3)" class="btn-primary w-full py-3 rounded-xl mt-4 font-bold">Comprar Ahora</button>
+    </div>
 
-    <!-- GRUPO 2 -->
-    <a href="productos-grupo2.html#numeros" class="producto numeros card rounded-2xl p-6">
+    <!-- 6 NUMEROS -->
+    <div class="producto numeros card rounded-2xl p-6">
       <span class="bg-orange-100 text-orange-600 text-xs px-3 py-1 rounded-full font-bold">NÚMEROS</span>
       <p class="text-4xl mt-3">📱</p>
       <p class="font-bold text-xl mt-1">Número USA</p>
+      <p class="text-sm text-gray-500">Para WhatsApp</p>
       <p class="mt-4"><span class="text-3xl font-black text-orange-500">S/ 25.00</span></p>
-    </a>
-    
-    <a href="productos-grupo2.html#seguidores" class="producto seguidores card rounded-2xl p-6">
+      <button onclick="abrirPopup('Número USA', 25)" class="btn-primary w-full py-3 rounded-xl mt-4 font-bold">Comprar Ahora</button>
+    </div>
+
+    <!-- 7 SEGUIDORES -->
+    <div class="producto seguidores card rounded-2xl p-6">
       <span class="bg-orange-100 text-orange-600 text-xs px-3 py-1 rounded-full font-bold">SEGUIDORES</span>
       <p class="text-4xl mt-3">👥</p>
-      <p class="font-bold text-xl mt-1">Seguidores IG</p>
-      <p class="mt-4"><span class="text-3xl font-black text-orange-500">Desde S/ 2.00</span></p>
-    </a>
-    
-    <a href="productos-grupo2.html#vistas" class="producto vistas card rounded-2xl p-6">
+      <p class="font-bold text-xl mt-1">1000 Seguidores IG</p>
+      <p class="text-sm text-gray-500">Entrega rápida</p>
+      <p class="mt-4"><span class="text-3xl font-black text-orange-500">S/ 5.00</span></p>
+      <button onclick="abrirPopup('1000 Seguidores Instagram', 5)" class="btn-primary w-full py-3 rounded-xl mt-4 font-bold">Comprar Ahora</button>
+    </div>
+
+    <!-- 8 VISTAS -->
+    <div class="producto vistas card rounded-2xl p-6">
       <span class="bg-orange-100 text-orange-600 text-xs px-3 py-1 rounded-full font-bold">VISTAS</span>
       <p class="text-4xl mt-3">👁️</p>
-      <p class="font-bold text-xl mt-1">Vistas TikTok</p>
+      <p class="font-bold text-xl mt-1">10K Vistas TikTok</p>
+      <p class="text-sm text-gray-500">Para volverte viral</p>
       <p class="mt-4"><span class="text-3xl font-black text-orange-500">S/ 12.00</span></p>
-    </a>
-    
-    <a href="productos-grupo2.html#likes" class="producto likes card rounded-2xl p-6">
+      <button onclick="abrirPopup('10K Vistas TikTok', 12)" class="btn-primary w-full py-3 rounded-xl mt-4 font-bold">Comprar Ahora</button>
+    </div>
+
+    <!-- 9 LIKES -->
+    <div class="producto likes card rounded-2xl p-6">
       <span class="bg-orange-100 text-orange-600 text-xs px-3 py-1 rounded-full font-bold">LIKES</span>
       <p class="text-4xl mt-3">❤️</p>
-      <p class="font-bold text-xl mt-1">Likes IG</p>
+      <p class="font-bold text-xl mt-1">500 Likes IG</p>
+      <p class="text-sm text-gray-500">Likes reales</p>
       <p class="mt-4"><span class="text-3xl font-black text-orange-500">S/ 8.00</span></p>
-    </a>
-    
-    <a href="productos-grupo2.html#diamantes" class="producto diamantes card rounded-2xl p-6 md:col-span-3">
+      <button onclick="abrirPopup('500 Likes Instagram', 8)" class="btn-primary w-full py-3 rounded-xl mt-4 font-bold">Comprar Ahora</button>
+    </div>
+
+    <!-- 10 DIAMANTES -->
+    <div class="producto diamantes card rounded-2xl p-6 md:col-span-3">
       <span class="bg-orange-100 text-orange-600 text-xs px-3 py-1 rounded-full font-bold">FREE FIRE</span>
       <p class="text-4xl mt-3">💎</p>
       <p class="font-bold text-2xl mt-1">Recargas Free Fire</p>
-      <p class="text-sm text-gray-500">PE, CL, AR, MX, BO, UY - Con Stock y Sin Stock</p>
-    </a>
+      <p class="text-sm text-gray-500">PE, CL, AR, MX, BO, UY</p>
+      <p class="mt-4"><span class="text-3xl font-black text-orange-500">Desde S/ 2.50</span></p>
+      <button onclick="abrirPopup('110 Diamantes', 2.50)" class="btn-primary w-full py-3 rounded-xl mt-4 font-bold">Comprar 110💎 S/2.50</button>
+    </div>
 
-    <!-- GRUPO 3 -->
-    <a href="productos-grupo3.html#pase" class="producto pase card rounded-2xl p-6">
+    <!-- 11 PASE -->
+    <div class="producto pase card rounded-2xl p-6">
       <span class="bg-orange-100 text-orange-600 text-xs px-3 py-1 rounded-full font-bold">FREE FIRE</span>
       <p class="text-4xl mt-3">👑</p>
       <p class="font-bold text-xl mt-1">Pase Élite</p>
+      <p class="text-sm text-gray-500">Mensual</p>
       <p class="mt-4"><span class="text-3xl font-black text-orange-500">S/ 20.00</span></p>
-    </a>
-    
-    <a href="productos-grupo3.html#otro" class="producto card rounded-2xl p-6">
-      <span class="bg-gray-100 text-gray-600 text-xs px-3 py-1 rounded-full font-bold">OTROS</span>
-      <p class="text-4xl mt-3">📦</p>
-      <p class="font-bold text-xl mt-1">Otros Servicios</p>
-      <p class="mt-4"><span class="text-3xl font-black text-orange-500">Consultar</span></p>
-    </a>
+      <button onclick="abrirPopup('Pase Élite Mensual', 20)" class="btn-primary w-full py-3 rounded-xl mt-4 font-bold">Comprar Ahora</button>
+    </div>
 
   </div>
 </div>
 
-<script>
-let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-actualizarCarrito();
+<!-- POPUP DE PAGO DIRECTO WHATSAPP -->
+<div id="popup" class="popup items-end md:items-center justify-center">
+  <div class="popup-content bg-white w-full md:w-[500px] rounded-t-3xl md:rounded-2xl p-6">
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-2xl font-black">Confirmar Pedido</h3>
+      <button onclick="cerrarPopup()" class="text-3xl">×</button>
+    </div>
+    <div id="popup-info" class="mb-4"></div>
+    <input id="nombreCliente" type="text" placeholder="Tu Nombre" class="w-full border rounded-xl p-3 mb-3">
+    <input id="idCliente" type="text" placeholder="ID/Correo/Juego" class="w-full border rounded-xl p-3 mb-3">
+    <select id="metodoPago" class="w-full border rounded-xl p-3 mb-4">
+      <option>Yape</option><option>Plin</option><option>Transferencia</option>
+    </select>
+    <button onclick="enviarWhatsApp()" class="btn-whatsapp w-full py-4 rounded-xl font-bold text-lg">ENVIAR A WHATSAPP LU</button>
+  </div>
+</div>
 
-function actualizarCarrito() { 
-  document.getElementById('btnCarrito').innerText = `🛒 Carrito ${carrito.length}`; 
-}
+<script>
+let carrito = [];
+let productoActual = {};
 
 function filtrar(categoria) {
   document.querySelectorAll('.producto').forEach(p => p.style.display = 'none');
   document.querySelectorAll('.filter-btn').forEach(b => b.className = 'filter-btn px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600');
-  
-  if(categoria === 'todos') { 
-    document.querySelectorAll('.producto').forEach(p => p.style.display = 'block'); 
-    document.getElementById('btn-todos').className = 'filter-btn filter-active px-5 py-2.5 rounded-xl text-sm font-bold'; 
-  } else { 
-    document.querySelectorAll('.' + categoria).forEach(p => p.style.display = 'block'); 
-    document.getElementById('btn-' + categoria).className = 'filter-btn filter-active px-5 py-2.5 rounded-xl text-sm font-bold'; 
-  }
+  if(categoria === 'todos') { document.querySelectorAll('.producto').forEach(p => p.style.display = 'block'); document.getElementById('btn-todos').className = 'filter-btn filter-active px-5 py-2.5 rounded-xl text-sm font-bold'; }
+  else { document.querySelectorAll('.' + categoria).forEach(p => p.style.display = 'block'); document.getElementById('btn-' + categoria).className = 'filter-btn filter-active px-5 py-2.5 rounded-xl text-sm font-bold'; }
 }
+
+function abrirPopup(nombre, precio) {
+  productoActual = {nombre, precio};
+  document.getElementById('popup-info').innerHTML = `<p class="text-lg"><b>${nombre}</b></p><p class="text-3xl font-black text-orange-500">S/ ${precio}.00</p>`;
+  document.getElementById('popup').style.display = 'flex';
+}
+
+function cerrarPopup() { document.getElementById('popup').style.display = 'none'; }
+
+function enviarWhatsApp() {
+  let nombre = document.getElementById('nombreCliente').value;
+  let id = document.getElementById('idCliente').value;
+  let metodo = document.getElementById('metodoPago').value;
+
+  if(nombre === '' || id === '') return alert('Completa tus datos');
+
+  let mensaje = `*HOLA LU, QUIERO COMPRAR*%0A%0A`;
+  mensaje += `*PRODUCTO:* ${productoActual.nombre}%0A`;
+  mensaje += `*PRECIO:* S/ ${productoActual.precio}.00%0A%0A`;
+  mensaje += `*DATOS:*%0A`;
+  mensaje += `Nombre: ${nombre}%0A`;
+  mensaje += `Método: ${metodo}%0A`;
+  mensaje += `ID: ${id}%0A%0A`;
+  mensaje += `Espero confirmación! 🙏`;
+
+  window.open(`https://wa.me/51920726588?text=${mensaje}`, '_blank');
+  cerrarPopup();
+}
+
+function abrirCarrito() { alert('Compra directa desde cada producto'); }
 </script>
 </body>
 </html>
