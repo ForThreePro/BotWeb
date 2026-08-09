@@ -3,71 +3,142 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Garfield Love 💙</title>
-<link rel="stylesheet" href="style.css">
+<title>Producto Pro</title>
+<style>
+  :root{
+    --bg:#000;
+    --bg-light:#f5f5f7;
+    --text:#1d1d1f;
+    --text-muted:#6e6e73;
+    --accent:#0071e3;
+    --maxw:1100px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+    color:var(--text);
+    background:#fff;
+    -webkit-font-smoothing:antialiased;
+  }
+  nav{
+    position:sticky; top:0; backdrop-filter: saturate(180%) blur(20px);
+    background:rgba(255,255,255,0.8); border-bottom:1px solid #e5e5e5; z-index:10;
+  }
+  .container{max-width:var(--maxw); margin:0 auto; padding:0 20px}
+  .nav-wrap{display:flex; justify-content:space-between; align-items:center; height:52px}
+  .logo{font-weight:600; font-size:20px; letter-spacing:-0.5px}
+  .nav-links{display:flex; gap:28px; font-size:13px}
+  .nav-links a{color:var(--text-muted); text-decoration:none; transition:.2s}
+  .nav-links a:hover{color:var(--text)}
+  
+  .hero{
+    text-align:center; padding:100px 20px 60px; background:linear-gradient(180deg,#fff 0%, #f5f5f7 100%);
+  }
+  .hero h1{font-size:56px; font-weight:700; letter-spacing:-2px; line-height:1.05}
+  .hero p{font-size:24px; color:var(--text-muted); margin:18px 0 30px}
+  .cta{display:flex; gap:16px; justify-content:center}
+  .btn{
+    padding:12px 22px; border-radius:980px; font-size:17px; font-weight:500; text-decoration:none;
+    transition:.2s
+  }
+  .btn-primary{background:var(--accent); color:#fff}
+  .btn-primary:hover{background:#0077ed}
+  .btn-secondary{border:1px solid var(--accent); color:var(--accent)}
+  .btn-secondary:hover{background:var(--accent); color:#fff}
+  .hero img{width:100%; max-width:900px; margin-top:50px; border-radius:18px; box-shadow:0 20px 60px rgba(0,0,0,.15)}
+
+  .section{padding:100px 20px; text-align:center}
+  .section h2{font-size:48px; font-weight:700; letter-spacing:-1.5px}
+  .section p{font-size:20px; color:var(--text-muted); max-width:700px; margin:16px auto 0}
+
+  .grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:40px; margin-top:60px}
+  .card{background:var(--bg-light); padding:40px 30px; border-radius:24px; transition:.3s}
+  .card:hover{transform:translateY(-4px)}
+  .card h3{font-size:24px; margin-bottom:10px}
+  .card p{font-size:16px; color:var(--text-muted)}
+
+  .dark{background:var(--bg); color:#fff}
+  .dark p{color:#a1a1a6}
+  .dark .btn-secondary{border-color:#fff; color:#fff}
+
+  footer{background:#f5f5f7; padding:60px 20px; font-size:12px; color:var(--text-muted); text-align:center}
+  
+  @media(max-width:768px){
+    .hero h1{font-size:40px}
+    .hero p{font-size:18px}
+    .section h2{font-size:32px}
+    .nav-links{display:none}
+  }
+</style>
 </head>
 <body>
 
 <nav>
-  <div class="logo">🐱 Garfield Love</div>
-  <div class="nav-links">
-    <a href="index.html">Inicio</a>
-    <a href="garfield.html">Garfield</a>
-    <a href="servicios.html">Servicios</a>
-    <a href="contacto.html">Contacto</a>
+  <div class="container nav-wrap">
+    <div class="logo">Producto Pro</div>
+    <div class="nav-links">
+      <a href="#caracteristicas">Características</a>
+      <a href="#tecnologia">Tecnología</a>
+      <a href="#comprar">Comprar</a>
+    </div>
   </div>
-  <button class="menu-btn" onclick="toggleMenu()">☰</button>
 </nav>
 
-<div class="sidebar" id="sidebar">
-  <span class="close-btn" onclick="toggleMenu()">×</span>
-  <a href="index.html">Inicio</a>
-  <a href="garfield.html">Garfield</a>
-  <a href="servicios.html">Servicios</a>
-  <a href="contacto.html">Contacto</a>
-</div>
-
 <section class="hero">
-  <img src="https://via.placeholder.com/600x600/FFA500/000?text=BOT+GARFIELD" class="hero-img">
-  <h1>Garfield Love</h1>
-  <p class="subtitle">Bots, Diseños, Spam y Diamantes para fans</p>
-  <div class="cta-buttons">
-    <a href="servicios.html" class="btn-primary">Ver Servicios</a>
-    <a href="https://wa.me/51999999" class="btn-secondary">WhatsApp</a>
+  <div class="container">
+    <h1>Diseñado para hacer más.</h1>
+    <p>Potencia, diseño y simplicidad en un solo producto.</p>
+    <div class="cta">
+      <a href="#comprar" class="btn btn-primary">Comprar</a>
+      <a href="#caracteristicas" class="btn btn-secondary">Más información</a>
+    </div>
+    <img src="https://via.placeholder.com/900x600/f5f5f7/1d1d1f?text=Tu+Producto" alt="Producto">
   </div>
 </section>
 
-<section class="features">
-  <h2>¿Por qué nosotros?</h2>
-  <div class="grid-3">
-    <div class="card">
-      <h3>⚡ Rápido</h3>
-      <p>Entrega en minutos. Diamantes y Spam el mismo día.</p>
-    </div>
-    <div class="card">
-      <h3>💎 Confiable</h3>
-      <p>+200 clientes felices. Pagos seguros por país.</p>
-    </div>
-    <div class="card">
-      <h3>🐱 Fans</h3>
-      <p>Hecho por fans de Garfield para fans de Garfield.</p>
+<section id="caracteristicas" class="section">
+  <div class="container">
+    <h2>Rendimiento sin límites</h2>
+    <p>Nuevo chip. Batería que dura todo el día. Y una experiencia que simplemente funciona.</p>
+    <div class="grid">
+      <div class="card">
+        <h3>Velocidad</h3>
+        <p>Hasta 3x más rápido que la generación anterior. Para que todo fluya.</p>
+      </div>
+      <div class="card">
+        <h3>Diseño</h3>
+        <p>Aluminio 100% reciclado. 2.8mm de grosor. Hecho para durar.</p>
+      </div>
+      <div class="card">
+        <h3>Privacidad</h3>
+        <p>Tus datos son tuyos. Con cifrado de extremo a extremo.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="testimonios">
-  <h2>Lo que dicen</h2>
-  <div class="grid-3">
-    <div class="card">"Me llenó el grupo en 3 días" - Ana</div>
-    <div class="card">"Recarga rápida" - Diego</div>
-    <div class="card">"Logo hermoso" - Camila</div>
+<section id="tecnologia" class="section dark">
+  <div class="container">
+    <h2>Tecnología que te entiende</h2>
+    <p>Inteligencia que se adapta a ti. Pantalla que se ve increíble. Sonido que te envuelve.</p>
+    <a href="#comprar" class="btn btn-secondary" style="margin-top:30px; display:inline-block">Ver en acción</a>
+  </div>
+</section>
+
+<section id="comprar" class="section">
+  <div class="container">
+    <h2>Listo para ti</h2>
+    <p>Desde S/ 4,999. Entrega gratis. 12 cuotas sin intereses.</p>
+    <a href="#" class="btn btn-primary" style="margin-top:30px; display:inline-block">Comprar ahora</a>
   </div>
 </section>
 
 <footer>
-  <p>Garfield Love © 2026 | Hecho con 🧡 y lasaña</p>
+  <div class="container">
+    © 2026 Producto Pro. Todos los derechos reservados. <br>
+    Hecho con inspiración en el diseño de Apple.
+  </div>
 </footer>
 
-<script src="script.js"></script>
 </body>
 </html>
