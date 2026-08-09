@@ -124,9 +124,8 @@ function filtrar(categoria) {
 
 function enviarWhatsApp() {
   if(carrito.length === 0) return alert('Tu carrito está vacío');
-  let usuario = JSON.parse(localStorage.getItem('usuario')) || {name: "Invitado", email: ""};
   let total = carrito.reduce((sum, item) => sum + item.precio, 0);
-  let mensaje = `*NUEVO PEDIDO - EVENTOS GARFIELD*%0A*Cliente:* ${usuario.name}%0A*Email:* ${usuario.email}%0A%0A*Productos:*%0A`;
+  let mensaje = `*NUEVO PEDIDO - EVENTOS GARFIELD*%0A%0A*Productos:*%0A`;
   carrito.forEach((item, i) => { mensaje += `${i+1}. ${item.nombre} - S/ ${item.precio}.00%0A`; });
   mensaje += `%0A*TOTAL: S/ ${total}.00*`;
   let numero = "51999999"; // CAMBIA ESTE NUMERO
