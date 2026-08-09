@@ -1,0 +1,25 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design - GarfieldStore</title><link rel="stylesheet" href="style.css"></head><body>
+<nav><div class="nav-wrap"><div class="nav-left"><div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div><div class="logo-g">G</div><div class="logo-text">Garfield<span>Store</span></div></div><button class="cart-btn" onclick="toggleCart()">🛒 Carrito <span class="cart-count" id="cart-count">0</span></button></div></nav>
+<div class="overlay"></div><div class="side-menu" id="side-menu"><div class="menu-group"><div class="menu-header">📦 PORTAL</div><a href="index.html" class="menu-item"><span class="menu-icon">🏠</span> Inicio</a><a href="shop.html" class="menu-item"><span class="menu-icon">🛒</span> Volver a Tienda</a></div></div>
+
+<div class="container"><div class="hero-card"><div class="hero-label">DESIGN</div><div class="hero-title">Luu Design</div></div>
+<div class="country-tabs" id="tabs-design">
+  <button class="country-tab active" onclick="selectCountry('pe', this, 'design')">🇵🇪 Peru</button><button class="country-tab" onclick="selectCountry('cl', this, 'design')">🇨🇱 Chile</button>
+  <button class="country-tab" onclick="selectCountry('ar', this, 'design')">🇦🇷 Argentina</button><button class="country-tab" onclick="selectCountry('mx', this, 'design')">🇲🇽 Mexico</button>
+  <button class="country-tab" onclick="selectCountry('bo', this, 'design')">🇧🇴 Bolivia</button><button class="country-tab" onclick="selectCountry('uy', this, 'design')">🇺🇾 Uruguay</button>
+  <button class="country-tab" onclick="selectCountry('co', this, 'design')">🇨🇴 Colombia</button><button class="country-tab" onclick="selectCountry('us', this, 'design')">🇺🇸 USA</button>
+</div>
+<div class="form-group"><label class="form-label">Tipo de Diseño</label>
+  <select class="form-select" id="tipo-design" onchange="updatePrice('design')">
+    <option value="logo">Tex Logo y Logos</option><option value="plantilla">Plantillas 2x1</option>
+    <option value="caligrafico">Caligráficos 2x1</option><option value="jersey">Jersey</option>
+  </select>
+</div>
+<div class="price-preview">Total: <span id="precio-design" style="color:var(--green); font-weight:700">S/3</span></div>
+<button class="add-btn" onclick="addDesignToCart()">Agregar al Carrito</button>
+<div class="info-text">El pedido demora maximo 2 dias. No hago devoluciones. Respondo tardes y noches.</div>
+</div>
+<div class="cart-sidebar" id="cart"><div class="cart-header"><div style="font-size:18px; font-weight:700">Tu Carrito</div><div class="cart-close" onclick="toggleCart()">✕</div></div><div id="cart-items" style="flex:1; overflow-y:auto"></div><button class="checkout-btn" onclick="checkoutWhatsApp()">Pedir por WhatsApp</button></div>
+<div class="toast" id="toast">Agregado al carrito ✅</div><div class="music-player" id="music-player"><button id="play-btn">▶️</button><span>🎵 Garfield Theme</span></div>
+<script src="script.js"></script></body></html>
