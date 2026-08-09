@@ -3,49 +3,69 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Garfield Love 💙 - Inicio</title>
+<title>Garfield Love 💙</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header>
+<nav>
   <div class="logo">🐱 Garfield Love</div>
+  <div class="nav-links">
+    <a href="index.html">Inicio</a>
+    <a href="garfield.html">Garfield</a>
+    <a href="servicios.html">Servicios</a>
+    <a href="contacto.html">Contacto</a>
+  </div>
   <button class="menu-btn" onclick="toggleMenu()">☰</button>
-</header>
+</nav>
 
 <div class="sidebar" id="sidebar">
   <span class="close-btn" onclick="toggleMenu()">×</span>
   <a href="index.html">Inicio</a>
-  <a href="garfield.html">Garfield Love</a>
+  <a href="garfield.html">Garfield</a>
   <a href="servicios.html">Servicios</a>
   <a href="contacto.html">Contacto</a>
 </div>
 
-<section class="hero-garfield">
-  <img src="https://via.placeholder.com/800x400/FFA500/FFFFFF?text=FOTO+DEL+BOT+AQUI" alt="Bot Garfield">
-  <h1>Odio los lunes... pero amo Garfield 💙</h1>
-  <p>Bots, Diseños, Spam y Diamantes para fans</p>
-  <a href="servicios.html" class="btn-garfield">Ver Servicios</a>
-  <a href="https://wa.me/51999999" class="btn-whats">Hablar por WhatsApp</a>
+<section class="hero">
+  <img src="https://via.placeholder.com/600x600/FFA500/000?text=BOT+GARFIELD" class="hero-img">
+  <h1>Garfield Love</h1>
+  <p class="subtitle">Bots, Diseños, Spam y Diamantes para fans</p>
+  <div class="cta-buttons">
+    <a href="servicios.html" class="btn-primary">Ver Servicios</a>
+    <a href="https://wa.me/51999999" class="btn-secondary">WhatsApp</a>
+  </div>
 </section>
 
-<section class="seccion-blanca">
-  <h2>¿QUIÉNES SOMOS? 🩵</h2>
-  <p>Somos Luu Design. Un equipo de fans de Garfield creando servicios para la comunidad. 
-  Si te gusta la lasaña tanto como a nosotros, estás en el lugar correcto 😼</p>
+<section class="features">
+  <h2>¿Por qué nosotros?</h2>
+  <div class="grid-3">
+    <div class="card">
+      <h3>⚡ Rápido</h3>
+      <p>Entrega en minutos. Diamantes y Spam el mismo día.</p>
+    </div>
+    <div class="card">
+      <h3>💎 Confiable</h3>
+      <p>+200 clientes felices. Pagos seguros por país.</p>
+    </div>
+    <div class="card">
+      <h3>🐱 Fans</h3>
+      <p>Hecho por fans de Garfield para fans de Garfield.</p>
+    </div>
+  </div>
 </section>
 
-<section class="seccion-naranja">
-  <h2>LO QUE DICEN DE NOSOTROS ⭐</h2>
-  <div class="cards">
-    <div class="card-garfield">"El spam me llenó el grupo en 3 días" - Ana</div>
-    <div class="card-garfield">"Recarga rápida y barata" - Diego</div>
-    <div class="card-garfield">"Mi logo quedó hermoso" - Camila</div>
+<section class="testimonios">
+  <h2>Lo que dicen</h2>
+  <div class="grid-3">
+    <div class="card">"Me llenó el grupo en 3 días" - Ana</div>
+    <div class="card">"Recarga rápida" - Diego</div>
+    <div class="card">"Logo hermoso" - Camila</div>
   </div>
 </section>
 
 <footer>
-  Garfield Love © 2026 | "No soy gordo, soy esponjoso" 🧡
+  <p>Garfield Love © 2026 | Hecho con 🧡 y lasaña</p>
 </footer>
 
 <script src="script.js"></script>
