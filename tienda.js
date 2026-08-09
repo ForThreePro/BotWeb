@@ -32,7 +32,6 @@ const precios = {
 function generarProductos(pais){
   const productosData = [];
   
-  // SPAM
   for(let dur in precios.SPAM){
     productosData.push({
       id: "spam-"+dur, cat:"spam",
@@ -43,7 +42,6 @@ function generarProductos(pais){
     })
   }
 
-  // DIAMANTES
   if(precios.DIAMANTES[pais]){
     productosData.push({
       id: "dia-con", cat:"diamantes",
@@ -62,7 +60,6 @@ function generarProductos(pais){
     })
   }
 
-  // DESIGN
   for(let item in precios.DESIGN){
     productosData.push({
       id: "des-"+item, cat:"design",
@@ -78,6 +75,7 @@ function generarProductos(pais){
 function renderizar(filtro="todos"){
   const productosData = generarProductos(paisActual);
   const cont = document.getElementById("productos");
+  if(!cont) return;
   cont.innerHTML = "";
   productosData.filter(p => filtro==="todos" || p.cat===filtro).forEach(prod => {
     cont.innerHTML += `
@@ -93,7 +91,6 @@ function renderizar(filtro="todos"){
   })
 }
 
-// Carrito
 function agregarCarrito(item){
   carrito.push(item);
   localStorage.setItem('carrito', JSON.stringify(carrito));
@@ -101,8 +98,8 @@ function agregarCarrito(item){
   alert("✅ Agregado al carrito");
 }
 function actualizarContador(){
-  document.getElementById("contador").textContent = carrito.length;
-  document.getElementById("contador2").textContent = carrito.length;
+  if(document.getElementById("contador")) document.getElementById("contador").textContent = carrito.length;
+  if(document.getElementById("contador2")) document.getElementById("contador2").textContent = carrito.length;
 }
 function verCarrito(){
   if(carrito.length === 0) return alert("Carrito vacío");
@@ -110,24 +107,23 @@ function verCarrito(){
   window.open(`https://wa.me/51999999?text=${encodeURIComponent(msg)}`, '_blank')
 }
 
-// Filtros
 document.querySelectorAll(".filtro").forEach(btn => {
   btn.onclick = () => {
-    document.querySelector(".filtro.active").classList.remove("active");
+    document.querySelector(".filtro.active")?.classList.remove("active");
     btn.classList.add("active");
     renderizar(btn.dataset.cat);
   }
 })
 
-// Selector País
-document.getElementById("selectorPais").value = paisActual;
-document.getElementById("selectorPais").onchange = (e) => {
-  paisActual = e.target.value;
-  localStorage.setItem('pais', paisActual);
-  renderizar(document.querySelector(".filtro.active").dataset.cat);
+if(document.getElementById("selectorPais")){
+  document.getElementById("selectorPais").value = paisActual;
+  document.getElementById("selectorPais").onchange = (e) => {
+    paisActual = e.target.value;
+    localStorage.setItem('pais', paisActual);
+    renderizar(document.querySelector(".filtro.active")?.dataset.cat || "todos");
+  }
 }
 
-// Menu
 document.getElementById("btnMenu").onclick = () => {
   document.getElementById("sidebar").classList.toggle("active");
   document.getElementById("overlay").classList.toggle("active");
