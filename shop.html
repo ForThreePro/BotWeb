@@ -14,11 +14,11 @@
       <div class="logo-g">G</div>
       <div class="logo-text">Garfield<span>Store</span></div>
     </div>
-    <button class="cart-btn" onclick="toggleCart()">Carrito <span class="cart-count" id="cart-count">0</span></button>
+    <button class="cart-btn" onclick="toggleCart()">🛒 Carrito <span class="cart-count" id="cart-count">0</span></button>
   </div>
 </nav>
 
-<div class="overlay" onclick="toggleMenu(); toggleCart()"></div>
+<div class="overlay"></div>
 <div class="side-menu" id="side-menu">
   <div class="menu-group">
     <div class="menu-header">📦 PORTAL</div>
@@ -27,7 +27,7 @@
   </div>
   <div class="menu-group">
     <div class="menu-header">🌐 REDES</div>
-    <a href="redes.html" class="menu-item"><span class="menu-icon">💚</span> Canal de WhatsApp</a>
+    <a href="redes.html" class="menu-item"><span class="menu-icon">💚</span> Redes</a>
   </div>
   <div class="menu-group">
     <div class="menu-header">🛍️ GARFIELD SHOP</div>
@@ -37,52 +37,47 @@
 
 <div class="container">
   <div class="hero-card">
-    <div class="hero-label">CATÁLOGO OFICIAL</div>
-    <div class="hero-title">Arma tu pack y ahorra</div>
+    <div class="hero-label">TIENDA</div>
+    <div class="hero-title">Garfield Shop</div>
+    <p style="color:var(--text-muted); margin:10px 0">Diamantes, Design, Spam y Bots</p>
   </div>
 
-  <div class="section-title">Productos</div>
   <div class="products-grid">
     <div class="product">
       <div class="prod-cat">FREE FIRE</div>
-      <div class="prod-name">Diamantes FF</div>
-      <div class="prod-price">Elige país y cantidad</div>
-      <button class="add-btn" onclick="openModal('diamantes')">Ver</button>
+      <div class="prod-name">Diamantes</div>
+      <div class="prod-price">Recargas rápidas</div>
+      <button class="add-btn" onclick="openModal('diamantes')">Ver Precios</button>
     </div>
+
     <div class="product">
       <div class="prod-cat">DESIGN</div>
-      <div class="prod-name">🖌️ Luu Design</div>
-      <div class="prod-price">Logos, Plantillas, Jersey</div>
-      <button class="add-btn" onclick="openModal('design')">Ver</button>
+      <div class="prod-name">Tex Logo / Plantillas</div>
+      <div class="prod-price">Diseños personalizados</div>
+      <button class="add-btn" onclick="openModal('design')">Ver Precios</button>
     </div>
+
     <div class="product">
-      <div class="prod-cat">SPAM</div>
-      <div class="prod-name">📢 Spam 3h al día</div>
-      <div class="prod-price">Elige días y país</div>
-      <button class="add-btn" onclick="openModal('spam')">Ver</button>
+      <div class="prod-cat">MARKETING</div>
+      <div class="prod-name">Spam WhatsApp</div>
+      <div class="prod-price">Promociona tu link</div>
+      <button class="add-btn" onclick="openModal('spam')">Ver Precios</button>
     </div>
+
     <div class="product">
       <div class="prod-cat">BOTS</div>
-      <div class="prod-name">🤖 Bots WhatsApp</div>
-      <div class="prod-price">Mensual y Personalizado</div>
-      <button class="add-btn" onclick="openModal('bots')">Ver</button>
+      <div class="prod-name">Bot WhatsApp</div>
+      <div class="prod-price">Automatiza tu WhatsApp</div>
+      <button class="add-btn" onclick="openModal('bots')">Ver Precios</button>
     </div>
   </div>
-</div>
-
-<!-- CARRITO -->
-<div class="cart-sidebar" id="cart">
-  <div class="cart-header"><h3>Tu Carrito</h3><div class="cart-close" onclick="toggleCart()">✕</div></div>
-  <div id="cart-items" style="flex:1; overflow-y:auto"></div>
-  <div style="font-size:16px; font-weight:700; text-align:right; margin:16px 0; color:var(--text-muted)">Total: Ver pedido abajo</div>
-  <button class="checkout-btn" onclick="checkoutWhatsApp()">Pedir a Lu por WhatsApp</button>
 </div>
 
 <!-- MODAL DIAMANTES -->
 <div class="modal" id="modal-diamantes">
   <div class="modal-content">
-    <div class="modal-header"><h3>💎 Comprar Diamantes</h3><div class="cart-close" onclick="closeModal('diamantes')">✕</div></div>
-    <div class="country-tabs">
+    <div class="modal-header"><h3>Diamantes Free Fire</h3><span onclick="closeModal('diamantes')" style="cursor:pointer; font-size:24px">✕</span></div>
+    <div class="country-tabs" id="tabs-diamantes">
       <button class="country-tab active" onclick="selectCountry('cl', this, 'diamantes')">🇨🇱 Chile</button>
       <button class="country-tab" onclick="selectCountry('ar', this, 'diamantes')">🇦🇷 Argentina</button>
       <button class="country-tab" onclick="selectCountry('mx', this, 'diamantes')">🇲🇽 Mexico</button>
@@ -90,76 +85,178 @@
       <button class="country-tab" onclick="selectCountry('uy', this, 'diamantes')">🇺🇾 Uruguay</button>
       <button class="country-tab" onclick="selectCountry('pe', this, 'diamantes')">🇵🇪 Peru</button>
     </div>
+    <div class="country-tabs">
+      <button class="country-tab active" id="btn-con-dia" onclick="selectStockDia('con', this)">✅ Con Stock</button>
+      <button class="country-tab" id="btn-sin-dia" onclick="selectStockDia('sin', this)">❌ Sin Stock</button>
+    </div>
     <div class="form-group"><label class="form-label">Cantidad</label>
       <select class="form-select" id="cant-diamantes" onchange="updatePrice('diamantes')">
-        <option value="110">110 💎</option><option value="341">341 💎</option><option value="572">572 💎</option>
-        <option value="1166">1166 💎</option><option value="2398">2398 💎</option><option value="6160">6160 💎</option>
+        <option value="110">110 Diamantes</option><option value="341">341 Diamantes</option>
+        <option value="572">572 Diamantes</option><option value="1166">1166 Diamantes</option>
+        <option value="2398">2398 Diamantes</option><option value="6160">6160 Diamantes</option>
       </select>
     </div>
-    <div class="price-preview"><div style="font-size:12px; color:var(--text-muted)">Precio</div><div id="precio-diamantes" style="font-size:20px; font-weight:700; color:var(--green)">$875</div></div>
-    <div class="form-group"><label class="form-label">Nick FF</label><input type="text" class="form-input" id="nick-ff"></div>
-    <div class="form-group"><label class="form-label">ID FF</label><input type="text" class="form-input" id="id-ff"></div>
-    <button class="add-btn" onclick="addDiamantesToCart()">Añadir</button>
+    <div class="price-preview">Total: <span id="precio-diamantes" style="color:var(--green); font-weight:700">$875</span></div>
+    <div class="form-group"><label class="form-label">Nick Free Fire</label><input type="text" class="form-input" id="nick-ff" placeholder="Tu Nick"></div>
+    <div class="form-group"><label class="form-label">ID Free Fire</label><input type="text" class="form-input" id="id-ff" placeholder="Tu ID"></div>
+    <button class="add-btn" onclick="addDiamantesToCart()">Agregar al Carrito</button>
+    <div class="info-text">Para saber tu stock mándame tu ID. Recargas: Mañanas y Noches</div>
   </div>
 </div>
 
-<!-- MODAL DESIGN -->
+<!-- MODAL DESIGN ACTUALIZADO -->
 <div class="modal" id="modal-design">
   <div class="modal-content">
-    <div class="modal-header"><h3>🖌️ Luu Design</h3><div class="cart-close" onclick="closeModal('design')">✕</div></div>
-    <div class="country-tabs">
+    <div class="modal-header"><h3>🖌️ Luu Design</h3><span onclick="closeModal('design')" style="cursor:pointer; font-size:24px">✕</span></div>
+    <div class="country-tabs" id="tabs-design">
       <button class="country-tab active" onclick="selectCountry('pe', this, 'design')">🇵🇪 Peru</button>
       <button class="country-tab" onclick="selectCountry('cl', this, 'design')">🇨🇱 Chile</button>
+      <button class="country-tab" onclick="selectCountry('ar', this, 'design')">🇦🇷 Argentina</button>
+      <button class="country-tab" onclick="selectCountry('mx', this, 'design')">🇲🇽 Mexico</button>
+      <button class="country-tab" onclick="selectCountry('bo', this, 'design')">🇧🇴 Bolivia</button>
+      <button class="country-tab" onclick="selectCountry('uy', this, 'design')">🇺🇾 Uruguay</button>
+      <button class="country-tab" onclick="selectCountry('co', this, 'design')">🇨🇴 Colombia</button>
+      <button class="country-tab" onclick="selectCountry('us', this, 'design')">🇺🇸 USA</button>
     </div>
-    <div class="form-group"><label class="form-label">Tipo</label>
+    <div class="form-group"><label class="form-label">Tipo de Diseño</label>
       <select class="form-select" id="tipo-design" onchange="updatePrice('design')">
-        <option value="logo">Tex Logo</option><option value="plantilla">Plantillas</option>
-        <option value="caligrafico">Caligráficos</option><option value="jersey">Jersey</option>
+        <option value="logo">Tex Logo y Logos</option>
+        <option value="plantilla">Plantillas 2x1</option>
+        <option value="caligrafico">Caligráficos 2x1</option>
+        <option value="jersey">Jersey</option>
       </select>
     </div>
-    <div class="price-preview"><div style="font-size:12px; color:var(--text-muted)">Precio</div><div id="precio-design" style="font-size:20px; font-weight:700; color:var(--green)">S/3</div></div>
-    <button class="add-btn" onclick="addDesignToCart()">Añadir</button>
+    <div class="price-preview">Total: <span id="precio-design" style="color:var(--green); font-weight:700">S/3</span></div>
+    <button class="add-btn" onclick="addDesignToCart()">Agregar al Carrito</button>
+    <div class="info-text">El pedido demora maximo 2 dias. No hago devoluciones. Respondo tardes y noches.</div>
   </div>
 </div>
 
-<!-- MODAL SPAM -->
+<!-- MODAL SPAM ACTUALIZADO -->
 <div class="modal" id="modal-spam">
   <div class="modal-content">
-    <div class="modal-header"><h3>📢 Spam</h3><div class="cart-close" onclick="closeModal('spam')">✕</div></div>
-    <div class="country-tabs"><button class="country-tab active" onclick="selectCountry('pe', this, 'spam')">🇵🇪 Peru</button></div>
-    <div class="form-group"><label class="form-label">Días</label>
+    <div class="modal-header"><h3>📢 Spam WhatsApp</h3><span onclick="closeModal('spam')" style="cursor:pointer; font-size:24px">✕</span></div>
+    <div class="country-tabs" id="tabs-spam">
+      <button class="country-tab active" onclick="selectCountry('pe', this, 'spam')">🇵🇪 Peru</button>
+      <button class="country-tab" onclick="selectCountry('cl', this, 'spam')">🇨🇱 Chile</button>
+      <button class="country-tab" onclick="selectCountry('ar', this, 'spam')">🇦🇷 Argentina</button>
+      <button class="country-tab" onclick="selectCountry('mx', this, 'spam')">🇲🇽 Mexico</button>
+      <button class="country-tab" onclick="selectCountry('bo', this, 'spam')">🇧🇴 Bolivia</button>
+      <button class="country-tab" onclick="selectCountry('uy', this, 'spam')">🇺🇾 Uruguay</button>
+      <button class="country-tab" onclick="selectCountry('co', this, 'spam')">🇨🇴 Colombia</button>
+      <button class="country-tab" onclick="selectCountry('us', this, 'spam')">🇺🇸 USA</button>
+    </div>
+    <div class="form-group"><label class="form-label">Duración</label>
       <select class="form-select" id="dias-spam" onchange="updatePrice('spam')">
         <option value="3dias">3 Días</option><option value="5dias">5 Días</option><option value="1semana">1 Semana</option>
       </select>
     </div>
-    <div class="price-preview"><div style="font-size:12px; color:var(--text-muted)">Precio</div><div id="precio-spam" style="font-size:20px; font-weight:700; color:var(--green)">S/5.50</div></div>
-    <div class="form-group"><label class="form-label">Texto</label><textarea class="form-textarea" id="texto-spam"></textarea></div>
-    <div class="form-group"><label class="form-label">Link</label><input type="text" class="form-input" id="link-spam"></div>
-    <button class="add-btn" onclick="addSpamToCart()">Añadir</button>
+    <div class="price-preview">Total: <span id="precio-spam" style="color:var(--green); font-weight:700">S/5.50</span></div>
+    <div class="form-group"><label class="form-label">Texto a spamear</label><textarea class="form-textarea" id="texto-spam" placeholder="Escribe el texto exacto"></textarea></div>
+    <div class="form-group"><label class="form-label">Link a promocionar</label><input type="text" class="form-input" id="link-spam" placeholder="https://"></div>
+    <button class="add-btn" onclick="addSpamToCart()">Agregar al Carrito</button>
+    <div class="info-text">Spam x3 horas al dia. Si pagas tarde/noche inicia al dia siguiente. Si pagas mañana inicia el mismo dia. Texto tal cual lo mandas.</div>
   </div>
 </div>
 
 <!-- MODAL BOTS -->
 <div class="modal" id="modal-bots">
   <div class="modal-content">
-    <div class="modal-header"><h3>🤖 Bots</h3><div class="cart-close" onclick="closeModal('bots')">✕</div></div>
-    <div class="country-tabs"><button class="country-tab active" onclick="selectCountry('pe', this, 'bots')">🇵🇪 Peru</button></div>
-    <div class="form-group"><label class="form-label">Tipo</label>
+    <div class="modal-header"><h3>Bots WhatsApp</h3><span onclick="closeModal('bots')" style="cursor:pointer; font-size:24px">✕</span></div>
+    <div class="country-tabs" id="tabs-bots">
+      <button class="country-tab active" onclick="selectCountry('pe', this, 'bots')">🇵🇪 Peru S/</button>
+    </div>
+    <div class="form-group"><label class="form-label">Tipo de Bot</label>
       <select class="form-select" id="tipo-bot" onchange="updatePrice('bots'); toggleLinkField()">
         <option value="mensual">Bot Mensual</option><option value="personalizado">Bot Personalizado</option>
       </select>
     </div>
-    <div class="price-preview"><div style="font-size:12px; color:var(--text-muted)">Precio</div><div id="precio-bots" style="font-size:20px; font-weight:700; color:var(--green)">S/3</div></div>
-    <div class="form-group" id="link-bot-group"><label class="form-label">Link WhatsApp Bot</label><input type="text" class="form-input" id="link-bot"></div>
-    <button class="add-btn" onclick="addBotToCart()">Añadir</button>
+    <div class="price-preview">Total: <span id="precio-bots" style="color:var(--green); font-weight:700">S/3</span></div>
+    <div class="form-group" id="link-bot-group"><label class="form-label">Link de WhatsApp del Bot</label><input type="text" class="form-input" id="link-bot" placeholder="https://wa.me/"></div>
+    <button class="add-btn" onclick="addBotToCart()">Agregar al Carrito</button>
   </div>
 </div>
 
-<div class="toast" id="toast">Añadido al carrito</div>
+<!-- CARRITO -->
+<div class="cart-sidebar" id="cart">
+  <div class="cart-header"><div style="font-size:18px; font-weight:700">Tu Carrito</div><div class="cart-close" onclick="toggleCart()">✕</div></div>
+  <div id="cart-items" style="flex:1; overflow-y:auto"></div>
+  <button class="checkout-btn" onclick="checkoutWhatsApp()">Pedir por WhatsApp</button>
+</div>
 
-<!-- REPRODUCTOR -->
+<div class="toast" id="toast">Agregado al carrito ✅</div>
 <div class="music-player" id="music-player"><button id="play-btn" onclick="toggleMusic()">▶️</button><span>🎵 Garfield Theme</span></div>
 
 <script src="script.js"></script>
+<script>
+let stockDia = 'con';
+
+// ACTUALIZAR OBJETO PRECIOS
+precios.design = {
+  pe:{simbolo:'S/', nombre:'Peru', logo:3, plantilla:4, caligrafico:3, jersey:5},
+  cl:{simbolo:'$', nombre:'Chile', logo:1050, plantilla:1050, caligrafico:1050, jersey:1750},
+  ar:{simbolo:'$', nombre:'Argentina', logo:1560, plantilla:1560, caligrafico:1560, jersey:2600},
+  mx:{simbolo:'$', nombre:'Mexico', logo:22.5, plantilla:22.5, caligrafico:22.5, jersey:37.5},
+  bo:{simbolo:'$', nombre:'Bolivia', logo:13.5, plantilla:13.5, caligrafico:13.5, jersey:22.5},
+  uy:{simbolo:'$', nombre:'Uruguay', logo:22.5, plantilla:22.5, caligrafico:22.5, jersey:75},
+  co:{simbolo:'$', nombre:'Colombia', logo:4500, plantilla:4500, caligrafico:4500, jersey:7500},
+  us:{simbolo:'$', nombre:'USA', logo:2, plantilla:2, caligrafico:2, jersey:2}
+};
+
+precios.spam = {
+  pe:{simbolo:'S/', nombre:'Peru', '3dias':5.50, '5dias':7.50, '1semana':9.50},
+  cl:{simbolo:'$', nombre:'Chile', '3dias':1750, '5dias':2450, '1semana':3150},
+  ar:{simbolo:'$', nombre:'Argentina', '3dias':2600, '5dias':3640, '1semana':4680},
+  mx:{simbolo:'$', nombre:'Mexico', '3dias':37.5, '5dias':52.5, '1semana':67.5},
+  bo:{simbolo:'$', nombre:'Bolivia', '3dias':22.5, '5dias':31.5, '1semana':40.5},
+  uy:{simbolo:'$', nombre:'Uruguay', '3dias':75, '5dias':105, '1semana':135},
+  co:{simbolo:'$', nombre:'Colombia', '3dias':7500, '5dias':10500, '1semana':13500},
+  us:{simbolo:'$', nombre:'USA', '3dias':2, '5dias':3, '1semana':4}
+};
+
+function selectStockDia(tipo, btn){
+  stockDia = tipo;
+  document.getElementById('btn-con-dia').classList.remove('active');
+  document.getElementById('btn-sin-dia').classList.remove('active');
+  btn.classList.add('active');
+  updatePrice('diamantes');
+}
+
+function updatePrice(tipo){
+  if(tipo === 'diamantes'){
+    const cant = document.getElementById('cant-diamantes').value;
+    const data = precios.diamantes[selectedCountry.diamantes];
+    const precio = stockDia === 'con'? data.con[cant] : data.sin[cant];
+    document.getElementById('precio-diamantes').innerText = data.simbolo + precio;
+  }
+  if(tipo === 'design'){const prod = document.getElementById('tipo-design').value;const data = precios.design[selectedCountry.design];document.getElementById('precio-design').innerText = data.simbolo + data[prod];}
+  if(tipo === 'spam'){const dias = document.getElementById('dias-spam').value;const data = precios.spam[selectedCountry.spam];document.getElementById('precio-spam').innerText = data.simbolo + data[dias];}
+  if(tipo === 'bots'){const bot = document.getElementById('tipo-bot').value;const data = precios.bots[selectedCountry.bots];document.getElementById('precio-bots').innerText = data.simbolo + data[bot];}
+}
+
+function addDesignToCart(){
+  const prod = document.getElementById('tipo-design').value;const data = precios.design[selectedCountry.design];
+  cart.push({name: `Design: ${prod}`, price: data[prod], qty: 1, details: `Tipo: ${prod}`, moneda: data.simbolo, pais: data.nombre});
+  updateCart(); showToast(); closeModal('design');
+}
+
+function addSpamToCart(){
+  const dias = document.getElementById('dias-spam').value;const texto = document.getElementById('texto-spam').value;const link = document.getElementById('link-spam').value;
+  if(!texto ||!link) return alert('Completa texto y link');
+  const data = precios.spam[selectedCountry.spam];
+  cart.push({name: `Spam ${dias}`, price: data[dias], qty: 1, details: `Texto: ${texto.substring(0,20)}... | Link: ${link}`, moneda: data.simbolo, pais: data.nombre});
+  updateCart(); showToast(); closeModal('spam');document.getElementById('texto-spam').value = ''; document.getElementById('link-spam').value = '';
+}
+
+function addDiamantesToCart(){
+  const cant = document.getElementById('cant-diamantes').value;const nick = document.getElementById('nick-ff').value;const id = document.getElementById('id-ff').value;
+  if(!nick ||!id) return alert('Completa Nick e ID de Free Fire');
+  const data = precios.diamantes[selectedCountry.diamantes];
+  const precio = stockDia === 'con'? data.con[cant] : data.sin[cant];
+  const nombreStock = stockDia === 'con'? 'Con Stock' : 'Sin Stock';
+  cart.push({name: `Diamantes ${cant}💎`, price: precio, qty: 1, details: `Nick: ${nick} | ID: ${id} | ${nombreStock}`, moneda: data.simbolo, pais: data.nombre});
+  updateCart(); showToast(); closeModal('diamantes');document.getElementById('nick-ff').value = ''; document.getElementById('id-ff').value = '';
+}
+</script>
 </body>
 </html>
