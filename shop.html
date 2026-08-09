@@ -7,28 +7,28 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <button class="hamburger" id="hamburger">☰</button>
-  <button class="cart-btn" id="cartBtn">🛒 <span id="cartCount">0</span></button>
-
-  <aside class="sidebar" id="sidebar">
-    <div class="sidebar-section"><h3>📦 PORTAL</h3><a href="index.html">🏠 Inicio</a></div>
-    <div class="sidebar-section"><h3>🌐 REDES</h3><a href="redes.html">💚 Canal</a><a href="love.html">❤️ Love</a></div>
-    <div class="sidebar-section"><h3>🛍️ GARFIELD SHOP</h3><a href="shop.html" class="active">🛒 Tienda</a></div>
-  </aside>
+  <header>
+    <div class="logo">Garfield <span style="color:var(--purple-light)">Store</span></div>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="shop.html">Tienda</a>
+      <a href="redes.html">Redes</a>
+      <a href="love.html">Love</a>
+    </nav>
+    <button class="cart-btn" id="cartBtn">🛒 <span id="cartCount">0</span></button>
+  </header>
 
   <main class="content">
     <section class="hero"><h1>Tienda</h1><p>Elige una categoría</p></section>
-    <section class="links">
-      <div class="cards">
-        <a href="design.html" class="card">🎨 Design</a>
-        <a href="diamantes.html" class="card">💎 Diamantes</a>
-        <a href="spam.html" class="card">📢 Spam</a>
-        <a href="bots.html" class="card">🤖 Bot</a>
-      </div>
+    <section class="cards">
+      <a href="design.html" class="card"><h3>🎨 Design</h3></a>
+      <a href="diamantes.html" class="card"><h3>💎 Diamantes</h3></a>
+      <a href="spam.html" class="card"><h3>📢 Spam</h3></a>
+      <a href="bots.html" class="card"><h3>🤖 Bot</h3></a>
     </section>
   </main>
 
-  <div class="cart-modal" id="cartModal"><div class="cart-content"><h2>Tu Carrito</h2><div id="cartItems"></div><p class="cart-total">Total: S/<span id="cartTotal">0.00</span></p><button class="btn-orange" onclick="checkout()">Pagar por WhatsApp</button><button class="btn-close" onclick="toggleCart()">Cerrar</button></div></div>
+  <div class="cart-modal" id="cartModal"><div class="cart-content"><h2>Tu Carrito</h2><div id="cartItems"></div><p>Total: S/<span id="cartTotal">0.00</span></p><button class="btn-purple" onclick="checkout()">Pagar por WhatsApp</button><button onclick="toggleCart()">Cerrar</button></div></div>
   <audio id="bgMusic" loop src="garfield.mp3"></audio>
   <button id="musicBtn" class="music-btn">🔊</button>
   <script src="script.js"></script>
