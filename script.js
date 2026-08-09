@@ -48,46 +48,133 @@ const precios = {
 
 // MUSICA CON LOCALSTORAGE SOLUCION 2
 function initMusic(){
+  const btn = document.getElementById('play-btn');
+  if(!btn) return;
   const isPlaying = localStorage.getItem('musicPlaying') === 'true';
   const currentTime = parseFloat(localStorage.getItem('musicTime')) || 0;
   audio.currentTime = currentTime;
-  if(isPlaying) audio.play();
-  document.getElementById('play-btn').innerText = isPlaying? '⏸️' : '▶️';
+  if(isPlaying) audio.play().catch(()=>{});
+  btn.innerText = isPlaying? '⏸️' : '▶️';
 }
 function toggleMusic(){
-  if(audio.paused){audio.play(); localStorage.setItem('musicPlaying', 'true'); document.getElementById('play-btn').innerText = '⏸️';}
-  else {audio.pause(); localStorage.setItem('musicPlaying', 'false'); document.getElementById('play-btn').innerText = '▶️';}
-setInterval(()=>{localStorage.setItem('musicTime', audio.currentTime);}, 1000);
+  const btn = document.getElementById('play-btn');
+  if(!btn) return;
+  if(audio.paused){audio.play(); localStorage.setItem('musicPlaying', 'true'); btn.innerText = '⏸️';}
+  else {audio.pause(); localStorage.setItem('musicPlaying', 'false'); btn.innerText = '▶️';}
+}
+setInterval(()=>{localStorage.setItem('musicTime', audio.currentTime);}, 1000); // <- AQUI FALTABA CERRAR
 
 // MENU Y CARRITO
-function toggleMenu(){document.getElementById('side-menu').classList.toggle('open'); document.querySelector('.overlay').classList.toggle('open');}
-function toggleCart(){document.getElementById('cart').classList.toggle('open'); document.querySelector('.overlay').classList.toggle('open');}
+function toggleMenu(){
+  document.getElementById('side-menu').classList.toggle('open'); 
+  document.querySelector('.overlay').classList.toggle('open');
+}
+document.querySelector('.overlay').addEventListener('click', ()=>{
+  document.getElementById('side-menu').classList.remove('open');
+  document.getElementById('cart').classList.remove('open');
+  document.querySelector('.overlay').classList.remove('open');
+});
+
+function toggleCart(){
+  document.getElementById('cart').classList.toggle('open'); 
+  document.querySelector('.overlay').classList.toggle('open');
+}
 function showToast(){const t=document.getElementById('toast'); t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2000);}
 function updateCart(){
-  const c=document.getElementById('cart-items'); c.innerHTML=''; let total=0;
+  const c=document.getElementById('cart-items'); if(!c) return;
+  c.innerHTML=''; let total=0;
   cart.forEach((item,i)=>{total+=item.price*item.qty; c.innerHTML+=`<div style="padding:10px; border-bottom:1px solid var(--border)"><b>${item.name}</b><br>${item.details}<br>${item.moneda}${item.price} x${item.qty}</div>`;});
   document.getElementById('cart-count').innerText=cart.length;
 }
 function checkoutWhatsApp(){
+  if(cart.length===0) return alert('Carrito vacío');
   let msg="Hola Lu! Quiero hacer este pedido:\n\n"; let total=0;
   cart.forEach(item=>{msg+=`*${item.name}*\nPaís: ${item.pais}\nPrecio: ${item.moneda}${item.price}\n${item.details}\n\n`; total+=item.price;});
   msg+=`Total: ${total}`; window.open(`https://wa.me/51XXXXXXXXX?text=${encodeURIComponent(msg)}`); // PON TU NUMERO
 }
 
 // LOGICA PRODUCTOS
-function selectCountry(pais, btn, tipo){document.querySelectorAll(`#tabs-${tipo}.country-tab`).forEach(b=>b.classList.remove('active')); btn.classList.add('active'); selectedCountry[tipo]=pais; updatePrice(tipo);}
-function selectStockDia(tipo, btn){stockDia=tipo; document.getElementById('btn-con-dia').classList.remove('active'); document.getElementById('btn-sin-dia').classList.remove('active'); btn.classList.add('active'); updatePrice('diamantes');}
-function updatePrice(tipo){
-  if(tipo==='diamantes'){const cant=document.getElementById('cant-diamantes').value; const data=precios.diamantes[selectedCountry.diamantes]; const precio=stockDia==='con'?data.con[cant]:data.sin[cant]; document.getElementById('precio-diamantes').innerText=data.simbolo+precio;}
-  if(tipo==='design'){const prod=document.getElementById('tipo-design').value; const data=precios.design[selectedCountry.design]; document.getElementById('precio-design').innerText=data.simbolo+data[prod];}
-  if(tipo==='spam'){const dias=document.getElementById('dias-spam').value; const data=precios.spam[selectedCountry.spam]; document.getElementById('precio-spam').innerText=data.simbolo+data[dias];}
-  if(tipo==='bots'){const bot=document.getElementById('tipo-bot').value; const data=precios.bots[selectedCountry.bots]; document.getElementById('precio-bots').innerText=data.simbolo+data[bot];}
+function selectCountry(pais, btn, tipo){
+  // CORREGIDO: antes buscaba mal las tabs
+  document.querySelectorAll(`#tabs-${tipo}.country-tab`).forEach(b=>b.classList.remove('active')); 
+  btn.classList.add('active'); 
+  selectedCountry[tipo]=pais; 
+  updatePrice(tipo);
 }
-function addDiamantesToCart(){const cant=document.getElementById('cant-diamantes').value;const nick=document.getElementById('nick-ff').value;const id=document.getElementById('id-ff').value; if(!nick||!id)return alert('Completa Nick e ID'); const data=precios.diamantes[selectedCountry.diamantes]; const precio=stockDia==='con'?data.con[cant]:data.sin[cant]; cart.push({name:`Diamantes ${cant}💎`,price:precio,qty:1,details:`Nick: ${nick} | ID: ${id} | ${stockDia==='con'?'Con Stock':'Sin Stock'}`,moneda:data.simbolo,pais:data.nombre}); updateCart(); showToast();}
-function addDesignToCart(){const prod=document.getElementById('tipo-design').value; const data=precios.design[selectedCountry.design]; cart.push({name:`Design: ${prod}`,price:data[prod],qty:1,details:`Tipo: ${prod}`,moneda:data.simbolo,pais:data.nombre}); updateCart(); showToast();}
-function addSpamToCart(){const dias=document.getElementById('dias-spam').value; const texto=document.getElementById('texto-spam').value; const link=document.getElementById('link-spam').value; if(!texto||!link)return alert('Completa texto y link'); const data=precios.spam[selectedCountry.spam]; cart.push({name:`Spam ${dias}`,price:data[dias],qty:1,details:`Texto: ${texto.substring(0,20)}... | Link: ${link}`,moneda:data.simbolo,pais:data.nombre}); updateCart(); showToast();}
-function addBotToCart(){const tipo=document.getElementById('tipo-bot').value; const link=document.getElementById('link-bot').value; const data=precios.bots[selectedCountry.bots]; if(tipo==='mensual'&&!link)return alert('Pon el link del Bot'); cart.push({name:`Bot ${tipo}`,price:data[tipo],qty:1,details:tipo==='mensual'?`Link: ${link}`:'',moneda:data.simbolo,pais:data.nombre}); updateCart(); showToast();}
-function toggleLinkField(){document.getElementById('link-bot-group').style.display=document.getElementById('tipo-bot').value==='mensual'?'block':'none';}
+function selectStockDia(tipo, btn){
+  stockDia=tipo; 
+  document.getElementById('btn-con-dia').classList.remove('active'); 
+  document.getElementById('btn-sin-dia').classList.remove('active'); 
+  btn.classList.add('active'); 
+  updatePrice('diamantes');
+}
+function updatePrice(tipo){
+  if(tipo==='diamantes' && document.getElementById('cant-diamantes')){
+    const cant=document.getElementById('cant-diamantes').value; 
+    const data=precios.diamantes[selectedCountry.diamantes]; 
+    const precio=stockDia==='con'?data.con[cant]:data.sin[cant]; 
+    document.getElementById('precio-diamantes').innerText=data.simbolo+precio;
+  }
+  if(tipo==='design' && document.getElementById('tipo-design')){
+    const prod=document.getElementById('tipo-design').value; 
+    const data=precios.design[selectedCountry.design]; 
+    document.getElementById('precio-design').innerText=data.simbolo+data[prod];
+  }
+  if(tipo==='spam' && document.getElementById('dias-spam')){
+    const dias=document.getElementById('dias-spam').value; 
+    const data=precios.spam[selectedCountry.spam]; 
+    document.getElementById('precio-spam').innerText=data.simbolo+data[dias];
+  }
+  if(tipo==='bots' && document.getElementById('tipo-bot')){
+    const bot=document.getElementById('tipo-bot').value; 
+    const data=precios.bots[selectedCountry.bots]; 
+    document.getElementById('precio-bots').innerText=data.simbolo+data[bot];
+  }
+}
+function addDiamantesToCart(){
+  const cant=document.getElementById('cant-diamantes').value;
+  const nick=document.getElementById('nick-ff').value;
+  const id=document.getElementById('id-ff').value; 
+  if(!nick||!id)return alert('Completa Nick e ID'); 
+  const data=precios.diamantes[selectedCountry.diamantes]; 
+  const precio=stockDia==='con'?data.con[cant]:data.sin[cant]; 
+  cart.push({name:`Diamantes ${cant}💎`,price:precio,qty:1,details:`Nick: ${nick} | ID: ${id} | ${stockDia==='con'?'Con Stock':'Sin Stock'}`,moneda:data.simbolo,pais:data.nombre}); 
+  updateCart(); showToast();
+}
+function addDesignToCart(){
+  const prod=document.getElementById('tipo-design').value; 
+  const data=precios.design[selectedCountry.design]; 
+  cart.push({name:`Design: ${prod}`,price:data[prod],qty:1,details:`Tipo: ${prod}`,moneda:data.simbolo,pais:data.nombre}); 
+  updateCart(); showToast();
+}
+function addSpamToCart(){
+  const dias=document.getElementById('dias-spam').value; 
+  const texto=document.getElementById('texto-spam').value; 
+  const link=document.getElementById('link-spam').value; 
+  if(!texto||!link)return alert('Completa texto y link'); 
+  const data=precios.spam[selectedCountry.spam]; 
+  cart.push({name:`Spam ${dias}`,price:data[dias],qty:1,details:`Texto: ${texto.substring(0,20)}... | Link: ${link}`,moneda:data.simbolo,pais:data.nombre}); 
+  updateCart(); showToast();
+}
+function addBotToCart(){
+  const tipo=document.getElementById('tipo-bot').value; 
+  const link=document.getElementById('link-bot').value; 
+  const data=precios.bots[selectedCountry.bots]; 
+  if(tipo==='mensual'&&!link)return alert('Pon el link del Bot'); 
+  cart.push({name:`Bot ${tipo}`,price:data[tipo],qty:1,details:tipo==='mensual'?`Link: ${link}`:'',moneda:data.simbolo,pais:data.nombre}); 
+  updateCart(); showToast();
+}
+function toggleLinkField(){
+  const g=document.getElementById('link-bot-group'); 
+  if(g) g.style.display=document.getElementById('tipo-bot').value==='mensual'?'block':'none';
+}
 
-document.addEventListener('DOMContentLoaded', initMusic);
-document.getElementById('play-btn').addEventListener('click', toggleMusic);
+document.addEventListener('DOMContentLoaded', ()=>{
+  initMusic();
+  const btn = document.getElementById('play-btn');
+  if(btn) btn.addEventListener('click', toggleMusic);
+  updatePrice('diamantes');
+  updatePrice('design');
+  updatePrice('spam');
+  updatePrice('bots');
+});
