@@ -13,8 +13,22 @@
   .nav-left{display:flex; align-items:center; gap:12px}
   .logo-g{width:38px; height:38px; border-radius:12px; background:var(--gradient); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:18px}
   .logo-text{font-size:17px; font-weight:700} .logo-text span{color:var(--green)}
+  .hamburger{width:26px; height:18px; cursor:pointer; display:flex; flex-direction:column; justify-content:space-between}
+  .hamburger span{height:2px; background:#fff; border-radius:2px; transition:.3s}
+  .hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+  .hamburger.active span:nth-child(2){opacity:0}
+  .hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
   .cart-btn{background:var(--card); border:1px solid var(--card-border); padding:8px 14px; border-radius:10px; color:#fff; font-weight:600; font-size:13px; cursor:pointer}
   .cart-count{background:var(--green); color:#000; padding:2px 6px; border-radius:6px; margin-left:6px}
+  .side-menu{position:fixed; top:0; left:-100%; width:85%; max-width:320px; height:100%; background:#08080f; z-index:150; transition:.35s; padding:70px 0 20px; border-right:1px solid var(--card-border)}
+  .side-menu.active{left:0}
+  .menu-group{margin-bottom:8px}
+  .menu-header{padding:14px 20px; font-size:11px; font-weight:700; color:var(--text-muted); letter-spacing:1px}
+  .menu-item{display:flex; align-items:center; gap:12px; padding:14px 20px; color:#c0c4d6; text-decoration:none; font-size:15px; font-weight:500; margin:2px 12px; border-radius:10px}
+  .menu-item:hover, .menu-item.active{background:var(--card); color:#fff; border-left:3px solid var(--green)}
+  .menu-icon{width:20px; text-align:center; font-size:16px}
+  .overlay{position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); display:none; z-index:140}
+  .overlay.active{display:block}
   .container{max-width:1000px; margin:0 auto; padding:20px}
   .hero-card{background:linear-gradient(135deg, #0f0f18 0%, #1a1a2e 100%); border:1px solid var(--card-border); border-radius:20px; padding:24px; margin-bottom:24px}
   .hero-label{color:var(--green); font-size:11px; font-weight:700; letter-spacing:1px}
@@ -23,114 +37,78 @@
   .btn{background:var(--gradient); border:none; padding:12px 20px; border-radius:12px; color:#fff; font-weight:700; cursor:pointer}
   .section-title{font-size:20px; font-weight:700; margin-bottom:16px}
   .filters{display:flex; gap:8px; overflow-x:auto; padding-bottom:10px; margin-bottom:20px}
-  .filter-btn{background:var(--card); border:1px solid var(--card-border); color:var(--text-muted); padding:8px 16px; border-radius:10px; font-size:13px; font-weight:600; cursor:pointer; white-space:nowrap}
+  .filter-btn{background:var(--card); border:1px solid var(--card-border); color:var(--text-muted); padding:8px 16px; border-radius:10px; font-size:13px; font-weight:600; cursor:pointer}
   .filter-btn.active{background:var(--gradient); color:#fff; border:none}
-  .search-box{width:100%; background:var(--card); border:1px solid var(--card-border); border-radius:12px; padding:12px 16px; color:#fff; margin-bottom:24px}
-  .category{margin-bottom:40px}
   .products-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:16px}
   .product{background:var(--card); border:1px solid var(--card-border); border-radius:16px; padding:16px; position:relative}
   .discount{position:absolute; top:12px; left:12px; background:var(--green); color:#000; padding:4px 8px; border-radius:6px; font-size:11px; font-weight:700}
   .prod-cat{color:var(--text-muted); font-size:11px; text-transform:uppercase; margin-top:10px}
   .prod-name{font-size:15px; font-weight:700; margin:6px 0}
-  .prod-rating{color:#fbbf24; font-size:12px; margin-bottom:8px}
   .prod-price{font-size:18px; font-weight:700; color:var(--green)}
-  .old-price{font-size:13px; color:var(--text-muted); text-decoration:line-through; margin-left:6px}
   .add-btn{width:100%; background:var(--gradient); border:none; padding:10px; border-radius:10px; color:#fff; font-weight:700; margin-top:12px; cursor:pointer}
   .cart-sidebar{position:fixed; right:-400px; top:0; width:380px; height:100%; background:#0a0a12; border-left:1px solid var(--card-border); transition:.4s; z-index:200; padding:20px; display:flex; flex-direction:column}
   .cart-sidebar.active{right:0}
   .checkout-btn{width:100%; padding:16px; background:#25D366; color:#fff; border:none; border-radius:12px; font-size:16px; font-weight:700; cursor:pointer}
-  .overlay{position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); display:none; z-index:150}
-  .overlay.active{display:block}
 </style>
 </head>
 <body>
 <nav>
   <div class="nav-wrap">
     <div class="nav-left">
-      <a href="index.html" style="color:#fff; font-size:24px; text-decoration:none">←</a>
+      <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
       <div class="logo-g">G</div>
       <div class="logo-text">Garfield<span>Shop</span></div>
     </div>
     <button class="cart-btn" onclick="toggleCart()">Carrito <span class="cart-count" id="cart-count">0</span></button>
   </div>
 </nav>
+<div class="overlay" onclick="toggleMenu(); toggleCart()"></div>
+<div class="side-menu" id="side-menu">
+  <div class="menu-group"><div class="menu-header">📦 PORTAL</div>
+    <a href="index.html" class="menu-item"><span class="menu-icon">🏠</span> Inicio</a>
+  </div>
+  <div class="menu-group"><div class="menu-header">🌐 REDES</div>
+    <a href="redes.html" class="menu-item"><span class="menu-icon">💚</span> Canal de WhatsApp</a>
+    <a href="redes.html" class="menu-item"><span class="menu-icon">💚</span> Comunidad WhatsApp</a>
+  </div>
+  <div class="menu-group"><div class="menu-header">🛍️ GARFIELD SHOP</div>
+    <a href="shop.html" class="menu-item active"><span class="menu-icon">🛒</span> Tienda</a>
+  </div>
+</div>
 <div class="container">
   <div class="hero-card">
     <div class="hero-label">CATÁLOGO OFICIAL</div>
     <div class="hero-title">Arma tu pack y ahorra</div>
-    <div class="hero-desc">Elige polos, hoodies, accesorios y más. Añade varios productos al carrito y envía tu pedido completo por WhatsApp.</div>
-    <button class="btn" onclick="document.getElementById('catalogo').scrollIntoView()">Explorar catálogo</button>
+    <div class="hero-desc">Añade varios productos al carrito y envía tu pedido por WhatsApp.</div>
+    <button class="btn">Explorar catálogo</button>
   </div>
-  <div id="catalogo">
-    <div class="section-title">Todos los productos</div>
-    <input type="text" class="search-box" placeholder="🔍 Buscar producto..." id="search">
-    <div class="filters">
-      <button class="filter-btn active" onclick="filterCat('todos')">Todos</button>
-      <button class="filter-btn" onclick="filterCat('ropa')">Ropa</button>
-      <button class="filter-btn" onclick="filterCat('accesorios')">Accesorios</button>
-      <button class="filter-btn" onclick="filterCat('packs')">Packs</button>
-    </div>
-
-    <div class="category" data-cat="ropa">
-      <div class="section-title">Ropa</div>
-      <div class="products-grid">
-        <div class="product"><div class="discount">-25%</div><div class="prod-cat">ROPA</div><div class="prod-name">Polo Garfield Classic Negro</div><div class="prod-rating">★ 4.9</div><div><span class="prod-price">S/ 59.90</span><span class="old-price">S/ 79.90</span></div><button class="add-btn" onclick="addToCart('Polo Garfield Classic Negro', 59.90)">Añadir al carrito</button></div>
-        <div class="product"><div class="prod-cat">ROPA</div><div class="prod-name">Hoodie Garfield Oversize</div><div class="prod-rating">★ 4.8</div><div><span class="prod-price">S/ 129.90</span></div><button class="add-btn" onclick="addToCart('Hoodie Garfield Oversize', 129.90)">Añadir al carrito</button></div>
-      </div>
-    </div>
-
-    <div class="category" data-cat="accesorios">
-      <div class="section-title">Accesorios</div>
-      <div class="products-grid">
-        <div class="product"><div class="discount">-20%</div><div class="prod-cat">ACCESORIOS</div><div class="prod-name">Gorra Bordada Garfield</div><div class="prod-rating">★ 4.9</div><div><span class="prod-price">S/ 45.00</span><span class="old-price">S/ 55.00</span></div><button class="add-btn" onclick="addToCart('Gorra Bordada Garfield', 45.00)">Añadir al carrito</button></div>
-      </div>
-    </div>
-
-    <div class="category" data-cat="packs">
-      <div class="section-title">Packs</div>
-      <div class="products-grid">
-        <div class="product"><div class="discount">-30%</div><div class="prod-cat">PACKS</div><div class="prod-name">Pack 2 Polos + Gorra</div><div class="prod-rating">★ 5.0</div><div><span class="prod-price">S/ 139.90</span><span class="old-price">S/ 199.80</span></div><button class="add-btn" onclick="addToCart('Pack 2 Polos + Gorra', 139.90)">Añadir al carrito</button></div>
-      </div>
-    </div>
+  <div class="section-title">Todos los productos</div>
+  <div class="filters">
+    <button class="filter-btn active">Todos</button>
+    <button class="filter-btn">Ropa</button>
+    <button class="filter-btn">Accesorios</button>
+  </div>
+  <div class="products-grid">
+    <div class="product"><div class="discount">-25%</div><div class="prod-cat">ROPA</div><div class="prod-name">Polo Garfield Classic</div><div><span class="prod-price">S/ 59.90</span></div><button class="add-btn" onclick="addToCart('Polo Garfield', 59.90)">Añadir al carrito</button></div>
+    <div class="product"><div class="prod-cat">ACCESORIOS</div><div class="prod-name">Gorra Garfield</div><div><span class="prod-price">S/ 45.00</span></div><button class="add-btn" onclick="addToCart('Gorra Garfield', 45.00)">Añadir al carrito</button></div>
   </div>
 </div>
-
-<div class="overlay" onclick="toggleCart()"></div>
 <div class="cart-sidebar" id="cart">
   <h3 style="margin-bottom:20px">Tu Carrito</h3>
-  <div id="cart-items" style="flex:1; overflow-y:auto"></div>
+  <div id="cart-items" style="flex:1"></div>
   <div style="font-size:20px; font-weight:700; text-align:right; margin:16px 0">Total: S/ <span id="cart-total">0.00</span></div>
   <button class="checkout-btn" onclick="checkoutWhatsApp()">Pedir por WhatsApp</button>
 </div>
-
 <script>
   let cart = [];
   const WHATSAPP = "51999999999";
-  function addToCart(name, price){
-    const item = cart.find(i => i.name === name);
-    if(item){ item.qty++; } else { cart.push({name, price, qty:1}) }
-    updateCart();
-  }
-  function updateCart(){
-    document.getElementById('cart-count').innerText = cart.reduce((a,b)=>a+b.qty,0);
-    const items = document.getElementById('cart-items');
-    if(cart.length === 0){ items.innerHTML = "<p style='color:var(--text-muted)'>Carrito vacío</p>"; }
-    else { items.innerHTML = cart.map(i => `<div style="margin-bottom:12px"><b>${i.name}</b> x${i.qty} - S/ ${(i.price*i.qty).toFixed(2)}</div>`).join(''); }
-    document.getElementById('cart-total').innerText = cart.reduce((a,b)=>a + b.price*b.qty,0).toFixed(2);
-  }
-  function toggleCart(){ document.getElementById('cart').classList.toggle('active'); document.querySelector('.overlay').classList.toggle('active'); }
-  function checkoutWhatsApp(){
-    if(cart.length === 0) return alert("Carrito vacío");
-    let msg = "Hola GarfieldShop! Quiero este pedido:%0A%0A";
-    cart.forEach(i => msg += `• ${i.name} x${i.qty} - S/ ${(i.price*i.qty).toFixed(2)}%0A`);
-    msg += `%0ATotal: S/ ${cart.reduce((a,b)=>a + b.price*b.qty,0).toFixed(2)}`;
-    window.open(`https://wa.me/${WHATSAPP}?text=${msg}`, '_blank');
-  }
-  function filterCat(cat){
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    event.target.classList.add('active');
-    document.querySelectorAll('.category').forEach(c => { c.style.display = (cat === 'todos' || c.dataset.cat === cat) ? 'block' : 'none'; });
-  }
+  function toggleMenu(){document.getElementById('side-menu').classList.toggle('active');document.querySelector('.overlay').classList.toggle('active');document.querySelector('.hamburger').classList.toggle('active');}
+  function toggleCart(){document.getElementById('cart').classList.toggle('active');document.querySelector('.overlay').classList.toggle('active');}
+  function addToCart(name, price){const item = cart.find(i => i.name === name); if(item){ item.qty++; } else { cart.push({name, price, qty:1}) } updateCart();}
+  function updateCart(){document.getElementById('cart-count').innerText = cart.reduce((a,b)=>a+b.qty,0);
+  document.getElementById('cart-items').innerHTML = cart.length === 0 ? "<p style='color:var(--text-muted)'>Carrito vacío</p>" : cart.map(i => `<div style="margin-bottom:12px"><b>${i.name}</b> x${i.qty}</div>`).join('');
+  document.getElementById('cart-total').innerText = cart.reduce((a,b)=>a + b.price*b.qty,0).toFixed(2);}
+  function checkoutWhatsApp(){let msg = "Hola GarfieldShop! Pedido:%0A"; cart.forEach(i => msg += `• ${i.name} x${i.qty}%0A`); window.open(`https://wa.me/${WHATSAPP}?text=${msg}`, '_blank');}
 </script>
 </body>
 </html>
