@@ -11,48 +11,10 @@ body {
 /* Sidebar */
 .sidebar {
   width: 280px;
-  background: #fff8f0;
+  background: #fffdf7;
   padding: 20px;
-  border-right: 2px solid #FF8C00;
+  border-right: 3px solid #FF8C00;
   overflow-y: auto;
-}
-
-.perfil {
-  background: #ffffff;
-  border: 2px solid #FFA500;
-  border-radius: 16px;
-  padding: 15px;
-  margin-bottom: 15px;
-  position: relative;
-  box-shadow: 0 4px 12px rgba(255,140,0,0.15);
-}
-
-.avatar {
-  width: 50px; height: 50px;
-  background: #FF8C00;
-  border-radius: 12px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 24px; font-weight: 700; color: white;
-  float: left; margin-right: 12px;
-  position: relative;
-}
-.avatar::after {
-  content: "";
-  width: 12px; height: 12px;
-  background: #00cc66;
-  border-radius: 50%;
-  position: absolute;
-  bottom: 0; right: 0;
-  border: 2px solid #ffffff;
-}
-
-.info h3 { font-size: 18px; color: #FF8C00; }
-.info p { font-size: 12px; color: #777; }
-.estado { color: #00cc66; font-size: 12px; font-weight: 600; }
-.rol {
-  position: absolute; bottom: 10px; right: 10px;
-  background: #FF8C00; color: white; padding: 3px 8px;
-  border-radius: 8px; font-size: 11px; font-weight: 600;
 }
 
 .btn-musica {
@@ -60,58 +22,55 @@ body {
   background: #FF8C00;
   color: white;
   border: none;
-  padding: 12px;
-  border-radius: 12px;
+  padding: 14px;
+  border-radius: 14px;
   font-weight: 700;
   cursor: pointer;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  font-size: 15px;
+  box-shadow: 0 4px 10px rgba(255,140,0,0.3);
   transition: 0.2s;
 }
 .btn-musica:hover { background: #FF7700; }
 .btn-musica.activo { background: #00cc66; }
 
-/* Menu */
+/* Menu tipo tarjetas */
 details {
   background: #ffffff;
-  border: 1px solid #FFD580;
-  border-radius: 12px;
-  margin-bottom: 12px;
-  padding: 10px;
+  border: 2px solid #FFD580;
+  border-radius: 16px;
+  margin-bottom: 15px;
+  padding: 12px 15px;
+  box-shadow: 0 2px 8px rgba(255,140,0,0.1);
 }
 
 summary {
-  font-weight: 700;
+  font-weight: 800;
   cursor: pointer;
   list-style: none;
   color: #FF8C00;
-  font-size: 13px;
-  letter-spacing: 1px;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  display: flex;
+  justify-content: space-between;
 }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "▼"; font-size: 12px; transition: 0.2s; }
+details[open] summary::after { transform: rotate(180deg); }
 
 details a {
-  display: block;
-  padding: 10px;
-  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  margin-top: 8px;
   color: #333;
   text-decoration: none;
-  border-radius: 8px;
+  border-radius: 10px;
   transition: background 0.2s;
   font-weight: 500;
 }
 details a:hover { background: #FFF0E0; color: #FF8C00; }
-
-.btn-tienda {
-  display: block;
-  background: #FF8C00;
-  color: white;
-  padding: 12px;
-  border-radius: 12px;
-  text-decoration: none;
-  font-weight: 700;
-  text-align: center;
-  margin-top: 10px;
-}
-.btn-tienda.active { background: #FF7700; }
 
 /* Contenido */
 .contenido {
@@ -120,7 +79,18 @@ details a:hover { background: #FFF0E0; color: #FF8C00; }
   overflow-y: auto;
 }
 
-.contenido h1 { color: #FF8C00; margin-bottom: 10px; }
+.contenido h1 { color: #FF8C00; font-size: 32px; margin-bottom: 10px; }
+.contenido p { color: #555; margin-bottom: 20px; }
+
+#selectorPais {
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid #FF8C00;
+  margin: 20px 0;
+  font-weight: 600;
+  background: #fff;
+  width: 250px;
+}
 
 .video-grid {
   display: grid;
@@ -137,7 +107,7 @@ video {
 
 .grid-productos {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 20px;
   margin-top: 20px;
 }
@@ -148,23 +118,30 @@ video {
   border-radius: 18px;
   padding: 15px;
   box-shadow: 0 4px 12px rgba(255,140,0,0.1);
-  text-align: center;
   transition: transform 0.2s;
 }
 .card:hover { transform: translateY(-5px); border-color: #FF8C00; }
 
-.card img { width: 100%; border-radius: 12px; }
-.card h4 { color: #FF8C00; margin: 10px 0 5px; }
-.precio { display: block; font-weight: 700; margin: 10px 0; color: #FF8C00; font-size: 18px; }
+.card img { width: 100%; border-radius: 12px; margin-bottom: 10px; }
+.card h4 { color: #FF8C00; margin: 10px 0 5px; font-size: 18px; }
+.card p { font-size: 14px; margin: 5px 0; }
+.card small { color: #777; font-size: 12px; display: block; margin: 8px 0; }
 
 .card button {
   background: #FF8C00;
   border: none;
-  padding: 10px 16px;
+  padding: 12px 16px;
   border-radius: 12px;
   color: white;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   width: 100%;
+  margin-top: 10px;
 }
 .card button:hover { background: #FF7700; }
+
+/* Responsive para cel */
+@media(max-width: 768px){
+  body { flex-direction: column; }
+.sidebar { width: 100%; border-right: none; border-bottom: 3px solid #FF8C00; }
+}
