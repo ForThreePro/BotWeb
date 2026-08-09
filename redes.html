@@ -5,70 +5,34 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Garfield Store - Redes</title>
 <script src="https://cdn.tailwindcss.com"></script>
+<style>
+  .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 20; }
+  .overlay.active { display: block; }
+</style>
 </head>
 <body class="bg-[#000] text-white font-sans">
   <div class="h-8 bg-blue-600 w-full"></div>
-
-  <header class="sticky top-8 z-40 bg-[#0A0A0A]/80 backdrop-blur border-b border-white/5">
-    <div class="flex items-center justify-between px-4 py-3">
-      <div class="flex items-center gap-3">
-        <button onclick="toggleSidebar()" class="p-2 rounded-lg hover:bg-white/5">☰</button>
-        <div class="flex items-center gap-2">
-          <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center font-bold text-lg">G</div>
-          <h1 class="text-lg font-semibold">Garfield<span class="text-green-400">Store</span></h1>
-        </div>
-      </div>
+  <header class="sticky top-8 z-40 bg-[#0A0A0A]/80 backdrop-blur border-b border-white/5 h-14">
+    <div class="flex items-center justify-between px-4 h-full">
+      <div class="flex items-center gap-3"><button onclick="toggleSidebar()" class="p-2 rounded-lg hover:bg-white/5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg></button><div class="flex items-center gap-2"><div class="w-9 h-9 rounded-lg bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center font-bold text-lg">G</div><h1 class="text-lg font-semibold">Garfield<span class="text-green-400">Store</span></h1></div></div>
       <button class="p-2 rounded-xl bg-[#111]">🔔</button>
     </div>
   </header>
-
+  <div id="overlay" class="overlay" onclick="toggleSidebar()"></div>
   <div class="flex">
-    <aside id="sidebar" class="fixed md:static inset-y-0 left-0 z-30 w-64 bg-[#0A0A0A] border-r border-white/5 -translate-x-full md:translate-x-0 transition">
+    <aside id="sidebar" class="fixed md:static inset-y-0 left-0 z-30 w-64 bg-[#0A0A0A] border-r border-white/5 -translate-x-full md:translate-x-0 transition-transform duration-300">
       <div class="p-4 space-y-3">
-        <div class="rounded-xl bg-[#111] p-2">
-          <button onclick="toggleSection('portal')" class="w-full flex justify-between text-xs">🏠 PORTAL <span id="arrow-portal">▼</span></button>
-          <div id="portal" class="mt-2 hidden"><a href="index.html" class="block px-3 py-2 rounded-lg text-sm hover:bg-white/5">Inicio</a></div>
-        </div>
-        <div class="rounded-xl bg-[#111] p-2">
-          <button onclick="toggleSection('redes')" class="w-full flex justify-between text-xs">💬 REDES <span id="arrow-redes">▲</span></button>
-          <div id="redes" class="mt-2">
-            <a href="redes.html" class="block px-3 py-2 rounded-lg text-sm bg-gradient-to-r from-purple-600/30 to-blue-600/30">Canal de WhatsApp</a>
-            <a href="redes.html" class="block px-3 py-2 rounded-lg text-sm hover:bg-white/5">Comunidad WhatsApp</a>
-          </div>
-        </div>
-        <div class="rounded-xl bg-[#111] p-2">
-          <button onclick="toggleSection('shop')" class="w-full flex justify-between text-xs">🛍️ GARFIELD SHOP <span id="arrow-shop">▼</span></button>
-          <div id="shop" class="mt-2 hidden">
-            <a href="tienda.html" class="block px-3 py-2 rounded-lg text-sm hover:bg-white/5">Tienda</a>
-            <a href="productos.html" class="block px-3 py-2 rounded-lg text-sm hover:bg-white/5">Productos</a>
-          </div>
-        </div>
+        <div class="rounded-xl bg-[#111] p-2"><button onclick="toggleSection('portal')" class="w-full flex justify-between text-xs">🏠 PORTAL <span id="arrow-portal">▼</span></button><div id="portal" class="mt-2 hidden"><a href="index.html" class="block px-3 py-2 rounded-lg text-sm hover:bg-white/5">Inicio</a><a href="garfield.html" class="block px-3 py-2 rounded-lg text-sm hover:bg-white/5">Zona Garfield</a></div></div>
+        <div class="rounded-xl bg-[#111] p-2"><button onclick="toggleSection('redes')" class="w-full flex justify-between text-xs">💬 REDES <span id="arrow-redes">▲</span></button><div id="redes" class="mt-2"><a href="redes.html" class="block px-3 py-2 rounded-lg text-sm bg-gradient-to-r from-purple-600/30 to-blue-600/30">Canal de WhatsApp</a><a href="redes.html" class="block px-3 py-2 rounded-lg text-sm hover:bg-white/5">Comunidad WhatsApp</a></div></div>
+        <div class="rounded-xl bg-[#111] p-2"><button onclick="toggleSection('shop')" class="w-full flex justify-between text-xs">🛍️ GARFIELD SHOP <span id="arrow-shop">▼</span></button><div id="shop" class="mt-2 hidden"><a href="tienda.html" class="block px-3 py-2 rounded-lg text-sm hover:bg-white/5">Tienda</a><a href="productos.html" class="block px-3 py-2 rounded-lg text-sm hover:bg-white/5">Productos</a></div></div>
       </div>
     </aside>
-
-    <main class="flex-1 p-6">
-      <h2 class="text-2xl font-bold mb-4">Nuestras Redes</h2>
-      <div class="grid md:grid-cols-2 gap-4">
-        <a href="https://wa.me/" target="_blank" class="bg-[#0A0A0A] border-white/5 rounded-2xl p-6 hover:border-green-500/40">
-          <div class="text-2xl mb-2">📢</div>
-          <h3 class="font-semibold">Canal de WhatsApp</h3>
-          <p class="text-white/60 text-sm">Únete para anuncios y actualizaciones</p>
-        </a>
-        <a href="https://chat.whatsapp.com/" target="_blank" class="bg-[#0A0A0A] border-white/5 rounded-2xl p-6 hover:border-green-500/40">
-          <div class="text-2xl mb-2">👥</div>
-          <h3 class="font-semibold">Comunidad WhatsApp</h3>
-          <p class="text-white/60 text-sm">Habla con la comunidad y soporte</p>
-        </a>
-      </div>
-    </main>
+    <main class="flex-1 p-6"><h2 class="text-2xl font-bold mb-4">Nuestras Redes</h2><div class="grid md:grid-cols-2 gap-4"><a href="https://wa.me/" target="_blank" class="bg-[#0A0A0A] border-white/5 rounded-2xl p-6 hover:border-green-500/40"><div class="text-2xl mb-2">📢</div><h3 class="font-semibold">Canal de WhatsApp</h3><p class="text-white/60 text-sm">Únete para anuncios y actualizaciones</p></a><a href="https://chat.whatsapp.com/" target="_blank" class="bg-[#0A0A0A] border-white/5 rounded-2xl p-6 hover:border-green-500/40"><div class="text-2xl mb-2">👥</div><h3 class="font-semibold">Comunidad WhatsApp</h3><p class="text-white/60 text-sm">Habla con la comunidad y soporte</p></a></div></main>
   </div>
-
 <script>
-function toggleSidebar(){ document.getElementById('sidebar').classList.toggle('-translate-x-full') }
-function toggleSection(id){
-  document.getElementById(id).classList.toggle('hidden');
-  document.getElementById('arrow-'+id).innerText = document.getElementById(id).classList.contains('hidden')? '▼' : '▲';
-}
+function toggleSidebar(){ const sidebar = document.getElementById('sidebar'); const overlay = document.getElementById('overlay'); sidebar.classList.toggle('-translate-x-full'); overlay.classList.toggle('active'); }
+function toggleSection(id){ document.getElementById(id).classList.toggle('hidden'); document.getElementById('arrow-'+id).innerText = document.getElementById(id).classList.contains('hidden')? '▼' : '▲'; }
+document.querySelectorAll('#sidebar a').forEach(link => { link.addEventListener('click', () => { if(window.innerWidth < 768){ toggleSidebar(); } }) })
 </script>
 </body>
 </html>
