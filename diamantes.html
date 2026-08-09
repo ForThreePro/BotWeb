@@ -1,59 +1,34 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diamantes - GarfieldStore</title><link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diamantes - Garfield Store</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<nav>
-  <div class="nav-wrap">
-    <div class="nav-left">
-      <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
-      <div class="logo-g">G</div>
-      <div class="logo-text">Garfield<span>Store</span></div>
+  <header class="nav">
+    <div class="nav-logo"><a href="index.html">Garfield Store</a></div>
+    <nav class="nav-links" id="navLinks">
+      <a href="shop.html">Shop</a>
+      <a href="redes.html">Redes</a>
+      <a href="love.html">Love</a>
+    </nav>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </header>
+
+  <section class="hero">
+    <h1>Diamantes</h1>
+    <p>Recarga instantánea</p>
+  </section>
+
+  <section class="links">
+    <div class="cards">
+      <div class="card"><h3>100 Diamantes</h3><p>S/5.00</p><button>Comprar</button></div>
+      <div class="card"><h3>500 Diamantes</h3><p>S/25.00</p><button>Comprar</button></div>
+      <div class="card"><h3>1000 Diamantes</h3><p>S/45.00</p><button>Comprar</button></div>
     </div>
-    <button class="cart-btn" onclick="toggleCart()">🛒 Carrito <span class="cart-count" id="cart-count">0</span></button>
-  </div>
-</nav>
-<div class="overlay"></div>
-<div class="side-menu" id="side-menu">
-  <div class="menu-group"><div class="menu-header">📦 PORTAL</div>
-    <a href="index.html" class="menu-item"><span class="menu-icon">🏠</span> Inicio</a>
-    <a href="shop.html" class="menu-item"><span class="menu-icon">🛒</span> Volver a Tienda</a>
-  </div>
-</div>
-
-<div class="container">
-  <div class="hero-card"><div class="hero-label">FREE FIRE</div><div class="hero-title">Diamantes</div></div>
-
-  <div class="country-tabs" id="tabs-diamantes">
-    <button class="country-tab active" onclick="selectCountry('cl', this, 'diamantes')">🇨🇱 Chile</button>
-    <button class="country-tab" onclick="selectCountry('ar', this, 'diamantes')">🇦🇷 Argentina</button>
-    <button class="country-tab" onclick="selectCountry('mx', this, 'diamantes')">🇲🇽 Mexico</button>
-    <button class="country-tab" onclick="selectCountry('bo', this, 'diamantes')">🇧🇴 Bolivia</button>
-    <button class="country-tab" onclick="selectCountry('uy', this, 'diamantes')">🇺🇾 Uruguay</button>
-    <button class="country-tab" onclick="selectCountry('pe', this, 'diamantes')">🇵🇪 Peru</button>
-  </div>
-  <div class="country-tabs">
-    <button class="country-tab active" id="btn-con-dia" onclick="selectStockDia('con', this)">✅ Con Stock</button>
-    <button class="country-tab" id="btn-sin-dia" onclick="selectStockDia('sin', this)">❌ Sin Stock</button>
-  </div>
-  <div class="form-group"><label class="form-label">Cantidad</label>
-    <select class="form-select" id="cant-diamantes" onchange="updatePrice('diamantes')">
-      <option value="110">110 Diamantes</option><option value="341">341 Diamantes</option>
-      <option value="572">572 Diamantes</option><option value="1166">1166 Diamantes</option>
-      <option value="2398">2398 Diamantes</option><option value="6160">6160 Diamantes</option>
-    </select>
-  </div>
-  <div class="price-preview">Total: <span id="precio-diamantes" style="color:var(--green); font-weight:700">$875</span></div>
-  <div class="form-group"><label class="form-label">Nick Free Fire</label><input type="text" class="form-input" id="nick-ff" placeholder="Tu Nick"></div>
-  <div class="form-group"><label class="form-label">ID Free Fire</label><input type="text" class="form-input" id="id-ff" placeholder="Tu ID"></div>
-  <button class="add-btn" onclick="addDiamantesToCart()">Agregar al Carrito</button>
-  <div class="info-text">Para saber tu stock mándame tu ID. Recargas: Mañanas y Noches</div>
-</div>
-
-<div class="cart-sidebar" id="cart"><div class="cart-header"><div style="font-size:18px; font-weight:700">Tu Carrito</div><div class="cart-close" onclick="toggleCart()">✕</div></div><div id="cart-items" style="flex:1; overflow-y:auto"></div><button class="checkout-btn" onclick="checkoutWhatsApp()">Pedir por WhatsApp</button></div>
-<div class="toast" id="toast">Agregado al carrito ✅</div>
-<div class="music-player" id="music-player"><button id="play-btn">▶️</button><span>🎵 Garfield Theme</span></div>
-<script src="script.js"></script>
-</body></html>
+  </section>
+  <script src="script.js"></script>
+</body>
+</html>
