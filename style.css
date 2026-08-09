@@ -35,19 +35,25 @@ header button{background:none;border:none;color:#fff;font-size:22px;cursor:point
 .banner{
   background: linear-gradient(135deg, #1a1a1a 0%, #2a1500 100%);
   padding:40px 20px; display:flex; gap:30px; border-radius:16px; margin:20px;
-  flex-wrap:wrap;
+  flex-wrap:wrap; align-items:center; justify-content:space-between;
 }
 .banner h1{color:var(--naranja); font-size:32px;}
 .banner small{color:#888;}
 .banner button{background:var(--naranja); color:#000; border:none; padding:12px 20px; border-radius:10px; font-weight:700; cursor:pointer; margin:10px 10px 0 0;}
 .banner button.btn-carrito{background:#333; color:#fff;}
-.banner-logos{display:flex; gap:10px; font-size:40px;}
+.banner-logos{display:flex; gap:15px; font-size:40px;}
+
+.videos-section{padding:20px 40px;}
+.videos-section h2{color:var(--naranja); margin-bottom:20px;}
+.video-grid{display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:20px;}
+.video-grid video{width:100%; border-radius:16px; border:2px solid var(--naranja);}
 
 .filtros{display:flex; gap:10px; padding:20px; overflow-x:auto;}
 .filtro{background:#222; border:1px solid #333; color:#fff; padding:8px 16px; border-radius:20px; cursor:pointer;}
 .filtro.active{background:var(--naranja); color:#000;}
 
 #catalogo{padding:20px;}
+#catalogo h1{color:var(--naranja); margin-bottom:10px;}
 #selectorPais{
   padding: 10px; border-radius: 10px; border: 2px solid var(--naranja);
   margin: 20px 0; font-weight: 600; background: #222; color:#fff; width: 250px;
@@ -68,4 +74,7 @@ header button{background:none;border:none;color:#fff;font-size:22px;cursor:point
 .card button:hover{opacity:0.9;}
 .card small{color:#888; font-size:12px; display:block; margin:8px 0;}
 
-@media(max-width: 768px){.banner{padding:20px;}}
+@media(max-width: 768px){
+  .banner{padding:20px;}
+  .videos-section{padding:20px;}
+}
