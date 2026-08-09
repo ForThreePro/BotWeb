@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Garfield Shop - Catálogo</title>
+<title>GarfieldStore - Tienda</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,7 +12,7 @@
     <div class="nav-left">
       <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
       <div class="logo-g">G</div>
-      <div class="logo-text">Garfield<span>Shop</span></div>
+      <div class="logo-text">Garfield<span>Store</span></div>
     </div>
     <button class="cart-btn" onclick="toggleCart()">Carrito <span class="cart-count" id="cart-count">0</span></button>
   </div>
@@ -20,9 +20,19 @@
 
 <div class="overlay" onclick="toggleMenu(); toggleCart()"></div>
 <div class="side-menu" id="side-menu">
-  <div class="menu-group"><div class="menu-header">📦 PORTAL</div><a href="index.html" class="menu-item"><span class="menu-icon">🏠</span> Inicio</a></div>
-  <div class="menu-group"><div class="menu-header">🌐 REDES</div><a href="redes.html" class="menu-item"><span class="menu-icon">💚</span> Canal de WhatsApp</a></div>
-  <div class="menu-group"><div class="menu-header">🛍️ GARFIELD SHOP</div><a href="shop.html" class="menu-item active"><span class="menu-icon">🛒</span> Tienda</a></div>
+  <div class="menu-group">
+    <div class="menu-header">📦 PORTAL</div>
+    <a href="index.html" class="menu-item"><span class="menu-icon">🏠</span> Inicio</a>
+    <a href="love.html" class="menu-item"><span class="menu-icon">❤️</span> Garfield Love</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-header">🌐 REDES</div>
+    <a href="redes.html" class="menu-item"><span class="menu-icon">💚</span> Canal de WhatsApp</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-header">🛍️ GARFIELD SHOP</div>
+    <a href="shop.html" class="menu-item active"><span class="menu-icon">🛒</span> Tienda</a>
+  </div>
 </div>
 
 <div class="container">
@@ -39,21 +49,18 @@
       <div class="prod-price">Elige país y cantidad</div>
       <button class="add-btn" onclick="openModal('diamantes')">Ver</button>
     </div>
-
     <div class="product">
       <div class="prod-cat">DESIGN</div>
       <div class="prod-name">🖌️ Luu Design</div>
       <div class="prod-price">Logos, Plantillas, Jersey</div>
       <button class="add-btn" onclick="openModal('design')">Ver</button>
     </div>
-
     <div class="product">
       <div class="prod-cat">SPAM</div>
       <div class="prod-name">📢 Spam 3h al día</div>
       <div class="prod-price">Elige días y país</div>
       <button class="add-btn" onclick="openModal('spam')">Ver</button>
     </div>
-
     <div class="product">
       <div class="prod-cat">BOTS</div>
       <div class="prod-name">🤖 Bots WhatsApp</div>
@@ -65,12 +72,9 @@
 
 <!-- CARRITO -->
 <div class="cart-sidebar" id="cart">
-  <div class="cart-header">
-    <h3>Tu Carrito</h3>
-    <div class="cart-close" onclick="toggleCart()">✕</div>
-  </div>
+  <div class="cart-header"><h3>Tu Carrito</h3><div class="cart-close" onclick="toggleCart()">✕</div></div>
   <div id="cart-items" style="flex:1; overflow-y:auto"></div>
-  <div style="font-size:20px; font-weight:700; text-align:right; margin:16px 0">Total: S/ <span id="cart-total">0.00</span></div>
+  <div style="font-size:16px; font-weight:700; text-align:right; margin:16px 0; color:var(--text-muted)">Total: Ver pedido abajo</div>
   <button class="checkout-btn" onclick="checkoutWhatsApp()">Pedir a Lu por WhatsApp</button>
 </div>
 
@@ -86,17 +90,16 @@
       <button class="country-tab" onclick="selectCountry('uy', this, 'diamantes')">🇺🇾 Uruguay</button>
       <button class="country-tab" onclick="selectCountry('pe', this, 'diamantes')">🇵🇪 Peru</button>
     </div>
-    <div class="form-group">
-      <label class="form-label">Cantidad de Diamantes</label>
+    <div class="form-group"><label class="form-label">Cantidad</label>
       <select class="form-select" id="cant-diamantes" onchange="updatePrice('diamantes')">
         <option value="110">110 💎</option><option value="341">341 💎</option><option value="572">572 💎</option>
         <option value="1166">1166 💎</option><option value="2398">2398 💎</option><option value="6160">6160 💎</option>
       </select>
     </div>
-    <div class="price-preview"><div style="font-size:12px; color:var(--text-muted)">Precio con Stock</div><div id="precio-diamantes" style="font-size:20px; font-weight:700; color:var(--green)">$875</div></div>
-    <div class="form-group"><label class="form-label">Nick Free Fire</label><input type="text" class="form-input" id="nick-ff" placeholder="Ej: GarfieldPro"></div>
-    <div class="form-group"><label class="form-label">ID Free Fire</label><input type="text" class="form-input" id="id-ff" placeholder="Ej: 123456789"></div>
-    <button class="add-btn" onclick="addDiamantesToCart()">Añadir al Carrito</button>
+    <div class="price-preview"><div style="font-size:12px; color:var(--text-muted)">Precio</div><div id="precio-diamantes" style="font-size:20px; font-weight:700; color:var(--green)">$875</div></div>
+    <div class="form-group"><label class="form-label">Nick FF</label><input type="text" class="form-input" id="nick-ff"></div>
+    <div class="form-group"><label class="form-label">ID FF</label><input type="text" class="form-input" id="id-ff"></div>
+    <button class="add-btn" onclick="addDiamantesToCart()">Añadir</button>
   </div>
 </div>
 
@@ -107,89 +110,55 @@
     <div class="country-tabs">
       <button class="country-tab active" onclick="selectCountry('pe', this, 'design')">🇵🇪 Peru</button>
       <button class="country-tab" onclick="selectCountry('cl', this, 'design')">🇨🇱 Chile</button>
-      <button class="country-tab" onclick="selectCountry('ar', this, 'design')">🇦🇷 Argentina</button>
-      <button class="country-tab" onclick="selectCountry('mx', this, 'design')">🇲🇽 Mexico</button>
-      <button class="country-tab" onclick="selectCountry('uy', this, 'design')">🇺🇾 Uruguay</button>
-      <button class="country-tab" onclick="selectCountry('bo', this, 'design')">🇧🇴 Bolivia</button>
-      <button class="country-tab" onclick="selectCountry('co', this, 'design')">🇨🇴 Colombia</button>
-      <button class="country-tab" onclick="selectCountry('us', this, 'design')">🇺🇸 USA</button>
     </div>
-    <div class="form-group">
-      <label class="form-label">Tipo de Diseño</label>
+    <div class="form-group"><label class="form-label">Tipo</label>
       <select class="form-select" id="tipo-design" onchange="updatePrice('design')">
-        <option value="logo">Tex Logo y Logos</option>
-        <option value="plantilla">Plantillas 2x1</option>
-        <option value="caligrafico">Caligráficos 2x1</option>
-        <option value="jersey">Jersey</option>
+        <option value="logo">Tex Logo</option><option value="plantilla">Plantillas</option>
+        <option value="caligrafico">Caligráficos</option><option value="jersey">Jersey</option>
       </select>
     </div>
     <div class="price-preview"><div style="font-size:12px; color:var(--text-muted)">Precio</div><div id="precio-design" style="font-size:20px; font-weight:700; color:var(--green)">S/3</div></div>
-    <div class="info-text">Mas Información: el pedido demora maximo 2 dias. No hago devoluciones ni acepto faltas de respeto. Respondo mensajes en las tardes y noches.</div>
-    <button class="add-btn" onclick="addDesignToCart()">Añadir al Carrito</button>
+    <button class="add-btn" onclick="addDesignToCart()">Añadir</button>
   </div>
 </div>
 
 <!-- MODAL SPAM -->
 <div class="modal" id="modal-spam">
   <div class="modal-content">
-    <div class="modal-header"><h3>📢 Servicio de Spam</h3><div class="cart-close" onclick="closeModal('spam')">✕</div></div>
-    <div class="country-tabs">
-      <button class="country-tab active" onclick="selectCountry('pe', this, 'spam')">🇵🇪 Peru</button>
-      <button class="country-tab" onclick="selectCountry('cl', this, 'spam')">🇨🇱 Chile</button>
-      <button class="country-tab" onclick="selectCountry('ar', this, 'spam')">🇦🇷 Argentina</button>
-      <button class="country-tab" onclick="selectCountry('mx', this, 'spam')">🇲🇽 Mexico</button>
-      <button class="country-tab" onclick="selectCountry('uy', this, 'spam')">🇺🇾 Uruguay</button>
-      <button class="country-tab" onclick="selectCountry('bo', this, 'spam')">🇧🇴 Bolivia</button>
-      <button class="country-tab" onclick="selectCountry('co', this, 'spam')">🇨🇴 Colombia</button>
-      <button class="country-tab" onclick="selectCountry('us', this, 'spam')">🇺🇸 USA</button>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Días de Spam - 3 horas al día</label>
+    <div class="modal-header"><h3>📢 Spam</h3><div class="cart-close" onclick="closeModal('spam')">✕</div></div>
+    <div class="country-tabs"><button class="country-tab active" onclick="selectCountry('pe', this, 'spam')">🇵🇪 Peru</button></div>
+    <div class="form-group"><label class="form-label">Días</label>
       <select class="form-select" id="dias-spam" onchange="updatePrice('spam')">
-        <option value="3dias">3 Días</option>
-        <option value="5dias">5 Días</option>
-        <option value="1semana">1 Semana</option>
+        <option value="3dias">3 Días</option><option value="5dias">5 Días</option><option value="1semana">1 Semana</option>
       </select>
     </div>
     <div class="price-preview"><div style="font-size:12px; color:var(--text-muted)">Precio</div><div id="precio-spam" style="font-size:20px; font-weight:700; color:var(--green)">S/5.50</div></div>
-    <div class="form-group"><label class="form-label">Texto para Spam</label><textarea class="form-textarea" id="texto-spam" placeholder="Pega aquí el texto que quieres que se spamée"></textarea></div>
-    <div class="form-group"><label class="form-label">Link a Spamear</label><input type="text" class="form-input" id="link-spam" placeholder="https://..."></div>
-    <div class="info-text">Mas información: El spam es x3 horas al dia. Si pagan en la tarde o noche se inicia al dia siguiente. Si pagan por la mañana se empieza el mismo dia.</div>
-    <button class="add-btn" onclick="addSpamToCart()">Añadir al Carrito</button>
+    <div class="form-group"><label class="form-label">Texto</label><textarea class="form-textarea" id="texto-spam"></textarea></div>
+    <div class="form-group"><label class="form-label">Link</label><input type="text" class="form-input" id="link-spam"></div>
+    <button class="add-btn" onclick="addSpamToCart()">Añadir</button>
   </div>
 </div>
 
 <!-- MODAL BOTS -->
 <div class="modal" id="modal-bots">
   <div class="modal-content">
-    <div class="modal-header"><h3>🤖 Bots WhatsApp</h3><div class="cart-close" onclick="closeModal('bots')">✕</div></div>
-    <div class="country-tabs">
-      <button class="country-tab active" onclick="selectCountry('pe', this, 'bots')">🇵🇪 Peru</button>
-      <button class="country-tab" onclick="selectCountry('cl', this, 'bots')">🇨🇱 Chile</button>
-      <button class="country-tab" onclick="selectCountry('ar', this, 'bots')">🇦🇷 Argentina</button>
-      <button class="country-tab" onclick="selectCountry('mx', this, 'bots')">🇲🇽 Mexico</button>
-      <button class="country-tab" onclick="selectCountry('uy', this, 'bots')">🇺🇾 Uruguay</button>
-      <button class="country-tab" onclick="selectCountry('bo', this, 'bots')">🇧🇴 Bolivia</button>
-      <button class="country-tab" onclick="selectCountry('co', this, 'bots')">🇨🇴 Colombia</button>
-      <button class="country-tab" onclick="selectCountry('us', this, 'bots')">🇺🇸 USA</button>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Tipo de Bot</label>
+    <div class="modal-header"><h3>🤖 Bots</h3><div class="cart-close" onclick="closeModal('bots')">✕</div></div>
+    <div class="country-tabs"><button class="country-tab active" onclick="selectCountry('pe', this, 'bots')">🇵🇪 Peru</button></div>
+    <div class="form-group"><label class="form-label">Tipo</label>
       <select class="form-select" id="tipo-bot" onchange="updatePrice('bots'); toggleLinkField()">
-        <option value="mensual">Bot Mensual</option>
-        <option value="personalizado">Bot Personalizado</option>
+        <option value="mensual">Bot Mensual</option><option value="personalizado">Bot Personalizado</option>
       </select>
     </div>
     <div class="price-preview"><div style="font-size:12px; color:var(--text-muted)">Precio</div><div id="precio-bots" style="font-size:20px; font-weight:700; color:var(--green)">S/3</div></div>
-    <div class="form-group" id="link-bot-group">
-      <label class="form-label">Link de WhatsApp del Bot</label>
-      <input type="text" class="form-input" id="link-bot" placeholder="https://wa.me/519...">
-    </div>
-    <button class="add-btn" onclick="addBotToCart()">Añadir al Carrito</button>
+    <div class="form-group" id="link-bot-group"><label class="form-label">Link WhatsApp Bot</label><input type="text" class="form-input" id="link-bot"></div>
+    <button class="add-btn" onclick="addBotToCart()">Añadir</button>
   </div>
 </div>
 
-<div class="toast" id="toast">✅ Revisa tu carrito, ya se añadió</div>
+<div class="toast" id="toast">Añadido al carrito</div>
+
+<!-- REPRODUCTOR -->
+<div class="music-player" id="music-player"><button id="play-btn" onclick="toggleMusic()">▶️</button><span>🎵 Garfield Theme</span></div>
 
 <script src="script.js"></script>
 </body>
