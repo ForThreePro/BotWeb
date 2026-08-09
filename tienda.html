@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tienda - Eventos Garfield</title>
+<title>Tienda - Garfield Store</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -11,7 +11,7 @@
   body { background: var(--gris); font-family: 'Inter', sans-serif; color: var(--texto); }
 .card { background: #fff; border: 1px solid #E5E5E7; }
 .btn-primary { background: linear-gradient(90deg, var(--naranja), var(--naranja2)); color: #fff; }
-.filter-btn { background: #fff; border: 1px solid #E5E5E7; }
+.filter-btn { background: #fff; border: 1px solid #E5E5E7; white-space: nowrap; }
 .filter-active { background: var(--naranja); color: #fff; border-color: var(--naranja); }
 .music-bar { background: #fff; border-top: 1px solid #E5E5E7; }
 </style>
@@ -23,8 +23,8 @@
 
 <header class="card p-4 flex items-center justify-between sticky top-0 z-20 shadow-sm">
   <a href="index.html" class="flex items-center gap-2">
-    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-orange-400 flex items-center justify-center text-lg font-black text-white">G</div>
-    <h1 class="text-xl font-black">Eventos <span class="text-orange-500">Garfield</span></h1>
+    <img src="https://i.imgur.com/TU_IMAGEN_AQUI.png" alt="Garfield" class="w-10 h-10 rounded-xl object-cover">
+    <h1 class="text-xl font-black"><span class="text-orange-500">Garfield</span> Store</h1>
   </a>
   <div class="flex items-center gap-3">
     <button onclick="toggleMusic()" id="btnMusic" class="text-2xl">🔊</button>
@@ -39,13 +39,25 @@
     <p class="text-gray-600 mt-3">Servicios digitales con la actitud de Garfield: Rápido y sin lunes.</p>
   </div>
 
+  <!-- FILTROS NUEVOS -->
   <div class="flex gap-3 mb-6 overflow-x-auto pb-2">
     <button onclick="filtrar('todos')" id="btn-todos" class="filter-btn filter-active px-5 py-2.5 rounded-xl text-sm font-bold">Todos</button>
     <button onclick="filtrar('streaming')" id="btn-streaming" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600">Streaming</button>
     <button onclick="filtrar('musica')" id="btn-musica" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600">Música</button>
+    <button onclick="filtrar('bots')" id="btn-bots" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600">Bots</button>
+    <button onclick="filtrar('spam')" id="btn-spam" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600">Spam</button>
+    <button onclick="filtrar('design')" id="btn-design" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600">Design</button>
+    <button onclick="filtrar('numeros')" id="btn-numeros" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600">Números Virtuales</button>
+    <button onclick="filtrar('seguidores')" id="btn-seguidores" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600">Seguidores</button>
+    <button onclick="filtrar('vistas')" id="btn-vistas" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600">Vistas</button>
+    <button onclick="filtrar('likes')" id="btn-likes" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600">Likes</button>
+    <button onclick="filtrar('diamantes')" id="btn-diamantes" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600">Diamantes</button>
+    <button onclick="filtrar('pase')" id="btn-pase" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600">Pase Élite</button>
   </div>
 
   <div id="productos" class="grid md:grid-cols-3 gap-5">
+    
+    <!-- STREAMING -->
     <div class="producto streaming card rounded-2xl p-6 transition shadow-sm">
       <span class="bg-orange-100 text-orange-600 text-xs px-3 py-1 rounded-full font-bold">-25%</span>
       <p class="text-4xl font-black text-red-500 mt-3">N</p>
@@ -55,15 +67,51 @@
       <p class="mt-4"><span class="text-3xl font-black text-orange-500">S/ 15.00</span></p>
       <button onclick="agregarCarrito('Netflix Premium 1 Pantalla', 15)" class="btn-primary w-full py-3.5 rounded-xl mt-4 font-bold transition">AÑADIR AL CARRITO</button>
     </div>
-    <div class="producto musica card rounded-2xl p-6 transition shadow-sm">
-      <span class="bg-orange-100 text-orange-600 text-xs px-3 py-1 rounded-full font-bold">-29%</span>
-      <p class="text-4xl text-green-500 mt-3">●</p>
-      <p class="text-xs text-gray-500 mt-2 uppercase">Música</p>
-      <p class="font-bold text-xl mt-1">Spotify Premium Individual</p>
-      <p class="text-sm text-yellow-500 mt-1">⭐ 4.9 · Entrega inmediata</p>
-      <p class="mt-4"><span class="text-3xl font-black text-orange-500">S/ 10.00</span></p>
-      <button onclick="agregarCarrito('Spotify Premium Individual', 10)" class="btn-primary w-full py-3.5 rounded-xl mt-4 font-bold transition">AÑADIR AL CARRITO</button>
+
+    <!-- DIAMANTES -->
+    <div class="producto diamantes card rounded-2xl p-6 transition shadow-sm">
+      <span class="bg-orange-100 text-orange-600 text-xs px-3 py-1 rounded-full font-bold">FREE FIRE</span>
+      <p class="text-4xl mt-3">💎</p>
+      <p class="text-xs text-gray-500 mt-2 uppercase">Diamantes</p>
+      <p class="font-bold text-xl mt-1">560 Diamantes Free Fire</p>
+      <p class="text-sm text-yellow-500 mt-1">⭐ 5.0 · Entrega en 5 min</p>
+      <p class="mt-4"><span class="text-3xl font-black text-orange-500">S/ 25.00</span></p>
+      <button onclick="agregarCarrito('560 Diamantes Free Fire', 25)" class="btn-primary w-full py-3.5 rounded-xl mt-4 font-bold transition">AÑADIR AL CARRITO</button>
     </div>
+
+    <!-- PASE ELITE -->
+    <div class="producto pase card rounded-2xl p-6 transition shadow-sm">
+      <span class="bg-orange-100 text-orange-600 text-xs px-3 py-1 rounded-full font-bold">FREE FIRE</span>
+      <p class="text-4xl mt-3">👑</p>
+      <p class="text-xs text-gray-500 mt-2 uppercase">Pase Élite</p>
+      <p class="font-bold text-xl mt-1">Pase Élite Mensual</p>
+      <p class="text-sm text-yellow-500 mt-1">⭐ 5.0 · Con recompensas</p>
+      <p class="mt-4"><span class="text-3xl font-black text-orange-500">S/ 20.00</span></p>
+      <button onclick="agregarCarrito('Pase Élite Mensual', 20)" class="btn-primary w-full py-3.5 rounded-xl mt-4 font-bold transition">AÑADIR AL CARRITO</button>
+    </div>
+
+    <!-- SEGUIDORES -->
+    <div class="producto seguidores card rounded-2xl p-6 transition shadow-sm">
+      <span class="bg-orange-100 text-orange-600 text-xs px-3 py-1 rounded-full font-bold">TOP</span>
+      <p class="text-4xl mt-3">👥</p>
+      <p class="text-xs text-gray-500 mt-2 uppercase">Seguidores</p>
+      <p class="font-bold text-xl mt-1">1000 Seguidores Instagram</p>
+      <p class="text-sm text-yellow-500 mt-1">⭐ 4.8 · Sin contraseña</p>
+      <p class="mt-4"><span class="text-3xl font-black text-orange-500">S/ 18.00</span></p>
+      <button onclick="agregarCarrito('1000 Seguidores Instagram', 18)" class="btn-primary w-full py-3.5 rounded-xl mt-4 font-bold transition">AÑADIR AL CARRITO</button>
+    </div>
+
+    <!-- VISTAS -->
+    <div class="producto vistas card rounded-2xl p-6 transition shadow-sm">
+      <span class="bg-orange-100 text-orange-600 text-xs px-3 py-1 rounded-full font-bold">VIRAL</span>
+      <p class="text-4xl mt-3">👁️</p>
+      <p class="text-xs text-gray-500 mt-2 uppercase">Vistas</p>
+      <p class="font-bold text-xl mt-1">10K Vistas TikTok</p>
+      <p class="text-sm text-yellow-500 mt-1">⭐ 4.9 · Entrega 2 horas</p>
+      <p class="mt-4"><span class="text-3xl font-black text-orange-500">S/ 12.00</span></p>
+      <button onclick="agregarCarrito('10K Vistas TikTok', 12)" class="btn-primary w-full py-3.5 rounded-xl mt-4 font-bold transition">AÑADIR AL CARRITO</button>
+    </div>
+
   </div>
 </div>
 
@@ -125,10 +173,19 @@ function filtrar(categoria) {
 function enviarWhatsApp() {
   if(carrito.length === 0) return alert('Tu carrito está vacío');
   let total = carrito.reduce((sum, item) => sum + item.precio, 0);
-  let mensaje = `*NUEVO PEDIDO - EVENTOS GARFIELD*%0A%0A*Productos:*%0A`;
+  
+  // TEXTO NUEVO QUE PIDE DATOS DE PAGO
+  let mensaje = `*HOLA LU, QUIERO COMPRAR*%0A%0A`;
+  mensaje += `*PRODUCTOS:*%0A`;
   carrito.forEach((item, i) => { mensaje += `${i+1}. ${item.nombre} - S/ ${item.precio}.00%0A`; });
-  mensaje += `%0A*TOTAL: S/ ${total}.00*`;
-  let numero = "51999999"; // CAMBIA ESTE NUMERO
+  mensaje += `%0A*TOTAL A PAGAR: S/ ${total}.00*%0A%0A`;
+  mensaje += `*DATOS PARA EL PAGO:*%0A`;
+  mensaje += `Nombre: _%0A`;
+  mensaje += `Método de Pago: _%0A`;
+  mensaje += `Correo/Juego/ID: _ _ _%0A%0A`;
+  mensaje += `Espero confirmación, gracias! 🙏`;
+  
+  let numero = "51920726588"; // WHATSAPP LU
   window.open(`https://wa.me/${numero}?text=${mensaje}`, '_blank');
   localStorage.removeItem('carrito'); carrito = []; actualizarCarrito();
 }
