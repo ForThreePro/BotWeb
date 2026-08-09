@@ -1,16 +1,11 @@
-// Menú
-const hamburger = document.getElementById('hamburger');
-const sidebar = document.getElementById('sidebar');
-if(hamburger) hamburger.addEventListener('click', () => sidebar.classList.toggle('active'));
-
-// Carrito
+// Carrito - Solo funciona si existe #cartBtn
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 const cartBtn = document.getElementById('cartBtn');
 const cartModal = document.getElementById('cartModal');
 
 function updateCart() {
-  if(document.getElementById('cartCount')) 
-    document.getElementById('cartCount').textContent = cart.length;
+  if(!cartBtn) return;
+  document.getElementById('cartCount').textContent = cart.length;
   const cartItems = document.getElementById('cartItems');
   const cartTotal = document.getElementById('cartTotal');
   if(!cartItems) return;
@@ -24,12 +19,11 @@ function updateCart() {
   localStorage.setItem('cart', JSON.stringify(cart));
 }
 
-function addToCart(name, price) {
-  cart.push({name, price});
-  updateCart();
-  alert(`${name} agregado al carrito 🛒`);
+function addToCart(name, price) { 
+  cart.push({name, price}); 
+  updateCart(); 
+  alert(`${name} agregado al carrito 🛒`); 
 }
-
 function removeFromCart(i) { cart.splice(i,1); updateCart(); }
 function toggleCart() { cartModal.classList.toggle('active'); }
 function checkout() {
@@ -46,14 +40,13 @@ updateCart();
 const music = document.getElementById('bgMusic');
 const musicBtn = document.getElementById('musicBtn');
 let playing = true;
-window.addEventListener('load', () => {
-  if(music) {
-    music.volume = 0.5;
-    music.play().catch(() => document.addEventListener('click', () => music.play(), {once: true}));
+window.addEventListener('load', () => { 
+  if(music){ 
+    music.volume = 0.5; 
+    music.play().catch(() => document.addEventListener('click', () => music.play(), {once: true})); 
   }
 });
 if(musicBtn) musicBtn.addEventListener('click', () => {
-  playing ? (music.pause(), musicBtn.textContent = '🔇', musicBtn.style.background = '#ccc') 
-          : (music.play(), musicBtn.textContent = '🔊', musicBtn.style.background = 'var(--orange)');
+  playing ? (music.pause(), musicBtn.textContent = '🔇') : (music.play(), musicBtn.textContent = '🔊');
   playing = !playing;
 });
