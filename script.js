@@ -1,22 +1,17 @@
 const audio = document.getElementById('musica');
 const btn = document.getElementById('btnMusica');
-
 if(localStorage.getItem('musicaEstado') === 'playing'){
-  audio.play();
-  btn.textContent = '🔇 Pausar Música';
-  btn.classList.add('activo');
+  audio.play(); 
+  btn.textContent = '🔇';
 }
-
-btn.addEventListener('click', () => {
+btn.onclick = () => {
   if(audio.paused){
-    audio.play();
-    btn.textContent = '🔇 Pausar Música';
-    btn.classList.add('activo');
-    localStorage.setItem('musicaEstado', 'playing');
+    audio.play(); 
+    btn.textContent='🔇'; 
+    localStorage.setItem('musicaEstado','playing');
   } else {
-    audio.pause();
-    btn.textContent = '🔊 Reproducir Música';
-    btn.classList.remove('activo');
-    localStorage.setItem('musicaEstado', 'paused');
+    audio.pause(); 
+    btn.textContent='🔊'; 
+    localStorage.setItem('musicaEstado','paused');
   }
-});
+}
