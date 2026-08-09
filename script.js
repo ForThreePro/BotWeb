@@ -13,38 +13,35 @@ const precios = {
   },
   design: {
     pe: {simbolo:'S/', nombre:'Peru', logo:3, plantilla:4, caligrafico:3, jersey:5},
-    cl: {simbolo:'$', nombre:'Chile', logo:1050, plantilla:1050, caligrafico:1050, jersey:1750},
-    ar: {simbolo:'$', nombre:'Argentina', logo:1560, plantilla:1560, caligrafico:1560, jersey:2600},
-    mx: {simbolo:'$', nombre:'Mexico', logo:22.5, plantilla:22.5, caligrafico:22.5, jersey:37.5},
-    uy: {simbolo:'$', nombre:'Uruguay', logo:22.5, plantilla:22.5, caligrafico:22.5, jersey:75},
-    bo: {simbolo:'$', nombre:'Bolivia', logo:13.5, plantilla:13.5, caligrafico:13.5, jersey:22.5},
-    co: {simbolo:'$', nombre:'Colombia', logo:4500, plantilla:4500, caligrafico:4500, jersey:7500},
-    us: {simbolo:'$', nombre:'USA', logo:2, plantilla:2, caligrafico:2, jersey:2}
+    cl: {simbolo:'$', nombre:'Chile', logo:1050, plantilla:1050, caligrafico:1050, jersey:1750}
   },
   spam: {
-    pe: {simbolo:'S/', nombre:'Peru', '3dias':5.50, '5dias':7.50, '1semana':9.50},
-    cl: {simbolo:'$', nombre:'Chile', '3dias':1750, '5dias':2450, '1semana':3150},
-    ar: {simbolo:'$', nombre:'Argentina', '3dias':2600, '5dias':3640, '1semana':4680},
-    mx: {simbolo:'$', nombre:'Mexico', '3dias':37.5, '5dias':52.5, '1semana':67.5},
-    uy: {simbolo:'$', nombre:'Uruguay', '3dias':75, '5dias':105, '1semana':135},
-    bo: {simbolo:'$', nombre:'Bolivia', '3dias':22.5, '5dias':31.5, '1semana':40.5},
-    co: {simbolo:'$', nombre:'Colombia', '3dias':7500, '5dias':10500, '1semana':13500},
-    us: {simbolo:'$', nombre:'USA', '3dias':2, '5dias':3, '1semana':4}
+    pe: {simbolo:'S/', nombre:'Peru', '3dias':5.50, '5dias':7.50, '1semana':9.50}
   },
   bots: {
-    pe: {simbolo:'S/', nombre:'Peru', mensual:3, personalizado:20},
-    cl: {simbolo:'$', nombre:'Chile', mensual:1050, personalizado:7000},
-    ar: {simbolo:'$', nombre:'Argentina', mensual:1560, personalizado:10400},
-    mx: {simbolo:'$', nombre:'Mexico', mensual:22.5, personalizado:150},
-    uy: {simbolo:'$', nombre:'Uruguay', mensual:22.5, personalizado:90},
-    bo: {simbolo:'$', nombre:'Bolivia', mensual:13.5, personalizado:90},
-    co: {simbolo:'$', nombre:'Colombia', mensual:4500, personalizado:0},
-    us: {simbolo:'$', nombre:'USA', mensual:2, personalizado:8}
+    pe: {simbolo:'S/', nombre:'Peru', mensual:3, personalizado:20}
   }
 };
 
-function toggleMenu(){document.getElementById('side-menu').classList.toggle('active');document.querySelector('.overlay').classList.toggle('active');document.querySelector('.hamburger').classList.toggle('active');}
-function toggleCart(){document.getElementById('cart').classList.toggle('active');document.querySelector('.overlay').classList.toggle('active');}
+function toggleMenu(){
+  const menu = document.getElementById('side-menu');
+  const overlay = document.querySelector('.overlay');
+  const burger = document.querySelector('.hamburger');
+
+  menu.classList.toggle('active');
+  overlay.classList.toggle('active');
+  burger.classList.toggle('active');
+  document.body.style.overflow = menu.classList.contains('active')? 'hidden' : 'auto';
+}
+
+function toggleCart(){
+  const cartEl = document.getElementById('cart');
+  const overlay = document.querySelector('.overlay');
+
+  cartEl.classList.toggle('active');
+  overlay.classList.toggle('active');
+  document.body.style.overflow = cartEl.classList.contains('active')? 'hidden' : 'auto';
+}
 
 function removeItem(index){cart.splice(index, 1); updateCart();}
 function updateCart(){
@@ -83,6 +80,7 @@ function updatePrice(tipo){
   if(tipo === 'design'){const prod = document.getElementById('tipo-design').value;const data = precios.design[selectedCountry.design];document.getElementById('precio-design').innerText = data.simbolo + data[prod];}
   if(tipo === 'spam'){const dias = document.getElementById('dias-spam').value;const data = precios.spam[selectedCountry.spam];document.getElementById('precio-spam').innerText = data.simbolo + data[dias];}
   if(tipo === 'bots'){const bot = document.getElementById('tipo-bot').value;const data = precios.bots[selectedCountry.bots];document.getElementById('precio-bots').innerText = data.simbolo + data[bot];}
+}
 function toggleLinkField(){const tipo = document.getElementById('tipo-bot').value;document.getElementById('link-bot-group').style.display = tipo === 'mensual'? 'block' : 'none';}
 
 function addDiamantesToCart(){
@@ -93,7 +91,7 @@ function addDiamantesToCart(){
   updateCart(); showToast(); closeModal('diamantes');document.getElementById('nick-ff').value = ''; document.getElementById('id-ff').value = '';
 }
 function addDesignToCart(){
-  const prod = document.getElementById('tipo-design').value;const nombres = {logo:'Tex Logo y Logos', plantilla:'Plantillas 2x1', caligrafico:'Caligráficos 2x1', jersey:'Jersey'};const data = precios.design[selectedCountry.design];
+  const prod = document.getElementById('tipo-design').value;const nombres = {logo:'Tex Logo', plantilla:'Plantillas', caligrafico:'Caligráficos', jersey:'Jersey'};const data = precios.design[selectedCountry.design];
   cart.push({name: `Pedido Design - ${nombres[prod]}`, price: data[prod], qty: 1, details: '', moneda: data.simbolo, pais: data.nombre});
   updateCart(); showToast(); closeModal('design');
 }
@@ -119,6 +117,18 @@ function toggleMusic(){
   else{audio.play();document.getElementById('play-btn').innerText = '⏸️';}
   isPlaying =!isPlaying;
 }
-if(window.location.pathname.includes('love.html')){
-  document.addEventListener('DOMContentLoaded', ()=>{const player = document.getElementById('music-player');if(player) player.style.display = 'none';});
-}
+document.addEventListener('DOMContentLoaded', ()=>{
+  // Cerrar menú al tocar overlay
+  document.querySelector('.overlay').addEventListener('click', ()=>{
+    document.getElementById('side-menu').classList.remove('active');
+    document.getElementById('cart')?.classList.remove('active');
+    document.querySelector('.overlay').classList.remove('active');
+    document.querySelector('.hamburger')?.classList.remove('active');
+    document.body.style.overflow = 'auto';
+  });
+  // Ocultar reproductor en love.html
+  if(window.location.pathname.includes('love.html')){
+    const player = document.getElementById('music-player');
+    if(player) player.style.display = 'none';
+  }
+});
