@@ -3,76 +3,56 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Garfield Store - Dashboard</title>
+<title>GarfieldStore</title>
 <style>
   :root{
-    --bg:#0a0a0f;
-    --card:#11121a;
-    --card-border:#1f2233;
-    --text:#fff;
-    --text-muted:#8a8fa3;
-    --accent:#00ff88;
-    --accent2:#3b82f6;
-    --gradient: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+    --bg:#07070d; --card:#0f0f18; --card-border:#1a1a2e;
+    --text:#fff; --text-muted:#7a7f9a; --green:#00ff88; 
   }
   *{margin:0;padding:0;box-sizing:border-box}
   body{font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", Arial, sans-serif; background:var(--bg); color:var(--text)}
   
-  /* NAV */
-  nav{position:sticky; top:0; background:rgba(10,10,15,0.8); backdrop-filter: blur(20px); border-bottom:1px solid var(--card-border); z-index:100}
-  .nav-wrap{display:flex; justify-content:space-between; align-items:center; padding:14px 20px}
+  nav{position:sticky; top:0; background:#000; border-bottom:1px solid var(--card-border); z-index:100}
+  .nav-wrap{display:flex; justify-content:space-between; align-items:center; padding:12px 16px}
   .nav-left{display:flex; align-items:center; gap:12px}
-  .logo-img{width:40px; height:40px; border-radius:12px; background:var(--gradient); display:flex; align-items:center; justify-content:center; font-weight:700}
-  .logo-text{font-size:18px; font-weight:700} .logo-text span{color:var(--accent)}
-  .hamburger{width:28px; height:20px; cursor:pointer; display:flex; flex-direction:column; justify-content:space-between}
-  .hamburger span{height:3px; background:#fff; border-radius:2px; transition:.3s}
-  .hamburger.active span:nth-child(1){transform:rotate(45deg) translate(6px,6px)}
+  .logo-g{width:38px; height:38px; border-radius:12px; background:linear-gradient(135deg, #ff3b30 0%, #ff9500 100%); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:18px}
+  .logo-text{font-size:17px; font-weight:700} .logo-text span{color:var(--green)}
+  .hamburger{width:26px; height:18px; cursor:pointer; display:flex; flex-direction:column; justify-content:space-between}
+  .hamburger span{height:2px; background:#fff; border-radius:2px; transition:.3s}
+  .hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
   .hamburger.active span:nth-child(2){opacity:0}
-  .hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(6px,-6px)}
-  .bell{width:40px; height:40px; border:1px solid var(--card-border); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:20px}
+  .hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+  .bell{width:38px; height:38px; border:1px solid var(--card-border); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:20px; background:var(--card)}
 
-  /* MENU LATERAL */
-  .side-menu{position:fixed; top:0; left:-100%; width:280px; height:100%; background:rgba(17,18,26,0.95); backdrop-filter: blur(30px); z-index:150; transition:.4s; padding:80px 20px; border-right:1px solid var(--card-border)}
+  .side-menu{position:fixed; top:0; left:-100%; width:85%; max-width:320px; height:100%; background:#08080f; z-index:150; transition:.35s; padding:70px 0 20px; border-right:1px solid var(--card-border); overflow-y:auto}
   .side-menu.active{left:0}
-  .side-menu a{display:block; color:#fff; font-size:18px; font-weight:600; text-decoration:none; padding:16px; border-radius:12px; margin-bottom:8px}
-  .side-menu a:hover{background:var(--card-border)}
-  .overlay{position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); display:none; z-index:140}
+  .menu-group{margin-bottom:8px}
+  .menu-header{display:flex; justify-content:space-between; align-items:center; padding:14px 20px; font-size:11px; font-weight:700; color:var(--text-muted); letter-spacing:1px}
+  .menu-item{display:flex; align-items:center; gap:12px; padding:14px 20px; color:#c0c4d6; text-decoration:none; font-size:15px; font-weight:500; margin:2px 12px; border-radius:10px; transition:.2s}
+  .menu-item:hover, .menu-item.active{background:var(--card); color:#fff}
+  .menu-item.active{border-left:3px solid var(--green)}
+  .menu-icon{width:20px; text-align:center; font-size:16px}
+  .overlay{position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); display:none; z-index:140}
   .overlay.active{display:block}
 
-  .container{max-width:800px; margin:0 auto; padding:20px}
-
-  /* CARDS */
-  .card{background:var(--card); border:1px solid var(--card-border); border-radius:20px; padding:20px; margin-bottom:16px}
-  .card-header{display:flex; align-items:center; gap:12px; margin-bottom:16px}
-  .card-icon{width:48px; height:48px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:24px}
-  .icon-blue{background:rgba(59,130,246,0.2)}
-  .icon-green{background:rgba(0,255,136,0.2)}
-  .icon-purple{background:rgba(139,92,246,0.2)}
-
-  .stats{display:grid; grid-template-columns:1fr 1fr; gap:16px}
-  .stat-label{font-size:12px; color:var(--text-muted); text-transform:uppercase}
-  .stat-value{font-size:28px; font-weight:700; color:var(--accent)}
-  .stat-sub{font-size:12px; color:var(--text-muted)}
-
-  /* STAFF */
-  .section-title{font-size:20px; font-weight:700; margin-bottom:8px}
-  .section-sub{color:var(--text-muted); font-size:14px; margin-bottom:16px}
-  .staff-grid{display:flex; gap:16px; overflow-x:auto; padding-bottom:10px}
-  .staff-card{min-width:160px; background:var(--card); border:1px solid var(--card-border); border-radius:16px; padding:20px; text-align:center; cursor:pointer}
-  .staff-avatar{width:80px; height:80px; border-radius:20px; background:var(--gradient); margin:0 auto 12px; display:flex; align-items:center; justify-content:center; font-size:32px; font-weight:700}
-  .staff-name{font-weight:700; font-size:16px}
-  .staff-role{font-size:12px; color:var(--text-muted); text-transform:uppercase}
-
-  /* RESEÑAS */
-  .stars{color:#fbbf24; font-size:18px}
-  .review-card{background:var(--card); border:1px solid var(--card-border); border-radius:16px; padding:16px; margin-bottom:12px}
-  .review-header{display:flex; justify-content:space-between; align-items:center; margin-bottom:8px}
-  .review-user{display:flex; align-items:center; gap:10px}
-  .user-avatar{width:36px; height:36px; border-radius:10px; background:var(--gradient); display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700}
-  .review-input{width:100%; background:#0a0a0f; border:1px solid var(--card-border); border-radius:12px; padding:14px; color:#fff; margin:12px 0}
-  .btn-gradient{width:100%; padding:14px; border:none; border-radius:12px; background:var(--gradient); color:#fff; font-weight:700; font-size:16px; cursor:pointer}
-
-  .fab{position:fixed; bottom:20px; right:20px; width:56px; height:56px; border-radius:16px; background:var(--gradient); display:flex; align-items:center; justify-content:center; font-size:24px; cursor:pointer; box-shadow:0 10px 30px rgba(59,130,246,0.4)}
+  .container{max-width:600px; margin:0 auto; padding:16px}
+  .card{background:var(--card); border:1px solid var(--card-border); border-radius:18px; padding:16px; margin-bottom:14px}
+  .banner-img{width:100%; border-radius:14px; display:block}
+  .card-header{display:flex; align-items:center; gap:10px; margin-bottom:16px}
+  .card-icon{width:44px; height:44px; border-radius:12px; background:#1a1f2e; display:flex; align-items:center; justify-content:center; font-size:22px}
+  .card-icon.green{background:#0e2a1a}
+  .stat-label{font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.5px}
+  .stats{display:grid; grid-template-columns:1fr 1fr; gap:18px 10px; margin-top:8px}
+  .stat-value{font-size:26px; font-weight:700; color:var(--green); line-height:1}
+  .stat-sub{font-size:11px; color:var(--text-muted)}
+  .users-num{font-size:28px; font-weight:700; color:var(--green)}
+  .status{color:var(--green); font-weight:700; font-size:16px}
+  .section-title{font-size:18px; font-weight:700; margin:20px 0 6px}
+  .section-sub{color:var(--text-muted); font-size:13px; margin-bottom:14px}
+  .staff-grid{display:flex; gap:12px; overflow-x:auto; padding-bottom:10px}
+  .staff-card{min-width:140px; background:var(--card); border:1px solid var(--card-border); border-radius:16px; padding:16px; text-align:center; cursor:pointer}
+  .staff-avatar{width:70px; height:70px; border-radius:18px; background:linear-gradient(135deg, #ff3b30 0%, #ff9500 100%); margin:0 auto 10px; display:flex; align-items:center; justify-content:center; font-size:28px; font-weight:700}
+  .fab{position:fixed; bottom:20px; right:20px; width:54px; height:54px; border-radius:16px; background:linear-gradient(135deg, #ff3b30 0%, #ff9500 100%); display:flex; align-items:center; justify-content:center; font-size:22px; cursor:pointer; box-shadow:0 8px 25px rgba(255,59,48,0.4)}
 </style>
 </head>
 <body>
@@ -81,7 +61,7 @@
   <div class="nav-wrap">
     <div class="nav-left">
       <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
-      <div class="logo-img">G</div>
+      <div class="logo-g">G</div>
       <div class="logo-text">Garfield<span>Store</span></div>
     </div>
     <div class="bell">🔔</div>
@@ -90,109 +70,63 @@
 
 <div class="overlay" onclick="toggleMenu()"></div>
 <div class="side-menu" id="side-menu">
-  <a href="#">Inicio</a>
-  <a href="#productos">Productos</a>
-  <a href="#staff">Staff</a>
-  <a href="#reseñas">Reseñas</a>
-  <a href="#contacto">Contacto WhatsApp</a>
+  <div class="menu-group">
+    <div class="menu-header">📦 PORTAL</div>
+    <a href="index.html" class="menu-item active"><span class="menu-icon">🏠</span> Inicio</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-header">🌐 REDES</div>
+    <a href="redes.html" class="menu-item"><span class="menu-icon">💚</span> Canal de WhatsApp</a>
+    <a href="redes.html" class="menu-item"><span class="menu-icon">💚</span> Comunidad WhatsApp</a>
+  </div>
+  <div class="menu-group">
+    <div class="menu-header">🛍️ GARFIELD SHOP</div>
+    <a href="shop.html" class="menu-item"><span class="menu-icon">🛒</span> Tienda</a>
+  </div>
 </div>
 
 <div class="container">
-
-  <!-- CARD 1: BANNER -->
-  <div class="card">
-    <img src="https://files.evogb.win/sRJ0HB.jpg" style="width:100%; border-radius:16px">
+  <div class="card" style="padding:12px">
+    <img src="https://files.evogb.win/sRJ0HB.jpg" class="banner-img" alt="Garfield Store">
   </div>
 
-  <!-- CARD 2: TIEMPO ACTIVO -->
   <div class="card">
     <div class="card-header">
-      <div class="card-icon icon-blue">⏱️</div>
-      <div>
-        <div class="stat-label">TIEMPO ACTIVO</div>
-      </div>
+      <div class="card-icon">⏱️</div>
+      <div class="stat-label">TIEMPO ACTIVO</div>
     </div>
     <div class="stats">
       <div><div class="stat-value" id="dias">0</div><div class="stat-sub">DÍAS</div></div>
       <div><div class="stat-value" id="horas">14</div><div class="stat-sub">HORAS</div></div>
       <div><div class="stat-value" id="min">20</div><div class="stat-sub">MIN</div></div>
-      <div><div class="stat-value" id="seg">35</div><div class="stat-sub">SEG</div></div>
+      <div><div class="stat-value" id="seg">55</div><div class="stat-sub">SEG</div></div>
     </div>
   </div>
 
-  <!-- CARD 3: USUARIOS -->
   <div class="card">
     <div class="card-header">
-      <div class="card-icon icon-green">👥</div>
+      <div class="card-icon green">👥</div>
       <div>
         <div class="stat-label">USUARIOS REGISTRADOS</div>
-        <div class="stat-value">127</div>
+        <div class="users-num">127</div>
         <div class="stat-sub">PERSONAS</div>
       </div>
     </div>
-    <div style="margin-top:12px">
+    <div style="margin-top:14px">
       <div class="stat-label">ESTADO DE LA TIENDA</div>
-      <div class="stat-value" style="font-size:20px">En línea</div>
+      <div class="status">En línea</div>
       <div class="stat-sub">GARFIELD BOT ACTIVO</div>
     </div>
   </div>
 
-  <!-- CARD 4: STAFF -->
   <div id="staff">
     <div class="section-title">Creadores y Staff</div>
-    <div class="section-sub">Desliza y toca una tarjeta para abrir WhatsApp</div>
+    <div class="section-sub">Toca una tarjeta para abrir WhatsApp</div>
     <div class="staff-grid">
-      <div class="staff-card" onclick="openWhatsApp('Zemo')">
-        <div class="staff-avatar">Z</div>
-        <div class="staff-name">Zemo</div>
-        <div class="staff-role">CREADOR</div>
-      </div>
-      <div class="staff-card" onclick="openWhatsApp('Smtíh')">
-        <div class="staff-avatar">S</div>
-        <div class="staff-name">Smtíh</div>
-        <div class="staff-role">OWNER</div>
-      </div>
+      <div class="staff-card" onclick="openWhatsApp('Zemo')"><div class="staff-avatar">Z</div><div>Zemo</div><div class="stat-sub">CREADOR</div></div>
+      <div class="staff-card" onclick="openWhatsApp('Smtíh')"><div class="staff-avatar">S</div><div>Smtíh</div><div class="stat-sub">OWNER</div></div>
     </div>
   </div>
-
-  <!-- CARD 5: RESEÑAS -->
-  <div id="reseñas" style="margin-top:30px">
-    <div style="display:flex; justify-content:space-between; align-items:center">
-      <div>
-        <div class="section-title">Reseñas reales</div>
-        <div class="section-sub">Opiniones de la comunidad</div>
-      </div>
-      <div style="text-align:right">
-        <div class="stat-value">5.0</div>
-        <div class="stars">★★★★★</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <select class="review-input">
-        <option>★★★ · 5</option>
-        <option>★★★★☆ · 4</option>
-      </select>
-      <button class="btn-gradient">Publicar reseña</button>
-      <textarea class="review-input" placeholder="Cuéntanos tu experiencia..."></textarea>
-      <div class="stat-sub">La reseña aparecerá cuando Admin la apruebe.</div>
-    </div>
-
-    <div class="review-card">
-      <div class="review-header">
-        <div class="stars">★★★★★</div>
-      </div>
-      <p>Los mejores productos de Lima. Envío rapidísimo 🔥</p>
-      <div class="review-user" style="margin-top:12px">
-        <div class="user-avatar">i</div>
-        <div>
-          <div style="font-weight:600">imperioarcadia2016</div>
-          <div class="stat-sub">8/8/2026</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
 </div>
 
 <div class="fab" onclick="openWhatsApp('Ventas')">✨</div>
@@ -204,22 +138,16 @@
     document.querySelector('.hamburger').classList.toggle('active');
   }
   function openWhatsApp(nombre){
-    window.open(`https://wa.me/51999999999?text=Hola ${nombre}, te escribo desde Garfield Store`, '_blank');
+    window.open(`https://wa.me/51999999999?text=Hola ${nombre}, te escribo desde GarfieldStore`, '_blank');
   }
-  
-  // Contador
-  let seg = 35, min = 20, horas = 14, dias = 0;
+  let seg = 55, min = 20, horas = 14, dias = 0;
   setInterval(()=>{
-    seg++;
-    if(seg==60){seg=0; min++}
-    if(min==60){min=0; horas++}
-    if(horas==24){horas=0; dias++}
+    seg++; if(seg==60){seg=0; min++} if(min==60){min=0; horas++} if(horas==24){horas=0; dias++}
     document.getElementById('seg').innerText = seg.toString().padStart(2,'0');
     document.getElementById('min').innerText = min.toString().padStart(2,'0');
     document.getElementById('horas').innerText = horas;
     document.getElementById('dias').innerText = dias;
   },1000)
 </script>
-
 </body>
 </html>
