@@ -3,44 +3,83 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Atiens - Garfield</title>
+  <title>Garfield Store</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <audio id="musica" src="garfield.mp3" loop></audio>
 
-  <aside class="sidebar">
-    <button id="btnMusica" class="btn-musica">🔊 Reproducir Música</button>
+  <header>
+    <button id="btnMenu">☰</button>
+    <div class="logo">🐱 Garfield<span>Store</span></div>
+    <div class="header-right">
+      <button id="btnMusica">🔊</button>
+      <button id="btnCarrito">🛒 <span id="contador">0</span></button>
+    </div>
+  </header>
 
+  <aside id="sidebar">
     <div class="menu">
-      <details open>
-        <summary>PORTAL</summary>
-        <a href="index.html">🏠 Inicio</a>
+      <div class="menu-section">
+        <h3>👑 PORTAL</h3>
+        <a href="index.html" class="active">🏠 Inicio</a>
         <a href="index.html">💛 Garfield Love</a>
-      </details>
-
-      <details open>
-        <summary>SOCIAL</summary>
+      </div>
+      <div class="menu-section">
+        <h3>🌐 REDES</h3>
         <a href="https://chat.whatsapp.com/" target="_blank">🟢 WhatsApp Grupo</a>
         <a href="https://whatsapp.com/channel/" target="_blank">🟢 WhatsApp Channel</a>
+      </div>
+      <div class="menu-section">
+        <h3>🎉 EVENTOS GARFIELD</h3>
+        <a href="#">Lunes sin Lasaña</a>
+      </div>
+      <div class="menu-section">
+        <h3>⚙️ SERVICIOS</h3>
         <a href="tienda.html">🛒 Tienda</a>
-      </details>
+      </div>
     </div>
   </aside>
+  <div id="overlay"></div>
 
-  <main class="contenido">
-    <h1>Bienvenido a Garfield</h1>
-    <p>Odio los lunes, amo la lasaña</p>
-
-    <section class="videos">
-      <h2>Historias de Garfield</h2>
-      <div class="video-grid">
-        <video src="1.mp4" controls></video>
-        <video src="2.mp4" controls></video>
+  <main>
+    <section class="banner">
+      <div class="banner-text">
+        <small>CATÁLOGO OFICIAL</small>
+        <h1>Arma tu pack y ahorra</h1>
+        <p>Elige Spam, Diamantes, Design y más. Añade varios servicios al carrito y envía tu pedido por WhatsApp.</p>
+        <button onclick="document.getElementById('catalogo').scrollIntoView()">Explorar catálogo</button>
+        <button class="btn-carrito" onclick="verCarrito()">Carrito <span id="contador2">0</span></button>
       </div>
+      <div class="banner-logos">
+        <div>💎</div><div>📢</div><div>🎨</div>
+      </div>
+    </section>
+
+    <section class="filtros">
+      <button class="filtro active" data-cat="todos">Todos</button>
+      <button class="filtro" data-cat="spam">Spam</button>
+      <button class="filtro" data-cat="diamantes">Diamantes</button>
+      <button class="filtro" data-cat="design">Design</button>
+    </section>
+
+    <section id="catalogo">
+      <h2>Todos los productos</h2>
+      <select id="selectorPais">
+        <option value="PE">🇵🇪 Perú</option>
+        <option value="CL">🇨🇱 Chile</option>
+        <option value="AR">🇦🇷 Argentina</option>
+        <option value="MX">🇲🇽 México</option>
+        <option value="BO">🇧🇴 Bolivia</option>
+        <option value="UY">🇺🇾 Uruguay</option>
+        <option value="CO">🇨🇴 Colombia</option>
+        <option value="US">🇺🇸 USA</option>
+      </select>
+      <div id="productos" class="grid-productos"></div>
     </section>
   </main>
 
+  <script src="tienda.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
