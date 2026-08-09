@@ -1,0 +1,10 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><title>Grupo 3 - Garfield Store</title><script src="https://cdn.tailwindcss.com"></script><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"><style>:root{ --naranja:#FF6B00; --naranja2:#FF8C00; --gris:#F5F5F7; } body { background: var(--gris); font-family: 'Inter', sans-serif; } .btn-primary { background: linear-gradient(90deg, var(--naranja), var(--naranja2)); color: #fff; } .card { background: #fff; border: 1px solid #E5E5E7; }</style></head><body>
+<header class="card p-4 flex items-center justify-between sticky top-0 z-30 shadow-sm"><a href="tienda.html" class="font-bold">← Volver</a><a href="producto-carrito.html" id="btnCarrito" class="card px-5 py-2.5 rounded-xl font-bold">🛒 Carrito 0</a></header>
+<div class="p-5 max-w-4xl mx-auto space-y-6">
+
+<div id="pase" class="card rounded-2xl p-6"><p class="text-5xl">👑</p><h1 class="text-3xl font-black mt-3">Pase Élite Mensual</h1><p class="text-4xl font-black text-orange-500 mt-4">S/ 20.00</p><button onclick="agregarCarrito('Pase Élite Mensual', 20)" class="btn-primary w-full py-4 rounded-xl mt-6 font-bold">AÑADIR AL CARRITO</button></div>
+
+<div id="otro" class="card rounded-2xl p-6"><p class="text-5xl">📦</p><h1 class="text-3xl font-black mt-3">Otros Servicios</h1><p class="text-gray-600">¿No encuentras lo que buscas? Escríbele a Lu</p><a href="https://wa.me/51920726588" target="_blank" class="btn-primary w-full py-4 rounded-xl mt-6 font-bold block text-center">CONSULTAR POR WHATSAPP</a></div>
+
+</div>
+<script>let carrito = JSON.parse(localStorage.getItem('carrito')) || [];actualizarCarrito();function agregarCarrito(nombre, precio) { carrito.push({nombre, precio}); localStorage.setItem('carrito', JSON.stringify(carrito)); actualizarCarrito(); alert('✅ ' + nombre + ' añadido'); }function actualizarCarrito() { document.getElementById('btnCarrito').innerText = `🛒 Carrito ${carrito.length}`; }</script></body></html>
