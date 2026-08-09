@@ -1,7 +1,6 @@
 const audio = document.getElementById('musica');
 const btn = document.getElementById('btnMusica');
 
-// Guardar estado de la música en localStorage para que siga sonando al cambiar de página
 if(localStorage.getItem('musicaEstado') === 'playing'){
   audio.play();
   btn.textContent = '🔇 Pausar Música';
