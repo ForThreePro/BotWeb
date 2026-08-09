@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Garfield Shop - Catálogo</title>
+<style>
+  :root{--bg:#07070d; --card:#0f0f18; --card-border:#1a1a2e; --text:#fff; --text-muted:#7a7f9a; --green:#00ff88; --gradient: linear-gradient(135deg, #ff3b30 0%, #ff9500 100%);}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", Arial, sans-serif; background:var(--bg); color:var(--text)}
+  nav{position:sticky; top:0; background:#000; border-bottom:1px solid var(--card-border); z-index:100}
+  .nav-wrap{display:flex; justify-content:space-between; align-items:center; padding:12px 16px}
+  .nav-left{display:flex; align-items:center; gap:12px}
+  .logo-g{width:38px; height:38px; border-radius:12px; background:var(--gradient); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:18px}
+  .logo-text{font-size:17px; font-weight:700} .logo-text span{color:var(--green)}
+  .cart-btn{background:var(--card); border:1px solid var(--card-border); padding:8px 14px; border-radius:10px; color:#fff; font-weight:600; font-size:13px; cursor:pointer}
+  .cart-count{background:var(--green); color:#000; padding:2px 6px; border-radius:6px; margin-left:6px}
+  .container{max-width:1000px; margin:0 auto; padding:20px}
+  .hero-card{background:linear-gradient(135deg, #0f0f18 0%, #1a1a2e 100%); border:1px solid var(--card-border); border-radius:20px; padding:24px; margin-bottom:24px}
+  .hero-label{color:var(--green); font-size:11px; font-weight:700; letter-spacing:1px}
+  .hero-title{font-size:28px; font-weight:700; margin:8px 0}
+  .hero-desc{color:var(--text-muted); font-size:14px; margin-bottom:20px}
+  .btn{background:var(--gradient); border:none; padding:12px 20px; border-radius:12px; color:#fff; font-weight:700; cursor:pointer}
+  .section-title{font-size:20px; font-weight:700; margin-bottom:16px}
+  .filters{display:flex; gap:8px; overflow-x:auto; padding-bottom:10px; margin-bottom:20px}
+  .filter-btn{background:var(--card); border:1px solid var(--card-border); color:var(--text-muted); padding:8px 16px; border-radius:10px; font-size:13px; font-weight:600; cursor:pointer; white-space:nowrap}
+  .filter-btn.active{background:var(--gradient); color:#fff; border:none}
+  .search-box{width:100%; background:var(--card); border:1px solid var(--card-border); border-radius:12px; padding:12px 16px; color:#fff; margin-bottom:24px}
+  .category{margin-bottom:40px}
+  .products-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:16px}
+  .product{background:var(--card); border:1px solid var(--card-border); border-radius:16px; padding:16px; position:relative}
+  .discount{position:absolute; top:12px; left:12px; background:var(--green); color:#000; padding:4px 8px; border-radius:6px; font-size:11px; font-weight:700}
+  .prod-cat{color:var(--text-muted); font-size:11px; text-transform:uppercase; margin-top:10px}
+  .prod-name{font-size:15px; font-weight:700; margin:6px 0}
+  .prod-rating{color:#fbbf24; font-size:12px; margin-bottom:8px}
+  .prod-price{font-size:18px; font-weight:700; color:var(--green)}
+  .old-price{font-size:13px; color:var(--text-muted); text-decoration:line-through; margin-left:6px}
+  .add-btn{width:100%; background:var(--gradient); border:none; padding:10px; border-radius:10px; color:#fff; font-weight:700; margin-top:12px; cursor:pointer}
+  .cart-sidebar{position:fixed; right:-400px; top:0; width:380px; height:100%; background:#0a0a12; border-left:1px solid var(--card-border); transition:.4s; z-index:200; padding:20px; display:flex; flex-direction:column}
+  .cart-sidebar.active{right:0}
+  .checkout-btn{width:100%; padding:16px; background:#25D366; color:#fff; border:none; border-radius:12px; font-size:16px; font-weight:700; cursor:pointer}
+  .overlay{position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); display:none; z-index:150}
+  .overlay.active{display:block}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-wrap">
+    <div class="nav-left">
+      <a href="index.html" style="color:#fff; font-size:24px; text-decoration:none">←</a>
+      <div class="logo-g">G</div>
+      <div class="logo-text">Garfield<span>Shop</span></div>
+    </div>
+    <button class="cart-btn" onclick="toggleCart()">Carrito <span class="cart-count" id="cart-count">0</span></button>
+  </div>
+</nav>
+<div class="container">
+  <div class="hero-card">
+    <div class="hero-label">CATÁLOGO OFICIAL</div>
+    <div class="hero-title">Arma tu pack y ahorra</div>
+    <div class="hero-desc">Elige polos, hoodies, accesorios y más. Añade varios productos al carrito y envía tu pedido completo por WhatsApp.</div>
+    <button class="btn" onclick="document.getElementById('catalogo').scrollIntoView()">Explorar catálogo</button>
+  </div>
+  <div id="catalogo">
+    <div class="section-title">Todos los productos</div>
+    <input type="text" class="search-box" placeholder="🔍 Buscar producto..." id="search">
+    <div class="filters">
+      <button class="filter-btn active" onclick="filterCat('todos')">Todos</button>
+      <button class="filter-btn" onclick="filterCat('ropa')">Ropa</button>
+      <button class="filter-btn" onclick="filterCat('accesorios')">Accesorios</button>
+      <button class="filter-btn" onclick="filterCat('packs')">Packs</button>
+    </div>
+
+    <div class="category" data-cat="ropa">
+      <div class="section-title">Ropa</div>
+      <div class="products-grid">
+        <div class="product"><div class="discount">-25%</div><div class="prod-cat">ROPA</div><div class="prod-name">Polo Garfield Classic Negro</div><div class="prod-rating">★ 4.9</div><div><span class="prod-price">S/ 59.90</span><span class="old-price">S/ 79.90</span></div><button class="add-btn" onclick="addToCart('Polo Garfield Classic Negro', 59.90)">Añadir al carrito</button></div>
+        <div class="product"><div class="prod-cat">ROPA</div><div class="prod-name">Hoodie Garfield Oversize</div><div class="prod-rating">★ 4.8</div><div><span class="prod-price">S/ 129.90</span></div><button class="add-btn" onclick="addToCart('Hoodie Garfield Oversize', 129.90)">Añadir al carrito</button></div>
+      </div>
+    </div>
+
+    <div class="category" data-cat="accesorios">
+      <div class="section-title">Accesorios</div>
+      <div class="products-grid">
+        <div class="product"><div class="discount">-20%</div><div class="prod-cat">ACCESORIOS</div><div class="prod-name">Gorra Bordada Garfield</div><div class="prod-rating">★ 4.9</div><div><span class="prod-price">S/ 45.00</span><span class="old-price">S/ 55.00</span></div><button class="add-btn" onclick="addToCart('Gorra Bordada Garfield', 45.00)">Añadir al carrito</button></div>
+      </div>
+    </div>
+
+    <div class="category" data-cat="packs">
+      <div class="section-title">Packs</div>
+      <div class="products-grid">
+        <div class="product"><div class="discount">-30%</div><div class="prod-cat">PACKS</div><div class="prod-name">Pack 2 Polos + Gorra</div><div class="prod-rating">★ 5.0</div><div><span class="prod-price">S/ 139.90</span><span class="old-price">S/ 199.80</span></div><button class="add-btn" onclick="addToCart('Pack 2 Polos + Gorra', 139.90)">Añadir al carrito</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" onclick="toggleCart()"></div>
+<div class="cart-sidebar" id="cart">
+  <h3 style="margin-bottom:20px">Tu Carrito</h3>
+  <div id="cart-items" style="flex:1; overflow-y:auto"></div>
+  <div style="font-size:20px; font-weight:700; text-align:right; margin:16px 0">Total: S/ <span id="cart-total">0.00</span></div>
+  <button class="checkout-btn" onclick="checkoutWhatsApp()">Pedir por WhatsApp</button>
+</div>
+
+<script>
+  let cart = [];
+  const WHATSAPP = "51999999999";
+  function addToCart(name, price){
+    const item = cart.find(i => i.name === name);
+    if(item){ item.qty++; } else { cart.push({name, price, qty:1}) }
+    updateCart();
+  }
+  function updateCart(){
+    document.getElementById('cart-count').innerText = cart.reduce((a,b)=>a+b.qty,0);
+    const items = document.getElementById('cart-items');
+    if(cart.length === 0){ items.innerHTML = "<p style='color:var(--text-muted)'>Carrito vacío</p>"; }
+    else { items.innerHTML = cart.map(i => `<div style="margin-bottom:12px"><b>${i.name}</b> x${i.qty} - S/ ${(i.price*i.qty).toFixed(2)}</div>`).join(''); }
+    document.getElementById('cart-total').innerText = cart.reduce((a,b)=>a + b.price*b.qty,0).toFixed(2);
+  }
+  function toggleCart(){ document.getElementById('cart').classList.toggle('active'); document.querySelector('.overlay').classList.toggle('active'); }
+  function checkoutWhatsApp(){
+    if(cart.length === 0) return alert("Carrito vacío");
+    let msg = "Hola GarfieldShop! Quiero este pedido:%0A%0A";
+    cart.forEach(i => msg += `• ${i.name} x${i.qty} - S/ ${(i.price*i.qty).toFixed(2)}%0A`);
+    msg += `%0ATotal: S/ ${cart.reduce((a,b)=>a + b.price*b.qty,0).toFixed(2)}`;
+    window.open(`https://wa.me/${WHATSAPP}?text=${msg}`, '_blank');
+  }
+  function filterCat(cat){
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+    document.querySelectorAll('.category').forEach(c => { c.style.display = (cat === 'todos' || c.dataset.cat === cat) ? 'block' : 'none'; });
+  }
+</script>
+</body>
+</html>
