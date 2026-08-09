@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Garfield Store</title>
+  <title>Garfield Store - Inicio</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,7 +14,7 @@
     <div class="logo">🐱 Garfield<span>Store</span></div>
     <div class="header-right">
       <button id="btnMusica">🔊</button>
-      <button id="btnCarrito">🛒 <span id="contador">0</span></button>
+      <button id="btnCarrito" onclick="verCarrito()">🛒 <span id="contador">0</span></button>
     </div>
   </header>
 
@@ -48,34 +48,20 @@
         <small>CATÁLOGO OFICIAL</small>
         <h1>Arma tu pack y ahorra</h1>
         <p>Elige Spam, Diamantes, Design y más. Añade varios servicios al carrito y envía tu pedido por WhatsApp.</p>
-        <button onclick="document.getElementById('catalogo').scrollIntoView()">Explorar catálogo</button>
-        <button class="btn-carrito" onclick="verCarrito()">Carrito <span id="contador2">0</span></button>
+        <button onclick="window.location='tienda.html'">Ir a Tienda</button>
+        <button class="btn-carrito" onclick="verCarrito()">Ver Carrito <span id="contador2">0</span></button>
       </div>
       <div class="banner-logos">
         <div>💎</div><div>📢</div><div>🎨</div>
       </div>
     </section>
 
-    <section class="filtros">
-      <button class="filtro active" data-cat="todos">Todos</button>
-      <button class="filtro" data-cat="spam">Spam</button>
-      <button class="filtro" data-cat="diamantes">Diamantes</button>
-      <button class="filtro" data-cat="design">Design</button>
-    </section>
-
-    <section id="catalogo">
-      <h2>Todos los productos</h2>
-      <select id="selectorPais">
-        <option value="PE">🇵🇪 Perú</option>
-        <option value="CL">🇨🇱 Chile</option>
-        <option value="AR">🇦🇷 Argentina</option>
-        <option value="MX">🇲🇽 México</option>
-        <option value="BO">🇧🇴 Bolivia</option>
-        <option value="UY">🇺🇾 Uruguay</option>
-        <option value="CO">🇨🇴 Colombia</option>
-        <option value="US">🇺🇸 USA</option>
-      </select>
-      <div id="productos" class="grid-productos"></div>
+    <section class="videos-section">
+      <h2>Historias de Garfield</h2>
+      <div class="video-grid">
+        <video src="1.mp4" controls></video>
+        <video src="2.mp4" controls></video>
+      </div>
     </section>
   </main>
 
