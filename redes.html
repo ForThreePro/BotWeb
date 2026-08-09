@@ -1,70 +1,34 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GarfieldStore - Redes</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redes - Garfield Store</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<nav>
-  <div class="nav-wrap">
-    <div class="nav-left">
-      <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
-      <div class="logo-g">G</div>
-      <div class="logo-text">Garfield<span>Store</span></div>
+  <header class="nav">
+    <div class="nav-logo"><a href="index.html">Garfield Store</a></div>
+    <nav class="nav-links" id="navLinks">
+      <a href="shop.html">Shop</a>
+      <a href="redes.html">Redes</a>
+      <a href="love.html">Love</a>
+    </nav>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </header>
+
+  <section class="hero">
+    <h1>Redes</h1>
+    <p>Síguenos</p>
+  </section>
+
+  <section class="links">
+    <div class="cards">
+      <a href="#" class="card">Instagram</a>
+      <a href="#" class="card">TikTok</a>
+      <a href="#" class="card">YouTube</a>
     </div>
-  </div>
-</nav>
-
-<div class="overlay" onclick="toggleMenu()"></div>
-<div class="side-menu" id="side-menu">
-  <div class="menu-group">
-    <div class="menu-header">📦 PORTAL</div>
-    <a href="index.html" class="menu-item"><span class="menu-icon">🏠</span> Inicio</a>
-    <a href="love.html" class="menu-item"><span class="menu-icon">❤️</span> Garfield Love</a>
-  </div>
-  <div class="menu-group">
-    <div class="menu-header">🌐 REDES</div>
-    <a href="redes.html" class="menu-item active"><span class="menu-icon">💚</span> Redes</a>
-  </div>
-  <div class="menu-group">
-    <div class="menu-header">🛍️ GARFIELD SHOP</div>
-    <a href="shop.html" class="menu-item"><span class="menu-icon">🛒</span> Tienda</a>
-  </div>
-</div>
-
-<div class="container">
-  <div class="hero-card">
-    <div class="hero-label">COMUNIDAD</div>
-    <div class="hero-title">Únete a Garfield Store</div>
-    <p style="color:var(--text-muted); margin:10px 0">Entérate primero de ofertas, nuevos productos y sorteos</p>
-  </div>
-
-  <!-- GRUPO -->
-  <div class="product" style="text-align:center; margin-bottom:16px">
-    <div style="font-size:50px; margin-bottom:12px">👥</div>
-    <div class="prod-name">Grupo de WhatsApp</div>
-    <div class="prod-price">Chatea con la comunidad y staff</div>
-    <a href="https://chat.whatsapp.com/C0Mknbe1IiaBkH3WMHINvM" target="_blank">
-      <button class="add-btn" style="margin-top:16px; background:#25D366">Unirse al Grupo</button>
-    </a>
-  </div>
-
-  <!-- CANAL -->
-  <div class="product" style="text-align:center">
-    <div style="font-size:50px; margin-bottom:12px">📢</div>
-    <div class="prod-name">Canal Oficial</div>
-    <div class="prod-price">Promociones y novedades todos los días</div>
-    <a href="https://whatsapp.com/channel/0029VaisGFT3AzNMAqLVCJ2Z" target="_blank">
-      <button class="add-btn" style="margin-top:16px; background:#25D366">Seguir Canal</button>
-    </a>
-  </div>
-</div>
-
-<!-- REPRODUCTOR -->
-<div class="music-player" id="music-player"><button id="play-btn" onclick="toggleMusic()">▶️</button><span>🎵 Garfield Theme</span></div>
-
-<script src="script.js"></script>
+  </section>
+  <script src="script.js"></script>
 </body>
 </html>
