@@ -1,3 +1,6 @@
+let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+let paisActual = localStorage.getItem('pais') || "PE";
+
 const precios = {
   SPAM: {
     "3 dias": {PE: "S/5.50", CL: "$1750", AR: "$2600", UY: "$75", BO: "Bs22.5", CO: "$7.500", US: "$2", MX: "$37.5"},
@@ -26,44 +29,113 @@ const precios = {
   }
 };
 
-const contenedor = document.getElementById("productos");
-const selector = document.getElementById("selectorPais");
-
-function renderizar(pais){
-  contenedor.innerHTML = "";
-
+function generarProductos(pais){
+  const productosData = [];
+  
   // SPAM
-  let cardSpam = document.createElement("div");
-  cardSpam.className = "card";
-  cardSpam.innerHTML = `<img src="https://placehold.co/300x200/FF8C00/fff?text=Spam"><h4>Spam x3h al día</h4><p>Texto igual al que mandas. Si pagas mañana inicia mismo día</p>`;
   for(let dur in precios.SPAM){
-    cardSpam.innerHTML += `<p><b>${dur}:</b> ${precios.SPAM[dur][pais]}</p>`;
+    productosData.push({
+      id: "spam-"+dur, cat:"spam",
+      nombre: `Spam ${dur}`, 
+      desc: "x3 horas al día. Si pagas en la mañana inicia el mismo día",
+      precio: precios.SPAM[dur][pais],
+      img: "https://placehold.co/300x200/FF8C00/000?text=Spam"
+    })
   }
-  cardSpam.innerHTML += `<button>Comprar Spam</button>`;
-  contenedor.appendChild(cardSpam);
 
   // DIAMANTES
   if(precios.DIAMANTES[pais]){
-    let cardDia = document.createElement("div");
-    cardDia.className = "card";
-    cardDia.innerHTML = `<img src="https://placehold.co/300x200/FFA500/fff?text=Diamantes"><h4>Diamantes</h4><p><b>Con Stock:</b></p>`;
-    precios.DIAMANTES[pais].con.forEach(i => cardDia.innerHTML += `<p>${i.d} ${i.p}</p>`);
-    cardDia.innerHTML += `<p><b>Sin Stock:</b></p>`;
-    precios.DIAMANTES[pais].sin.forEach(i => cardDia.innerHTML += `<p>${i.d} ${i.p}</p>`);
-    cardDia.innerHTML += `<small>Para saber tu stock mándame tu ID. Recargas en mañana y noche</small><button>Comprar Diamantes</button>`;
-    contenedor.appendChild(cardDia);
+    productosData.push({
+      id: "dia-con", cat:"diamantes",
+      nombre: `Diamantes Con Stock`,
+      desc: precios.DIAMANTES[pais].con.map(i => `${i.d} ${i.p}`).join(" | "),
+      precio: "Desde " + precios.DIAMANTES[pais].con[0].p,
+      img: "https://placehold.co/300x200/FFA500/000?text=Diamantes",
+      extra: "Para saber tu stock mándame tu ID. Recargas en mañana y noche"
+    })
+    productosData.push({
+      id: "dia-sin", cat:"diamantes",
+      nombre: `Diamantes Sin Stock`,
+      desc: precios.DIAMANTES[pais].sin.map(i => `${i.d} ${i.p}`).join(" | "),
+      precio: "Desde " + precios.DIAMANTES[pais].sin[0].p,
+      img: "https://placehold.co/300x200/FFA500/000?text=Diamantes"
+    })
   }
 
   // DESIGN
-  let cardDes = document.createElement("div");
-  cardDes.className = "card";
-  cardDes.innerHTML = `<img src="https://placehold.co/300x200/FFD580/000?text=Design"><h4>Design</h4><p>Entrega máx 2 días. Sin devoluciones</p>`;
   for(let item in precios.DESIGN){
-    cardDes.innerHTML += `<p><b>${item}:</b> ${precios.DESIGN[item][pais]}</p>`;
+    productosData.push({
+      id: "des-"+item, cat:"design",
+      nombre: item,
+      desc: "Entrega máx 2 días. Sin devoluciones",
+      precio: precios.DESIGN[item][pais],
+      img: "https://placehold.co/300x200/FFD580/000?text=Design"
+    })
   }
-  cardDes.innerHTML += `<button>Comprar Design</button>`;
-  contenedor.appendChild(cardDes);
+  return productosData;
 }
 
-selector.addEventListener("change", e => renderizar(e.target.value));
-renderizar("PE");
+function renderizar(filtro="todos"){
+  const productosData = generarProductos(paisActual);
+  const cont = document.getElementById("productos");
+  cont.innerHTML = "";
+  productosData.filter(p => filtro==="todos" || p.cat===filtro).forEach(prod => {
+    cont.innerHTML += `
+      <div class="card">
+        <img src="${prod.img}">
+        <h4>${prod.nombre}</h4>
+        <p>${prod.desc}</p>
+        ${prod.extra ? `<small>${prod.extra}</small>` : ''}
+        <p class="precio">${prod.precio}</p>
+        <button onclick="agregarCarrito('${prod.nombre} - ${prod.precio}')">Añadir al carrito</button>
+      </div>
+    `
+  })
+}
+
+// Carrito
+function agregarCarrito(item){
+  carrito.push(item);
+  localStorage.setItem('carrito', JSON.stringify(carrito));
+  actualizarContador();
+  alert("✅ Agregado al carrito");
+}
+function actualizarContador(){
+  document.getElementById("contador").textContent = carrito.length;
+  document.getElementById("contador2").textContent = carrito.length;
+}
+function verCarrito(){
+  if(carrito.length === 0) return alert("Carrito vacío");
+  let msg = "Hola, quiero pedir:\n\n" + carrito.join("\n");
+  window.open(`https://wa.me/51999999?text=${encodeURIComponent(msg)}`, '_blank')
+}
+
+// Filtros
+document.querySelectorAll(".filtro").forEach(btn => {
+  btn.onclick = () => {
+    document.querySelector(".filtro.active").classList.remove("active");
+    btn.classList.add("active");
+    renderizar(btn.dataset.cat);
+  }
+})
+
+// Selector País
+document.getElementById("selectorPais").value = paisActual;
+document.getElementById("selectorPais").onchange = (e) => {
+  paisActual = e.target.value;
+  localStorage.setItem('pais', paisActual);
+  renderizar(document.querySelector(".filtro.active").dataset.cat);
+}
+
+// Menu
+document.getElementById("btnMenu").onclick = () => {
+  document.getElementById("sidebar").classList.toggle("active");
+  document.getElementById("overlay").classList.toggle("active");
+}
+document.getElementById("overlay").onclick = () => {
+  document.getElementById("sidebar").classList.remove("active");
+  document.getElementById("overlay").classList.remove("active");
+}
+
+renderizar();
+actualizarContador();
