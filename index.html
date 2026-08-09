@@ -25,41 +25,8 @@
 <!-- MUSICA DE FONDO EN TODA LA WEB -->
 <audio id="bgMusic" src="garfield.mp3" loop autoplay></audio>
 
-<!-- LOGIN -->
-<div id="loginScreen" class="min-h-screen flex items-center justify-center p-4">
-  <div class="w-full max-w-md">
-    <div class="text-center mb-8">
-      <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-500 to-orange-400 mx-auto flex items-center justify-center text-3xl font-black text-white mb-3">G</div>
-      <h1 class="text-3xl font-black">Eventos <span class="text-orange-500">Garfield</span></h1>
-      <p class="text-gray-500 text-sm">El gato más famoso del mundo 🍕</p>
-    </div>
-    <div class="card rounded-2xl p-8 shadow-sm">
-      <div class="flex bg-gray-100 rounded-xl p-1 mb-6">
-        <button id="tabLogin" onclick="showTab('login')" class="flex-1 py-2.5 rounded-lg font-bold text-sm">Iniciar Sesión</button>
-        <button id="tabRegister" onclick="showTab('register')" class="flex-1 py-2.5 rounded-lg font-bold text-sm text-gray-500">Crear Cuenta</button>
-      </div>
-      <div id="formLogin">
-        <label class="text-sm font-semibold text-gray-600">Correo</label>
-        <input id="email" type="email" class="w-full bg-gray-50 border-gray-200 rounded-xl px-4 py-3 mt-2 mb-4 outline-none focus:border-orange-500">
-        <label class="text-sm font-semibold text-gray-600">Contraseña</label>
-        <input id="password" type="password" class="w-full bg-gray-50 border-gray-200 rounded-xl px-4 py-3 mt-2 mb-5 outline-none focus:border-orange-500">
-        <button onclick="login()" class="btn-primary w-full py-3 rounded-xl font-bold transition">INGRESAR</button>
-      </div>
-      <div id="formRegister" class="hidden">
-        <label class="text-sm font-semibold text-gray-600">Nombre</label>
-        <input id="name" type="text" class="w-full bg-gray-50 border-gray-200 rounded-xl px-4 py-3 mt-2 mb-4 outline-none">
-        <label class="text-sm font-semibold text-gray-600">Correo</label>
-        <input id="email2" type="email" class="w-full bg-gray-50 border-gray-200 rounded-xl px-4 py-3 mt-2 mb-4 outline-none">
-        <label class="text-sm font-semibold text-gray-600">Contraseña</label>
-        <input id="password2" type="password" class="w-full bg-gray-50 border-gray-200 rounded-xl px-4 py-3 mt-2 mb-5 outline-none">
-        <button onclick="register()" class="btn-primary w-full py-3 rounded-xl font-bold transition">CREAR CUENTA</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- DASHBOARD -->
-<div id="dashboardScreen" class="hidden min-h-screen pb-20">
+<!-- DASHBOARD DIRECTO -->
+<div id="dashboardScreen" class="min-h-screen pb-20">
   <header class="card p-4 flex items-center justify-between sticky top-0 z-30 shadow-sm">
     <div class="flex items-center gap-4">
       <button onclick="toggleSidebar()" class="text-2xl text-gray-600">☰</button>
@@ -77,7 +44,6 @@
         <p class="text-xs text-gray-400 font-bold px-3 mb-2">PORTAL</p>
         <a onclick="mostrarSeccion('inicio', this)" class="menu-item flex items-center gap-3 px-3 py-3 rounded-xl cursor-pointer active-menu font-semibold">🏠 Inicio</a>
         <a onclick="mostrarSeccion('garfield', this)" class="menu-item flex items-center gap-3 px-3 py-3 rounded-xl cursor-pointer font-semibold">🐱 Universo Garfield</a>
-        <a onclick="mostrarSeccion('perfil', this)" class="menu-item flex items-center gap-3 px-3 py-3 rounded-xl cursor-pointer font-semibold">⚪ Mi Perfil</a>
 
         <p class="text-xs text-gray-400 font-bold px-3 mt-6 mb-2">REDES</p>
         <a href="https://wa.me/51999999" target="_blank" class="menu-item flex items-center gap-3 px-3 py-3 rounded-xl font-semibold">📢 Canal WhatsApp</a>
@@ -85,8 +51,6 @@
 
         <p class="text-xs text-gray-400 font-bold px-3 mt-6 mb-2">TIENDA</p>
         <a href="tienda.html" class="menu-item flex items-center gap-3 px-3 py-3 rounded-xl font-semibold">🛍️ Ver Productos</a>
-
-        <button onclick="logout()" class="w-full text-red-500 py-3 rounded-xl font-bold mt-6 text-left px-3 hover:bg-red-50">Cerrar Sesión</button>
       </div>
     </aside>
 
@@ -105,7 +69,7 @@
         </div>
       </div>
 
-      <!-- SECCION GARFIELD CON VIDEOS LOCALES -->
+      <!-- SECCION GARFIELD CON VIDEOS SIN AUTOPLAY -->
       <div id="seccion-garfield" class="hidden">
         <div class="card rounded-2xl p-8 mb-6 bg-gradient-to-r from-orange-100 to-yellow-50">
           <h2 class="text-4xl font-black">🐱 Universo Garfield</h2>
@@ -118,17 +82,15 @@
 
             <!-- VIDEO 1 -->
             <div>
-              <video controls autoplay muted loop playsinline class="rounded-2xl w-full h-[500px] object-cover shadow-lg">
+              <video controls loop playsinline poster="https://placehold.co/600x400/FF6B00/FFFFFF?text=Garfield+1" class="rounded-2xl w-full h-[500px] object-cover shadow-lg">
                 <source src="1.mp4" type="video/mp4">
-                Tu navegador no soporta video.
               </video>
             </div>
 
             <!-- VIDEO 2 -->
             <div>
-              <video controls autoplay muted loop playsinline class="rounded-2xl w-full h-[500px] object-cover shadow-lg">
+              <video controls loop playsinline poster="https://placehold.co/600x400/FF6B00/FFFFFF?text=Garfield+2" class="rounded-2xl w-full h-[500px] object-cover shadow-lg">
                 <source src="2.mp4" type="video/mp4">
-                Tu navegador no soporta video.
               </video>
             </div>
 
@@ -138,7 +100,7 @@
         <div class="grid md:grid-cols-2 gap-5 mb-6">
           <div class="card rounded-2xl p-6">
             <h3 class="text-2xl font-black mb-3">¿Quién es Garfield?</h3>
-            <p class="text-gray-600">Garfield es un gato naranja, gordo y perezoso creado por Jim Davis en 1978. Ama 3 cosas: <b>Lasaña, dormir y odiar los lunes</b>.</p>
+            <p class="text-gray-600">Garfield es un gato naranja, gordo y perezoso. Ama 3 cosas: <b>Lasaña, dormir y odiar los lunes</b>.</p>
           </div>
           <div class="card rounded-2xl p-6">
             <h3 class="text-2xl font-black mb-3">Datos Curiosos</h3>
@@ -148,32 +110,6 @@
               <li>📅 <b>Primer cómic:</b> 19 de Junio de 1978</li>
             </ul>
           </div>
-        </div>
-
-        <div class="card rounded-2xl p-6">
-          <h3 class="text-2xl font-black mb-4">🎵 Tema de Garfield</h3>
-          <div class="bg-orange-50 p-4 rounded-xl flex items-center justify-between">
-            <p class="font-bold">garfield.mp3</p>
-            <button onclick="toggleMusic()" class="btn-primary px-4 py-2 rounded-lg font-bold">Play/Pause</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- PERFIL -->
-      <div id="seccion-perfil" class="hidden">
-        <div class="card rounded-2xl p-8 max-w-2xl shadow-sm">
-          <h2 class="text-3xl font-black mb-6">Mi Perfil</h2>
-          <div class="flex items-center gap-5 mb-6">
-            <img id="fotoPerfil" src="https://via.placeholder.com/90/F5F5F7/FF6B00" class="w-24 h-24 rounded-2xl border-4 border-orange-500"/>
-            <input type="file" id="inputFoto" accept="image/*" class="text-sm">
-          </div>
-          <label class="text-sm font-semibold text-gray-600">Nombre Completo</label>
-          <input id="perfilNombre" type="text" class="w-full bg-gray-50 border-gray-200 rounded-xl px-4 py-3 mt-2 mb-4 outline-none">
-          <label class="text-sm font-semibold text-gray-600">Correo Electrónico</label>
-          <input id="perfilCorreo" type="email" class="w-full bg-gray-50 border-gray-200 rounded-xl px-4 py-3 mt-2 mb-4 outline-none">
-          <label class="text-sm font-semibold text-gray-600">Contraseña</label>
-          <input id="perfilPass" type="password" class="w-full bg-gray-50 border-gray-200 rounded-xl px-4 py-3 mt-2 mb-5 outline-none">
-          <button onclick="guardarPerfil()" class="btn-primary w-full py-3 rounded-xl font-bold transition">GUARDAR CAMBIOS</button>
         </div>
       </div>
     </main>
@@ -196,18 +132,13 @@
 
 <script>
 let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-let usuario = JSON.parse(localStorage.getItem('usuario')) || {};
 let sidebarOpen = false;
 const music = document.getElementById('bgMusic');
 
 window.onload = function() {
-  if(usuario.email && usuario.password) {
-    cargarPerfil();
-    document.getElementById('loginScreen').classList.add('hidden');
-    document.getElementById('dashboardScreen').classList.remove('hidden');
-    mostrarSeccion('inicio', document.querySelector('.menu-item'));
-    music.volume = 0.3;
-  }
+  mostrarSeccion('inicio', document.querySelector('.menu-item'));
+  music.volume = 0.3;
+  music.play().catch(()=>{});
 }
 
 function toggleMusic() {
@@ -228,77 +159,13 @@ function toggleSidebar() {
   document.getElementById('overlay').classList.toggle('hidden');
 }
 
-function showTab(tab) {
-  document.getElementById('formLogin').classList.toggle('hidden', tab!== 'login');
-  document.getElementById('formRegister').classList.toggle('hidden', tab!== 'register');
-  document.getElementById('tabLogin').classList.toggle('bg-white', tab === 'login');
-  document.getElementById('tabLogin').classList.toggle('shadow', tab === 'login');
-  document.getElementById('tabRegister').classList.toggle('bg-white', tab === 'register');
-  document.getElementById('tabRegister').classList.toggle('shadow', tab === 'register');
-  document.getElementById('tabLogin').classList.toggle('text-gray-500', tab!== 'login');
-  document.getElementById('tabRegister').classList.toggle('text-gray-500', tab!== 'register');
-}
-
-function login() {
-  let email = document.getElementById('email').value;
-  let pass = document.getElementById('password').value;
-  if(usuario.email === email && usuario.password === pass) {
-    cargarPerfil();
-    document.getElementById('loginScreen').classList.add('hidden');
-    document.getElementById('dashboardScreen').classList.remove('hidden');
-    music.play().catch(()=>{});
-  } else { alert('❌ Correo o contraseña incorrectos'); }
-}
-
-function register() {
-  usuario.name = document.getElementById('name').value;
-  usuario.email = document.getElementById('email2').value;
-  usuario.password = document.getElementById('password2').value;
-  localStorage.setItem('usuario', JSON.stringify(usuario));
-  alert('✅ Cuenta creada: ' + usuario.name);
-  showTab('login');
-}
-
-function logout() {
-  music.pause();
-  localStorage.removeItem('usuario');
-  localStorage.removeItem('carrito');
-  location.reload();
-}
-
 function mostrarSeccion(sec, el) {
   document.getElementById('seccion-inicio').classList.add('hidden');
   document.getElementById('seccion-garfield').classList.add('hidden');
-  document.getElementById('seccion-perfil').classList.add('hidden');
   document.getElementById('seccion-' + sec).classList.remove('hidden');
   document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active-menu'));
   if(el) el.classList.add('active-menu');
   if(window.innerWidth < 768) toggleSidebar();
-}
-
-function cargarPerfil() {
-  document.getElementById('perfilNombre').value = usuario.name || '';
-  document.getElementById('perfilCorreo').value = usuario.email || '';
-  document.getElementById('perfilPass').value = usuario.password || '';
-  if(usuario.foto) document.getElementById('fotoPerfil').src = usuario.foto;
-}
-
-function guardarPerfil() {
-  usuario.name = document.getElementById('perfilNombre').value;
-  usuario.email = document.getElementById('perfilCorreo').value;
-  usuario.password = document.getElementById('perfilPass').value;
-  localStorage.setItem('usuario', JSON.stringify(usuario));
-  alert('✅ Perfil guardado correctamente');
-}
-
-document.getElementById('inputFoto').onchange = function(e) {
-  let reader = new FileReader();
-  reader.onload = function() {
-    usuario.foto = reader.result;
-    document.getElementById('fotoPerfil').src = reader.result;
-    localStorage.setItem('usuario', JSON.stringify(usuario));
-  }
-  reader.readAsDataURL(e.target.files[0]);
 }
 </script>
 </body>
