@@ -3,8 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Garfield Shop - Inicio</title>
+<title>GarfieldStore - Inicio</title>
 <link rel="stylesheet" href="style.css">
+<style>
+  .banner-img{width:100%; border-radius:20px; display:block}
+  .staff-card{text-align:center; cursor:pointer; transition:transform .2s}
+  .staff-card:active{transform:scale(0.95)}
+  .staff-img{width:60px; height:60px; border-radius:16px; object-fit:cover; margin:0 auto 8px}
+  .staff-placeholder{width:60px; height:60px; border-radius:16px; background:var(--gradient); display:flex; align-items:center; justify-content:center; font-size:24px; font-weight:700; margin:0 auto 8px}
+</style>
 </head>
 <body>
 <nav>
@@ -12,9 +19,9 @@
     <div class="nav-left">
       <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
       <div class="logo-g">G</div>
-      <div class="logo-text">Garfield<span>Shop</span></div>
+      <div class="logo-text">Garfield<span>Store</span></div>
     </div>
-    <a href="shop.html"><button class="cart-btn">Ir a Tienda 🛒</button></a>
+    <div class="bell-btn">🔔</div>
   </div>
 </nav>
 
@@ -26,58 +33,77 @@
 </div>
 
 <div class="container">
-  <!-- HERO -->
-  <div class="hero-card">
-    <div class="hero-label">BIENVENIDO A</div>
-    <div class="hero-title">Garfield Shop Oficial</div>
-    <p style="color:var(--text-muted); margin:10px 0 16px">Diamantes, Design, Spam y Bots. Entrega rápida y segura al mejor precio.</p>
-    <a href="shop.html"><button class="add-btn">Ir a la Tienda 🛒</button></a>
+  <!-- BANNER IGUAL A LA FOTO -->
+  <div class="hero-card" style="padding:0; overflow:hidden">
+    <img src="https://files.evogb.win/2gepcp.jpg" alt="Garfield Store" class="banner-img">
   </div>
 
-  <!-- QUIENES SOMOS -->
-  <div class="section-title">👑 Quienes Somos</div>
-  <div class="product" style="margin-bottom:20px">
-    <div class="prod-name">Somos Garfield Shop</div>
-    <div class="prod-price">Llevamos más de 2 años vendiendo diamantes, diseños, spam y bots. Atendemos a toda LATAM con los mejores precios y atención 24/7. Tu confianza es lo primero.</div>
+  <!-- TIEMPO ACTIVO -->
+  <div class="product" style="display:grid; grid-template-columns:1fr 1fr; gap:16px; text-align:center">
+    <div>
+      <div style="font-size:11px; color:var(--text-muted)">TIEMPO ACTIVO</div>
+      <div style="font-size:24px; font-weight:700; color:var(--green)">0</div>
+      <div style="font-size:11px; color:var(--text-muted)">DÍAS</div>
+    </div>
+    <div>
+      <div style="font-size:24px; font-weight:700; color:var(--green)">14</div>
+      <div style="font-size:11px; color:var(--text-muted)">HORAS</div>
+    </div>
+    <div>
+      <div style="font-size:24px; font-weight:700; color:var(--green)">21</div>
+      <div style="font-size:11px; color:var(--text-muted)">MIN</div>
+    </div>
+    <div>
+      <div style="font-size:24px; font-weight:700; color:var(--green)">01</div>
+      <div style="font-size:11px; color:var(--text-muted)">SEG</div>
+    </div>
   </div>
 
-  <!-- CREADORES -->
-  <div class="section-title">🌟 Creadores</div>
+  <!-- USUARIOS -->
+  <div class="product">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px">
+      <div style="width:40px; height:40px; border-radius:10px; background:#1a1a2e; display:flex; align-items:center; justify-content:center; font-size:20px">👥</div>
+      <div>
+        <div style="font-size:11px; color:var(--text-muted)">USUARIOS REGISTRADOS</div>
+        <div style="font-size:24px; font-weight:700; color:var(--green)">127</div>
+        <div style="font-size:11px; color:var(--text-muted)">PERSONAS</div>
+      </div>
+    </div>
+    <div style="font-size:11px; color:var(--text-muted)">ESTADO DE LA TIENDA</div>
+    <div style="font-size:14px; font-weight:700; color:var(--green)">En línea</div>
+    <div style="font-size:11px; color:var(--text-muted)">GARFIELD BOT ACTIVO</div>
+  </div>
+
+  <!-- CREADORES Y STAFF -->
+  <div class="section-title">Creadores y Staff</div>
+  <div style="font-size:12px; color:var(--text-muted); margin-bottom:12px">Toca una tarjeta</div>
+  
   <div class="products-grid">
-    <div class="product">
-      <div class="prod-cat">FUNDADOR</div>
-      <div class="prod-name">Garfield</div>
-      <div class="prod-price">Encargado de diamantes y atención al cliente</div>
+    <div class="product staff-card" onclick="window.open('https://wa.me/51927174369','_blank')">
+      <img src="https://files.evogb.win/WkMIzl.jpg" alt="Whois" class="staff-img">
+      <div class="prod-name">Whois</div>
+      <div class="prod-price">OWNER</div>
     </div>
-    <div class="product">
-      <div class="prod-cat">DISEÑADORA</div>
-      <div class="prod-name">Luu Design 🖌️</div>
-      <div class="prod-price">Logos, plantillas, jersey y caligráficos</div>
-    </div>
-    <div class="product">
-      <div class="prod-cat">ADMIN</div>
-      <div class="prod-name">Spam & Bots Team</div>
-      <div class="prod-price">Encargados de spam y bots whatsapp</div>
+
+    <div class="product staff-card" onclick="window.open('https://wa.me/51920726588','_blank')">
+      <img src="https://files.evogb.win/Q8pffG.jpg" alt="Lu" class="staff-img">
+      <div class="prod-name">Lu</div>
+      <div class="prod-price">CREADORA</div>
     </div>
   </div>
 
   <!-- RESEÑAS -->
-  <div class="section-title">💬 Reseñas de Clientes</div>
+  <div class="section-title" style="margin-top:20px">💬 Reseñas</div>
   <div class="products-grid">
     <div class="product">
-      <div class="prod-cat">⭐⭐</div>
+      <div class="prod-cat">⭐⭐⭐</div>
       <div class="prod-name">"Muy confiable"</div>
-      <div class="prod-price">"Compro diamantes todas las semanas, llega rápido y barato. 100% recomendado" - Juan CL</div>
+      <div class="prod-price">"Compro diamantes todas las semanas, llega rápido" - Juan</div>
     </div>
     <div class="product">
-      <div class="prod-cat">⭐⭐⭐⭐⭐</div>
+      <div class="prod-cat">⭐⭐⭐</div>
       <div class="prod-name">"Me encantan los designs"</div>
-      <div class="prod-price">"Luu hace los mejores logos. Me hizo mi jersey en 1 día" - Maria AR</div>
-    </div>
-    <div class="product">
-      <div class="prod-cat">⭐</div>
-      <div class="prod-name">"El spam funciona"</div>
-      <div class="prod-price">"Subí mi grupo de 0 a 500 en 3 días con el spam. Buen servicio" - Pedro MX</div>
+      <div class="prod-price">"Luu hace los mejores logos" - Maria</div>
     </div>
   </div>
 
@@ -93,11 +119,7 @@
   </div>
   <div class="product" style="margin-bottom:12px">
     <div class="prod-name">¿Cómo pago?</div>
-    <div class="prod-price">Al darle "Pedir por WhatsApp" te mandamos los datos de pago. Aceptamos Yape, Plin, Transferencia.</div>
-  </div>
-  <div class="product" style="margin-bottom:12px">
-    <div class="prod-name">¿El spam en cuánto inicia?</div>
-    <div class="prod-price">Si pagas en la mañana inicia el mismo día. Si pagas tarde/noche inicia al día siguiente.</div>
+    <div class="prod-price">Al darle "Pedir por WhatsApp" te mandamos los datos de pago.</div>
   </div>
 </div>
 
