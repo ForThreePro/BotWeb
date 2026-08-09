@@ -1,70 +1,26 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Garfield Love - Todo sobre Garfield</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Love - Garfield Store</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<nav>
-  <div class="nav-wrap">
-    <div class="nav-left">
-      <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
-      <div class="logo-g">G</div>
-      <div class="logo-text">Garfield<span>Store</span></div>
-    </div>
-  </div>
-</nav>
+  <header class="nav">
+    <div class="nav-logo"><a href="index.html">Garfield Store</a></div>
+    <nav class="nav-links" id="navLinks">
+      <a href="shop.html">Shop</a>
+      <a href="redes.html">Redes</a>
+      <a href="love.html">Love</a>
+    </nav>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </header>
 
-<div class="overlay" onclick="toggleMenu()"></div>
-<div class="side-menu" id="side-menu">
-  <div class="menu-group">
-    <div class="menu-header">📦 PORTAL</div>
-    <a href="index.html" class="menu-item"><span class="menu-icon">🏠</span> Inicio</a>
-    <a href="love.html" class="menu-item active"><span class="menu-icon">❤️</span> Garfield Love</a>
-  </div>
-  <div class="menu-group">
-    <div class="menu-header">🌐 REDES</div>
-    <a href="redes.html" class="menu-item"><span class="menu-icon">💚</span> Canal de WhatsApp</a>
-  </div>
-  <div class="menu-group">
-    <div class="menu-header">🛍️ GARFIELD SHOP</div>
-    <a href="shop.html" class="menu-item"><span class="menu-icon">🛒</span> Tienda</a>
-  </div>
-</div>
-
-<div class="container">
-  <div class="hero-card">
-    <div class="hero-label">SECCIÓN ESPECIAL</div>
-    <div class="hero-title">Garfield Love ❤️</div>
-    <p style="color:var(--text-muted); margin:10px 0">Todo sobre Garfield. Los mejores momentos del gato más flojo y amante de la lasaña.</p>
-  </div>
-
-  <div class="section-title">Videos de Garfield</div>
-
-  <div class="video-card">
-    <div class="video-title">🎬 Video 1: Garfield Moment</div>
-    <video controls>
-      <source src="1.mp4" type="video/mp4">
-      Tu navegador no soporta video.
-    </video>
-  </div>
-
-  <div class="video-card">
-    <div class="video-title">🎬 Video 2: Lasaña Time</div>
-    <video controls>
-      <source src="2.mp4" type="video/mp4">
-      Tu navegador no soporta video.
-    </video>
-  </div>
-
-  <div class="product">
-    <div class="prod-name">¿Sabías que?</div>
-    <div class="prod-price">Garfield odia los lunes, ama la lasaña y dormir. Fue creado por Jim Davis en 1978 y es uno de los cómics más leídos del mundo.</div>
-  </div>
-</div>
-
-<script src="script.js"></script>
+  <section class="hero">
+    <h1>Love</h1>
+    <p>Hecho con amor para fans de Garfield ❤️</p>
+  </section>
+  <script src="script.js"></script>
 </body>
 </html>
