@@ -1,82 +1,34 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Garfield Store - Tienda</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-<style>
-  :root{ --naranja:#FF6B00; --naranja2:#FF8C00; --gris:#F5F5F7; --texto:#1D1D1F; --verde:#25D366; }
-  body { background: var(--gris); font-family: 'Inter', sans-serif; color: var(--texto); }
-.card { background: #fff; border: 1px solid #E5E5E7; transition: all 0.3s; cursor: pointer; }
-.card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(255,107,0,0.18); }
-.btn-primary { background: linear-gradient(90deg, var(--naranja), var(--naranja2)); color: #fff; }
-.btn-whatsapp { background: var(--verde); color: #fff; }
-.filter-btn { background: #fff; border: 2px solid #E5E5E7; white-space: nowrap; }
-.filter-active { background: var(--naranja); color: #fff; border-color: var(--naranja); }
-.popup { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 50; backdrop-filter: blur(8px); }
-.popup-content { animation: slideUp 0.3s ease; }
-  @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
-.variant-btn { border: 2px solid #E5E5E7; cursor: pointer; }
-.variant-active { border-color: var(--naranja); background: #FFF5EB; }
-.stock-box { border: 2px solid; }
-.badge { background: #FFF5EB; color: var(--naranja); }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tienda - Atiens</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <header class="navbar">
+    <h1 class="logo">Atiens</h1>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="#">Dónde</a>
+      <a href="#">Varios</a>
+      <a href="tienda.html">Tienda</a>
+      <a href="#">Perfil</a>
+    </nav>
+  </header>
 
-<header class="card p-4 flex items-center justify-between sticky top-0 z-30 shadow-sm">
-  <a href="index.html" class="flex items-center gap-3">
-    <img src="https://i.imgur.com/wa_image_7763882126055199045.png" class="w-10 h-10 rounded-xl object-cover">
-    <h1 class="text-xl font-black"><span class="text-orange-500">Garfield</span> Store</h1>
-  </a>
-</header>
+  <main class="tienda">
+    <h2>Tienda</h2>
+    <div id="productos" class="grid-productos">
+      <!-- Los productos se cargan desde tienda.js -->
+    </div>
+  </main>
 
-<div class="p-5 max-w-7xl mx-auto pb-10">
-  <div class="card rounded-2xl p-8 mb-6 bg-gradient-to-r from-orange-50 to-white">
-    <span class="badge px-3 py-1 rounded-full text-xs font-bold">CATÁLOGO 2026</span>
-    <h2 class="text-4xl font-black mt-4">Arma tu pack como Garfield 🍕</h2>
-    <p class="text-gray-600 mt-2">Elige tu servicio y te contacto por WhatsApp al instante</p>
-  </div>
+  <footer>
+    <p>© 2026 Atiens Web</p>
+  </footer>
 
-  <div class="flex gap-3 mb-6 overflow-x-auto pb-2">
-    <button onclick="filtrar('todos')" id="btn-todos" class="filter-btn filter-active px-5 py-2.5 rounded-xl text-sm font-bold">Todos</button>
-    <button onclick="filtrar('diamantes')" id="btn-diamantes" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600">Diamantes</button>
-    <button onclick="filtrar('musica')" id="btn-musica" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600">Música</button>
-    <button onclick="filtrar('streaming')" id="btn-streaming" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600">Streaming</button>
-    <button onclick="filtrar('spam')" id="btn-spam" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600">Spam</button>
-    <button onclick="filtrar('design')" id="btn-design" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600">Design</button>
-    <button onclick="filtrar('bots')" id="btn-bots" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600">Bots</button>
-    <button onclick="filtrar('seguidores')" id="btn-seguidores" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600">Seguidores</button>
-    <button onclick="filtrar('vistas')" id="btn-vistas" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600">Vistas</button>
-    <button onclick="filtrar('likes')" id="btn-likes" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600">Likes</button>
-    <button onclick="filtrar('numeros')" id="btn-numeros" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600">Números</button>
-    <button onclick="filtrar('pase')" id="btn-pase" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600">Pase Élite</button>
-  </div>
-
-  <div id="productos" class="grid md:grid-cols-3 gap-5">
-    <div class="producto diamantes card rounded-2xl p-6 md:col-span-3" onclick="abrirPopupDiamantes()"><span class="badge text-xs px-3 py-1 rounded-full font-bold">FREE FIRE</span><p class="text-4xl mt-3">💎</p><p class="font-bold text-2xl mt-1">Recargas Free Fire</p><p class="text-gray-600 text-sm">100 - 6160 diamantes | 6 países</p><button class="btn-primary w-full py-3 rounded-xl mt-3 font-bold">Ver Precios</button></div>
-    <div class="producto musica card rounded-2xl p-6" onclick="abrirPopupSimple('Spotify Premium Individual', 10)"><span class="badge text-xs px-3 py-1 rounded-full font-bold">MÚSICA</span><p class="text-4xl text-green-500 mt-3">●</p><p class="font-bold text-xl mt-1">Spotify Premium</p><p class="mt-2 text-3xl font-black text-orange-500">S/ 10.00</p><button class="btn-primary w-full py-3 rounded-xl mt-3 font-bold">Comprar</button></div>
-    <div class="producto streaming card rounded-2xl p-6" onclick="abrirPopupSimple('Netflix Premium 1 Pantalla', 15)"><span class="badge text-xs px-3 py-1 rounded-full font-bold">STREAMING</span><p class="text-4xl font-black text-red-500 mt-3">N</p><p class="font-bold text-xl mt-1">Netflix Premium</p><p class="mt-2 text-3xl font-black text-orange-500">S/ 15.00</p><button class="btn-primary w-full py-3 rounded-xl mt-3 font-bold">Comprar</button></div>
-    <div class="producto spam card rounded-2xl p-6" onclick="abrirPopupSpam()"><span class="badge text-xs px-3 py-1 rounded-full font-bold">SPAM</span><p class="text-4xl mt-3">📢</p><p class="font-bold text-xl mt-1">Spam 3x3 Horas</p><p class="text-gray-600 text-sm">3, 5 días o 1 semana</p><button class="btn-primary w-full py-3 rounded-xl mt-3 font-bold">Ver Planes</button></div>
-    <div class="producto design card rounded-2xl p-6" onclick="abrirPopupDesign()"><span class="badge text-xs px-3 py-1 rounded-full font-bold">DESIGN</span><p class="text-4xl mt-3">🖌️</p><p class="font-bold text-xl mt-1">Design Luu</p><p class="text-gray-600 text-sm">Logos, Jersey, Plantillas</p><button class="btn-primary w-full py-3 rounded-xl mt-3 font-bold">Ver Servicios</button></div>
-    <div class="producto bots card rounded-2xl p-6" onclick="abrirPopupBots()"><span class="badge text-xs px-3 py-1 rounded-full font-bold">BOTS</span><p class="text-4xl mt-3">🤖</p><p class="font-bold text-xl mt-1">Bots WhatsApp</p><p class="text-gray-600 text-sm">Mensual y Personalizado</p><button class="btn-primary w-full py-3 rounded-xl mt-3 font-bold">Ver Opciones</button></div>
-    <div class="producto seguidores card rounded-2xl p-6" onclick="abrirPopupSeguidores()"><span class="badge text-xs px-3 py-1 rounded-full font-bold">SEGUIDORES</span><p class="text-4xl mt-3">👥</p><p class="font-bold text-xl mt-1">Seguidores IG/TK</p><p class="text-gray-600 text-sm">500 - 2000 seguidores</p><button class="btn-primary w-full py-3 rounded-xl mt-3 font-bold">Ver Paquetes</button></div>
-    <div class="producto vistas card rounded-2xl p-6" onclick="abrirPopupSimple('10K Vistas TikTok', 12)"><span class="badge text-xs px-3 py-1 rounded-full font-bold">VISTAS</span><p class="text-4xl mt-3">👁️</p><p class="font-bold text-xl mt-1">10K Vistas TikTok</p><p class="mt-2 text-3xl font-black text-orange-500">S/ 12.00</p><button class="btn-primary w-full py-3 rounded-xl mt-3 font-bold">Comprar</button></div>
-    <div class="producto likes card rounded-2xl p-6" onclick="abrirPopupSimple('500 Likes Instagram', 8)"><span class="badge text-xs px-3 py-1 rounded-full font-bold">LIKES</span><p class="text-4xl mt-3">❤️</p><p class="font-bold text-xl mt-1">500 Likes Instagram</p><p class="mt-2 text-3xl font-black text-orange-500">S/ 8.00</p><button class="btn-primary w-full py-3 rounded-xl mt-3 font-bold">Comprar</button></div>
-    <div class="producto numeros card rounded-2xl p-6" onclick="abrirPopupSimple('Número USA WhatsApp', 25)"><span class="badge text-xs px-3 py-1 rounded-full font-bold">NÚMEROS</span><p class="text-4xl mt-3">📱</p><p class="font-bold text-xl mt-1">Número USA</p><p class="mt-2 text-3xl font-black text-orange-500">S/ 25.00</p><button class="btn-primary w-full py-3 rounded-xl mt-3 font-bold">Comprar</button></div>
-    <div class="producto pase card rounded-2xl p-6" onclick="abrirPopupSimple('Pase Élite Mensual', 20)"><span class="badge text-xs px-3 py-1 rounded-full font-bold">FREE FIRE</span><p class="text-4xl mt-3">👑</p><p class="font-bold text-xl mt-1">Pase Élite</p><p class="mt-2 text-3xl font-black text-orange-500">S/ 20.00</p><button class="btn-primary w-full py-3 rounded-xl mt-3 font-bold">Comprar</button></div>
-  </div>
-</div>
-
-<div id="popup" class="popup items-end md:items-center justify-center">
-  <div class="popup-content bg-white w-full md:w-[700px] rounded-t-3xl md:rounded-2xl p-6">
-    <div class="flex justify-between items-center mb-4"><h3 class="text-2xl font-black" id="popup-titulo">Confirmar</h3><button onclick="cerrarPopup()" class="text-3xl">×</button></div>
-    <div id="popup-contenido"></div>
-  </div>
-</div>
-
-<script src="tienda.js"></script>
+  <script src="tienda.js"></script>
 </body>
 </html>
