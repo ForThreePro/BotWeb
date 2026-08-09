@@ -1,35 +1,5 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Design - Garfield Store</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <button class="hamburger" id="hamburger">☰</button>
-  <button class="cart-btn" id="cartBtn">🛒 <span id="cartCount">0</span></button>
-
-  <aside class="sidebar" id="sidebar">
-    <div class="sidebar-section"><h3>📦 PORTAL</h3><a href="index.html">🏠 Inicio</a></div>
-    <div class="sidebar-section"><h3>🌐 REDES</h3><a href="redes.html">💚 Canal</a><a href="love.html">❤️ Love</a></div>
-    <div class="sidebar-section"><h3>🛍️ GARFIELD SHOP</h3><a href="shop.html">🛒 Tienda</a></div>
-  </aside>
-
-  <main class="content">
-    <section class="hero"><h1>Design</h1><p>Diseños exclusivos de Garfield</p></section>
-    <section class="links">
-      <div class="cards">
-        <div class="card"><h3>Logo Garfield</h3><p>S/15.00</p><button onclick="addToCart('Logo Garfield', 15)">Agregar</button></div>
-        <div class="card"><h3>Banners HD</h3><p>S/10.00</p><button onclick="addToCart('Banners HD', 10)">Agregar</button></div>
-        <div class="card"><h3>Pack Stickers</h3><p>S/8.00</p><button onclick="addToCart('Pack Stickers', 8)">Agregar</button></div>
-      </div>
-    </section>
-  </main>
-
-  <div class="cart-modal" id="cartModal"><div class="cart-content"><h2>Tu Carrito</h2><div id="cartItems"></div><p class="cart-total">Total: S/<span id="cartTotal">0.00</span></p><button class="btn-orange" onclick="checkout()">Pagar por WhatsApp</button><button class="btn-close" onclick="toggleCart()">Cerrar</button></div></div>
-  <audio id="bgMusic" loop src="garfield.mp3"></audio>
-  <button id="musicBtn" class="music-btn">🔊</button>
-  <script src="script.js"></script>
-</body>
-</html>
+<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Design</title><link rel="stylesheet" href="style.css"></head><body>
+<header><div class="logo">Garfield <span style="color:var(--purple-light)">Store</span></div><nav><a href="index.html">Inicio</a><a href="shop.html">Tienda</a><a href="redes.html">Redes</a></nav></header>
+<main class="content"><section class="hero"><h1>Design</h1><p>Diseños exclusivos</p></section><section class="cards">
+<div class="card"><h3>Logo Garfield</h3><p>Pack completo</p></div><div class="card"><h3>Banners HD</h3><p>Para redes</p></div></section></main>
+<audio id="bgMusic" loop src="garfield.mp3"></audio><button id="musicBtn" class="music-btn">🔊</button><script src="script.js"></script></body></html>
