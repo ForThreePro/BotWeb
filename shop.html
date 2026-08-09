@@ -1,88 +1,36 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GarfieldStore - Tienda</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop - Garfield Store</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<nav>
-  <div class="nav-wrap">
-    <div class="nav-left">
-      <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
-      <div class="logo-g">G</div>
-      <div class="logo-text">Garfield<span>Store</span></div>
+  <header class="nav">
+    <div class="nav-logo"><a href="index.html">Garfield Store</a></div>
+    <nav class="nav-links" id="navLinks">
+      <a href="shop.html">Shop</a>
+      <a href="redes.html">Redes</a>
+      <a href="love.html">Love</a>
+    </nav>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </header>
+
+  <section class="hero">
+    <h1>Shop</h1>
+    <p>Elige una categoría</p>
+  </section>
+
+  <section class="links">
+    <div class="cards">
+      <a href="design.html" class="card">Design</a>
+      <a href="diamantes.html" class="card">Diamantes</a>
+      <a href="spam.html" class="card">Spam</a>
+      <a href="bots.html" class="card">Bot</a>
     </div>
-    <button class="cart-btn" onclick="toggleCart()">🛒 Carrito <span class="cart-count" id="cart-count">0</span></button>
-  </div>
-</nav>
+  </section>
 
-<div class="overlay"></div>
-<div class="side-menu" id="side-menu">
-  <div class="menu-group">
-    <div class="menu-header">📦 PORTAL</div>
-    <a href="index.html" class="menu-item"><span class="menu-icon">🏠</span> Inicio</a>
-    <a href="love.html" class="menu-item"><span class="menu-icon">❤️</span> Garfield Love</a>
-  </div>
-  <div class="menu-group">
-    <div class="menu-header">🌐 REDES</div>
-    <a href="redes.html" class="menu-item"><span class="menu-icon">💚</span> Redes</a>
-  </div>
-  <div class="menu-group">
-    <div class="menu-header">🛍️ GARFIELD SHOP</div>
-    <a href="shop.html" class="menu-item active"><span class="menu-icon">🛒</span> Tienda</a>
-  </div>
-</div>
-
-<div class="container">
-  <div class="hero-card">
-    <div class="hero-label">TIENDA</div>
-    <div class="hero-title">Garfield Shop</div>
-    <p style="color:var(--text-muted); margin:10px 0">Elige una categoría</p>
-  </div>
-
-  <div class="products-grid">
-    <div class="product" onclick="location.href='diamantes.html'" style="cursor:pointer">
-      <div class="prod-cat">FREE FIRE</div>
-      <div class="prod-name">Diamantes</div>
-      <div class="prod-price">Recargas rápidas</div>
-      <button class="add-btn">Entrar</button>
-    </div>
-
-    <div class="product" onclick="location.href='design.html'" style="cursor:pointer">
-      <div class="prod-cat">DESIGN</div>
-      <div class="prod-name">Tex Logo / Plantillas</div>
-      <div class="prod-price">Diseños personalizados</div>
-      <button class="add-btn">Entrar</button>
-    </div>
-
-    <div class="product" onclick="location.href='spam.html'" style="cursor:pointer">
-      <div class="prod-cat">MARKETING</div>
-      <div class="prod-name">Spam WhatsApp</div>
-      <div class="prod-price">Promociona tu link</div>
-      <button class="add-btn">Entrar</button>
-    </div>
-
-    <div class="product" onclick="location.href='bots.html'" style="cursor:pointer">
-      <div class="prod-cat">BOTS</div>
-      <div class="prod-name">Bot WhatsApp</div>
-      <div class="prod-price">Automatiza tu WhatsApp</div>
-      <button class="add-btn">Entrar</button>
-    </div>
-  </div>
-</div>
-
-<!-- CARRITO -->
-<div class="cart-sidebar" id="cart">
-  <div class="cart-header"><div style="font-size:18px; font-weight:700">Tu Carrito</div><div class="cart-close" onclick="toggleCart()">✕</div></div>
-  <div id="cart-items" style="flex:1; overflow-y:auto"></div>
-  <button class="checkout-btn" onclick="checkoutWhatsApp()">Pedir por WhatsApp</button>
-</div>
-
-<div class="toast" id="toast">Agregado al carrito ✅</div>
-<div class="music-player" id="music-player"><button id="play-btn">▶️</button><span>🎵 Garfield Theme</span></div>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
