@@ -7,28 +7,29 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="nav">
-    <div class="nav-logo"><a href="index.html">Garfield Store</a></div>
-    <nav class="nav-links" id="navLinks">
-      <a href="shop.html">Shop</a>
-      <a href="redes.html">Redes</a>
-      <a href="love.html">Love</a>
-    </nav>
-    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
-  </header>
+  <button class="hamburger" id="hamburger">☰</button>
+  <button class="cart-btn" id="cartBtn">🛒 <span id="cartCount">0</span></button>
 
-  <section class="hero">
-    <h1>Bot</h1>
-    <p>Nuestros bots automatizados</p>
-  </section>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-section"><h3>📦 PORTAL</h3><a href="index.html">🏠 Inicio</a></div>
+    <div class="sidebar-section"><h3>🌐 REDES</h3><a href="redes.html">💚 Canal</a><a href="love.html">❤️ Love</a></div>
+    <div class="sidebar-section"><h3>🛍️ GARFIELD SHOP</h3><a href="shop.html">🛒 Tienda</a></div>
+  </aside>
 
-  <section class="links">
-    <div class="cards">
-      <a href="#" class="card">Bot Discord</a>
-      <a href="#" class="card">Bot Telegram</a>
-      <a href="#" class="card">Bot Garfield</a>
-    </div>
-  </section>
+  <main class="content">
+    <section class="hero"><h1>Bots</h1><p>Nuestros bots automatizados</p></section>
+    <section class="links">
+      <div class="cards">
+        <div class="card"><h3>Bot Discord</h3><p>S/30.00</p><button onclick="addToCart('Bot Discord', 30)">Agregar</button></div>
+        <div class="card"><h3>Bot Telegram</h3><p>S/30.00</p><button onclick="addToCart('Bot Telegram', 30)">Agregar</button></div>
+        <div class="card"><h3>Bot Garfield</h3><p>S/40.00</p><button onclick="addToCart('Bot Garfield', 40)">Agregar</button></div>
+      </div>
+    </section>
+  </main>
+
+  <div class="cart-modal" id="cartModal"><div class="cart-content"><h2>Tu Carrito</h2><div id="cartItems"></div><p class="cart-total">Total: S/<span id="cartTotal">0.00</span></p><button class="btn-orange" onclick="checkout()">Pagar por WhatsApp</button><button class="btn-close" onclick="toggleCart()">Cerrar</button></div></div>
+  <audio id="bgMusic" loop src="garfield.mp3"></audio>
+  <button id="musicBtn" class="music-btn">🔊</button>
   <script src="script.js"></script>
 </body>
 </html>
