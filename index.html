@@ -14,11 +14,11 @@
       <div class="logo-g">G</div>
       <div class="logo-text">Garfield<span>Shop</span></div>
     </div>
-    <button class="cart-btn" onclick="toggleCart()">Carrito <span class="cart-count" id="cart-count">0</span></button>
+    <a href="shop.html"><button class="cart-btn">Ir a Tienda 🛒</button></a>
   </div>
 </nav>
 
-<div class="overlay" onclick="toggleMenu(); toggleCart()"></div>
+<div class="overlay" onclick="toggleMenu()"></div>
 <div class="side-menu" id="side-menu">
   <div class="menu-group"><div class="menu-header">📦 PORTAL</div><a href="index.html" class="menu-item active"><span class="menu-icon">🏠</span> Inicio</a></div>
   <div class="menu-group"><div class="menu-header">🌐 REDES</div><a href="redes.html" class="menu-item"><span class="menu-icon">💚</span> Canal de WhatsApp</a></div>
@@ -26,42 +26,79 @@
 </div>
 
 <div class="container">
+  <!-- HERO -->
   <div class="hero-card">
-    <div class="hero-label">BIENVENIDO</div>
+    <div class="hero-label">BIENVENIDO A</div>
     <div class="hero-title">Garfield Shop Oficial</div>
-    <p style="color:var(--text-muted); margin:10px 0 16px">Diamantes, Design, Spam y Bots para Free Fire y WhatsApp</p>
+    <p style="color:var(--text-muted); margin:10px 0 16px">Diamantes, Design, Spam y Bots. Entrega rápida y segura al mejor precio.</p>
     <a href="shop.html"><button class="add-btn">Ir a la Tienda 🛒</button></a>
   </div>
 
-  <div class="section-title">¿Por qué elegirnos?</div>
+  <!-- QUIENES SOMOS -->
+  <div class="section-title">👑 Quienes Somos</div>
+  <div class="product" style="margin-bottom:20px">
+    <div class="prod-name">Somos Garfield Shop</div>
+    <div class="prod-price">Llevamos más de 2 años vendiendo diamantes, diseños, spam y bots. Atendemos a toda LATAM con los mejores precios y atención 24/7. Tu confianza es lo primero.</div>
+  </div>
+
+  <!-- CREADORES -->
+  <div class="section-title">🌟 Creadores</div>
   <div class="products-grid">
     <div class="product">
-      <div class="prod-cat">ENTREGA</div>
-      <div class="prod-name">Rápida 24/7</div>
-      <div class="prod-price">Recargas en la mañana y noche</div>
+      <div class="prod-cat">FUNDADOR</div>
+      <div class="prod-name">Garfield</div>
+      <div class="prod-price">Encargado de diamantes y atención al cliente</div>
     </div>
     <div class="product">
-      <div class="prod-cat">PAGO</div>
-      <div class="prod-name">Seguro</div>
-      <div class="prod-price">Pago por WhatsApp con Lu</div>
+      <div class="prod-cat">DISEÑADORA</div>
+      <div class="prod-name">Luu Design 🖌️</div>
+      <div class="prod-price">Logos, plantillas, jersey y caligráficos</div>
     </div>
     <div class="product">
-      <div class="prod-cat">SOPORTE</div>
-      <div class="prod-name">Atención personalizada</div>
-      <div class="prod-price">Te ayudamos en todo</div>
+      <div class="prod-cat">ADMIN</div>
+      <div class="prod-name">Spam & Bots Team</div>
+      <div class="prod-price">Encargados de spam y bots whatsapp</div>
     </div>
   </div>
-</div>
 
-<!-- CARRITO -->
-<div class="cart-sidebar" id="cart">
-  <div class="cart-header">
-    <h3>Tu Carrito</h3>
-    <div class="cart-close" onclick="toggleCart()">✕</div>
+  <!-- RESEÑAS -->
+  <div class="section-title">💬 Reseñas de Clientes</div>
+  <div class="products-grid">
+    <div class="product">
+      <div class="prod-cat">⭐⭐</div>
+      <div class="prod-name">"Muy confiable"</div>
+      <div class="prod-price">"Compro diamantes todas las semanas, llega rápido y barato. 100% recomendado" - Juan CL</div>
+    </div>
+    <div class="product">
+      <div class="prod-cat">⭐⭐⭐⭐⭐</div>
+      <div class="prod-name">"Me encantan los designs"</div>
+      <div class="prod-price">"Luu hace los mejores logos. Me hizo mi jersey en 1 día" - Maria AR</div>
+    </div>
+    <div class="product">
+      <div class="prod-cat">⭐</div>
+      <div class="prod-name">"El spam funciona"</div>
+      <div class="prod-price">"Subí mi grupo de 0 a 500 en 3 días con el spam. Buen servicio" - Pedro MX</div>
+    </div>
   </div>
-  <div id="cart-items" style="flex:1; overflow-y:auto"></div>
-  <div style="font-size:20px; font-weight:700; text-align:right; margin:16px 0">Total: S/ <span id="cart-total">0.00</span></div>
-  <button class="checkout-btn" onclick="checkoutWhatsApp()">Pedir a Lu por WhatsApp</button>
+
+  <!-- FAQ -->
+  <div class="section-title">❓ Preguntas Frecuentes</div>
+  <div class="product" style="margin-bottom:12px">
+    <div class="prod-name">¿En cuánto tiempo llegan los diamantes?</div>
+    <div class="prod-price">En la mañana y noche. Tardes no respondemos mucho.</div>
+  </div>
+  <div class="product" style="margin-bottom:12px">
+    <div class="prod-name">¿Hacen devoluciones?</div>
+    <div class="prod-price">No hacemos devoluciones ni aceptamos faltas de respeto.</div>
+  </div>
+  <div class="product" style="margin-bottom:12px">
+    <div class="prod-name">¿Cómo pago?</div>
+    <div class="prod-price">Al darle "Pedir por WhatsApp" te mandamos los datos de pago. Aceptamos Yape, Plin, Transferencia.</div>
+  </div>
+  <div class="product" style="margin-bottom:12px">
+    <div class="prod-name">¿El spam en cuánto inicia?</div>
+    <div class="prod-price">Si pagas en la mañana inicia el mismo día. Si pagas tarde/noche inicia al día siguiente.</div>
+  </div>
 </div>
 
 <script src="script.js"></script>
