@@ -18,7 +18,6 @@
 .active-menu { background: #FFF5EB; color: var(--naranja); border-left: 3px solid var(--naranja); }
 .overlay { background: rgba(0,0,0,0.4); }
 .music-bar { background: #fff; border-top: 1px solid #E5E5E7; }
-.tiktok-embed { margin: 0 auto!important; }
 </style>
 </head>
 <body>
@@ -106,7 +105,7 @@
         </div>
       </div>
 
-      <!-- SECCION GARFIELD CON TIKTOKS -->
+      <!-- SECCION GARFIELD CON VIDEOS LOCALES -->
       <div id="seccion-garfield" class="hidden">
         <div class="card rounded-2xl p-8 mb-6 bg-gradient-to-r from-orange-100 to-yellow-50">
           <h2 class="text-4xl font-black">🐱 Universo Garfield</h2>
@@ -114,21 +113,26 @@
         </div>
 
         <div class="card rounded-2xl p-6 mb-6">
-          <h3 class="text-2xl font-black mb-4">🎬 TikToks Virales de Garfield</h3>
-          <div class="grid md:grid-cols-2 gap-6 justify-items-center">
+          <h3 class="text-2xl font-black mb-4">🎬 Videos de Garfield</h3>
+          <div class="grid md:grid-cols-2 gap-6">
 
-            <!-- TIKTOK 1 -->
-            <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@usuario/video/ZS4pDXm7U" data-video-id="ZS4pDXm7U" style="max-width: 325px; min-width: 325px;" >
-              <section> </section>
-            </blockquote>
+            <!-- VIDEO 1 -->
+            <div>
+              <video controls autoplay muted loop playsinline class="rounded-2xl w-full h-[500px] object-cover shadow-lg">
+                <source src="1.mp4" type="video/mp4">
+                Tu navegador no soporta video.
+              </video>
+            </div>
 
-            <!-- TIKTOK 2 -->
-            <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@usuario/video/ZS4pD5x3N" data-video-id="ZS4pD5x3N" style="max-width: 325px; min-width: 325px;" >
-              <section> </section>
-            </blockquote>
+            <!-- VIDEO 2 -->
+            <div>
+              <video controls autoplay muted loop playsinline class="rounded-2xl w-full h-[500px] object-cover shadow-lg">
+                <source src="2.mp4" type="video/mp4">
+                Tu navegador no soporta video.
+              </video>
+            </div>
 
           </div>
-          <script async src="https://www.tiktok.com/embed.js"></script>
         </div>
 
         <div class="grid md:grid-cols-2 gap-5 mb-6">
@@ -194,7 +198,6 @@
 let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 let usuario = JSON.parse(localStorage.getItem('usuario')) || {};
 let sidebarOpen = false;
-let musicPlaying = true;
 const music = document.getElementById('bgMusic');
 
 window.onload = function() {
