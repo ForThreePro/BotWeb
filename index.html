@@ -5,190 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Garfield Store</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root{ --naranja:#FF6B00; --naranja2:#FF8C00; --gris:#F5F5F7; --texto:#1D1D1F; --verde:#25D366; }
-  body { background: var(--gris); font-family: 'Inter', sans-serif; color: var(--texto); }
-.card { background: #fff; border: 1px solid #E5E5E7; }
-.btn-primary { background: linear-gradient(90deg, var(--naranja), var(--naranja2)); color: #fff; }
-.btn-whatsapp { background: var(--verde); color: #fff; }
-.btn-primary:hover,.btn-whatsapp:hover { opacity: 0.9; transform: translateY(-1px); }
-.sidebar { background: #fff; border-right: 1px solid #E5E5E7; }
-.menu-item { color: #6E6E73; }
-.menu-item:hover { background: #FFF5EB; color: var(--naranja); }
-.active-menu { background: #FFF5EB; color: var(--naranja); border-left: 3px solid var(--naranja); }
-.overlay { background: rgba(0,0,0,0.4); }
-.music-bar { background: #fff; border-top: 1px solid #E5E5E7; }
+  :root{ --naranja:#FF6B00; --naranja2:#FF8C00; --gris:#F5F5F7; }
+  body { background: var(--gris); font-family: 'Inter', sans-serif; }
+  .btn-primary { background: linear-gradient(90deg, var(--naranja), var(--naranja2)); color: #fff; }
 </style>
 </head>
 <body>
 
-<!-- MUSICA DE FONDO EN TODA LA WEB -->
 <audio id="bgMusic" src="garfield.mp3" loop autoplay></audio>
 
-<!-- DASHBOARD DIRECTO -->
-<div id="dashboardScreen" class="min-h-screen pb-20">
-  <header class="card p-4 flex items-center justify-between sticky top-0 z-30 shadow-sm">
-    <div class="flex items-center gap-4">
-      <button onclick="toggleSidebar()" class="text-2xl text-gray-600">☰</button>
-      <!-- LOGO POR LINK -->
-      <img src="https://i.imgur.com/TU_IMAGEN_AQUI.png" alt="Garfield" class="w-10 h-10 rounded-xl object-cover">
-      <h1 class="text-xl font-black"><span class="text-orange-500">Garfield</span> Store</h1>
-    </div>
-    <button onclick="toggleMusic()" id="btnMusic" class="text-2xl">🔊</button>
-  </header>
-
-  <div id="overlay" onclick="toggleSidebar()" class="overlay fixed inset-0 z-20 hidden md:hidden"></div>
-
-  <div class="flex">
-    <aside id="sidebar" class="sidebar w-72 h-[calc(100vh-69px)] overflow-y-auto fixed left-0 top-[69px] z-20 transform -translate-x-full md:translate-x-0 shadow-sm">
-      <div class="p-4">
-        <p class="text-xs text-gray-400 font-bold px-3 mb-2">PORTAL</p>
-        <a onclick="mostrarSeccion('inicio', this)" class="menu-item flex items-center gap-3 px-3 py-3 rounded-xl cursor-pointer active-menu font-semibold">🏠 Inicio</a>
-        <a onclick="mostrarSeccion('garfield', this)" class="menu-item flex items-center gap-3 px-3 py-3 rounded-xl cursor-pointer font-semibold">🐱 Universo Garfield</a>
-
-        <p class="text-xs text-gray-400 font-bold px-3 mt-6 mb-2">REDES</p>
-        <a href="https://wa.me/51999999" target="_blank" class="menu-item flex items-center gap-3 px-3 py-3 rounded-xl font-semibold">📢 Canal WhatsApp</a>
-        <a href="https://chat.whatsapp.com/xxxxx" target="_blank" class="menu-item flex items-center gap-3 px-3 py-3 rounded-xl font-semibold">👥 Comunidad</a>
-
-        <p class="text-xs text-gray-400 font-bold px-3 mt-6 mb-2">TIENDA</p>
-        <a href="tienda.html" class="menu-item flex items-center gap-3 px-3 py-3 rounded-xl font-semibold">🛍️ Ver Productos</a>
-      </div>
-    </aside>
-
-    <main class="w-full p-5 md:ml-72">
-      <!-- INICIO CON CONTACTOS -->
-      <div id="seccion-inicio">
-        <div class="card rounded-2xl p-8 mb-6 bg-gradient-to-r from-orange-50 to-white">
-          <h2 class="text-4xl font-black">Bienvenido a <span class="text-orange-500">Garfield Store</span> 🎭</h2>
-          <p class="text-gray-600 mt-3 text-lg">La tienda #1 de servicios digitales. Con el espíritu de Garfield: Lasaña, lunes y buena vibra.</p>
-          <button onclick="toggleMusic()" class="btn-primary px-5 py-2.5 rounded-xl font-bold mt-4">🎵 Reproducir Tema de Garfield</button>
-        </div>
-
-        <!-- NUEVA SECCIÓN CONTACTOS -->
-        <div class="card rounded-2xl p-6 mb-6">
-          <h3 class="text-2xl font-black mb-4">📞 Contacto Directo</h3>
-          <p class="text-gray-600 mb-4">¿Dudas o pedidos? Escríbenos por WhatsApp y te respondemos al toque</p>
-          <div class="grid md:grid-cols-2 gap-4">
-            
-            <!-- WHATSAPP WHOIS -->
-            <div class="bg-green-50 border border-green-200 rounded-xl p-5">
-              <div class="flex items-center gap-3 mb-3">
-                <div class="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center text-2xl">👤</div>
-                <div>
-                  <p class="font-black text-lg">WhatsApp Whois</p>
-                  <p class="text-gray-600 text-sm">+51 927 174 369</p>
-                </div>
-              </div>
-              <a href="https://wa.me/51927174369" target="_blank" class="btn-whatsapp w-full py-3 rounded-xl font-bold text-center block">Chatear Ahora</a>
-            </div>
-
-            <!-- WHATSAPP LU -->
-            <div class="bg-green-50 border-green-200 rounded-xl p-5">
-              <div class="flex items-center gap-3 mb-3">
-                <div class="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center text-2xl">👩</div>
-                <div>
-                  <p class="font-black text-lg">WhatsApp Lu</p>
-                  <p class="text-gray-600 text-sm">+51 920 726 588</p>
-                </div>
-              </div>
-              <a href="https://wa.me/51920726588" target="_blank" class="btn-whatsapp w-full py-3 rounded-xl font-bold text-center block">Chatear Ahora</a>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="grid grid-cols-3 gap-4 mb-6">
-          <div class="card rounded-2xl p-5 text-center"><p class="text-3xl font-black text-orange-500">500+</p><p class="text-sm text-gray-500">Clientes Felices</p></div>
-          <div class="card rounded-2xl p-5 text-center"><p class="text-3xl font-black text-orange-500">1000+</p><p class="text-sm text-gray-500">Ventas</p></div>
-          <div class="card rounded-2xl p-5 text-center"><p class="text-3xl font-black text-orange-500">24/7</p><p class="text-sm text-gray-500">Soporte</p></div>
-        </div>
-      </div>
-
-      <!-- SECCION GARFIELD CON VIDEOS SIN AUTOPLAY -->
-      <div id="seccion-garfield" class="hidden">
-        <div class="card rounded-2xl p-8 mb-6 bg-gradient-to-r from-orange-100 to-yellow-50">
-          <h2 class="text-4xl font-black">🐱 Universo Garfield</h2>
-          <p class="text-gray-600 mt-2">Los mejores momentos del gato naranja más querido</p>
-        </div>
-
-        <div class="card rounded-2xl p-6 mb-6">
-          <h3 class="text-2xl font-black mb-4">🎬 Videos de Garfield</h3>
-          <div class="grid md:grid-cols-2 gap-6">
-            <video controls loop playsinline class="rounded-2xl w-full h-[500px] object-cover shadow-lg"><source src="1.mp4" type="video/mp4"></video>
-            <video controls loop playsinline class="rounded-2xl w-full h-[500px] object-cover shadow-lg"><source src="2.mp4" type="video/mp4"></video>
-          </div>
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-5 mb-6">
-          <div class="card rounded-2xl p-6">
-            <h3 class="text-2xl font-black mb-3">¿Quién es Garfield?</h3>
-            <p class="text-gray-600">Garfield es un gato naranja, gordo y perezoso. Ama 3 cosas: <b>Lasaña, dormir y odiar los lunes</b>.</p>
-          </div>
-          <div class="card rounded-2xl p-6">
-            <h3 class="text-2xl font-black mb-3">Datos Curiosos</h3>
-            <ul class="space-y-2 text-gray-600">
-              <li>🍕 <b>Comida favorita:</b> Lasaña</li>
-              <li>😴 <b>Odia:</b> Los lunes y las dietas</li>
-              <li>📅 <b>Primer cómic:</b> 19 de Junio de 1978</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </main>
-  </div>
-
-  <!-- BARRA DE MUSICA FIJA -->
-  <div class="music-bar fixed bottom-0 left-0 right-0 p-3 z-40">
-    <div class="max-w-7xl mx-auto flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-lg bg-orange-500 flex items-center justify-center text-white">🎵</div>
-        <div>
-          <p class="font-bold text-sm">Tema de Garfield</p>
-          <p class="text-xs text-gray-500">Reproduciendo...</p>
-        </div>
-      </div>
-      <button onclick="toggleMusic()" id="btnMusic2" class="btn-primary px-4 py-2 rounded-lg font-bold text-sm">Pausar</button>
-    </div>
-  </div>
+<div class="min-h-screen flex-col items-center justify-center p-5 text-center">
+  <img src="https://i.imgur.com/TU_IMAGEN_AQUI.png" class="w-32 h-32 rounded-3xl mb-6">
+  <h1 class="text-5xl font-black"><span class="text-orange-500">Garfield</span> Store</h1>
+  <p class="text-gray-600 mt-3 mb-8">Servicios digitales con la actitud de Garfield 🍕</p>
+  <a href="tienda.html" class="btn-primary px-10 py-4 rounded-2xl font-bold text-lg">ENTRAR A LA TIENDA</a>
+  
+  <button onclick="toggleMusic()" id="btnMusic" class="mt-8 text-3xl">🔊</button>
 </div>
 
 <script>
-let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-let sidebarOpen = false;
 const music = document.getElementById('bgMusic');
-
-window.onload = function() {
-  mostrarSeccion('inicio', document.querySelector('.menu-item'));
-  music.volume = 0.3;
-  music.play().catch(()=>{});
-}
-
+music.volume = 0.3;
 function toggleMusic() {
-  if(music.paused) {
-    music.play();
-    document.getElementById('btnMusic').innerText = '🔊';
-    document.getElementById('btnMusic2').innerText = 'Pausar';
-  } else {
-    music.pause();
-    document.getElementById('btnMusic').innerText = '🔇';
-    document.getElementById('btnMusic2').innerText = 'Reproducir';
-  }
-}
-
-function toggleSidebar() {
-  sidebarOpen =!sidebarOpen;
-  document.getElementById('sidebar').classList.toggle('-translate-x-full');
-  document.getElementById('overlay').classList.toggle('hidden');
-}
-
-function mostrarSeccion(sec, el) {
-  document.getElementById('seccion-inicio').classList.add('hidden');
-  document.getElementById('seccion-garfield').classList.add('hidden');
-  document.getElementById('seccion-' + sec).classList.remove('hidden');
-  document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active-menu'));
-  if(el) el.classList.add('active-menu');
-  if(window.innerWidth < 768) toggleSidebar();
+  if(music.paused) { music.play(); document.getElementById('btnMusic').innerText = '🔊'; } 
+  else { music.pause(); document.getElementById('btnMusic').innerText = '🔇'; }
 }
 </script>
 </body>
