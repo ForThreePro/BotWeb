@@ -3,45 +3,70 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tienda - Atiens</title>
+  <title>Tienda - Garfield Store</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <audio id="musica" src="garfield.mp3" loop></audio>
 
-  <aside class="sidebar">
-    <button id="btnMusica" class="btn-musica">🔊 Reproducir Música</button>
+  <header>
+    <button id="btnMenu">☰</button>
+    <div class="logo">🐱 Garfield<span>Store</span></div>
+    <div class="header-right">
+      <button id="btnMusica">🔊</button>
+      <button id="btnCarrito" onclick="verCarrito()">🛒 <span id="contador">0</span></button>
+    </div>
+  </header>
 
+  <aside id="sidebar">
     <div class="menu">
-      <details open>
-        <summary>PORTAL</summary>
+      <div class="menu-section">
+        <h3>👑 PORTAL</h3>
         <a href="index.html">🏠 Inicio</a>
         <a href="index.html">💛 Garfield Love</a>
-      </details>
-
-      <details open>
-        <summary>SOCIAL</summary>
+      </div>
+      <div class="menu-section">
+        <h3>🌐 REDES</h3>
         <a href="https://chat.whatsapp.com/" target="_blank">🟢 WhatsApp Grupo</a>
         <a href="https://whatsapp.com/channel/" target="_blank">🟢 WhatsApp Channel</a>
-        <a href="tienda.html">🛒 Tienda</a>
-      </details>
+      </div>
+      <div class="menu-section">
+        <h3>🎉 EVENTOS GARFIELD</h3>
+        <a href="#">Lunes sin Lasaña</a>
+      </div>
+      <div class="menu-section">
+        <h3>⚙️ SERVICIOS</h3>
+        <a href="tienda.html" class="active">🛒 Tienda</a>
+      </div>
     </div>
   </aside>
+  <div id="overlay"></div>
 
-  <main class="contenido">
-    <h1>Tienda</h1>
-    <p>Elige tu país para ver precios</p>
-    <select id="selectorPais">
-      <option value="PE">🇵🇪 Perú</option>
-      <option value="CL">🇨🇱 Chile</option>
-      <option value="AR">🇦🇷 Argentina</option>
-      <option value="MX">🇲🇽 México</option>
-      <option value="BO">🇧🇴 Bolivia</option>
-      <option value="UY">🇺🇾 Uruguay</option>
-      <option value="CO">🇨🇴 Colombia</option>
-      <option value="US">🇺🇸 USA</option>
-    </select>
-    <div id="productos" class="grid-productos"></div>
+  <main>
+    <section id="catalogo">
+      <h1>🛒 Tienda Oficial</h1>
+      <p>Selecciona tu país y añade al carrito</p>
+
+      <select id="selectorPais">
+        <option value="PE">🇵🇪 Perú</option>
+        <option value="CL">🇨🇱 Chile</option>
+        <option value="AR">🇦🇷 Argentina</option>
+        <option value="MX">🇲🇽 México</option>
+        <option value="BO">🇧🇴 Bolivia</option>
+        <option value="UY">🇺🇾 Uruguay</option>
+        <option value="CO">🇨🇴 Colombia</option>
+        <option value="US">🇺🇸 USA</option>
+      </select>
+
+      <div class="filtros">
+        <button class="filtro active" data-cat="todos">Todos</button>
+        <button class="filtro" data-cat="spam">Spam</button>
+        <button class="filtro" data-cat="diamantes">Diamantes</button>
+        <button class="filtro" data-cat="design">Design</button>
+      </div>
+
+      <div id="productos" class="grid-productos"></div>
+    </section>
   </main>
 
   <script src="tienda.js"></script>
