@@ -19,7 +19,7 @@ nav{
   top:0; 
   background:#000; 
   border-bottom:1px solid var(--card-border); 
-  z-index:100
+  z-index:999 /* ARREGLADO: antes 100 */
 }
 .nav-wrap{
   display:flex; 
@@ -47,13 +47,16 @@ nav{
   cursor:pointer; 
   display:flex; 
   flex-direction:column; 
-  justify-content:space-between
+  justify-content:space-between;
+  position:relative; /* ARREGLADO */
+  z-index:1000; /* ARREGLADO: para que quede arriba de todo */
 }
 .hamburger span{
   height:2px; 
   background:#fff; 
   border-radius:2px; 
-  transition:.3s
+  transition:.3s;
+  pointer-events:none; /* ARREGLADO: para que el click pase al botón */
 }
 .hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
 .hamburger.active span:nth-child(2){opacity:0}
@@ -87,7 +90,7 @@ nav{
   transition:.35s; 
   padding:70px 0 20px; 
   border-right:1px solid var(--card-border);
-  overflow-y:auto /* PARA PODER SCROLLEAR EL MENU */
+  overflow-y:auto
 }
 .side-menu.active{left:0}
 .menu-group{margin-bottom:8px}
@@ -133,7 +136,9 @@ nav{
   border:1px solid var(--card-border); 
   border-radius:20px; 
   padding:24px; 
-  margin-bottom:24px
+  margin-bottom:24px;
+  position:relative; /* ARREGLADO */
+  z-index:1; /* ARREGLADO: para que no tape el nav */
 }
 .hero-label{
   color:var(--green); 
