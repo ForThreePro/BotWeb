@@ -46,12 +46,12 @@ const precios = {
 function toggleMenu(){document.getElementById('side-menu').classList.toggle('active');document.querySelector('.overlay').classList.toggle('active');document.querySelector('.hamburger').classList.toggle('active');}
 function toggleCart(){document.getElementById('cart').classList.toggle('active');document.querySelector('.overlay').classList.toggle('active');}
 
-function addToCart(name, price){cart.push({name, price, qty:1, details:'', tipo:'general', moneda:'S/', pais:'Peru'}); updateCart(); showToast();}
 function removeItem(index){cart.splice(index, 1); updateCart();}
-
 function updateCart(){
-  document.getElementById('cart-count').innerText = cart.length;
-  document.getElementById('cart-items').innerHTML = cart.length === 0?
+  const count = document.getElementById('cart-count');
+  const items = document.getElementById('cart-items');
+  if(count) count.innerText = cart.length;
+  if(items) items.innerHTML = cart.length === 0?
     "<p style='color:var(--text-muted)'>Carrito vacío</p>" :
     cart.map((i, index) => `
       <div class="cart-item">
@@ -59,15 +59,11 @@ function updateCart(){
         <button class="cart-delete" onclick="removeItem(${index})">🗑️</button>
       </div>
     `).join('');
-  document.getElementById('cart-total').innerText = 'Ver pedido abajo';
 }
 
 function checkoutWhatsApp(){
   if(cart.length === 0) return alert('Tu carrito está vacío');
-
-  // Separa por tipo de producto
   let mensajeFinal = "Hola Lu! Quiero hacer este pedido:%0A%0A";
-
   cart.forEach(i => {
     mensajeFinal += `*${i.name.toUpperCase()}*%0A`;
     mensajeFinal += `País: ${i.pais} ${i.moneda}%0A`;
@@ -75,139 +71,54 @@ function checkoutWhatsApp(){
     if(i.details) mensajeFinal += `${i.details}%0A`;
     mensajeFinal += `%0A--------------------%0A%0A`;
   });
-
   mensajeFinal += `_Envíame los datos de pago por favor_`;
-
   window.open(`https://wa.me/${WHATSAPP}?text=${mensajeFinal}`, '_blank');
 }
 
-function openModal(tipo){
-  document.getElementById('modal-'+tipo).classList.add('active');
-  document.querySelector('.overlay').classList.add('active');
-  updatePrice(tipo);
-  if(tipo === 'bots') toggleLinkField();
-}
-function closeModal(tipo){
-  document.getElementById('modal-'+tipo).classList.remove('active');
-  document.querySelector('.overlay').classList.remove('active');
-}
-
-function selectCountry(pais, btn, tipo){
-  selectedCountry[tipo] = pais;
-  btn.parentElement.querySelectorAll('.country-tab').forEach(t => t.classList.remove('active'));
-  btn.classList.add('active');
-  updatePrice(tipo);
-}
-
+function openModal(tipo){document.getElementById('modal-'+tipo).classList.add('active');document.querySelector('.overlay').classList.add('active');updatePrice(tipo);if(tipo === 'bots') toggleLinkField();}
+function closeModal(tipo){document.getElementById('modal-'+tipo).classList.remove('active');document.querySelector('.overlay').classList.remove('active');}
+function selectCountry(pais, btn, tipo){selectedCountry[tipo] = pais;btn.parentElement.querySelectorAll('.country-tab').forEach(t => t.classList.remove('active'));btn.classList.add('active');updatePrice(tipo);}
 function updatePrice(tipo){
-  if(tipo === 'diamantes'){
-    const cant = document.getElementById('cant-diamantes').value;
-    const data = precios.diamantes[selectedCountry.diamantes];
-    document.getElementById('precio-diamantes').innerText = data.simbolo + data.con[cant];
-  }
-  if(tipo === 'design'){
-    const prod = document.getElementById('tipo-design').value;
-    const data = precios.design[selectedCountry.design];
-    document.getElementById('precio-design').innerText = data.simbolo + data[prod];
-  }
-  if(tipo === 'spam'){
-    const dias = document.getElementById('dias-spam').value;
-    const data = precios.spam[selectedCountry.spam];
-    document.getElementById('precio-spam').innerText = data.simbolo + data[dias];
-  }
-  if(tipo === 'bots'){
-    const bot = document.getElementById('tipo-bot').value;
-    const data = precios.bots[selectedCountry.bots];
-    document.getElementById('precio-bots').innerText = data.simbolo + data[bot];
-  }
-}
-
-function toggleLinkField(){
-  const tipo = document.getElementById('tipo-bot').value;
-  document.getElementById('link-bot-group').style.display = tipo === 'mensual'? 'block' : 'none';
-}
+  if(tipo === 'diamantes'){const cant = document.getElementById('cant-diamantes').value;const data = precios.diamantes[selectedCountry.diamantes];document.getElementById('precio-diamantes').innerText = data.simbolo + data.con[cant];}
+  if(tipo === 'design'){const prod = document.getElementById('tipo-design').value;const data = precios.design[selectedCountry.design];document.getElementById('precio-design').innerText = data.simbolo + data[prod];}
+  if(tipo === 'spam'){const dias = document.getElementById('dias-spam').value;const data = precios.spam[selectedCountry.spam];document.getElementById('precio-spam').innerText = data.simbolo + data[dias];}
+  if(tipo === 'bots'){const bot = document.getElementById('tipo-bot').value;const data = precios.bots[selectedCountry.bots];document.getElementById('precio-bots').innerText = data.simbolo + data[bot];}
+function toggleLinkField(){const tipo = document.getElementById('tipo-bot').value;document.getElementById('link-bot-group').style.display = tipo === 'mensual'? 'block' : 'none';}
 
 function addDiamantesToCart(){
-  const cant = document.getElementById('cant-diamantes').value;
-  const nick = document.getElementById('nick-ff').value;
-  const id = document.getElementById('id-ff').value;
+  const cant = document.getElementById('cant-diamantes').value;const nick = document.getElementById('nick-ff').value;const id = document.getElementById('id-ff').value;
   if(!nick ||!id) return alert('Completa Nick e ID de Free Fire');
   const data = precios.diamantes[selectedCountry.diamantes];
-  cart.push({
-    name: `Pedido Diamantes ${cant}💎`,
-    price: data.con[cant],
-    qty: 1,
-    details: `Nick: ${nick} | ID: ${id}`,
-    tipo: 'diamantes',
-    moneda: data.simbolo,
-    pais: data.nombre
-  });
-  updateCart(); showToast(); closeModal('diamantes');
-  document.getElementById('nick-ff').value = ''; document.getElementById('id-ff').value = '';
+  cart.push({name: `Pedido Diamantes ${cant}💎`, price: data.con[cant], qty: 1, details: `Nick: ${nick} | ID: ${id}`, moneda: data.simbolo, pais: data.nombre});
+  updateCart(); showToast(); closeModal('diamantes');document.getElementById('nick-ff').value = ''; document.getElementById('id-ff').value = '';
 }
-
 function addDesignToCart(){
-  const prod = document.getElementById('tipo-design').value;
-  const nombres = {logo:'Tex Logo y Logos', plantilla:'Plantillas 2x1', caligrafico:'Caligráficos 2x1', jersey:'Jersey'};
-  const data = precios.design[selectedCountry.design];
-  cart.push({
-    name: `Pedido Design - ${nombres[prod]}`,
-    price: data[prod],
-    qty: 1,
-    details: '',
-    tipo: 'design',
-    moneda: data.simbolo,
-    pais: data.nombre
-  });
+  const prod = document.getElementById('tipo-design').value;const nombres = {logo:'Tex Logo y Logos', plantilla:'Plantillas 2x1', caligrafico:'Caligráficos 2x1', jersey:'Jersey'};const data = precios.design[selectedCountry.design];
+  cart.push({name: `Pedido Design - ${nombres[prod]}`, price: data[prod], qty: 1, details: '', moneda: data.simbolo, pais: data.nombre});
   updateCart(); showToast(); closeModal('design');
 }
-
 function addSpamToCart(){
-  const dias = document.getElementById('dias-spam').value;
-  const texto = document.getElementById('texto-spam').value;
-  const link = document.getElementById('link-spam').value;
-  if(!texto ||!link) return alert('Completa el texto y link para spam');
-  const data = precios.spam[selectedCountry.spam];
-  const nombres = {'3dias':'3 Días', '5dias':'5 Días', '1semana':'1 Semana'};
-  cart.push({
-    name: `Pedido Spam ${nombres[dias]}`,
-    price: data[dias],
-    qty: 1,
-    details: `Texto: ${texto.substring(0,40)}... | Link: ${link}`,
-    tipo: 'spam',
-    moneda: data.simbolo,
-    pais: data.nombre
-  });
-  updateCart(); showToast(); closeModal('spam');
-  document.getElementById('texto-spam').value = ''; document.getElementById('link-spam').value = '';
+  const dias = document.getElementById('dias-spam').value;const texto = document.getElementById('texto-spam').value;const link = document.getElementById('link-spam').value;
+  if(!texto ||!link) return alert('Completa el texto y link para spam');const data = precios.spam[selectedCountry.spam];const nombres = {'3dias':'3 Días', '5dias':'5 Días', '1semana':'1 Semana'};
+  cart.push({name: `Pedido Spam ${nombres[dias]}`, price: data[dias], qty: 1, details: `Texto: ${texto.substring(0,40)}... | Link: ${link}`, moneda: data.simbolo, pais: data.nombre});
+  updateCart(); showToast(); closeModal('spam');document.getElementById('texto-spam').value = ''; document.getElementById('link-spam').value = '';
 }
-
 function addBotToCart(){
-  const tipo = document.getElementById('tipo-bot').value;
-  const link = document.getElementById('link-bot').value;
-  const data = precios.bots[selectedCountry.bots];
-
+  const tipo = document.getElementById('tipo-bot').value;const link = document.getElementById('link-bot').value;const data = precios.bots[selectedCountry.bots];
   if(tipo === 'mensual' &&!link) return alert('Pon el link de WhatsApp del Bot');
-
-  const nombres = {mensual:'Bot Mensual', personalizado:'Bot Personalizado'};
-  let details = '';
-  if(tipo === 'mensual') details = `Link: ${link}`;
-
-  cart.push({
-    name: `Pedido ${nombres[tipo]}`,
-    price: data[tipo],
-    qty: 1,
-    details: details,
-    tipo: 'bots',
-    moneda: data.simbolo,
-    pais: data.nombre
-  });
-  updateCart(); showToast(); closeModal('bots');
-  document.getElementById('link-bot').value = '';
+  const nombres = {mensual:'Bot Mensual', personalizado:'Bot Personalizado'};let details = '';if(tipo === 'mensual') details = `Link: ${link}`;
+  cart.push({name: `Pedido ${nombres[tipo]}`, price: data[tipo], qty: 1, details: details, moneda: data.simbolo, pais: data.nombre});
+  updateCart(); showToast(); closeModal('bots');document.getElementById('link-bot').value = '';
 }
+function showToast(){const toast = document.getElementById('toast');toast.classList.add('show');setTimeout(() => toast.classList.remove('show'), 2000);}
 
-function showToast(){
-  const toast = document.getElementById('toast');
-  toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 2000);
+// Reproductor
+let audio = new Audio('garfield.mp3');let isPlaying = false;
+function toggleMusic(){
+  if(isPlaying){audio.pause();document.getElementById('play-btn').innerText = '▶️';}
+  else{audio.play();document.getElementById('play-btn').innerText = '⏸️';}
+  isPlaying =!isPlaying;
+}
+if(window.location.pathname.includes('love.html')){
+  document.addEventListener('DOMContentLoaded', ()=>{const player = document.getElementById('music-player');if(player) player.style.display = 'none';});
 }
