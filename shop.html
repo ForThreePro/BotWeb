@@ -33,7 +33,6 @@
   .hero-card{background:linear-gradient(135deg, #0f0f18 0%, #1a1a2e 100%); border:1px solid var(--card-border); border-radius:20px; padding:24px; margin-bottom:24px}
   .hero-label{color:var(--green); font-size:11px; font-weight:700; letter-spacing:1px}
   .hero-title{font-size:28px; font-weight:700; margin:8px 0}
-  .hero-desc{color:var(--text-muted); font-size:14px; margin-bottom:20px}
   .btn{background:var(--gradient); border:none; padding:12px 20px; border-radius:12px; color:#fff; font-weight:700; cursor:pointer}
   .section-title{font-size:20px; font-weight:700; margin-bottom:16px}
   .filters{display:flex; gap:8px; overflow-x:auto; padding-bottom:10px; margin-bottom:20px}
@@ -42,7 +41,6 @@
   .products-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:16px}
   .product{background:var(--card); border:1px solid var(--card-border); border-radius:16px; padding:16px; position:relative}
   .discount{position:absolute; top:12px; left:12px; background:var(--green); color:#000; padding:4px 8px; border-radius:6px; font-size:11px; font-weight:700}
-  .prod-cat{color:var(--text-muted); font-size:11px; text-transform:uppercase; margin-top:10px}
   .prod-name{font-size:15px; font-weight:700; margin:6px 0}
   .prod-price{font-size:18px; font-weight:700; color:var(--green)}
   .add-btn{width:100%; background:var(--gradient); border:none; padding:10px; border-radius:10px; color:#fff; font-weight:700; margin-top:12px; cursor:pointer}
@@ -79,18 +77,12 @@
   <div class="hero-card">
     <div class="hero-label">CATÁLOGO OFICIAL</div>
     <div class="hero-title">Arma tu pack y ahorra</div>
-    <div class="hero-desc">Añade varios productos al carrito y envía tu pedido por WhatsApp.</div>
     <button class="btn">Explorar catálogo</button>
   </div>
-  <div class="section-title">Todos los productos</div>
-  <div class="filters">
-    <button class="filter-btn active">Todos</button>
-    <button class="filter-btn">Ropa</button>
-    <button class="filter-btn">Accesorios</button>
-  </div>
+  <div class="section-title">Productos</div>
   <div class="products-grid">
-    <div class="product"><div class="discount">-25%</div><div class="prod-cat">ROPA</div><div class="prod-name">Polo Garfield Classic</div><div><span class="prod-price">S/ 59.90</span></div><button class="add-btn" onclick="addToCart('Polo Garfield', 59.90)">Añadir al carrito</button></div>
-    <div class="product"><div class="prod-cat">ACCESORIOS</div><div class="prod-name">Gorra Garfield</div><div><span class="prod-price">S/ 45.00</span></div><button class="add-btn" onclick="addToCart('Gorra Garfield', 45.00)">Añadir al carrito</button></div>
+    <div class="product"><div class="discount">-25%</div><div class="prod-name">Polo Garfield Classic</div><div><span class="prod-price">S/ 59.90</span></div><button class="add-btn" onclick="addToCart('Polo Garfield', 59.90)">Añadir</button></div>
+    <div class="product"><div class="prod-name">Gorra Garfield</div><div><span class="prod-price">S/ 45.00</span></div><button class="add-btn" onclick="addToCart('Gorra Garfield', 45.00)">Añadir</button></div>
   </div>
 </div>
 <div class="cart-sidebar" id="cart">
@@ -100,14 +92,11 @@
   <button class="checkout-btn" onclick="checkoutWhatsApp()">Pedir por WhatsApp</button>
 </div>
 <script>
-  let cart = [];
-  const WHATSAPP = "51999999999";
+  let cart = []; const WHATSAPP = "51999999999";
   function toggleMenu(){document.getElementById('side-menu').classList.toggle('active');document.querySelector('.overlay').classList.toggle('active');document.querySelector('.hamburger').classList.toggle('active');}
   function toggleCart(){document.getElementById('cart').classList.toggle('active');document.querySelector('.overlay').classList.toggle('active');}
   function addToCart(name, price){const item = cart.find(i => i.name === name); if(item){ item.qty++; } else { cart.push({name, price, qty:1}) } updateCart();}
-  function updateCart(){document.getElementById('cart-count').innerText = cart.reduce((a,b)=>a+b.qty,0);
-  document.getElementById('cart-items').innerHTML = cart.length === 0 ? "<p style='color:var(--text-muted)'>Carrito vacío</p>" : cart.map(i => `<div style="margin-bottom:12px"><b>${i.name}</b> x${i.qty}</div>`).join('');
-  document.getElementById('cart-total').innerText = cart.reduce((a,b)=>a + b.price*b.qty,0).toFixed(2);}
+  function updateCart(){document.getElementById('cart-count').innerText = cart.reduce((a,b)=>a+b.qty,0); document.getElementById('cart-items').innerHTML = cart.length === 0 ? "<p>Carrito vacío</p>" : cart.map(i => `<div><b>${i.name}</b> x${i.qty}</div>`).join(''); document.getElementById('cart-total').innerText = cart.reduce((a,b)=>a + b.price*b.qty,0).toFixed(2);}
   function checkoutWhatsApp(){let msg = "Hola GarfieldShop! Pedido:%0A"; cart.forEach(i => msg += `• ${i.name} x${i.qty}%0A`); window.open(`https://wa.me/${WHATSAPP}?text=${msg}`, '_blank');}
 </script>
 </body>
