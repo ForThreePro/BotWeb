@@ -14,8 +14,8 @@
       <div class="flex items-center gap-3">
         <button onclick="toggleSidebar()" class="p-2 rounded-lg hover:bg-white/5">☰</button>
         <div class="flex items-center gap-2">
-          <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-600 to-blue-500 flex items-center justify-center font-bold">G</div>
-          <h1 class="text-lg font-semibold">Garfield<span class="text-cyan-400">Store</span></h1>
+          <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center font-bold text-lg">G</div>
+          <h1 class="text-lg font-semibold">Garfield<span class="text-green-400">Store</span></h1>
         </div>
       </div>
       <button class="p-2 rounded-xl bg-[#111]">🔔</button>
@@ -27,10 +27,7 @@
       <div class="p-4 space-y-3">
         <div class="rounded-xl bg-[#111] p-2">
           <button onclick="toggleSection('portal')" class="w-full flex justify-between text-xs">🏠 PORTAL <span id="arrow-portal">▼</span></button>
-          <div id="portal" class="mt-2 hidden">
-            <a href="index.html#inicio" class="block px-3 py-2 rounded-lg text-sm hover:bg-white/5">Inicio</a>
-            <a href="index.html#garfield" class="block px-3 py-2 rounded-lg text-sm hover:bg-white/5">Garfield</a>
-          </div>
+          <div id="portal" class="mt-2 hidden"><a href="index.html" class="block px-3 py-2 rounded-lg text-sm hover:bg-white/5">Inicio</a></div>
         </div>
         <div class="rounded-xl bg-[#111] p-2">
           <button onclick="toggleSection('redes')" class="w-full flex justify-between text-xs">💬 REDES <span id="arrow-redes">▼</span></button>
@@ -42,29 +39,62 @@
         <div class="rounded-xl bg-[#111] p-2">
           <button onclick="toggleSection('shop')" class="w-full flex justify-between text-xs">🛍️ GARFIELD SHOP <span id="arrow-shop">▲</span></button>
           <div id="shop" class="mt-2">
-            <a href="productos.html" class="block px-3 py-2 rounded-lg text-sm bg-gradient-to-r from-purple-600/30 to-blue-600/30">Tienda</a>
+            <a href="tienda.html" class="block px-3 py-2 rounded-lg text-sm hover:bg-white/5">Tienda</a>
+            <a href="productos.html" class="block px-3 py-2 rounded-lg text-sm bg-gradient-to-r from-purple-600/30 to-blue-600/30">Productos</a>
           </div>
         </div>
       </div>
     </aside>
 
-    <main class="flex-1 p-6">
-      <div class="flex items-center justify-between mb-4">
-        <div>
-          <div class="text-xs text-cyan-400">CATÁLOGO</div>
-          <h2 class="text-2xl font-bold">Todos los productos</h2>
+    <main class="flex-1 p-6 space-y-8">
+      <!-- CATALOGO -->
+      <div>
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <div class="text-xs text-cyan-400">CATÁLOGO</div>
+            <h2 class="text-2xl font-bold">Todos los productos</h2>
+          </div>
+          <input id="search" onkeyup="render()" placeholder="Buscar producto..." class="bg-[#111] border-white/10 rounded-xl px-3 py-2 text-sm w-60">
         </div>
-        <input id="search" onkeyup="render()" placeholder="Buscar producto..." class="bg-[#111] border-white/10 rounded-xl px-3 py-2 text-sm w-60">
+
+        <div class="flex gap-2 flex-wrap mb-4">
+          <button onclick="setCategory('Todos')" class="cat-btn px-4 py-2 rounded-lg text-sm bg-gradient-to-r from-blue-600 to-purple-600">Todos</button>
+          <button onclick="setCategory('Streaming')" class="cat-btn px-4 py-2 rounded-lg text-sm bg-[#111]">Streaming</button>
+          <button onclick="setCategory('Música')" class="cat-btn px-4 py-2 rounded-lg text-sm bg-[#111]">Música</button>
+          <button onclick="setCategory('Software')" class="cat-btn px-4 py-2 rounded-lg text-sm bg-[#111]">Software</button>
+        </div>
+
+        <div id="products" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
       </div>
 
-      <div class="flex gap-2 flex-wrap mb-4">
-        <button onclick="setCategory('Todos')" class="cat-btn px-4 py-2 rounded-lg text-sm bg-gradient-to-r from-blue-600 to-purple-600">Todos</button>
-        <button onclick="setCategory('Streaming')" class="cat-btn px-4 py-2 rounded-lg text-sm bg-[#111]">Streaming</button>
-        <button onclick="setCategory('Música')" class="cat-btn px-4 py-2 rounded-lg text-sm bg-[#111]">Música</button>
-        <button onclick="setCategory('Software')" class="cat-btn px-4 py-2 rounded-lg text-sm bg-[#111]">Software</button>
-      </div>
+      <!-- ZONA GARFIELD -->
+      <div class="border-t border-white/10 pt-8">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="p-3 rounded-xl bg-gradient-to-br from-orange-500 to-yellow-400 text-2xl">😼</div>
+          <h2 class="text-2xl font-bold">Zona Garfield</h2>
+        </div>
+        <p class="text-white/60 mb-4">Las mejores fotos y videos de Garfield para ti</p>
 
-      <div id="products" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
+        <h3 class="text-lg font-semibold mb-3">Galería de Fotos</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+          <img src="garfield1.jpg" alt="Garfield" class="w-full h-40 object-cover rounded-2xl border-white/5 hover:scale-105 transition">
+          <img src="garfield2.jpg" alt="Garfield" class="w-full h-40 object-cover rounded-2xl border-white/5 hover:scale-105 transition">
+          <img src="garfield3.jpg" alt="Garfield" class="w-full h-40 object-cover rounded-2xl border-white/5 hover:scale-105 transition">
+          <img src="garfield4.jpg" alt="Garfield" class="w-full h-40 object-cover rounded-2xl border-white/5 hover:scale-105 transition">
+        </div>
+
+        <h3 class="text-lg font-semibold mb-3">Videos</h3>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="bg-[#0A0A0A] border-white/5 rounded-2xl p-3">
+            <video src="1.mp4" controls class="w-full rounded-xl"></video>
+            <p class="text-sm text-white/60 mt-2">Video 1</p>
+          </div>
+          <div class="bg-[#0A0A0A] border-white/5 rounded-2xl p-3">
+            <video src="2.mp4" controls class="w-full rounded-xl"></video>
+            <p class="text-sm text-white/60 mt-2">Video 2</p>
+          </div>
+        </div>
+      </div>
     </main>
   </div>
 
