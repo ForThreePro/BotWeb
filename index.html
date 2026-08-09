@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GarfieldStore</title>
 <style>
-  :root{--bg:#07070d; --card:#0f0f18; --card-border:#1a1a2e; --text:#fff; --text-muted:#7a7f9a; --green:#00ff88;}
+  :root{--bg:#07070d; --card:#0f0f18; --card-border:#1a1a2e; --text:#fff; --text-muted:#7a7f9a; --green:#00ff88; --gradient: linear-gradient(135deg, #ff3b30 0%, #ff9500 100%);}
   *{margin:0;padding:0;box-sizing:border-box}
   body{font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", Arial, sans-serif; background:var(--bg); color:var(--text)}
   nav{position:sticky; top:0; background:#000; border-bottom:1px solid var(--card-border); z-index:100}
   .nav-wrap{display:flex; justify-content:space-between; align-items:center; padding:12px 16px}
   .nav-left{display:flex; align-items:center; gap:12px}
-  .logo-g{width:38px; height:38px; border-radius:12px; background:linear-gradient(135deg, #ff3b30 0%, #ff9500 100%); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:18px}
+  .logo-g{width:38px; height:38px; border-radius:12px; background:var(--gradient); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:18px}
   .logo-text{font-size:17px; font-weight:700} .logo-text span{color:var(--green)}
   .hamburger{width:26px; height:18px; cursor:pointer; display:flex; flex-direction:column; justify-content:space-between}
   .hamburger span{height:2px; background:#fff; border-radius:2px; transition:.3s}
@@ -31,6 +31,18 @@
   .container{max-width:600px; margin:0 auto; padding:16px}
   .card{background:var(--card); border:1px solid var(--card-border); border-radius:18px; padding:16px; margin-bottom:14px}
   .banner-img{width:100%; border-radius:14px; display:block}
+  
+  /* 1. BANNER OFERTAS */
+  .offer-banner{background:var(--gradient); padding:16px; border-radius:16px; margin-bottom:16px; text-align:center}
+  .offer-tag{font-size:10px; background:#000; padding:4px 10px; border-radius:6px; font-weight:700; display:inline-block; margin-bottom:8px}
+  .offer-title{font-size:18px; font-weight:700; margin-bottom:4px}
+  .offer-sub{font-size:12px; opacity:0.9}
+  
+  /* 5. BOTONES RAPIDOS */
+  .quick-btns{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:16px 0}
+  .q-btn{background:var(--card); border:1px solid var(--card-border); padding:14px; border-radius:12px; text-align:center; color:#fff; text-decoration:none; font-weight:700; font-size:14px}
+  .q-btn:hover{border-color:var(--green)}
+  
   .card-header{display:flex; align-items:center; gap:10px; margin-bottom:16px}
   .card-icon{width:44px; height:44px; border-radius:12px; background:#1a1f2e; display:flex; align-items:center; justify-content:center; font-size:22px}
   .card-icon.green{background:#0e2a1a}
@@ -42,11 +54,20 @@
   .status{color:var(--green); font-weight:700; font-size:16px}
   .section-title{font-size:18px; font-weight:700; margin:20px 0 6px}
   .section-sub{color:var(--text-muted); font-size:13px; margin-bottom:14px}
+  
+  /* 4. CONTADOR VENTAS */
+  .sales-counter{background:linear-gradient(135deg, #0e2a1a 0%, #0f0f18 100%); border:1px solid var(--green); padding:16px; border-radius:16px; text-align:center; margin-bottom:16px}
+  .sales-num{font-size:32px; font-weight:700; color:var(--green)}
+  
+  /* 3. TESTIMONIOS */
+  .review-card{background:var(--card); border:1px solid var(--card-border); padding:14px; border-radius:12px; margin-bottom:10px}
+  .stars{color:#fbbf24; font-size:12px}
+  
   .staff-grid{display:flex; gap:12px; overflow-x:auto; padding-bottom:10px}
   .staff-card{min-width:160px; background:var(--card); border:1px solid var(--card-border); border-radius:16px; padding:16px; text-align:center; cursor:pointer; transition:.3s}
   .staff-card:hover{border-color:var(--green); transform:translateY(-3px)}
   .staff-avatar-img{width:70px; height:70px; border-radius:18px; margin:0 auto 10px; display:block; object-fit:cover; border:2px solid var(--green)}
-  .fab{position:fixed; bottom:20px; right:20px; width:54px; height:54px; border-radius:16px; background:linear-gradient(135deg, #ff3b30 0%, #ff9500 100%); display:flex; align-items:center; justify-content:center; font-size:22px; cursor:pointer}
+  .fab{position:fixed; bottom:20px; right:20px; width:54px; height:54px; border-radius:16px; background:var(--gradient); display:flex; align-items:center; justify-content:center; font-size:22px; cursor:pointer; box-shadow:0 8px 25px rgba(255,59,48,0.4)}
 </style>
 </head>
 <body>
@@ -64,21 +85,28 @@
 
 <div class="overlay" onclick="toggleMenu()"></div>
 <div class="side-menu" id="side-menu">
-  <div class="menu-group"><div class="menu-header">📦 PORTAL</div>
-    <a href="index.html" class="menu-item active"><span class="menu-icon">🏠</span> Inicio</a>
-  </div>
-  <div class="menu-group"><div class="menu-header">🌐 REDES</div>
-    <a href="redes.html" class="menu-item"><span class="menu-icon">💚</span> Canal de WhatsApp</a>
-    <a href="redes.html" class="menu-item"><span class="menu-icon">💚</span> Comunidad WhatsApp</a>
-  </div>
-  <div class="menu-group"><div class="menu-header">🛍️ GARFIELD SHOP</div>
-    <a href="shop.html" class="menu-item"><span class="menu-icon">🛒</span> Tienda</a>
-  </div>
+  <div class="menu-group"><div class="menu-header">📦 PORTAL</div><a href="index.html" class="menu-item active"><span class="menu-icon">🏠</span> Inicio</a></div>
+  <div class="menu-group"><div class="menu-header">🌐 REDES</div><a href="redes.html" class="menu-item"><span class="menu-icon">💚</span> Canal de WhatsApp</a><a href="redes.html" class="menu-item"><span class="menu-icon">💚</span> Comunidad WhatsApp</a></div>
+  <div class="menu-group"><div class="menu-header">🛍️ GARFIELD SHOP</div><a href="shop.html" class="menu-item"><span class="menu-icon">🛒</span> Tienda</a></div>
 </div>
 
 <div class="container">
-  <div class="card" style="padding:12px">
-    <img src="https://files.evogb.win/sRJ0HB.jpg" class="banner-img" alt="Garfield Store">
+  
+  <!-- 1. BANNER OFERTAS -->
+  <div class="offer-banner">
+    <div class="offer-tag">🔥 OFERTA DE LA SEMANA</div>
+    <div class="offer-title">PACK 2 POLOS + GORRA</div>
+    <div class="offer-sub">Solo S/ 139.90 - Ahorra 30% | Válido hasta Domingo</div>
+  </div>
+
+  <div class="card" style="padding:12px"><img src="https://files.evogb.win/sRJ0HB.jpg" class="banner-img"></div>
+
+  <!-- 5. BOTONES RAPIDOS -->
+  <div class="quick-btns">
+    <a href="shop.html" class="q-btn">🛒 Ir a Tienda</a>
+    <a href="redes.html" class="q-btn">💚 Comunidad</a>
+    <a href="shop.html" class="q-btn">📦 Ver Ofertas</a>
+    <a href="https://wa.me/51999999999" class="q-btn">💬 Soporte</a>
   </div>
 
   <div class="card">
@@ -96,28 +124,45 @@
     <div style="margin-top:14px"><div class="stat-label">ESTADO DE LA TIENDA</div><div class="status">En línea</div><div class="stat-sub">GARFIELD BOT ACTIVO</div></div>
   </div>
 
-  <!-- CREADORES CON FOTO -->
+  <!-- 4. CONTADOR VENTAS -->
+  <div class="sales-counter">
+    <div class="stat-label">PEDIDOS ESTE MES</div>
+    <div class="sales-num">127</div>
+    <div class="stat-sub">Envíos a todo Lima y Provincias</div>
+  </div>
+
+  <!-- 3. TESTIMONIOS -->
+  <div><div class="section-title">Lo que dicen nuestros clientes</div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <div style="margin:6px 0">"Me llegó al día siguiente, la calidad es brutal. 100% recomendado"</div>
+      <div class="stat-sub">- Carlos L. | Lima</div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <div style="margin:6px 0">"El mejor precio y atención. Respondieron al toque por WhatsApp"</div>
+      <div class="stat-sub">- Ana R. | Arequipa</div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <div style="margin:6px 0">"Compré el pack y me vino con regalo. Son unos cracks"</div>
+      <div class="stat-sub">- Diego M. | Trujillo</div>
+    </div>
+  </div>
+
+  <!-- CREADORES -->
   <div id="staff">
     <div class="section-title">Creadores</div>
     <div class="section-sub">Toca para hablar por WhatsApp</div>
     <div class="staff-grid">
-      
-      <!-- WHOIS -->
       <div class="staff-card" onclick="openWhatsApp('Whois', '51927174369')">
         <img src="https://files.evogb.win/dbx0GX.jpg" class="staff-avatar-img" alt="Whois">
-        <div><b>Whois</b></div>
-        <div class="stat-sub">CREADOR</div>
-        <div class="stat-sub">+51 927 174 369</div>
+        <div><b>Whois</b></div><div class="stat-sub">CREADOR</div><div class="stat-sub">+51 927 174 369</div>
       </div>
-
-      <!-- LU -->
       <div class="staff-card" onclick="openWhatsApp('Lu', '51920726588')">
         <img src="https://via.placeholder.com/70x70/1a1a2e/00ff88?text=L" class="staff-avatar-img" alt="Lu">
-        <div><b>Lu</b></div>
-        <div class="stat-sub">CREADOR</div>
-        <div class="stat-sub">+51 920 726 588</div>
+        <div><b>Lu</b></div><div class="stat-sub">CREADOR</div><div class="stat-sub">+51 920 726 588</div>
       </div>
-
     </div>
   </div>
 </div>
@@ -125,22 +170,14 @@
 <div class="fab" onclick="openWhatsApp('Ventas', '51999999999')">✨</div>
 
 <script>
-  function toggleMenu(){
-    document.getElementById('side-menu').classList.toggle('active');
-    document.querySelector('.overlay').classList.toggle('active');
-    document.querySelector('.hamburger').classList.toggle('active');
-  }
-  function openWhatsApp(nombre, numero){
-    window.open(`https://wa.me/${numero}?text=Hola ${nombre}, te escribo desde GarfieldStore`, '_blank');
-  }
+  function toggleMenu(){document.getElementById('side-menu').classList.toggle('active');document.querySelector('.overlay').classList.toggle('active');document.querySelector('.hamburger').classList.toggle('active');}
+  function openWhatsApp(nombre, numero){window.open(`https://wa.me/${numero}?text=Hola ${nombre}, te escribo desde GarfieldStore`, '_blank');}
   let seg = 55, min = 20, horas = 14, dias = 0;
-  setInterval(()=>{
-    seg++; if(seg==60){seg=0; min++} if(min==60){min=0; horas++} if(horas==24){horas=0; dias++}
-    document.getElementById('seg').innerText = seg.toString().padStart(2,'0');
-    document.getElementById('min').innerText = min.toString().padStart(2,'0');
-    document.getElementById('horas').innerText = horas;
-    document.getElementById('dias').innerText = dias;
-  },1000)
+  setInterval(()=>{seg++; if(seg==60){seg=0; min++} if(min==60){min=0; horas++} if(horas==24){horas=0; dias++}
+  document.getElementById('seg').innerText = seg.toString().padStart(2,'0');
+  document.getElementById('min').innerText = min.toString().padStart(2,'0');
+  document.getElementById('horas').innerText = horas;
+  document.getElementById('dias').innerText = dias;},1000)
 </script>
 </body>
 </html>
