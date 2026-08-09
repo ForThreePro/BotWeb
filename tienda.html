@@ -5,39 +5,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tienda - Garfield Store</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root{ --naranja:#FF6B00; --naranja2:#FF8C00; --gris:#F5F5F7; --texto:#1D1D1F; }
   body { background: var(--gris); font-family: 'Inter', sans-serif; color: var(--texto); }
 .card { background: #fff; border: 1px solid #E5E5E7; }
-.btn-primary { background: linear-gradient(90deg, var(--naranja), var(--naranja2)); color: #fff; transition: all 0.2s; }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(255,107,0,0.3); }
+.btn-primary { background: linear-gradient(90deg, var(--naranja), var(--naranja2)); color: #fff; }
 .filter-btn { background: #fff; border: 1px solid #E5E5E7; white-space: nowrap; }
 .filter-active { background: var(--naranja); color: #fff; border-color: var(--naranja); }
-.music-bar { background: #fff; border-top: 1px solid #E5E5E7; }
 </style>
 </head>
 <body>
 
-<audio id="bgMusic" src="garfield.mp3" loop autoplay></audio>
-
-<header class="card p-4 flex items-center justify-between sticky top-0 z-20 shadow-sm">
+<header class="card p-4 flex items-center justify-between sticky top-0 z-30 shadow-sm">
   <a href="index.html" class="flex items-center gap-2">
-    <img src="https://i.imgur.com/TU_IMAGEN_AQUI.png" alt="Garfield" class="w-10 h-10 rounded-xl object-cover">
+    <img src="https://i.imgur.com/TU_IMAGEN_AQUI.png" class="w-10 h-10 rounded-xl object-cover">
     <h1 class="text-xl font-black"><span class="text-orange-500">Garfield</span> Store</h1>
   </a>
-  <div class="flex items-center gap-3">
-    <button onclick="toggleMusic()" id="btnMusic" class="text-2xl">🔊</button>
-    <button onclick="enviarWhatsApp()" id="btnCarrito" class="card px-5 py-2.5 rounded-xl font-bold">🛒 Carrito 0</button>
-  </div>
+  <a href="producto-carrito.html" id="btnCarrito" class="card px-5 py-2.5 rounded-xl font-bold">🛒 Carrito 0</a>
 </header>
 
-<div class="p-5 max-w-7xl mx-auto pb-24">
-  <div class="card rounded-2xl p-8 mb-6 bg-gradient-to-r from-orange-50 to-white">
-    <span class="bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-xs font-bold">CATÁLOGO 2026</span>
-    <h2 class="text-4xl font-black mt-4">Arma tu pack como Garfield 🍕</h2>
-  </div>
-
+<div class="p-5 max-w-7xl mx-auto pb-10">
   <div class="flex gap-3 mb-6 overflow-x-auto pb-2">
     <button onclick="filtrar('todos')" id="btn-todos" class="filter-btn filter-active px-5 py-2.5 rounded-xl text-sm font-bold">Todos</button>
     <button onclick="filtrar('streaming')" id="btn-streaming" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600">Streaming</button>
@@ -45,145 +33,39 @@
     <button onclick="filtrar('bots')" id="btn-bots" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600">Bots</button>
     <button onclick="filtrar('spam')" id="btn-spam" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600">Spam</button>
     <button onclick="filtrar('design')" id="btn-design" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600">Design</button>
+    <button onclick="filtrar('numeros')" id="btn-numeros" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600">Números</button>
     <button onclick="filtrar('seguidores')" id="btn-seguidores" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600">Seguidores</button>
+    <button onclick="filtrar('vistas')" id="btn-vistas" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600">Vistas</button>
+    <button onclick="filtrar('likes')" id="btn-likes" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600">Likes</button>
     <button onclick="filtrar('diamantes')" id="btn-diamantes" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600">Diamantes</button>
     <button onclick="filtrar('pase')" id="btn-pase" class="filter-btn px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600">Pase Élite</button>
   </div>
 
   <div id="productos" class="grid md:grid-cols-3 gap-5">
-    
-    <!-- DIAMANTES CON SIN STOCK COMPLETO -->
-    <div class="producto diamantes card rounded-2xl p-6 transition shadow-sm md:col-span-3">
-      <span class="bg-orange-100 text-orange-600 text-xs px-3 py-1 rounded-full font-bold">FREE FIRE</span>
-      <p class="text-4xl mt-3">💎</p>
-      <p class="font-bold text-2xl mt-1">Recargas Free Fire</p>
-
-      <div class="mt-4 grid md:grid-cols-2 gap-4 text-sm">
-        <!-- PERU -->
-        <div class="bg-orange-50 rounded-xl p-4">
-          <p class="font-black">🇵🇪 PERÚ</p>
-          <p class="font-bold text-orange-600">CON STOCK</p>
-          <p>110💎 S/2.50 | 341💎 S/7.00 | 572💎 S/12.00</p>
-          <p class="font-bold text-red-600 mt-2">SIN STOCK</p>
-          <p>110💎 S/3.50 | 341💎 S/10.00 | 572💎 S/15.00</p>
-        </div>
-        <!-- CHILE -->
-        <div class="bg-orange-50 rounded-xl p-4">
-          <p class="font-black">🇨🇱 CHILE</p>
-          <p class="font-bold text-orange-600">CON STOCK</p>
-          <p>110💎 $875 | 341💎 $2.450</p>
-          <p class="font-bold text-red-600 mt-2">SIN STOCK</p>
-          <p>110💎 $1.225 | 341💎 $3.500</p>
-        </div>
-        <!-- ARGENTINA -->
-        <div class="bg-orange-50 rounded-xl p-4">
-          <p class="font-black">🇦🇷 ARGENTINA</p>
-          <p class="font-bold text-orange-600">CON STOCK</p>
-          <p>110💎 $1.300 | 341💎 $3.380</p>
-          <p class="font-bold text-red-600 mt-2">SIN STOCK</p>
-          <p>110💎 $1820 | 341💎 $4.680</p>
-        </div>
-        <!-- MEXICO -->
-        <div class="bg-orange-50 rounded-xl p-4">
-          <p class="font-black">🇲🇽 MÉXICO</p>
-          <p class="font-bold text-orange-600">CON STOCK</p>
-          <p>110💎 $18.75 | 341💎 $52.50</p>
-          <p class="font-bold text-red-600 mt-2">SIN STOCK</p>
-          <p>110💎 $26.25 | 341💎 $75</p>
-        </div>
-        <!-- BOLIVIA -->
-        <div class="bg-orange-50 rounded-xl p-4">
-          <p class="font-black">🇧🇴 BOLIVIA</p>
-          <p class="font-bold text-orange-600">CON STOCK</p>
-          <p>110💎 $11.25 | 341💎 $31.5</p>
-          <p class="font-bold text-red-600 mt-2">SIN STOCK</p>
-          <p>110💎 $15.75 | 341💎 $45</p>
-        </div>
-        <!-- URUGUAY -->
-        <div class="bg-orange-50 rounded-xl p-4">
-          <p class="font-black">🇺🇾 URUGUAY</p>
-          <p class="font-bold text-orange-600">CON STOCK</p>
-          <p>110💎 $37.5 | 341💎 $105</p>
-          <p class="font-bold text-red-600 mt-2">SIN STOCK</p>
-          <p>110💎 $52.5 | 341💎 $150</p>
-        </div>
-      </div>
-
-      <div class="mt-4 grid-cols-3 gap-2">
-        <button onclick="agregarCarrito('110 Diamantes', 2.50)" class="btn-primary py-2.5 rounded-xl font-bold text-sm">110💎 S/2.50</button>
-        <button onclick="agregarCarrito('341 Diamantes', 7.00)" class="btn-primary py-2.5 rounded-xl font-bold text-sm">341💎 S/7.00</button>
-        <button onclick="agregarCarrito('572 Diamantes', 12.00)" class="btn-primary py-2.5 rounded-xl font-bold text-sm">572💎 S/12.00</button>
-      </div>
-    </div>
-
-    <!-- SEGUIDORES -->
-    <div class="producto seguidores card rounded-2xl p-6 transition shadow-sm">
-      <p class="text-4xl mt-3">👥</p>
-      <p class="font-bold text-xl mt-1">1000 Seguidores Instagram</p>
-      <p class="mt-4"><span class="text-3xl font-black text-orange-500">S/ 5.00</span></p>
-      <button onclick="agregarCarrito('1000 Seguidores Instagram', 5)" class="btn-primary w-full py-3.5 rounded-xl font-bold">AÑADIR</button>
-    </div>
-
-    <!-- PASE ELITE -->
-    <div class="producto pase card rounded-2xl p-6 transition shadow-sm">
-      <p class="text-4xl mt-3">👑</p>
-      <p class="font-bold text-xl mt-1">Pase Élite Mensual</p>
-      <p class="mt-4"><span class="text-3xl font-black text-orange-500">S/ 20.00</span></p>
-      <button onclick="agregarCarrito('Pase Élite Mensual', 20)" class="btn-primary w-full py-3.5 rounded-xl font-bold">AÑADIR AL CARRITO</button>
-    </div>
-
-  </div>
-</div>
-
-<div class="music-bar fixed bottom-0 left-0 right-0 p-3 z-40">
-  <div class="max-w-7xl mx-auto flex items-center justify-between">
-    <button onclick="toggleMusic()" id="btnMusic2" class="btn-primary px-4 py-2 rounded-lg font-bold text-sm">Pausar</button>
+    <a href="producto-streaming.html" class="producto streaming card rounded-2xl p-6"><p class="text-4xl font-black text-red-500">N</p><p class="font-bold text-xl mt-1">Netflix Premium</p><p class="mt-4"><span class="text-3xl font-black text-orange-500">S/ 15.00</span></p></a>
+    <a href="producto-musica.html" class="producto musica card rounded-2xl p-6"><p class="text-4xl text-green-500">●</p><p class="font-bold text-xl mt-1">Spotify Premium</p><p class="mt-4"><span class="text-3xl font-black text-orange-500">S/ 10.00</span></p></a>
+    <a href="producto-bots.html" class="producto bots card rounded-2xl p-6"><p class="text-4xl">🤖</p><p class="font-bold text-xl mt-1">Bots</p><p class="mt-4"><span class="text-3xl font-black text-orange-500">Desde S/ 3.00</span></p></a>
+    <a href="producto-spam.html" class="producto spam card rounded-2xl p-6"><p class="text-4xl">📢</p><p class="font-bold text-xl mt-1">Spam 3x3 Horas</p><p class="mt-4"><span class="text-3xl font-black text-orange-500">Desde S/ 5.50</span></p></a>
+    <a href="producto-design.html" class="producto design card rounded-2xl p-6"><p class="text-4xl">🖌️</p><p class="font-bold text-xl mt-1">Design Luu</p><p class="mt-4"><span class="text-3xl font-black text-orange-500">Desde S/ 3.00</span></p></a>
+    <a href="producto-numeros.html" class="producto numeros card rounded-2xl p-6"><p class="text-4xl">📱</p><p class="font-bold text-xl mt-1">Número USA</p><p class="mt-4"><span class="text-3xl font-black text-orange-500">S/ 25.00</span></p></a>
+    <a href="producto-seguidores.html" class="producto seguidores card rounded-2xl p-6"><p class="text-4xl">👥</p><p class="font-bold text-xl mt-1">Seguidores IG</p><p class="mt-4"><span class="text-3xl font-black text-orange-500">Desde S/ 2.00</span></p></a>
+    <a href="producto-vistas.html" class="producto vistas card rounded-2xl p-6"><p class="text-4xl">👁️</p><p class="font-bold text-xl mt-1">Vistas TikTok</p><p class="mt-4"><span class="text-3xl font-black text-orange-500">S/ 12.00</span></p></a>
+    <a href="producto-likes.html" class="producto likes card rounded-2xl p-6"><p class="text-4xl">❤️</p><p class="font-bold text-xl mt-1">Likes IG</p><p class="mt-4"><span class="text-3xl font-black text-orange-500">S/ 8.00</span></p></a>
+    <a href="producto-diamantes.html" class="producto diamantes card rounded-2xl p-6 md:col-span-3"><p class="text-4xl">💎</p><p class="font-bold text-2xl mt-1">Recargas Free Fire</p><p class="text-sm text-gray-500">PE, CL, AR, MX, BO, UY</p></a>
+    <a href="producto-pase.html" class="producto pase card rounded-2xl p-6"><p class="text-4xl">👑</p><p class="font-bold text-xl mt-1">Pase Élite</p><p class="mt-4"><span class="text-3xl font-black text-orange-500">S/ 20.00</span></p></a>
+    <a href="producto-otro.html" class="producto card rounded-2xl p-6"><p class="text-4xl">📦</p><p class="font-bold text-xl mt-1">Otros Servicios</p><p class="mt-4"><span class="text-3xl font-black text-orange-500">Consultar</span></p></a>
   </div>
 </div>
 
 <script>
 let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-const music = document.getElementById('bgMusic');
-music.volume = 0.3;
 actualizarCarrito();
-
-function toggleMusic() {
-  if(music.paused) { music.play(); document.getElementById('btnMusic').innerText = '🔊'; document.getElementById('btnMusic2').innerText = 'Pausar'; } 
-  else { music.pause(); document.getElementById('btnMusic').innerText = '🔇'; document.getElementById('btnMusic2').innerText = 'Reproducir'; }
-}
-
-function agregarCarrito(nombre, precio) {
-  carrito.push({nombre, precio});
-  localStorage.setItem('carrito', JSON.stringify(carrito));
-  actualizarCarrito();
-  alert('✅ ' + nombre + ' añadido al carrito');
-}
-
-function actualizarCarrito() {
-  document.getElementById('btnCarrito').innerText = `🛒 Carrito ${carrito.length}`;
-}
-
+function actualizarCarrito() { document.getElementById('btnCarrito').innerText = `🛒 Carrito ${carrito.length}`; }
 function filtrar(categoria) {
   document.querySelectorAll('.producto').forEach(p => p.style.display = 'none');
   document.querySelectorAll('.filter-btn').forEach(b => b.className = 'filter-btn px-5 py-2.5 rounded-xl text-sm font-bold text-gray-600');
-  if(categoria === 'todos') {
-    document.querySelectorAll('.producto').forEach(p => p.style.display = 'block');
-    document.getElementById('btn-todos').className = 'filter-btn filter-active px-5 py-2.5 rounded-xl text-sm font-bold';
-  } else {
-    document.querySelectorAll('.' + categoria).forEach(p => p.style.display = 'block');
-    document.getElementById('btn-' + categoria).className = 'filter-btn filter-active px-5 py-2.5 rounded-xl text-sm font-bold';
-  }
-}
-
-function enviarWhatsApp() {
-  if(carrito.length === 0) return alert('Tu carrito está vacío');
-  let total = carrito.reduce((sum, item) => sum + item.precio, 0);
-  let mensaje = `*HOLA LU, QUIERO COMPRAR*%0A%0A*PRODUCTOS:*%0A`;
-  carrito.forEach((item, i) => { mensaje += `${i+1}. ${item.nombre} - S/ ${item.precio}.00%0A`; });
-  mensaje += `%0A*TOTAL: S/ ${total}.00*%0A%0A*DATOS PARA EL PAGO:*%0A`;
-  mensaje += `Nombre: _%0A` + `Método de Pago: _%0A` + `ID/Correo/Juego: _%0A%0A` + `Espero confirmación! 🙏`;
-  window.open(`https://wa.me/51920726588?text=${mensaje}`, '_blank');
-  localStorage.removeItem('carrito'); carrito = []; actualizarCarrito();
+  if(categoria === 'todos') { document.querySelectorAll('.producto').forEach(p => p.style.display = 'block'); document.getElementById('btn-todos').className = 'filter-btn filter-active px-5 py-2.5 rounded-xl text-sm font-bold'; }
+  else { document.querySelectorAll('.' + categoria).forEach(p => p.style.display = 'block'); document.getElementById('btn-' + categoria).className = 'filter-btn filter-active px-5 py-2.5 rounded-xl text-sm font-bold'; }
 }
 </script>
 </body>
