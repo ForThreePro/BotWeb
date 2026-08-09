@@ -43,12 +43,14 @@
   .section-title{font-size:18px; font-weight:700; margin:20px 0 6px}
   .section-sub{color:var(--text-muted); font-size:13px; margin-bottom:14px}
   .staff-grid{display:flex; gap:12px; overflow-x:auto; padding-bottom:10px}
-  .staff-card{min-width:140px; background:var(--card); border:1px solid var(--card-border); border-radius:16px; padding:16px; text-align:center; cursor:pointer}
-  .staff-avatar{width:70px; height:70px; border-radius:18px; background:linear-gradient(135deg, #ff3b30 0%, #ff9500 100%); margin:0 auto 10px; display:flex; align-items:center; justify-content:center; font-size:28px; font-weight:700}
+  .staff-card{min-width:160px; background:var(--card); border:1px solid var(--card-border); border-radius:16px; padding:16px; text-align:center; cursor:pointer; transition:.3s}
+  .staff-card:hover{border-color:var(--green); transform:translateY(-3px)}
+  .staff-avatar-img{width:70px; height:70px; border-radius:18px; margin:0 auto 10px; display:block; object-fit:cover; border:2px solid var(--green)}
   .fab{position:fixed; bottom:20px; right:20px; width:54px; height:54px; border-radius:16px; background:linear-gradient(135deg, #ff3b30 0%, #ff9500 100%); display:flex; align-items:center; justify-content:center; font-size:22px; cursor:pointer}
 </style>
 </head>
 <body>
+
 <nav>
   <div class="nav-wrap">
     <div class="nav-left">
@@ -59,6 +61,7 @@
     <div class="bell">🔔</div>
   </div>
 </nav>
+
 <div class="overlay" onclick="toggleMenu()"></div>
 <div class="side-menu" id="side-menu">
   <div class="menu-group"><div class="menu-header">📦 PORTAL</div>
@@ -72,8 +75,12 @@
     <a href="shop.html" class="menu-item"><span class="menu-icon">🛒</span> Tienda</a>
   </div>
 </div>
+
 <div class="container">
-  <div class="card" style="padding:12px"><img src="https://files.evogb.win/sRJ0HB.jpg" class="banner-img"></div>
+  <div class="card" style="padding:12px">
+    <img src="https://files.evogb.win/sRJ0HB.jpg" class="banner-img" alt="Garfield Store">
+  </div>
+
   <div class="card">
     <div class="card-header"><div class="card-icon">⏱️</div><div class="stat-label">TIEMPO ACTIVO</div></div>
     <div class="stats">
@@ -83,27 +90,57 @@
       <div><div class="stat-value" id="seg">55</div><div class="stat-sub">SEG</div></div>
     </div>
   </div>
+
   <div class="card">
     <div class="card-header"><div class="card-icon green">👥</div><div><div class="stat-label">USUARIOS REGISTRADOS</div><div class="users-num">127</div><div class="stat-sub">PERSONAS</div></div></div>
     <div style="margin-top:14px"><div class="stat-label">ESTADO DE LA TIENDA</div><div class="status">En línea</div><div class="stat-sub">GARFIELD BOT ACTIVO</div></div>
   </div>
-  <div><div class="section-title">Creadores y Staff</div><div class="section-sub">Toca una tarjeta</div>
+
+  <!-- CREADORES CON FOTO -->
+  <div id="staff">
+    <div class="section-title">Creadores</div>
+    <div class="section-sub">Toca para hablar por WhatsApp</div>
     <div class="staff-grid">
-      <div class="staff-card" onclick="openWhatsApp('Zemo')"><div class="staff-avatar">Z</div><div>Zemo</div><div class="stat-sub">CREADOR</div></div>
-      <div class="staff-card" onclick="openWhatsApp('Smtíh')"><div class="staff-avatar">S</div><div>Smtíh</div><div class="stat-sub">OWNER</div></div>
+      
+      <!-- WHOIS -->
+      <div class="staff-card" onclick="openWhatsApp('Whois', '51927174369')">
+        <img src="https://files.evogb.win/dbx0GX.jpg" class="staff-avatar-img" alt="Whois">
+        <div><b>Whois</b></div>
+        <div class="stat-sub">CREADOR</div>
+        <div class="stat-sub">+51 927 174 369</div>
+      </div>
+
+      <!-- LU -->
+      <div class="staff-card" onclick="openWhatsApp('Lu', '51920726588')">
+        <img src="https://via.placeholder.com/70x70/1a1a2e/00ff88?text=L" class="staff-avatar-img" alt="Lu">
+        <div><b>Lu</b></div>
+        <div class="stat-sub">CREADOR</div>
+        <div class="stat-sub">+51 920 726 588</div>
+      </div>
+
     </div>
   </div>
 </div>
-<div class="fab" onclick="openWhatsApp('Ventas')">✨</div>
+
+<div class="fab" onclick="openWhatsApp('Ventas', '51999999999')">✨</div>
+
 <script>
-  function toggleMenu(){document.getElementById('side-menu').classList.toggle('active');document.querySelector('.overlay').classList.toggle('active');document.querySelector('.hamburger').classList.toggle('active');}
-  function openWhatsApp(nombre){window.open(`https://wa.me/51999999999?text=Hola ${nombre}, te escribo desde GarfieldStore`, '_blank');}
+  function toggleMenu(){
+    document.getElementById('side-menu').classList.toggle('active');
+    document.querySelector('.overlay').classList.toggle('active');
+    document.querySelector('.hamburger').classList.toggle('active');
+  }
+  function openWhatsApp(nombre, numero){
+    window.open(`https://wa.me/${numero}?text=Hola ${nombre}, te escribo desde GarfieldStore`, '_blank');
+  }
   let seg = 55, min = 20, horas = 14, dias = 0;
-  setInterval(()=>{seg++; if(seg==60){seg=0; min++} if(min==60){min=0; horas++} if(horas==24){horas=0; dias++}
-  document.getElementById('seg').innerText = seg.toString().padStart(2,'0');
-  document.getElementById('min').innerText = min.toString().padStart(2,'0');
-  document.getElementById('horas').innerText = horas;
-  document.getElementById('dias').innerText = dias;},1000)
+  setInterval(()=>{
+    seg++; if(seg==60){seg=0; min++} if(min==60){min=0; horas++} if(horas==24){horas=0; dias++}
+    document.getElementById('seg').innerText = seg.toString().padStart(2,'0');
+    document.getElementById('min').innerText = min.toString().padStart(2,'0');
+    document.getElementById('horas').innerText = horas;
+    document.getElementById('dias').innerText = dias;
+  },1000)
 </script>
 </body>
 </html>
