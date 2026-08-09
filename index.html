@@ -7,37 +7,66 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="navbar">
-    <h1 class="logo">Atiens</h1>
-    <nav>
-      <a href="index.html">Inicio</a>
-      <a href="#">Dónde</a>
-      <a href="#">Varios</a>
-      <a href="tienda.html">Tienda</a>
-      <a href="#">Perfil</a>
-    </nav>
-  </header>
+  <audio id="musica" src="garfield.mp3" loop></audio>
 
-  <section class="hero">
-    <h2>Bienvenido a Garfield</h2>
-    <p>Comida, siestas y un poco de caos</p>
-  </section>
-
-  <section class="videos">
-    <h3>Historias de Garfield</h3>
-    <div class="video-grid">
-      <video src="1.mp4" controls></video>
-      <video src="2.mp4" controls></video>
+  <aside class="sidebar">
+    <div class="perfil">
+      <div class="avatar">Y</div>
+      <div class="info">
+        <h3>Yallico</h3>
+        <p>y58086236@gmail.com</p>
+        <span class="estado">En línea</span>
+      </div>
+      <span class="rol">Usuario</span>
     </div>
-  </section>
 
-  <section class="stories">
-    <h3>Más historias</h3>
-    <p>Aquí puedes agregar texto, memes o comics de Garfield. Este bloque es para tus "historias de Garfield".</p>
-  </section>
+    <button id="btnMusica" class="btn-musica">🔊 Reproducir Música</button>
 
-  <footer>
-    <p>© 2026 Atiens Web</p>
-  </footer>
+    <div class="menu">
+      <details open>
+        <summary>PORTAL</summary>
+        <a href="index.html">🏠 Inicio</a>
+        <a href="#">👤 Mi perfil</a>
+        <a href="#">📰 Noticias</a>
+      </details>
+
+      <details open>
+        <summary>SOCIAL</summary>
+        <a href="#">👥 Comunidad</a>
+        <a href="#">💬 Chat</a>
+      </details>
+
+      <details open>
+        <summary>REDES</summary>
+        <a href="#">🟢 Canal de WhatsApp</a>
+        <a href="#">🟢 Comunidad WhatsApp</a>
+        <a href="#">🔵 Telegram</a>
+      </details>
+
+      <details open>
+        <summary>IA'S</summary>
+        <a href="#">💎 ChatGPT</a>
+        <a href="#">💎 Claude</a>
+        <a href="#">🖼️ Imagen a Prompt</a>
+      </details>
+
+      <a href="tienda.html" class="btn-tienda">🛒 Tienda</a>
+    </div>
+  </aside>
+
+  <main class="contenido">
+    <h1>Bienvenido a Garfield</h1>
+    <p>Odio los lunes, amo la lasaña</p>
+    
+    <section class="videos">
+      <h2>Historias de Garfield</h2>
+      <div class="video-grid">
+        <video src="1.mp4" controls></video>
+        <video src="2.mp4" controls></video>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
