@@ -5,51 +5,48 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Garfield Store - Inicio</title>
 <script src="https://cdn.tailwindcss.com"></script>
+<style>
+  .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 20; }
+  .overlay.active { display: block; }
+</style>
 </head>
 <body class="bg-[#000] text-white font-sans">
-
   <div class="h-8 bg-blue-600 w-full"></div>
-
-  <header class="sticky top-8 z-40 bg-[#0A0A0A]/80 backdrop-blur border-b border-white/5">
-    <div class="flex items-center justify-between px-4 py-3">
+  <header class="sticky top-8 z-40 bg-[#0A0A0A]/80 backdrop-blur border-b border-white/5 h-14">
+    <div class="flex items-center justify-between px-4 h-full">
       <div class="flex items-center gap-3">
-        <button onclick="toggleSidebar()" class="p-2 rounded-lg hover:bg-white/5">☰</button>
+        <button onclick="toggleSidebar()" class="p-2 rounded-lg hover:bg-white/5">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+        </button>
         <div class="flex items-center gap-2">
-          <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center font-bold text-lg">G</div>
+          <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center font-bold text-lg">G</div>
           <h1 class="text-lg font-semibold">Garfield<span class="text-green-400">Store</span></h1>
         </div>
       </div>
-      <button class="p-2 rounded-xl bg-[#111] hover:bg-white/5">🔔</button>
+      <button class="p-2 rounded-xl bg-[#111]">🔔</button>
     </div>
   </header>
+  <div id="overlay" class="overlay" onclick="toggleSidebar()"></div>
 
   <div class="flex">
-    <aside id="sidebar" class="fixed md:static inset-y-0 left-0 z-30 w-64 bg-[#0A0A0A] border-r border-white/5 -translate-x-full md:translate-x-0 transition">
+    <aside id="sidebar" class="fixed md:static inset-y-0 left-0 z-30 w-64 bg-[#0A0A0A] border-r border-white/5 -translate-x-full md:translate-x-0 transition-transform duration-300">
       <div class="p-4 space-y-3">
         <div class="rounded-xl bg-[#111] p-2">
-          <button onclick="toggleSection('portal')" class="w-full flex items-center justify-between text-xs tracking-wider text-white/70">
-            <span class="flex items-center gap-2">🏠 PORTAL</span>
-            <span id="arrow-portal">▲</span>
-          </button>
+          <button onclick="toggleSection('portal')" class="w-full flex items-center justify-between text-xs tracking-wider text-white/70"><span class="flex items-center gap-2">🏠 PORTAL</span><span id="arrow-portal">▲</span></button>
           <div id="portal" class="mt-2 space-y-1">
             <a href="index.html" class="block px-3 py-2 rounded-lg text-sm bg-gradient-to-r from-purple-600/30 to-blue-600/30">Inicio</a>
+            <a href="garfield.html" class="block px-3 py-2 rounded-lg text-sm hover:bg-white/5">Zona Garfield</a>
           </div>
         </div>
         <div class="rounded-xl bg-[#111] p-2">
-          <button onclick="toggleSection('redes')" class="w-full flex items-center justify-between text-xs tracking-wider text-white/70">
-            <span class="flex items-center gap-2">💬 REDES</span>
-            <span id="arrow-redes">▼</span>
-          </button>
+          <button onclick="toggleSection('redes')" class="w-full flex items-center justify-between text-xs tracking-wider text-white/70"><span class="flex items-center gap-2">💬 REDES</span><span id="arrow-redes">▼</span></button>
           <div id="redes" class="mt-2 space-y-1 hidden">
             <a href="redes.html" class="block px-3 py-2 rounded-lg text-sm hover:bg-white/5">Canal de WhatsApp</a>
             <a href="redes.html" class="block px-3 py-2 rounded-lg text-sm hover:bg-white/5">Comunidad WhatsApp</a>
           </div>
         </div>
         <div class="rounded-xl bg-[#111] p-2">
-          <button onclick="toggleSection('shop')" class="w-full flex items-center justify-between text-xs tracking-wider text-white/70">
-            <span class="flex items-center gap-2">🛍️ GARFIELD SHOP</span>
-            <span id="arrow-shop">▼</span>
-          </button>
+          <button onclick="toggleSection('shop')" class="w-full flex items-center justify-between text-xs tracking-wider text-white/70"><span class="flex items-center gap-2">🛍️ GARFIELD SHOP</span><span id="arrow-shop">▼</span></button>
           <div id="shop" class="mt-2 space-y-1 hidden">
             <a href="tienda.html" class="block px-3 py-2 rounded-lg text-sm hover:bg-white/5">Tienda</a>
             <a href="productos.html" class="block px-3 py-2 rounded-lg text-sm hover:bg-white/5">Productos</a>
@@ -59,12 +56,9 @@
     </aside>
 
     <main class="flex-1 p-4 md:p-6 space-y-6">
-      <!-- BANNER GARFIELD -->
       <div class="rounded-2xl overflow-hidden border-white/5">
         <img src="https://files.evogb.win/2gepcp.jpg" alt="Garfield Store Banner" class="w-full object-cover">
       </div>
-
-      <!-- Cards -->
       <div class="grid md:grid-cols-2 gap-4">
         <div class="bg-[#0A0A0A] border-white/5 rounded-2xl p-4">
           <div class="text-center text-xs text-white/50 mb-2">TIEMPO ACTIVO</div>
@@ -75,50 +69,19 @@
             <div><div id="seg" class="text-3xl font-bold text-green-400">01</div><div class="text-xs text-white/50">SEG</div></div>
           </div>
         </div>
-
         <div class="bg-[#0A0A0A] border-white/5 rounded-2xl p-4">
-          <div class="flex items-center gap-3 mb-2">
-            <div class="p-2 rounded-lg bg-[#1a1a1a]">👥</div>
-            <div>
-              <div class="text-xs text-white/50">USUARIOS REGISTRADOS</div>
-              <div class="text-2xl font-bold text-green-400">127 <span class="text-sm font-normal text-white/60">PERSONAS</span></div>
-            </div>
-          </div>
-          <div class="text-xs text-white/50">ESTADO DE LA TIENDA</div>
-          <div class="text-sm text-green-400 font-semibold">En línea</div>
-          <div class="text-xs text-white/40">GARFIELD BOT ACTIVO</div>
-        </div>
-      </div>
-
-      <!-- Staff -->
-      <div>
-        <h2 class="text-xl font-semibold mb-1">Creadores y Staff</h2>
-        <p class="text-white/50 text-sm mb-3">Toca una tarjeta</p>
-        <div class="flex gap-4 overflow-x-auto pb-2">
-          <a href="https://wa.me/51" target="_blank" class="min-w-[160px] bg-[#0A0A0A] border-white/5 rounded-2xl p-4 text-center hover:border-purple-500/40">
-            <div class="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center text-3xl font-bold mb-2">W</div>
-            <div class="font-semibold">Whois</div>
-            <div class="text-xs text-white/50">OWNER</div>
-          </a>
+          <div class="flex items-center gap-3 mb-2"><div class="p-2 rounded-lg bg-[#1a1a1a]">👥</div><div><div class="text-xs text-white/50">USUARIOS REGISTRADOS</div><div class="text-2xl font-bold text-green-400">127 <span class="text-sm font-normal text-white/60">PERSONAS</span></div></div></div>
+          <div class="text-xs text-white/50">ESTADO DE LA TIENDA</div><div class="text-sm text-green-400 font-semibold">En línea</div><div class="text-xs text-white/40">GARFIELD BOT ACTIVO</div>
         </div>
       </div>
     </main>
   </div>
 
 <script>
-function toggleSidebar(){ document.getElementById('sidebar').classList.toggle('-translate-x-full') }
-function toggleSection(id){
-  document.getElementById(id).classList.toggle('hidden');
-  document.getElementById('arrow-'+id).innerText = document.getElementById(id).classList.contains('hidden')? '▼' : '▲';
-}
-let s=1, m=21, h=14, d=0;
-setInterval(()=>{
-  s++; if(s==60){s=0;m++} if(m==60){m=0;h++} if(h==24){h=0;d++}
-  document.getElementById('dias').innerText = d;
-  document.getElementById('horas').innerText = String(h).padStart(2,'0');
-  document.getElementById('min').innerText = String(m).padStart(2,'0');
-  document.getElementById('seg').innerText = String(s).padStart(2,'0');
-},1000)
+function toggleSidebar(){ const sidebar = document.getElementById('sidebar'); const overlay = document.getElementById('overlay'); sidebar.classList.toggle('-translate-x-full'); overlay.classList.toggle('active'); }
+function toggleSection(id){ document.getElementById(id).classList.toggle('hidden'); document.getElementById('arrow-'+id).innerText = document.getElementById(id).classList.contains('hidden')? '▼' : '▲'; }
+document.querySelectorAll('#sidebar a').forEach(link => { link.addEventListener('click', () => { if(window.innerWidth < 768){ toggleSidebar(); } }) })
+let s=1, m=21, h=14, d=0; setInterval(()=>{ s++; if(s==60){s=0;m++} if(m==60){m=0;h++} if(h==24){h=0;d++} document.getElementById('dias').innerText = d; document.getElementById('horas').innerText = String(h).padStart(2,'0'); document.getElementById('min').innerText = String(m).padStart(2,'0'); document.getElementById('seg').innerText = String(s).padStart(2,'0'); },1000)
 </script>
 </body>
 </html>
