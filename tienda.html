@@ -3,36 +3,64 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Garfield Store - Tienda</title>
-<script src="https://cdn.tailwindcss.com"></script>
+<title>Tienda - Garfield Store</title>
 <style>
-  .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 20; }
-  .overlay.active { display: block; }
+  *{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
+  body{background:#fff;}
+  header{display:flex;justify-content:space-between;align-items:center;padding:20px 40px;background:rgba(255,255,255,0.8);backdrop-filter:blur(20px);position:sticky;top:0;}
+  .menu-btn{font-size:24px;background:none;border:none;cursor:pointer;}
+  .carrito-btn{background:#FF8C00;color:#fff;border:none;padding:10px 16px;border-radius:12px;cursor:pointer;}
+  nav{position:fixed;top:0;left:-300px;width:280px;height:100%;background:#fff;box-shadow:2px 0 20px rgba(0,0,0,0.1);transition:0.3s;padding:60px 20px;z-index:101;}
+  nav.active{left:0;}
+  nav a{display:block;padding:14px 0;font-size:18px;color:#1d1d1f;text-decoration:none;border-bottom:1px solid #eee;}
+  .overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.4);z-index:100;}
+  .overlay.active{display:block;}
+  .productos{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;padding:40px;}
+  .producto{background:#F5F5F7;border-radius:18px;padding:20px;text-align:center;}
+  .producto button{background:#FF8C00;color:#fff;border:none;padding:10px 20px;border-radius:12px;cursor:pointer;margin-top:10px;}
+  #carrito{position:fixed;right:-400px;top:0;width:350px;height:100%;background:#fff;box-shadow:-4px 0 20px rgba(0,0,0,0.1);transition:0.3s;padding:20px;z-index:102;}
+  #carrito.active{right:0;}
+  .cerrar{float:right;font-size:24px;cursor:pointer;}
 </style>
 </head>
-<body class="bg-[#000] text-white font-sans">
-  <div class="h-8 bg-blue-600 w-full"></div>
-  <header class="sticky top-8 z-40 bg-[#0A0A0A]/80 backdrop-blur border-b border-white/5 h-14">
-    <div class="flex items-center justify-between px-4 h-full">
-      <div class="flex items-center gap-3"><button onclick="toggleSidebar()" class="p-2 rounded-lg hover:bg-white/5"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg></button><div class="flex items-center gap-2"><div class="w-9 h-9 rounded-lg bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center font-bold text-lg">G</div><h1 class="text-lg font-semibold">Garfield<span class="text-green-400">Store</span></h1></div></div>
-      <button class="p-2 rounded-xl bg-[#111]">🔔</button>
-    </div>
-  </header>
-  <div id="overlay" class="overlay" onclick="toggleSidebar()"></div>
-  <div class="flex">
-    <aside id="sidebar" class="fixed md:static inset-y-0 left-0 z-30 w-64 bg-[#0A0A0A] border-r border-white/5 -translate-x-full md:translate-x-0 transition-transform duration-300">
-      <div class="p-4 space-y-3">
-        <div class="rounded-xl bg-[#111] p-2"><button onclick="toggleSection('portal')" class="w-full flex justify-between text-xs">🏠 PORTAL <span id="arrow-portal">▼</span></button><div id="portal" class="mt-2 hidden"><a href="index.html" class="block px-3 py-2 rounded-lg text-sm hover:bg-white/5">Inicio</a><a href="garfield.html" class="block px-3 py-2 rounded-lg text-sm hover:bg-white/5">Zona Garfield</a></div></div>
-        <div class="rounded-xl bg-[#111] p-2"><button onclick="toggleSection('redes')" class="w-full flex justify-between text-xs">💬 REDES <span id="arrow-redes">▼</span></button><div id="redes" class="mt-2 hidden"><a href="redes.html" class="block px-3 py-2 rounded-lg text-sm hover:bg-white/5">Canal de WhatsApp</a><a href="redes.html" class="block px-3 py-2 rounded-lg text-sm hover:bg-white/5">Comunidad WhatsApp</a></div></div>
-        <div class="rounded-xl bg-[#111] p-2"><button onclick="toggleSection('shop')" class="w-full flex justify-between text-xs">🛍️ GARFIELD SHOP <span id="arrow-shop">▲</span></button><div id="shop" class="mt-2"><a href="tienda.html" class="block px-3 py-2 rounded-lg text-sm bg-gradient-to-r from-purple-600/30 to-blue-600/30">Tienda</a><a href="productos.html" class="block px-3 py-2 rounded-lg text-sm hover:bg-white/5">Productos</a></div></div>
-      </div>
-    </aside>
-    <main class="flex-1 p-6"><div class="text-center py-20"><div class="text-5xl mb-4">🛍️</div><h2 class="text-3xl font-bold mb-2">Garfield Shop</h2><p class="text-white/60 mb-6">Los mejores servicios de streaming, música, software y más</p><a href="productos.html" class="px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 font-semibold">Ver Catálogo Completo</a></div></main>
-  </div>
+<body>
+
+<header>
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+  <h2>Garfield Shop</h2>
+  <button class="carrito-btn" onclick="toggleCarrito()">Carrito</button>
+</header>
+
+<nav id="menu">
+  <a href="index.html">Inicio</a>
+  <a href="index.html#garfield">Garfield</a>
+  <a href="redes.html">Redes</a>
+  <a href="tienda.html">Tienda</a>
+</nav>
+<div class="overlay" onclick="toggleMenu()"></div>
+
+<section class="productos">
+  <div class="producto"><h3>Diamantes</h3><button onclick="agregar('Diamantes')">Agregar</button></div>
+  <div class="producto"><h3>Bots</h3><button onclick="agregar('Bots')">Agregar</button></div>
+  <div class="producto"><h3>Spam</h3><button onclick="agregar('Spam')">Agregar</button></div>
+  <div class="producto"><h3>Design</h3><button onclick="agregar('Design')">Agregar</button></div>
+</section>
+
+<div id="carrito">
+  <span class="cerrar" onclick="toggleCarrito()">X</span>
+  <h3>Tu Carrito</h3>
+  <div id="lista"></div>
+  <a id="comprar" href="https://wa.me/51XXXXXXXXX" style="display:block;margin-top:20px;background:#25D366;color:#fff;padding:12px;border-radius:12px;text-align:center;text-decoration:none;">Comprar por WhatsApp</a>
+</div>
+
 <script>
-function toggleSidebar(){ const sidebar = document.getElementById('sidebar'); const overlay = document.getElementById('overlay'); sidebar.classList.toggle('-translate-x-full'); overlay.classList.toggle('active'); }
-function toggleSection(id){ document.getElementById(id).classList.toggle('hidden'); document.getElementById('arrow-'+id).innerText = document.getElementById(id).classList.contains('hidden')? '▼' : '▲'; }
-document.querySelectorAll('#sidebar a').forEach(link => { link.addEventListener('click', () => { if(window.innerWidth < 768){ toggleSidebar(); } }) })
+let carrito = [];
+function agregar(prod){carrito.push(prod);mostrar();}
+function toggleCarrito(){document.getElementById('carrito').classList.toggle('active');}
+function toggleMenu(){document.getElementById('menu').classList.toggle('active');document.querySelector('.overlay').classList.toggle('active');}
+function mostrar(){let lista=document.getElementById('lista');lista.innerHTML='';carrito.forEach((p,i)=>{lista.innerHTML+=`<p>${p} <button onclick="borrar(${i})">X</button></p>`})}
+function borrar(i){carrito.splice(i,1);mostrar();}
 </script>
+
 </body>
 </html>
