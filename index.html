@@ -1,118 +1,87 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GarfieldCorp</title>
-<style>
-  :root{--naranja:#FF8C00;--naranja2:#FF4500;--fondo:#0A0A0F;--card:#12121A;--borde:#1E1E2A;}
-  *{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;}
-  body{background:var(--fondo);color:#fff;overflow-x:hidden;}
-  .topbar{height:4px;background:linear-gradient(90deg,var(--naranja),var(--naranja2));}
-  header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:#0F0F14;border-bottom:1px solid var(--borde);}
-  .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;}
-  .logo img{width:36px;height:36px;border-radius:10px;}
-  .logo span{color:var(--naranja);}
-  .menu-btn,.bell{background:#1A1A24;border:1px solid var(--borde);color:#fff;padding:10px;border-radius:12px;cursor:pointer;font-size:18px;}
-  .sidebar{position:fixed;top:0;left:-300px;width:280px;height:100%;background:#0F0F14;transition:0.3s;padding-top:60px;z-index:101;border-right:1px solid var(--borde);overflow-y:auto;}
-  .sidebar.active{left:0;}
-  .sidebar-section{margin-bottom:10px;}
-  .sidebar-title{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;font-size:12px;color:#888;font-weight:700;}
-  .sidebar a{display:flex;align-items:center;gap:12px;padding:12px 20px;color:#ccc;text-decoration:none;border-left:3px solid transparent;}
-  .sidebar a.active{background:linear-gradient(90deg,rgba(255,140,0,0.2),transparent);border-left:3px solid var(--naranja);color:#fff;}
-  .sidebar a:hover{background:#1A1A24;}
-  .overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:100;}
-  .overlay.active{display:block;}
-  .container{padding:16px;}
-  .card{background:var(--card);border:1px solid var(--borde);border-radius:16px;padding:16px;margin-bottom:16px;box-shadow:0 0 20px rgba(255,140,0,0.1);}
-  .stat{display:flex;align-items:center;gap:12px;}
-  .icon{width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,var(--naranja),var(--naranja2));display:flex;align-items:center;justify-content:center;font-size:22px;}
-  .tiempo{display:flex;gap:16px;margin-top:12px;}
-  .tiempo div{font-size:24px;font-weight:700;color:var(--naranja);}
-  .tiempo span{font-size:11px;color:#888;}
-  h3{margin:20px 16px 10px;font-size:18px;}
-  .staff{display:flex;gap:12px;overflow-x:auto;padding:0 16px 16px;}
-  .staff-card{min-width:160px;background:var(--card);border:1px solid var(--borde);border-radius:16px;padding:16px;text-align:center;cursor:pointer;}
-  .avatar{width:70px;height:70px;border-radius:18px;background:linear-gradient(135deg,var(--naranja),var(--naranja2));margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;}
-  .fab{position:fixed;bottom:20px;right:20px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--naranja),var(--naranja2));border:none;color:#fff;font-size:24px;box-shadow:0 4px 20px rgba(255,140,0,0.4);}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Streaming Bots Design - Automatiza tu Stream</title>
+  <style>
+    :root {
+      /* ===== CAMBIA TUS COLORES AQUÍ ===== */
+      --color-primario: #8b5cf6; /* Morado Neon */
+      --color-secundario: #06b6d4; /* Cyan Neon */
+      --color-fondo: #0a0a0f; /* Fondo Oscuro */
+      --color-tarjeta: #12121a; /* Fondo Tarjetas */
+      --color-texto: #e5e7eb; /* Texto Blanco */
+      /* =================================== */
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--color-fondo); color: var(--color-texto); font-family: 'Segoe UI', sans-serif; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+    
+    /* NAVBAR CON LOGO */
+    nav { display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid #222; }
+    .logo { display: flex; align-items: center; gap: 12px; font-size: 1.5rem; font-weight: bold; }
+    .logo img { width: 45px; height: 45px; border-radius: 10px; }
+
+    .btn { background: linear-gradient(90deg, var(--color-primario), var(--color-secundario)); color: white; padding: 14px 28px; border-radius: 10px; text-decoration: none; font-weight: bold; display: inline-block; }
+    .btn-outline { border: 2px solid var(--color-primario); background: transparent; }
+    .card { background: var(--color-tarjeta); padding: 25px; border-radius: 15px; border: 1px solid #222; }
+    h1, h2 { background: linear-gradient(90deg, var(--color-primario), var(--color-secundario)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  </style>
 </head>
 <body>
-<div class="topbar"></div>
 
-<header>
-  <div style="display:flex;align-items:center;gap:12px;">
-    <button class="menu-btn" onclick="toggleMenu()">☰</button>
-    <div class="logo"><img src="https://files.evogb.win/2gepcp.jpg"> Garfield<span>Corp</span></div>
-  </div>
-  <button class="bell">🔔</button>
-</header>
+  <!-- NAVBAR CON LOGO -->
+  <nav class="container">
+    <div class="logo">
+      <!-- CAMBIA LA RUTA DE TU LOGO AQUÍ -->
+      <img src="logo.png" alt="Logo Streaming Bots Design">
+      <span>Streaming Bots Design</span>
+    </div>
+    <div>
+      <a href="#productos" class="btn">Comprar Bot</a>
+    </div>
+  </nav>
 
-<div class="sidebar" id="menu">
-  <div class="sidebar-section">
-    <div class="sidebar-title">PORTAL ▼</div>
-    <a href="index.html" class="active">🏠 Inicio</a>
-    <a href="#">👤 Mi perfil</a>
-    <a href="#">📰 Noticias</a>
-  </div>
-  <div class="sidebar-section">
-    <div class="sidebar-title">SOCIAL ▼</div>
-    <a href="#">👥 Comunidad</a>
-    <a href="#">💬 Chat</a>
-  </div>
-  <div class="sidebar-section">
-    <div class="sidebar-title">REDES ▼</div>
-    <a href="redes.html">📱 Canal WhatsApp</a>
-    <a href="redes.html">👥 Comunidad WhatsApp</a>
-    <a href="redes.html">✈️ Telegram</a>
-  </div>
-  <div class="sidebar-section">
-    <div class="sidebar-title">GARFIELD SHOP ▼</div>
-    <a href="productos.html">🛒 Productos</a>
-    <a href="tienda.html">🛍️ Tienda</a>
-    <a href="garfield.html">🐱 Garfield</a>
-  </div>
-</div>
-<div class="overlay" onclick="toggleMenu()"></div>
+  <!-- HERO -->
+  <section class="container" style="text-align:center; padding:100px 20px;">
+    <h1 style="font-size:3rem;">Automatiza tu chat, crece tu comunidad</h1>
+    <p style="font-size:1.3rem; color:#aaa; margin:20px 0;">Bots para Twitch, YouTube y TikTok. Configuración en 5 min.</p>
+    <div style="margin-top:30px; display:flex; gap:15px; justify-content:center;">
+      <a href="#productos" class="btn">Ver Bots</a>
+      <a href="https://wa.me/51999999" class="btn btn-outline">Soporte WhatsApp</a>
+    </div>
+  </section>
 
-<div class="container">
-  <div class="card">
-    <div class="stat">
-      <div class="icon">⏱️</div>
-      <div>
-        <div style="font-size:12px;color:#888;">TIEMPO ACTIVO</div>
-        <div class="tiempo"><div>0 <span>DÍAS</span></div><div>00 <span>HORAS</span></div><div>10 <span>MIN</span></div><div>54 <span>SEG</span></div></div>
+  <!-- PRODUCTOS -->
+  <section id="productos" class="container" style="padding:80px 20px;">
+    <h2 style="text-align:center; font-size:2.2rem; margin-bottom:50px;">Nuestros Bots</h2>
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:25px;">
+      <div class="card">
+        <h3>🤖 Bot Twitch</h3>
+        <p>Comandos, bienvenida, sorteos, anti-spam 24/7</p>
+        <p style="font-size:1.8rem; color:var(--color-secundario); margin:20px 0;">S/29/mes</p>
+        <a href="https://wa.me/51999999999" class="btn">Comprar Ahora</a>
+      </div>
+      <div class="card">
+        <h3>▶️ Bot YouTube</h3>
+        <p>Moderación, alertas, respuestas automáticas</p>
+        <p style="font-size:1.8rem; color:var(--color-secundario); margin:20px 0;">S/29/mes</p>
+        <a href="https://wa.me/51999999" class="btn">Comprar Ahora</a>
+      </div>
+      <div class="card">
+        <h3>📱 Bot TikTok Live</h3>
+        <p>Regalos, FAQ, juegos en chat</p>
+        <p style="font-size:1.8rem; color:var(--color-secundario); margin:20px 0;">S/29/mes</p>
+        <a href="https://wa.me/51999999" class="btn">Comprar Ahora</a>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div class="card">
-    <div class="stat">
-      <div class="icon">👥</div>
-      <div>
-        <div style="font-size:12px;color:#888;">USUARIOS REGISTRADOS</div>
-        <div style="font-size:26px;font-weight:700;color:var(--naranja);">30 <span style="font-size:14px;color:#888;">PERSONAS</span></div>
-        <div style="margin-top:8px;font-size:12px;color:#888;">ESTADO DEL BOT</div>
-        <div style="font-size:18px;font-weight:700;color:#00FF88;">En línea</div>
-      </div>
-    </div>
-  </div>
+  <!-- FOOTER -->
+  <footer style="background:#05050a; padding:40px 20px; text-align:center; border-top:1px solid #222;">
+    <p>© 2026 Streaming Bots Design. Todos los derechos reservados.</p>
+  </footer>
 
-  <h3>Creadores y Staff</h3>
-  <div class="staff">
-    <div class="staff-card" onclick="window.open('https://wa.me/51XXXXXXXXX')">
-      <div class="avatar">W</div><div style="font-weight:700;">Whois</div><div style="font-size:12px;color:#888;">CREADOR</div>
-    </div>
-    <div class="staff-card" onclick="window.open('https://wa.me/51XXXXXXXXX')">
-      <div class="avatar">L</div><div style="font-weight:700;">Lu</div><div style="font-size:12px;color:#888;">OWNER</div>
-    </div>
-  </div>
-</div>
-
-<button class="fab" onclick="location.href='tienda.html'">⭐</button>
-
-<script>
-function toggleMenu(){document.getElementById('menu').classList.toggle('active');document.querySelector('.overlay').classList.toggle('active');}
-</script>
 </body>
 </html>
