@@ -5,31 +5,40 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GarfieldCorp</title>
 <style>
-  *{margin:0;padding:0;box-sizing:border-box;font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;}
-  body{background:#0A0A0F;color:#fff;}
-  header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:#0F0F14;position:sticky;top:0;z-index:100;border-bottom:1px solid #1E1E2A;}
+  :root{--naranja:#FF8C00;--naranja2:#FF4500;--fondo:#0A0A0F;--card:#12121A;--borde:#1E1E2A;}
+  *{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;}
+  body{background:var(--fondo);color:#fff;overflow-x:hidden;}
+  .topbar{height:4px;background:linear-gradient(90deg,var(--naranja),var(--naranja2));}
+  header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:#0F0F14;border-bottom:1px solid var(--borde);}
   .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;}
-  .logo img{width:36px;height:36px;border-radius:10px;object-fit:cover;}
-  .logo span{color:#00D4FF;}
-  .menu-btn,.bell{background:#1A1A24;border:none;color:#fff;padding:10px;border-radius:12px;cursor:pointer;font-size:18px;}
-  .card{background:#12121A;border:1px solid #1E1E2A;border-radius:16px;padding:16px;margin:16px;}
+  .logo img{width:36px;height:36px;border-radius:10px;}
+  .logo span{color:var(--naranja);}
+  .menu-btn,.bell{background:#1A1A24;border:1px solid var(--borde);color:#fff;padding:10px;border-radius:12px;cursor:pointer;font-size:18px;}
+  .sidebar{position:fixed;top:0;left:-300px;width:280px;height:100%;background:#0F0F14;transition:0.3s;padding-top:60px;z-index:101;border-right:1px solid var(--borde);overflow-y:auto;}
+  .sidebar.active{left:0;}
+  .sidebar-section{margin-bottom:10px;}
+  .sidebar-title{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;font-size:12px;color:#888;font-weight:700;}
+  .sidebar a{display:flex;align-items:center;gap:12px;padding:12px 20px;color:#ccc;text-decoration:none;border-left:3px solid transparent;}
+  .sidebar a.active{background:linear-gradient(90deg,rgba(255,140,0,0.2),transparent);border-left:3px solid var(--naranja);color:#fff;}
+  .sidebar a:hover{background:#1A1A24;}
+  .overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:100;}
+  .overlay.active{display:block;}
+  .container{padding:16px;}
+  .card{background:var(--card);border:1px solid var(--borde);border-radius:16px;padding:16px;margin-bottom:16px;box-shadow:0 0 20px rgba(255,140,0,0.1);}
   .stat{display:flex;align-items:center;gap:12px;}
-  .icon{width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#FF8C00,#FF4500);display:flex;align-items:center;justify-content:center;font-size:22px;}
+  .icon{width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,var(--naranja),var(--naranja2));display:flex;align-items:center;justify-content:center;font-size:22px;}
   .tiempo{display:flex;gap:16px;margin-top:12px;}
-  .tiempo div{font-size:24px;font-weight:700;color:#FF8C00;}
+  .tiempo div{font-size:24px;font-weight:700;color:var(--naranja);}
   .tiempo span{font-size:11px;color:#888;}
   h3{margin:20px 16px 10px;font-size:18px;}
   .staff{display:flex;gap:12px;overflow-x:auto;padding:0 16px 16px;}
-  .staff-card{min-width:160px;background:#12121A;border:1px solid #1E1E2A;border-radius:16px;padding:16px;text-align:center;}
-  .avatar{width:70px;height:70px;border-radius:18px;background:linear-gradient(135deg,#FF8C00,#FF4500);margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;}
-  .resenas{margin:16px;padding:16px;background:#12121A;border-radius:16px;border:1px solid #1E1E2A;}
-  nav{position:fixed;top:0;left:-280px;width:260px;height:100%;background:#0F0F14;transition:0.3s;padding:60px 20px;z-index:101;border-right:1px solid #1E1E2A;}
-  nav.active{left:0;} nav a{display:block;padding:14px 0;color:#fff;text-decoration:none;border-bottom:1px solid #1E1E2A;}
-  .overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:100;}
-  .overlay.active{display:block;}
+  .staff-card{min-width:160px;background:var(--card);border:1px solid var(--borde);border-radius:16px;padding:16px;text-align:center;cursor:pointer;}
+  .avatar{width:70px;height:70px;border-radius:18px;background:linear-gradient(135deg,var(--naranja),var(--naranja2));margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;}
+  .fab{position:fixed;bottom:20px;right:20px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--naranja),var(--naranja2));border:none;color:#fff;font-size:24px;box-shadow:0 4px 20px rgba(255,140,0,0.4);}
 </style>
 </head>
 <body>
+<div class="topbar"></div>
 
 <header>
   <div style="display:flex;align-items:center;gap:12px;">
@@ -39,72 +48,71 @@
   <button class="bell">🔔</button>
 </header>
 
-<nav id="menu">
-  <a href="index.html">Inicio</a>
-  <a href="garfield.html">Garfield</a>
-  <a href="productos.html">Productos</a>
-  <a href="tienda.html">Tienda</a>
-  <a href="redes.html">Redes</a>
-</nav>
+<div class="sidebar" id="menu">
+  <div class="sidebar-section">
+    <div class="sidebar-title">PORTAL ▼</div>
+    <a href="index.html" class="active">🏠 Inicio</a>
+    <a href="#">👤 Mi perfil</a>
+    <a href="#">📰 Noticias</a>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-title">SOCIAL ▼</div>
+    <a href="#">👥 Comunidad</a>
+    <a href="#">💬 Chat</a>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-title">REDES ▼</div>
+    <a href="redes.html">📱 Canal WhatsApp</a>
+    <a href="redes.html">👥 Comunidad WhatsApp</a>
+    <a href="redes.html">✈️ Telegram</a>
+  </div>
+  <div class="sidebar-section">
+    <div class="sidebar-title">GARFIELD SHOP ▼</div>
+    <a href="productos.html">🛒 Productos</a>
+    <a href="tienda.html">🛍️ Tienda</a>
+    <a href="garfield.html">🐱 Garfield</a>
+  </div>
+</div>
 <div class="overlay" onclick="toggleMenu()"></div>
 
-<div class="card">
-  <div class="stat">
-    <div class="icon">⏱️</div>
-    <div>
-      <div style="font-size:12px;color:#888;">TIEMPO ACTIVO</div>
-      <div class="tiempo">
-        <div>0 <span>DÍAS</span></div>
-        <div>00 <span>HORAS</span></div>
-        <div>10 <span>MIN</span></div>
-        <div>54 <span>SEG</span></div>
+<div class="container">
+  <div class="card">
+    <div class="stat">
+      <div class="icon">⏱️</div>
+      <div>
+        <div style="font-size:12px;color:#888;">TIEMPO ACTIVO</div>
+        <div class="tiempo"><div>0 <span>DÍAS</span></div><div>00 <span>HORAS</span></div><div>10 <span>MIN</span></div><div>54 <span>SEG</span></div></div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="card">
-  <div class="stat">
-    <div class="icon">👥</div>
-    <div>
-      <div style="font-size:12px;color:#888;">USUARIOS REGISTRADOS</div>
-      <div style="font-size:26px;font-weight:700;color:#FF8C00;">30 <span style="font-size:14px;color:#888;">PERSONAS</span></div>
-      <div style="margin-top:8px;font-size:12px;color:#888;">ESTADO DEL BOT</div>
-      <div style="font-size:18px;font-weight:700;color:#00FF88;">En línea</div>
-      <div style="font-size:11px;color:#666;">GARFIELD BOT ACTIVO</div>
+  <div class="card">
+    <div class="stat">
+      <div class="icon">👥</div>
+      <div>
+        <div style="font-size:12px;color:#888;">USUARIOS REGISTRADOS</div>
+        <div style="font-size:26px;font-weight:700;color:var(--naranja);">30 <span style="font-size:14px;color:#888;">PERSONAS</span></div>
+        <div style="margin-top:8px;font-size:12px;color:#888;">ESTADO DEL BOT</div>
+        <div style="font-size:18px;font-weight:700;color:#00FF88;">En línea</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Creadores y Staff</h3>
+  <div class="staff">
+    <div class="staff-card" onclick="window.open('https://wa.me/51XXXXXXXXX')">
+      <div class="avatar">W</div><div style="font-weight:700;">Whois</div><div style="font-size:12px;color:#888;">CREADOR</div>
+    </div>
+    <div class="staff-card" onclick="window.open('https://wa.me/51XXXXXXXXX')">
+      <div class="avatar">L</div><div style="font-weight:700;">Lu</div><div style="font-size:12px;color:#888;">OWNER</div>
     </div>
   </div>
 </div>
 
-<h3>Creadores y Staff</h3>
-<p style="margin:0 16px 10px;color:#888;font-size:14px;">Desliza y toca una tarjeta para abrir WhatsApp.</p>
-<div class="staff">
-  <div class="staff-card" onclick="window.open('https://wa.me/51XXXXXXXXX')">
-    <div class="avatar">W</div>
-    <div style="font-weight:700;">Whois</div>
-    <div style="font-size:12px;color:#888;">CREADOR</div>
-  </div>
-  <div class="staff-card" onclick="window.open('https://wa.me/51XXXXXXXXX')">
-    <div class="avatar">L</div>
-    <div style="font-weight:700;">Lu</div>
-    <div style="font-size:12px;color:#888;">OWNER</div>
-  </div>
-</div>
+<button class="fab" onclick="location.href='tienda.html'">⭐</button>
 
-<div class="resenas">
-  <div style="display:flex;justify-content:space-between;align-items:center;">
-    <div>
-      <h3 style="margin:0;">Reseñas reales</h3>
-      <p style="color:#888;font-size:14px;">Opiniones guardadas por la comunidad.</p>
-    </div>
-    <div style="text-align:right;">
-      <div style="font-size:26px;font-weight:700;color:#FF8C00;">5.0</div>
-      <div style="color:#FFC107;">★★★★★</div>
-    </div>
-  </div>
-</div>
-
-<script>function toggleMenu(){document.getElementById('menu').classList.toggle('active');document.querySelector('.overlay').classList.toggle('active');}</script>
-
+<script>
+function toggleMenu(){document.getElementById('menu').classList.toggle('active');document.querySelector('.overlay').classList.toggle('active');}
+</script>
 </body>
 </html>
