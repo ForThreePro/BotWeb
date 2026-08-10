@@ -1,13 +1,19 @@
 <!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SBD - Streaming Bots Design</title><style>:root{--prim:#ff6b00;--sec:#ffaa00;--fondo:#0a0a0a;--card:#151515;--texto:#f5f5f5}*{margin:0;padding:0}body{background:var(--fondo);color:var(--texto);font-family:Segoe UI}
+<title>SBD - Streaming Bots Design</title><style>:root{--prim:#ff6b00;--sec:#ffaa00;--fondo:#0a0a0a;--card:#151515;--texto:#f5f5f5}*{margin:0;padding:0;scroll-behavior:smooth}body{background:var(--fondo);color:var(--texto);font-family:Segoe UI}
 nav{display:flex;justify-content:space-between;align-items:center;padding:15px 20px;border-bottom:1px solid #222;position:sticky;top:0;background:rgba(10,10,10,0.95);z-index:1000}
+.logo-circulo{width:45px;height:45px;border-radius:50%;background:linear-gradient(90deg,var(--prim),var(--sec));display:flex;align-items:center;justify-content:center;font-weight:bold;color:black}
 .hamburguesa{display:flex;flex-direction:column;gap:5px;cursor:pointer}.hamburguesa span{width:28px;height:3px;background:var(--prim);border-radius:3px}
 .menu-lateral{position:fixed;top:0;left:-300px;width:280px;height:100%;background:#111;border-right:2px solid var(--prim);padding:80px 20px;transition:0.3s;z-index:999}
 .menu-lateral.activo{left:0}.overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);display:none;z-index:998}.overlay.activo{display:block}
 .menu-lateral a{display:block;color:var(--texto);text-decoration:none;padding:15px 10px;border-left:3px solid transparent}
 .menu-lateral a:hover{border-left:3px solid var(--prim);background:#1a1a1a;color:var(--prim)}
 .container{max-width:1200px;margin:0 auto;padding:20px}.btn{background:linear-gradient(90deg,var(--prim),var(--sec));color:black;padding:14px 28px;border-radius:10px;text-decoration:none;font-weight:bold}
-.card{background:var(--card);padding:25px;border-radius:15px;border:1px solid #2a2a2a}h1{background:linear-gradient(90deg,var(--prim),var(--sec));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero{text-align:center;padding:120px 20px;background:radial-gradient(circle at center,rgba(255,107,0,0.1) 0%,transparent 70%)}
+.hero h1{font-size:3.5rem;background:linear-gradient(90deg,var(--prim),var(--sec));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.card{background:var(--card);padding:25px;border-radius:15px;border:1px solid #2a2a2a;transition:0.3s}
+.card:hover{border-color:var(--prim);transform:translateY(-5px)}
+.seccion{padding:80px 20px}.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px}
+.faq-item{background:var(--card);padding:20px;border-radius:10px;margin:10px 0;border-left:3px solid var(--prim)}
 </style></head><body>
 <div class="overlay" onclick="toggleMenu()"></div>
 <div class="menu-lateral" id="menu">
@@ -16,12 +22,42 @@ nav{display:flex;justify-content:space-between;align-items:center;padding:15px 2
   <a href="spam.html" style="padding-left:30px">📢 Spam</a><a href="design.html" style="padding-left:30px">🎨 Design</a>
   <a href="garfield.html">🐱 Garfield</a><a href="nosotros.html">👤 Sobre Nosotros</a><a href="https://wa.me/51999999">💬 WhatsApp</a>
 </div>
-<nav><div class="hamburguesa" onclick="toggleMenu()"><span></span><span></span><span></span></div><div><b>SBD</b></div><div></div></nav>
-<section class="container" style="text-align:center;padding:100px 20px;"><h1 style="font-size:3rem;">Servicios para Streamers</h1>
-<p style="color:#aaa;margin:20px 0">Todo para crecer en Twitch, YouTube y TikTok</p></section>
-<section class="container"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;">
-<div class="card"><h3>💎 Diamantes</h3><p>Recarga para TikTok Live</p><a href="diamantes.html" class="btn">Ver Precios</a></div>
-<div class="card"><h3>🤖 Bots</h3><p>Bots para Twitch, YT, TikTok</p><a href="bots.html" class="btn">Ver Precios</a></div>
-<div class="card"><h3>📢 Spam</h3><p>Promoción masiva</p><a href="spam.html" class="btn">Ver Precios</a></div>
-<div class="card"><h3>🎨 Design</h3><p>Overlays y logos</p><a href="design.html" class="btn">Ver Precios</a></div>
-</div></section><script>function toggleMenu(){document.getElementById('menu').classList.toggle('activo');document.querySelector('.overlay').classList.toggle('activo');}</script></body></html>
+<nav><div class="hamburguesa" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+<div class="logo-circulo">SBD</div><div></div></nav>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Haz crecer tu Stream</h1>
+  <p style="color:#aaa;font-size:1.2rem;margin:20px 0">Herramientas reales para Twitch, YouTube y TikTok</p>
+  <a href="#creadores" class="btn">Ver Servicios</a>
+</section>
+
+<!-- CREADORES -->
+<section class="seccion" id="creadores"><div class="container">
+  <h2 style="text-align:center;margin-bottom:40px;font-size:2.5rem;">Para Creadores</h2>
+  <div class="grid-3">
+    <div class="card"><h3>💎 Diamantes</h3><p>Recargas para TikTok Live al mejor precio</p><a href="diamantes.html" class="btn">Ver más</a></div>
+    <div class="card"><h3>🤖 Bots</h3><p>Viewers y chat activos 24/7</p><a href="bots.html" class="btn">Ver más</a></div>
+    <div class="card"><h3>📢 Spam</h3><p>Promociona tu canal masivamente</p><a href="spam.html" class="btn">Ver más</a></div>
+  </div>
+</div></section>
+
+<!-- RESEÑAS -->
+<section class="seccion" style="background:#111"><div class="container">
+  <h2 style="text-align:center;margin-bottom:40px;font-size:2.5rem;">Reseñas</h2>
+  <div class="grid-3">
+    <div class="card"><p>"Subí de 2 a 40 viewers en 1 semana"</p><b>- @streamerLima</b></div>
+    <div class="card"><p>"El soporte responde al toque. 100% real"</p><b>- @gamerPeru</b></div>
+    <div class="card"><p>"Diseños brutales y baratos"</p><b>- @twitch_pe</b></div>
+  </div>
+</div></section>
+
+<!-- FAQ -->
+<section class="seccion" id="faq"><div class="container">
+  <h2 style="text-align:center;margin-bottom:40px;font-size:2.5rem;">Preguntas Frecuentes</h2>
+  <div class="faq-item"><b>¿Es seguro usar bots?</b><p>Si. Usamos métodos seguros y nadie se da cuenta.</p></div>
+  <div class="faq-item"><b>¿Cuánto demora la entrega?</b><p>Diamantes y Bots: 5 minutos. Design: 24 horas.</p></div>
+  <div class="faq-item"><b>¿Aceptan Yape/Plin?</b><p>Si. También Paypal y Cripto.</p></div>
+</div></section>
+
+<script>function toggleMenu(){document.getElementById('menu').classList.toggle('activo');document.querySelector('.overlay').classList.toggle('activo');}</script></body></html>
