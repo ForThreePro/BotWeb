@@ -1,14 +1,18 @@
-<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><title>Diamantes</title><style>:root{--prim:#ff6b00;--sec:#ffaa00;--fondo:#0a0a0a;--card:#151515;--texto:#f5f5f5}*{margin:0;padding:0}body{background:var(--fondo);color:var(--texto);font-family:Segoe UI}
-nav{display:flex;gap:15px;padding:15px 20px;border-bottom:1px solid #222;position:sticky;top:0;background:rgba(10,10,10,0.95)}.hamburguesa{display:flex;flex-direction:column;gap:5px;cursor:pointer}.hamburguesa span{width:28px;height:3px;background:var(--prim)}
-.menu-lateral{position:fixed;top:0;left:-300px;width:280px;height:100%;background:#111;border-right:2px solid var(--prim);padding:80px 20px;transition:0.3s;z-index:999}.menu-lateral.activo{left:0}.overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);display:none;z-index:998}.overlay.activo{display:block}
-.menu-lateral a{display:block;color:var(--texto);text-decoration:none;padding:15px 10px;border-left:3px solid transparent}.menu-lateral a:hover{border-left:3px solid var(--prim);background:#1a1a1a;color:var(--prim)}
-.container{max-width:900px;margin:0 auto;padding:20px}h1{background:linear-gradient(90deg,var(--prim),var(--sec));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;font-size:2.5rem;margin:30px 0}
-.card{background:var(--card);padding:20px;border-radius:15px;border:1px solid #2a2a2a;margin:15px 0;display:flex;justify-content:space-between;align-items:center}
-.btn{background:linear-gradient(90deg,var(--prim),var(--sec));color:black;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:bold}</style></head><body>
-<div class="overlay" onclick="toggleMenu()"></div><div class="menu-lateral" id="menu"><a href="index.html">🏠 Inicio</a><a href="#" style="font-weight:bold;color:var(--prim)">📦 Productos</a><a href="diamantes.html" style="padding-left:30px">💎 Diamantes</a><a href="bots.html" style="padding-left:30px">🤖 Bots</a><a href="spam.html" style="padding-left:30px">📢 Spam</a><a href="design.html" style="padding-left:30px">🎨 Design</a><a href="garfield.html">🐱 Garfield</a><a href="nosotros.html">👤 Sobre Nosotros</a><a href="https://wa.me/51999999">💬 WhatsApp</a></div>
-<nav><div class="hamburguesa" onclick="toggleMenu()"><span></span><span></span><span></span></div><div><b>Diamantes</b></div><div></div></nav>
-<div class="container"><h1>Recarga de Diamantes</h1>
-<div class="card"><div><h3>100 Diamantes</h3><p>S/ 5.00</p></div><a href="https://wa.me/51999999" class="btn">Comprar</a></div>
-<div class="card"><div><h3>500 Diamantes</h3><p>S/ 22.00</p></div><a href="https://wa.me/51999999" class="btn">Comprar</a></div>
-<div class="card"><div><h3>1000 Diamantes</h3><p>S/ 40.00</p></div><a href="https://wa.me/51999999" class="btn">Comprar</a></div></div>
+<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diamantes - SBD</title><style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');:root{--prim:#FF6A00;--sec:#FFB700;--fondo:#000;--card:#111111CC;--texto:#fff}*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}body{background:var(--fondo);color:var(--texto)}
+nav{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;position:sticky;top:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(20px);border-bottom:1px solid #1a1a1a}
+.logo-circulo{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--prim),var(--sec));display:flex;align-items:center;justify-content:center;font-weight:800;color:#000;font-size:14px}
+.hamburguesa{display:flex;flex-direction:column;gap:6px;cursor:pointer}.hamburguesa span{width:24px;height:2px;background:var(--prim)}
+.menu-lateral{position:fixed;top:0;left:-100%;width:85%;max-width:320px;height:100%;background:#0a0a0a;padding:100px 25px;transition:0.4s;z-index:999}.menu-lateral.activo{left:0}.overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);display:none;z-index:998}.overlay.activo{display:block}
+.menu-lateral a{display:block;color:var(--texto);text-decoration:none;padding:16px 0;font-size:17px;font-weight:500;border-bottom:1px solid #1a1a1a}
+.container{max-width:600px;margin:0 auto;padding:0 20px}
+.titulo{font-size:2.5rem;font-weight:800;text-align:center;padding:40px 0;background:linear-gradient(135deg,var(--prim),var(--sec));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.producto{background:var(--card);backdrop-filter:blur(20px);padding:24px;border-radius:20px;border:1px solid #222;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center}
+.btn{background:linear-gradient(135deg,var(--prim),var(--sec));color:#000;padding:12px 24px;border-radius:50px;text-decoration:none;font-weight:700}</style></head><body>
+<div class="overlay" onclick="toggleMenu()"></div><div class="menu-lateral" id="menu"><a href="index.html">🏠 Inicio</a><a href="diamantes.html">💎 Diamantes</a><a href="bots.html">🤖 Bots</a><a href="spam.html">📢 Spam</a><a href="design.html">🎨 Design</a><a href="garfield.html">🐱 Garfield</a><a href="nosotros.html">👤 Sobre Nosotros</a><a href="https://wa.me/51999999">💬 WhatsApp</a></div>
+<nav><div class="hamburguesa" onclick="toggleMenu()"><span></span><span></span><span></span></div><div class="logo-circulo">SBD</div><div></div></nav>
+<div class="container"><h1 class="titulo">Diamantes TikTok</h1>
+<div class="producto"><div><h3>100 Diamantes</h3><p style="color:#aaa">S/ 5.00</p></div><a href="https://wa.me/51999999" class="btn">Comprar</a></div>
+<div class="producto"><div><h3>500 Diamantes</h3><p style="color:#aaa">S/ 22.00</p></div><a href="https://wa.me/51999999" class="btn">Comprar</a></div>
+<div class="producto"><div><h3>1000 Diamantes</h3><p style="color:#aaa">S/ 40.00</p></div><a href="https://wa.me/51999999" class="btn">Comprar</a></div></div>
 <script>function toggleMenu(){document.getElementById('menu').classList.toggle('activo');document.querySelector('.overlay').classList.toggle('activo');}</script></body></html>
