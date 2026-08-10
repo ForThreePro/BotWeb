@@ -1,60 +1,10 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Garfield - Garfield Store</title>
-<style>
-  *{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
-  body{background:#FFF8F0;color:#1d1d1f;}
-  header{position:sticky;top:0;background:rgba(255,255,255,0.8);backdrop-filter:blur(20px);padding:16px 24px;display:flex;justify-content:space-between;align-items:center;z-index:100;}
-  .menu-btn{font-size:24px;background:none;border:none;cursor:pointer;}
-  nav{position:fixed;top:0;left:-300px;width:280px;height:100%;background:#fff;box-shadow:2px 0 20px rgba(0,0,0,0.1);transition:0.3s;padding:60px 20px;z-index:101;}
-  nav.active{left:0;}
-  nav a{display:block;padding:14px 0;font-size:18px;color:#1d1d1f;text-decoration:none;border-bottom:1px solid #eee;}
-  .overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.4);z-index:100;}
-  .overlay.active{display:block;}
-  section{padding:60px 20px;max-width:900px;margin:auto;text-align:center;}
-  h2{font-size:36px;color:#FF8C00;margin-bottom:30px;}
-  video{width:100%;border-radius:16px;margin-bottom:20px;box-shadow:0 4px 20px rgba(0,0,0,0.1);}
-  .frases{background:#fff;padding:30px;border-radius:18px;margin-top:30px;}
-  .frases p{font-size:20px;font-style:italic;margin:10px 0;color:#555;}
-</style>
-</head>
+<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Garfield</title>
+<style>body{background:#0A0A0F;color:#fff;font-family:Roboto;padding:20px;text-align:center;}
+video{width:100%;border-radius:16px;margin:16px 0;border:1px solid #1E1E2A;}
+</style></head>
 <body>
-
-<header>
-  <h3>Garfield Store</h3>
-  <button class="menu-btn" onclick="toggleMenu()">☰</button>
-</header>
-
-<nav id="menu">
-  <a href="index.html">Inicio</a>
-  <a href="garfield.html">Garfield</a>
-  <a href="redes.html">Redes</a>
-  <a href="productos.html">Productos</a>
-  <a href="tienda.html">Tienda</a>
-</nav>
-<div class="overlay" onclick="toggleMenu()"></div>
-
-<section>
-  <h2>El Gato Naranja 🐱</h2>
-  
-  <video src="1.mp4" controls></video>
-  <video src="2.mp4" controls></video>
-
-  <h3>¿Quién es Garfield?</h3>
-  <p style="font-size:18px;margin:20px 0;">Garfield es un gato naranja, perezoso, amante de la lasaña y que odia los lunes. Pero ama vender diamantes.</p>
-
-  <div class="frases">
-    <h3>Frases de Garfield</h3>
-    <p>"Odio los lunes"</p>
-    <p>"La lasaña es mi debilidad"</p>
-    <p>"Duermo para poder soñar con comida"</p>
-  </div>
-</section>
-
-<script>function toggleMenu(){document.getElementById('menu').classList.toggle('active');document.querySelector('.overlay').classList.toggle('active');}</script>
-
-</body>
-</html>
+<h2 style="color:#FF8C00;">Garfield 🐱</h2>
+<video src="1.mp4" controls></video>
+<video src="2.mp4" controls></video>
+<h3>¿Quién es Garfield?</h3><p>Odia los lunes. Ama la lasaña. Vende diamantes.</p>
+</body></html>
