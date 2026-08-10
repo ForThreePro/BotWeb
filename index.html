@@ -1,30 +1,62 @@
 <!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>SBD - Streaming Bots Design</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
-:root{--prim:#FF6A00;--sec:#FFB700;--fondo:#000;--card:#111CC;--texto:#fff}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap');
+:root{--prim:#FF6A00;--sec:#FFB700;--fondo:#000;--card:#111111E6;--texto:#fff}
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif}
 body{background:var(--fondo);color:var(--texto);-webkit-font-smoothing:antialiased}
-nav{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;position:sticky;top:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(20px);z-index:1000;border-bottom:1px solid #1a1a1a}
-.logo-circulo{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--prim),var(--sec));display:flex;align-items:center;justify-content:center;font-weight:800;color:#000;font-size:14px}
-.hamburguesa{display:flex;flex-direction:column;gap:6px;cursor:pointer;padding:5px}.hamburguesa span{width:24px;height:2px;background:var(--prim);border-radius:2px}
+
+/* NAV */
+nav{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;position:sticky;top:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(20px);z-index:1000;border-bottom:1px solid #1a1a1a}
+.logo-circulo{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--prim),var(--sec));display:flex;align-items:center;justify-content:center;font-weight:800;color:#000;font-size:15px}
+.hamburguesa{display:flex;flex-direction:column;gap:6px;cursor:pointer;padding:5px}.hamburguesa span{width:24px;height:2px;background:var(--prim);border-radius:2px;transition:0.3s}
 .menu-lateral{position:fixed;top:0;left:-100%;width:85%;max-width:320px;height:100%;background:#0a0a0a;border-right:1px solid #222;padding:100px 25px;transition:0.4s cubic-bezier(.4,0,.2,1);z-index:999}
 .menu-lateral.activo{left:0}.overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);display:none;z-index:998}.overlay.activo{display:block}
 .menu-lateral a{display:block;color:var(--texto);text-decoration:none;padding:16px 0;font-size:17px;font-weight:500;border-bottom:1px solid #1a1a1a}
 .menu-lateral a:hover{color:var(--prim)}
-.container{max-width:800px;margin:0 auto;padding:0 20px}
-.hero{padding:80px 20px 60px;text-align:center}
-.hero h1{font-size:2.8rem;font-weight:800;line-height:1.1;margin-bottom:16px;background:linear-gradient(135deg,var(--prim),var(--sec));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.hero p{font-size:1.1rem;color:#aaa;margin-bottom:30px}
-.btn{background:linear-gradient(135deg,var(--prim),var(--sec));color:#000;padding:14px 32px;border-radius:50px;text-decoration:none;font-weight:700;font-size:16px;display:inline-block;box-shadow:0 8px 20px rgba(255,106,0,0.3)}
-.seccion{padding:60px 0}
-.titulo-seccion{font-size:2.2rem;font-weight:800;text-align:center;margin-bottom:40px}
-.card{background:var(--card);backdrop-filter:blur(20px);padding:24px;border-radius:20px;border:1px solid #222;margin-bottom:16px}
-.card h3{font-size:1.3rem;margin-bottom:8px;display:flex;align-items:center;gap:8px}
-.card p{color:#aaa;margin-bottom:16px;font-size:15px}
-.btn-card{background:linear-gradient(135deg,var(--prim),var(--sec));color:#000;padding:12px 24px;border-radius:50px;text-decoration:none;font-weight:700;font-size:15px;display:inline-block}
-.faq-item{background:var(--card);backdrop-filter:blur(20px);padding:20px;border-radius:16px;margin-bottom:12px;border:1px solid #222}
-@media (max-width:768px){.hero h1{font-size:2.2rem}.titulo-seccion{font-size:1.8rem}}
+
+.container{max-width:900px;margin:0 auto;padding:0 24px}
+
+/* HERO */
+.hero{padding:100px 20px 80px;text-align:center;background:radial-gradient(circle at 50% 20%,rgba(255,106,0,0.15) 0%,transparent 50%)}
+.hero h1{font-size:3rem;font-weight:800;line-height:1.1;margin-bottom:20px;background:linear-gradient(135deg,var(--prim),var(--sec));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:1.2rem;color:#aaa;margin-bottom:35px;max-width:500px;margin-left:auto;margin-right:auto}
+.btn{background:linear-gradient(135deg,var(--prim),var(--sec));color:#000;padding:16px 36px;border-radius:50px;text-decoration:none;font-weight:700;font-size:17px;display:inline-block;box-shadow:0 10px 30px rgba(255,106,0,0.4)}
+
+/* SECCIONES */
+.seccion{padding:80px 0}
+.titulo-seccion{font-size:2.4rem;font-weight:800;text-align:center;margin-bottom:50px}
+
+/* QUIENES SOMOS */
+.card{background:var(--card);backdrop-filter:blur(20px);padding:32px;border-radius:24px;border:1px solid #222;margin-bottom:20px}
+.card p{color:#aaa;line-height:1.7;font-size:16px}
+
+/* CREADORES */
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.card-creador{background:var(--card);backdrop-filter:blur(20px);padding:28px;border-radius:20px;border:1px solid #222;text-align:center;transition:0.3s}
+.card-creador:hover{border-color:var(--prim);transform:translateY(-4px)}
+.card-creador h3{font-size:1.4rem;margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:8px}
+.card-creador p{color:#aaa;font-size:15px;margin-bottom:20px}
+.btn-card{background:#1a1a1a;color:var(--prim);padding:12px 24px;border-radius:50px;text-decoration:none;font-weight:700;font-size:15px;display:inline-block;border:1px solid var(--prim)}
+
+/* RESEÑAS */
+.resena{background:var(--card);backdrop-filter:blur(20px);padding:24px;border-radius:20px;border:1px solid #222;margin-bottom:16px}
+.resena p{font-size:16px;margin-bottom:10px}
+.resena b{color:var(--prim)}
+
+/* FAQ */
+.faq-item{background:var(--card);backdrop-filter:blur(20px);padding:24px;border-radius:18px;margin-bottom:14px;border:1px solid #222}
+.faq-item b{font-size:17px}
+.faq-item p{color:#aaa;margin-top:8px}
+
+/* WHATSAPP FLOTANTE */
+.whatsapp-float{position:fixed;bottom:20px;right:20px;width:60px;height:60px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:32px;text-decoration:none;box-shadow:0 8px 25px rgba(37,211,102,0.5);z-index:999}
+
+@media (max-width:768px){
+  .hero h1{font-size:2.3rem}
+  .titulo-seccion{font-size:1.9rem}
+  .grid-2{grid-template-columns:1fr}
+}
 </style></head><body>
 <div class="overlay" onclick="toggleMenu()"></div>
 <div class="menu-lateral" id="menu">
@@ -32,26 +64,64 @@ nav{display:flex;justify-content:space-between;align-items:center;padding:18px 2
   <a href="spam.html">📢 Spam</a><a href="design.html">🎨 Design</a><a href="garfield.html">🐱 Garfield</a>
   <a href="nosotros.html">👤 Sobre Nosotros</a><a href="https://wa.me/51999999">💬 WhatsApp</a>
 </div>
-<nav><div class="hamburguesa" onclick="toggleMenu()"><span></span><span></span><span></span></div>
-<div class="logo-circulo">SBD</div><div style="width:34px"></div></nav>
 
-<section class="hero"><h1>Haz crecer tu Stream</h1><p>Herramientas reales para Twitch, YouTube y TikTok</p><a href="#servicios" class="btn">Ver Servicios</a></section>
+<nav>
+  <div class="hamburguesa" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+  <div class="logo-circulo">SBD</div>
+  <div style="width:34px"></div>
+</nav>
 
-<section class="seccion" id="servicios"><div class="container"><h2 class="titulo-seccion">Para Creadores</h2>
-<div class="card"><h3>💎 Diamantes</h3><p>Recargas para TikTok Live al mejor precio del mercado</p><a href="diamantes.html" class="btn-card">Ver más</a></div>
-<div class="card"><h3>🤖 Bots</h3><p>Viewers y chat activos 24/7. Seguros y discretos</p><a href="bots.html" class="btn-card">Ver más</a></div>
-<div class="card"><h3>📢 Spam</h3><p>Promociona tu canal masivamente en miles de chats</p><a href="spam.html" class="btn-card">Ver más</a></div>
-<div class="card"><h3>🎨 Design</h3><p>Overlays, logos y emotes pro para tu canal</p><a href="design.html" class="btn-card">Ver más</a></div>
+<!-- HERO -->
+<section class="hero">
+  <h1>Haz que te vean</h1>
+  <p>Herramientas reales para crecer en Twitch, YouTube y TikTok. Sin vueltas.</p>
+  <a href="#creadores" class="btn">Empezar Ahora</a>
+</section>
+
+<!-- QUIENES SOMOS -->
+<section class="seccion"><div class="container">
+  <h2 class="titulo-seccion">Quiénes Somos</h2>
+  <div class="card">
+    <p>Somos 2 streamers de Lima 🇵🇪 que se cansaron de streamear para 0 personas. 
+    En 2024 empezamos a crear herramientas para crecer y ahora ayudamos a +500 creadores a llegar a su meta.</p>
+    <p style="margin-top:15px"><b>Nuestra meta:</b> Que tu talento se vea. Nosotros ponemos el impulso.</p>
+  </div>
 </div></section>
 
-<section class="seccion" style="background:#0a0a0a"><div class="container"><h2 class="titulo-seccion">Reseñas</h2>
-<div class="card"><p>"Subí de 2 a 40 viewers en 1 semana. Increíble"</p><b>- @streamerLima</b></div>
-<div class="card"><p>"El soporte responde al toque. 100% real"</p><b>- @gamerPeru</b></div>
+<!-- CREADORES / SERVICIOS -->
+<section class="seccion" id="creadores" style="background:#0a0a0a"><div class="container">
+  <h2 class="titulo-seccion">Para Creadores</h2>
+  <div class="grid-2">
+    <div class="card-creador"><h3>💎 Diamantes</h3><p>Recargas para TikTok Live al mejor precio</p><a href="diamantes.html" class="btn-card">Ver Precios</a></div>
+    <div class="card-creador"><h3>🤖 Bots</h3><p>Viewers y chat activos 24/7 seguros</p><a href="bots.html" class="btn-card">Ver Precios</a></div>
+    <div class="card-creador"><h3>📢 Spam</h3><p>Promociona tu canal en miles de chats</p><a href="spam.html" class="btn-card">Ver Precios</a></div>
+    <div class="card-creador"><h3>🎨 Design</h3><p>Overlays, logos y emotes pro</p><a href="design.html" class="btn-card">Ver Precios</a></div>
+  </div>
 </div></section>
 
-<section class="seccion"><div class="container"><h2 class="titulo-seccion">Preguntas Frecuentes</h2>
-<div class="faq-item"><b>¿Es seguro usar bots?</b><p style="color:#aaa;margin-top:8px">Si. Usamos métodos seguros y nadie se da cuenta.</p></div>
-<div class="faq-item"><b>¿Cuánto demora la entrega?</b><p style="color:#aaa;margin-top:8px">Diamantes y Bots: 5 minutos. Design: 24 horas.</p></div>
-<div class="faq-item"><b>¿Aceptan Yape/Plin?</b><p style="color:#aaa;margin-top:8px">Si. También Paypal y Cripto.</p></div>
+<!-- RESEÑAS -->
+<section class="seccion"><div class="container">
+  <h2 class="titulo-seccion">Lo que dicen</h2>
+  <div class="resena"><p>"Pasé de 3 a 50 viewers en 2 semanas. Esto sí funciona"</p><b>- @streamerLima</b></div>
+  <div class="resena"><p>"El soporte responde en 5 min. 100% confiable"</p><b>- @gamerPeru</b></div>
+  <div class="resena"><p>"Mi overlay quedó brutal y barato"</p><b>- @twitch_pe</b></div>
 </div></section>
-<script>function toggleMenu(){document.getElementById('menu').classList.toggle('activo');document.querySelector('.overlay').classList.toggle('activo');}</script></body></html>
+
+<!-- FAQ -->
+<section class="seccion" id="faq" style="background:#0a0a0a"><div class="container">
+  <h2 class="titulo-seccion">Preguntas Frecuentes</h2>
+  <div class="faq-item"><b>¿Es seguro usar bots?</b><p>Si. Usamos métodos 100% seguros. Tu cuenta no corre riesgo.</p></div>
+  <div class="faq-item"><b>¿Cuánto demora la entrega?</b><p>Diamantes y Bots: 5 minutos. Diseño: 24 horas máximo.</p></div>
+  <div class="faq-item"><b>¿Qué métodos de pago aceptan?</b><p>Yape, Plin, Paypal y Cripto. Todo por WhatsApp.</p></div>
+</div></section>
+
+<!-- BOTON WHATSAPP FLOTANTE -->
+<a href="https://wa.me/51999999" class="whatsapp-float">💬</a>
+
+<script>
+function toggleMenu(){
+  document.getElementById('menu').classList.toggle('activo');
+  document.querySelector('.overlay').classList.toggle('activo');
+}
+</script>
+</body></html>
