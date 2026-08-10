@@ -7,20 +7,21 @@
 <style>
   *{margin:0;padding:0;box-sizing:border-box;font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;}
   body{background:#0A0A0F;color:#fff;}
-  header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:#0F0F14;position:sticky;top:0;z-index:100;}
+  header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:#0F0F14;position:sticky;top:0;z-index:100;border-bottom:1px solid #1E1E2A;}
   .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;}
+  .logo img{width:36px;height:36px;border-radius:10px;object-fit:cover;}
   .logo span{color:#00D4FF;}
-  .menu-btn,.bell{background:#1A1A24;border:none;color:#fff;padding:10px;border-radius:12px;cursor:pointer;}
-  .card{background:#12121A;border:1px solid #1E1E2A;border-radius:16px;padding:16px;margin:16px;backdrop-filter:blur(10px);}
+  .menu-btn,.bell{background:#1A1A24;border:none;color:#fff;padding:10px;border-radius:12px;cursor:pointer;font-size:18px;}
+  .card{background:#12121A;border:1px solid #1E1E2A;border-radius:16px;padding:16px;margin:16px;}
   .stat{display:flex;align-items:center;gap:12px;}
-  .icon{width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#00D4FF,#8B5CF6);display:flex;align-items:center;justify-content:center;font-size:22px;}
+  .icon{width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#FF8C00,#FF4500);display:flex;align-items:center;justify-content:center;font-size:22px;}
   .tiempo{display:flex;gap:16px;margin-top:12px;}
-  .tiempo div{font-size:24px;font-weight:700;color:#00FF88;}
+  .tiempo div{font-size:24px;font-weight:700;color:#FF8C00;}
   .tiempo span{font-size:11px;color:#888;}
   h3{margin:20px 16px 10px;font-size:18px;}
-  .staff{display:flex;gap:12px;overflow-x:auto;padding:0 16px 16px;scroll-snap-type:x mandatory;}
-  .staff-card{min-width:160px;background:#12121A;border:1px solid #1E1E2A;border-radius:16px;padding:16px;text-align:center;scroll-snap-align:start;}
-  .avatar{width:70px;height:70px;border-radius:18px;background:linear-gradient(135deg,#8B5CF6,#EC4899);margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;}
+  .staff{display:flex;gap:12px;overflow-x:auto;padding:0 16px 16px;}
+  .staff-card{min-width:160px;background:#12121A;border:1px solid #1E1E2A;border-radius:16px;padding:16px;text-align:center;}
+  .avatar{width:70px;height:70px;border-radius:18px;background:linear-gradient(135deg,#FF8C00,#FF4500);margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;}
   .resenas{margin:16px;padding:16px;background:#12121A;border-radius:16px;border:1px solid #1E1E2A;}
   nav{position:fixed;top:0;left:-280px;width:260px;height:100%;background:#0F0F14;transition:0.3s;padding:60px 20px;z-index:101;border-right:1px solid #1E1E2A;}
   nav.active{left:0;} nav a{display:block;padding:14px 0;color:#fff;text-decoration:none;border-bottom:1px solid #1E1E2A;}
@@ -33,7 +34,7 @@
 <header>
   <div style="display:flex;align-items:center;gap:12px;">
     <button class="menu-btn" onclick="toggleMenu()">☰</button>
-    <div class="logo"><img src="https://via.placeholder.com/36" style="border-radius:10px;"> Garfield<span>Corp</span></div>
+    <div class="logo"><img src="https://files.evogb.win/2gepcp.jpg"> Garfield<span>Corp</span></div>
   </div>
   <button class="bell">🔔</button>
 </header>
@@ -67,7 +68,7 @@
     <div class="icon">👥</div>
     <div>
       <div style="font-size:12px;color:#888;">USUARIOS REGISTRADOS</div>
-      <div style="font-size:26px;font-weight:700;color:#00FF88;">30 <span style="font-size:14px;color:#888;">PERSONAS</span></div>
+      <div style="font-size:26px;font-weight:700;color:#FF8C00;">30 <span style="font-size:14px;color:#888;">PERSONAS</span></div>
       <div style="margin-top:8px;font-size:12px;color:#888;">ESTADO DEL BOT</div>
       <div style="font-size:18px;font-weight:700;color:#00FF88;">En línea</div>
       <div style="font-size:11px;color:#666;">GARFIELD BOT ACTIVO</div>
@@ -97,7 +98,7 @@
       <p style="color:#888;font-size:14px;">Opiniones guardadas por la comunidad.</p>
     </div>
     <div style="text-align:right;">
-      <div style="font-size:26px;font-weight:700;color:#00D4FF;">5.0</div>
+      <div style="font-size:26px;font-weight:700;color:#FF8C00;">5.0</div>
       <div style="color:#FFC107;">★★★★★</div>
     </div>
   </div>
