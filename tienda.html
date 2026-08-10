@@ -1,40 +1,49 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tienda - GarfieldCorp</title>
+<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Tienda</title>
 <style>
-  body{background:#0A0A0F;color:#fff;font-family:Roboto;}
-  header{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:#0F0F14;border-bottom:1px solid #1E1E2A;}
-  .logo{display:flex;align-items:center;gap:10px;font-weight:700;}
-  .logo img{width:32px;height:32px;border-radius:8px;}
-  .menu-btn,.cart-btn{background:#1A1A24;border:none;color:#fff;padding:10px;border-radius:12px;}
+  :root{--naranja:#FF8C00;--naranja2:#FF4500;--fondo:#0A0A0F;--card:#12121A;--borde:#1E1E2A;}
+  body{background:var(--fondo);color:#fff;font-family:Roboto;padding-bottom:100px;}
+  .topbar{height:4px;background:linear-gradient(90deg,var(--naranja),var(--naranja2));}
+  header{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:#0F0F14;border-bottom:1px solid var(--borde);}
+  .menu-btn,.cart-btn{background:#1A1A24;border:1px solid var(--borde);color:#fff;padding:10px;border-radius:12px;position:relative;}
+  .cart-count{position:absolute;top:-5px;right:-5px;background:var(--naranja);color:#000;border-radius:50%;width:18px;height:18px;font-size:12px;}
   .productos{padding:16px;display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
-  .item{background:#12121A;border:1px solid #1E1E2A;border-radius:16px;padding:12px;text-align:center;}
-  .btn{background:linear-gradient(135deg,#FF8C00,#FF4500);border:none;color:#fff;width:100%;padding:10px;border-radius:10px;margin-top:8px;font-weight:600;}
-  #carrito{position:fixed;bottom:0;left:0;width:100%;background:#12121A;border-top:1px solid #1E1E2A;padding:16px;}
+  .item{background:var(--card);border:1px solid var(--borde);border-radius:16px;padding:12px;text-align:center;}
+  .btn{background:linear-gradient(135deg,var(--naranja),var(--naranja2));border:none;color:#fff;width:100%;padding:10px;border-radius:10px;margin-top:8px;font-weight:600;}
+  #carrito{position:fixed;bottom:0;left:0;width:100%;background:var(--card);border-top:1px solid var(--borde);padding:16px;max-height:300px;overflow-y:auto;}
+  .carrito-item{display:flex;justify-content:space-between;margin:8px 0;}
+  .borrar{background:red;color:#fff;border:none;border-radius:6px;padding:2px 8px;}
 </style>
-</head>
-<body>
+</head><body>
+<div class="topbar"></div>
 <header>
   <button class="menu-btn" onclick="toggleMenu()">☰</button>
-  <div class="logo"><img src="https://files.evogb.win/2gepcp.jpg"> Tienda</div>
-  <button class="cart-btn" onclick="alert('Carrito: '+carrito.length)">🛒</button>
+  <div>🛍️ Tienda</div>
+  <button class="cart-btn" onclick="toggleCarrito()">🛒<span class="cart-count" id="count">0</span></button>
 </header>
 
 <div class="productos">
-  <div class="item"><h4>Diamantes</h4><p>S/5.00</p><button class="btn" onclick="agregar('Diamantes')">Agregar</button></div>
-  <div class="item"><h4>Bots</h4><p>S/10.00</p><button class="btn" onclick="agregar('Bots')">Agregar</button></div>
+  <div class="item"><h4>Diamantes</h4><p>S/5.00</p><button class="btn" onclick="agregar('Diamantes - S/5')">Agregar</button></div>
+  <div class="item"><h4>Bots</h4><p>S/10.00</p><button class="btn" onclick="agregar('Bots - S/10')">Agregar</button></div>
 </div>
 
 <div id="carrito">
-  <button class="btn" onclick="window.open('https://wa.me/51XXXXXXXXX?text='+carrito.join(', '))">Comprar por WhatsApp</button>
+  <h3>Tu Carrito</h3><div id="lista"></div>
+  <button class="btn" id="comprarBtn">Comprar por WhatsApp</button>
 </div>
 
 <script>
-let carrito=[]; 
-function agregar(p){carrito.push(p);alert(p+" agregado")}
+let carrito=JSON.parse(localStorage.getItem('carrito'))||[];
+function agregar(p){carrito.push(p);guardar();}
+function borrar(i){carrito.splice(i,1);guardar();}
+function guardar(){localStorage.setItem('carrito',JSON.stringify(carrito));mostrar();}
+function mostrar(){
+  let lista=document.getElementById('lista');lista.innerHTML='';
+  carrito.forEach((p,i)=>{lista.innerHTML+=`<div class="carrito-item">${p} <button class="borrar" onclick="borrar(${i})">X</button></div>`});
+  document.getElementById('count').innerText=carrito.length;
+  document.getElementById('comprarBtn').onclick=()=>window.open('https://wa.me/51XXXXXXXXX?text='+encodeURIComponent(carrito.join(', ')));
+}
 function toggleMenu(){document.getElementById('menu').classList.toggle('active');}
+function toggleCarrito(){document.getElementById('carrito').style.display=document.getElementById('carrito').style.display==='none'?'block':'none';}
+mostrar();
 </script>
-</body>
-</html>
+</body></html>
