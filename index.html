@@ -3,92 +3,107 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Garfield Store</title>
+<title>GarfieldCorp</title>
 <style>
-  *{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
-  body{background:#fff;color:#1d1d1f;}
-  header{position:sticky;top:0;background:rgba(255,255,255,0.8);backdrop-filter:blur(20px);padding:16px 24px;z-index:100;display:flex;justify-content:space-between;align-items:center;}
-  .menu-btn{font-size:24px;background:none;border:none;cursor:pointer;}
-  nav{position:fixed;top:0;left:-300px;width:280px;height:100%;background:#fff;box-shadow:2px 0 20px rgba(0,0,0,0.1);transition:0.3s;padding:60px 20px;z-index:101;}
-  nav.active{left:0;}
-  nav a{display:block;padding:14px 0;font-size:18px;color:#1d1d1f;text-decoration:none;border-bottom:1px solid #eee;}
-  .overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.4);z-index:100;}
+  *{margin:0;padding:0;box-sizing:border-box;font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;}
+  body{background:#0A0A0F;color:#fff;}
+  header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:#0F0F14;position:sticky;top:0;z-index:100;}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;}
+  .logo span{color:#00D4FF;}
+  .menu-btn,.bell{background:#1A1A24;border:none;color:#fff;padding:10px;border-radius:12px;cursor:pointer;}
+  .card{background:#12121A;border:1px solid #1E1E2A;border-radius:16px;padding:16px;margin:16px;backdrop-filter:blur(10px);}
+  .stat{display:flex;align-items:center;gap:12px;}
+  .icon{width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#00D4FF,#8B5CF6);display:flex;align-items:center;justify-content:center;font-size:22px;}
+  .tiempo{display:flex;gap:16px;margin-top:12px;}
+  .tiempo div{font-size:24px;font-weight:700;color:#00FF88;}
+  .tiempo span{font-size:11px;color:#888;}
+  h3{margin:20px 16px 10px;font-size:18px;}
+  .staff{display:flex;gap:12px;overflow-x:auto;padding:0 16px 16px;scroll-snap-type:x mandatory;}
+  .staff-card{min-width:160px;background:#12121A;border:1px solid #1E1E2A;border-radius:16px;padding:16px;text-align:center;scroll-snap-align:start;}
+  .avatar{width:70px;height:70px;border-radius:18px;background:linear-gradient(135deg,#8B5CF6,#EC4899);margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;}
+  .resenas{margin:16px;padding:16px;background:#12121A;border-radius:16px;border:1px solid #1E1E2A;}
+  nav{position:fixed;top:0;left:-280px;width:260px;height:100%;background:#0F0F14;transition:0.3s;padding:60px 20px;z-index:101;border-right:1px solid #1E1E2A;}
+  nav.active{left:0;} nav a{display:block;padding:14px 0;color:#fff;text-decoration:none;border-bottom:1px solid #1E1E2A;}
+  .overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:100;}
   .overlay.active{display:block;}
-  .banner{width:100%;border-radius:0 0 16px 16px;overflow:hidden;}
-  .banner img{width:100%;display:block;}
-  section{padding:60px 20px;max-width:1000px;margin:auto;}
-  h2{font-size:32px;font-weight:700;margin-bottom:30px;text-align:center;}
-  .creadores{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;}
-  .card{background:#F5F5F7;border-radius:18px;padding:24px;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,0.05);}
-  .card img{width:80px;height:80px;border-radius:50%;margin-bottom:12px;}
-  .btn-whats{display:inline-block;margin-top:12px;padding:10px 20px;background:#25D366;color:#fff;border-radius:12px;text-decoration:none;font-weight:600;}
-  .faq{background:#F5F5F7;}
-  .faq-item{background:#fff;border-radius:12px;padding:18px;margin-bottom:12px;cursor:pointer;}
-  .faq-item p{display:none;margin-top:8px;color:#555;}
-  .comentarios{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;}
-  .comentario{background:#F5F5F7;border-radius:16px;padding:20px;}
-  .stars{color:#FF8C00;margin-bottom:8px;}
 </style>
 </head>
 <body>
 
 <header>
-  <h3>Garfield Store</h3>
-  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+    <div class="logo"><img src="https://via.placeholder.com/36" style="border-radius:10px;"> Garfield<span>Corp</span></div>
+  </div>
+  <button class="bell">🔔</button>
 </header>
 
 <nav id="menu">
   <a href="index.html">Inicio</a>
   <a href="garfield.html">Garfield</a>
-  <a href="redes.html">Redes</a>
   <a href="productos.html">Productos</a>
   <a href="tienda.html">Tienda</a>
+  <a href="redes.html">Redes</a>
 </nav>
 <div class="overlay" onclick="toggleMenu()"></div>
 
-<div class="banner">
-  <img src="https://files.evogb.win/2gepcp.jpg" alt="Garfield Store Banner">
+<div class="card">
+  <div class="stat">
+    <div class="icon">⏱️</div>
+    <div>
+      <div style="font-size:12px;color:#888;">TIEMPO ACTIVO</div>
+      <div class="tiempo">
+        <div>0 <span>DÍAS</span></div>
+        <div>00 <span>HORAS</span></div>
+        <div>10 <span>MIN</span></div>
+        <div>54 <span>SEG</span></div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<section>
-  <h2>Creadores y Staff</h2>
-  <div class="creadores">
-    <div class="card">
-      <img src="https://via.placeholder.com/80" alt="Whois">
-      <h3>Whois</h3>
-      <a href="https://wa.me/51XXXXXXXXX" class="btn-whats">Contactar por WhatsApp</a>
-    </div>
-    <div class="card">
-      <img src="https://via.placeholder.com/80" alt="Lu">
-      <h3>Lu</h3>
-      <a href="https://wa.me/51XXXXXXXXX" class="btn-whats">Contactar por WhatsApp</a>
+<div class="card">
+  <div class="stat">
+    <div class="icon">👥</div>
+    <div>
+      <div style="font-size:12px;color:#888;">USUARIOS REGISTRADOS</div>
+      <div style="font-size:26px;font-weight:700;color:#00FF88;">30 <span style="font-size:14px;color:#888;">PERSONAS</span></div>
+      <div style="margin-top:8px;font-size:12px;color:#888;">ESTADO DEL BOT</div>
+      <div style="font-size:18px;font-weight:700;color:#00FF88;">En línea</div>
+      <div style="font-size:11px;color:#666;">GARFIELD BOT ACTIVO</div>
     </div>
   </div>
-</section>
+</div>
 
-<section class="faq">
-  <h2>Preguntas Frecuentes</h2>
-  <div class="faq-item" onclick="this.querySelector('p').style.display=this.querySelector('p').style.display==='block'?'none':'block'">
-    <h4>¿Cómo compro?</h4>
-    <p>Elige un producto en Tienda y dale a Comprar. Te mandaremos directo a WhatsApp.</p>
+<h3>Creadores y Staff</h3>
+<p style="margin:0 16px 10px;color:#888;font-size:14px;">Desliza y toca una tarjeta para abrir WhatsApp.</p>
+<div class="staff">
+  <div class="staff-card" onclick="window.open('https://wa.me/51XXXXXXXXX')">
+    <div class="avatar">W</div>
+    <div style="font-weight:700;">Whois</div>
+    <div style="font-size:12px;color:#888;">CREADOR</div>
   </div>
-  <div class="faq-item" onclick="this.querySelector('p').style.display=this.querySelector('p').style.display==='block'?'none':'block'">
-    <h4>¿Hacen entregas?</h4>
-    <p>Todo es digital. Te entregamos por WhatsApp en minutos.</p>
+  <div class="staff-card" onclick="window.open('https://wa.me/51XXXXXXXXX')">
+    <div class="avatar">L</div>
+    <div style="font-weight:700;">Lu</div>
+    <div style="font-size:12px;color:#888;">OWNER</div>
   </div>
-</section>
+</div>
 
-<section>
-  <h2>Comentarios Positivos</h2>
-  <div class="comentarios">
-    <div class="comentario"><div class="stars">★★★</div><p>"Excelente atención y productos 10/10"</p></div>
-    <div class="comentario"><div class="stars">★★★</div><p>"Muy rápidos y confiables"</p></div>
+<div class="resenas">
+  <div style="display:flex;justify-content:space-between;align-items:center;">
+    <div>
+      <h3 style="margin:0;">Reseñas reales</h3>
+      <p style="color:#888;font-size:14px;">Opiniones guardadas por la comunidad.</p>
+    </div>
+    <div style="text-align:right;">
+      <div style="font-size:26px;font-weight:700;color:#00D4FF;">5.0</div>
+      <div style="color:#FFC107;">★★★★★</div>
+    </div>
   </div>
-</section>
+</div>
 
-<script>
-function toggleMenu(){document.getElementById('menu').classList.toggle('active');document.querySelector('.overlay').classList.toggle('active');}
-</script>
+<script>function toggleMenu(){document.getElementById('menu').classList.toggle('active');document.querySelector('.overlay').classList.toggle('active');}</script>
 
 </body>
 </html>
