@@ -6,36 +6,35 @@
   <title>Streaming Bots Design - Automatiza tu Stream</title>
   <style>
     :root {
-      /* ===== CAMBIA TUS COLORES AQUÍ ===== */
-      --color-primario: #8b5cf6; /* Morado Neon */
-      --color-secundario: #06b6d4; /* Cyan Neon */
-      --color-fondo: #0a0a0f; /* Fondo Oscuro */
-      --color-tarjeta: #12121a; /* Fondo Tarjetas */
-      --color-texto: #e5e7eb; /* Texto Blanco */
-      /* =================================== */
+      /* ===== PALETA NARANJA ENERGIA ===== */
+      --color-primario: #ff6b00; /* Naranja Neon */
+      --color-secundario: #ffaa00; /* Naranja Claro */
+      --color-fondo: #0a0a0a; /* Negro */
+      --color-tarjeta: #151515; /* Gris Oscuro */
+      --color-texto: #f5f5f5; /* Blanco */
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { background: var(--color-fondo); color: var(--color-texto); font-family: 'Segoe UI', sans-serif; }
     .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
     
-    /* NAVBAR CON LOGO */
-    nav { display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid #222; }
+    nav { display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid #222; position: sticky; top: 0; background: rgba(10,10,10,0.9); backdrop-filter: blur(10px); z-index: 100; }
     .logo { display: flex; align-items: center; gap: 12px; font-size: 1.5rem; font-weight: bold; }
-    .logo img { width: 45px; height: 45px; border-radius: 10px; }
+    .logo img { width: 50px; height: 50px; border-radius: 12px; border: 2px solid var(--color-primario); object-fit: cover; }
 
-    .btn { background: linear-gradient(90deg, var(--color-primario), var(--color-secundario)); color: white; padding: 14px 28px; border-radius: 10px; text-decoration: none; font-weight: bold; display: inline-block; }
-    .btn-outline { border: 2px solid var(--color-primario); background: transparent; }
-    .card { background: var(--color-tarjeta); padding: 25px; border-radius: 15px; border: 1px solid #222; }
+    .btn { background: linear-gradient(90deg, var(--color-primario), var(--color-secundario)); color: black; padding: 14px 28px; border-radius: 10px; text-decoration: none; font-weight: bold; display: inline-block; box-shadow: 0 0 15px rgba(255,107,0,0.4); transition: 0.3s; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 0 25px rgba(255,107,0,0.6); }
+    .btn-outline { border: 2px solid var(--color-primario); background: transparent; color: var(--color-primario); box-shadow: none; }
+    .card { background: var(--color-tarjeta); padding: 25px; border-radius: 15px; border: 1px solid #2a2a2a; transition: 0.3s; }
+    .card:hover { border-color: var(--color-primario); box-shadow: 0 0 20px rgba(255,107,0,0.2); }
     h1, h2 { background: linear-gradient(90deg, var(--color-primario), var(--color-secundario)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
   </style>
 </head>
 <body>
 
-  <!-- NAVBAR CON LOGO -->
+  <!-- NAVBAR CON TU LOGO -->
   <nav class="container">
     <div class="logo">
-      <!-- CAMBIA LA RUTA DE TU LOGO AQUÍ -->
-      <img src="logo.png" alt="Logo Streaming Bots Design">
+      <img src="https://files.evogb.win/2gepcp.jpg" alt="Logo Streaming Bots Design">
       <span>Streaming Bots Design</span>
     </div>
     <div>
@@ -47,8 +46,8 @@
   <section class="container" style="text-align:center; padding:100px 20px;">
     <h1 style="font-size:3rem;">Automatiza tu chat, crece tu comunidad</h1>
     <p style="font-size:1.3rem; color:#aaa; margin:20px 0;">Bots para Twitch, YouTube y TikTok. Configuración en 5 min.</p>
-    <div style="margin-top:30px; display:flex; gap:15px; justify-content:center;">
-      <a href="#productos" class="btn">Ver Bots</a>
+    <div style="margin-top:30px; display:flex; gap:15px; justify-content:center; flex-wrap:wrap;">
+      <a href="#productos" class="btn">Ver Bots Ahora</a>
       <a href="https://wa.me/51999999" class="btn btn-outline">Soporte WhatsApp</a>
     </div>
   </section>
@@ -61,7 +60,7 @@
         <h3>🤖 Bot Twitch</h3>
         <p>Comandos, bienvenida, sorteos, anti-spam 24/7</p>
         <p style="font-size:1.8rem; color:var(--color-secundario); margin:20px 0;">S/29/mes</p>
-        <a href="https://wa.me/51999999999" class="btn">Comprar Ahora</a>
+        <a href="https://wa.me/51999999" class="btn">Comprar Ahora</a>
       </div>
       <div class="card">
         <h3>▶️ Bot YouTube</h3>
@@ -78,8 +77,7 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer style="background:#05050a; padding:40px 20px; text-align:center; border-top:1px solid #222;">
+  <footer style="background:#050505; padding:40px 20px; text-align:center; border-top:1px solid #222;">
     <p>© 2026 Streaming Bots Design. Todos los derechos reservados.</p>
   </footer>
 
