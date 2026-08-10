@@ -1,0 +1,22 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design - Overlays y Logos</title><style>:root{--prim:#ff6b00;--sec:#ffaa00;--fondo:#0a0a0a;--card:#151515;--texto:#f5f5f5}*{margin:0;padding:0}body{background:var(--fondo);color:var(--texto);font-family:Segoe UI}
+nav{display:flex;gap:15px;padding:15px 20px;border-bottom:1px solid #222;position:sticky;top:0;background:rgba(10,10,10,0.95);z-index:1000}
+.hamburguesa{display:flex;flex-direction:column;gap:5px;cursor:pointer}.hamburguesa span{width:28px;height:3px;background:var(--prim)}
+.menu-lateral{position:fixed;top:0;left:-300px;width:280px;height:100%;background:#111;border-right:2px solid var(--prim);padding:80px 20px;transition:0.3s;z-index:999}
+.menu-lateral.activo{left:0}.overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);display:none;z-index:998}.overlay.activo{display:block}
+.menu-lateral a{display:block;color:var(--texto);text-decoration:none;padding:15px 10px;border-left:3px solid transparent}
+.menu-lateral a:hover{border-left:3px solid var(--prim);background:#1a1a1a;color:var(--prim)}
+.container{max-width:900px;margin:0 auto;padding:20px}h1{background:linear-gradient(90deg,var(--prim),var(--sec));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;font-size:2.5rem;margin:30px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}.card{background:var(--card);padding:25px;border-radius:15px;border:1px solid #2a2a2a;text-align:center}
+.btn{background:linear-gradient(90deg,var(--prim),var(--sec));color:black;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:bold}</style></head><body>
+<div class="overlay" onclick="toggleMenu()"></div>
+<div class="menu-lateral" id="menu">
+  <a href="index.html">🏠 Inicio</a><a href="#" style="font-weight:bold;color:var(--prim)">📦 Productos</a>
+  <a href="diamantes.html" style="padding-left:30px">💎 Diamantes</a><a href="bots.html" style="padding-left:30px">🤖 Bots</a>
+  <a href="spam.html" style="padding-left:30px">📢 Spam</a><a href="design.html" style="padding-left:30px">🎨 Design</a>
+  <a href="garfield.html">🐱 Garfield</a><a href="nosotros.html">👤 Sobre Nosotros</a><a href="https://wa.me/51999999">💬 WhatsApp</a>
+</div>
+<nav><div class="hamburguesa" onclick="toggleMenu()"><span></span><span></span><span></span></div><div><b>🎨 Design</b></div><div></div></nav>
+<div class="container"><h1>Diseño para Streamers</h1><p style="text-align:center;color:#aaa;margin-bottom:30px">Que tu canal se vea pro</p>
+<div class="grid">
+<div class="card"><h3>Overlay Básico</h
