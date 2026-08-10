@@ -1,11 +1,14 @@
 <!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Garfield</title>
 <style>
-body{background:#0A0A0F;color:#fff;font-family:Roboto;padding:20px;text-align:center;}
-header{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #1E1E2A;margin-bottom:20px;}
-header img{width:32px;height:32px;border-radius:8px;}
-video{width:100%;border-radius:16px;margin:16px 0;border:1px solid #1E1E2A;}
-</style></head>
-<body>
+  :root{--naranja:#FF8C00;--naranja2:#FF4500;--fondo:#0A0A0F;--borde:#1E1E2A;}
+  body{background:var(--fondo);color:#fff;font-family:Roboto;padding:20px;text-align:center;}
+  .topbar{height:4px;background:linear-gradient(90deg,var(--naranja),var(--naranja2));position:fixed;top:0;left:0;width:100%;}
+  header{display:flex;align-items:center;gap:10px;padding:60px 0 20px;border-bottom:1px solid var(--borde);}
+  header img{width:32px;height:32px;border-radius:8px;}
+  video{width:100%;border-radius:16px;margin:16px 0;border:2px solid var(--naranja);box-shadow:0 0 20px rgba(255,140,0,0.5);}
+</style>
+</head><body>
+<div class="topbar"></div>
 <header><img src="https://files.evogb.win/2gepcp.jpg"><h2>Garfield 🐱</h2></header>
 <video src="1.mp4" controls></video>
 <video src="2.mp4" controls></video>
