@@ -3,44 +3,54 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Garfield Store 😼</title>
+<title>GS | Garfield Store</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header class="navbar">
-  <h1>😼 GARFIELD STORE</h1>
+<div class="bg-animado"></div>
+
+<header>
+  <div class="logo">GS<span>.STORE</span></div>
   <div class="menu-btn" onclick="toggleMenu()">☰</div>
 </header>
 
-<nav id="menuLateral" class="menu-lateral">
-  <a href="index.html">🏠 Inicio</a>
-  <a href="productos.html">💎 Productos</a>
-  <a href="videos.html">🎥 Videos</a>
-  <a href="carrito.html">🛒 Carrito <span id="menuTotal">0</span></a>
-  <a href="https://wa.me/51920726588" target="_blank">💬 Soporte</a>
+<nav id="menu">
+  <a href="index.html">INICIO</a>
+  <a href="productos.html">TIENDA</a>
+  <a href="videos.html">MEDIA</a>
+  <a href="carrito.html">CARRITO(<span id="menuTotal">0</span>)</a>
+  <a href="https://wa.me/51920726588" target="_blank">SOPORTE</a>
 </nav>
-<div id="overlayMenu" class="overlay-menu" onclick="toggleMenu()"></div>
 
-<section class="card portada-img">
-  <img src="https://files.evogf.win/2gepcp.jpg" alt="Garfield">
-  <h2>Entrega rápida | Soporte 24/7 | Más barato</h2>
-  <button id="btnMusica" onclick="toggleMusica()">🔊 Activar Música</button>
+<section class="hero">
+  <img src="https://files.evogb.win/2gepcp.jpg" class="hero-img">
+  <h1>GARFIELD <span>STORE</span></h1>
+  <p>Recargas, Diseños y Spam al instante</p>
+  <button onclick="toggleMusica()" id="btnMusica" class="btn-principal">🔊 ACTIVAR AUDIO</button>
   <audio id="musicaFondo" loop><source src="garfield.mp3" type="audio/mpeg"></audio>
+  <button onclick="window.location='productos.html'" class="btn-principal" style="margin-top:15px; background:linear-gradient(90deg, #00f5ff, #a855f7);">ENTRAR A LA TIENDA</button>
 </section>
 
-<a href="https://wa.me/51920726588" target="_blank" class="card creador">
-  <img src="https://files.evogf.win/Q8pffG.jpg" alt="Creador LU">
-  <div><h3>Creador: LU</h3><p>Toca mi foto para hablarme 💬</p></div>
-</a>
+<section class="perfil">
+  <img src="https://files.evogb.win/Q8pffG.jpg">
+  <div>
+    <h3>LU | FUNDADOR</h3>
+    <p>Soporte 24/7 por WhatsApp</p>
+    <a href="https://wa.me/51920726588" class="btn-wsp">CHATEAR</a>
+  </div>
+</section>
 
-<div class="card oferta"><h2>🔥 OFERTA: Diamantes + Spam = 20% OFF</h2></div>
+<section class="oferta-neon">
+  <h2>🔥 COMBO NEON 🔥</h2>
+  <p>Spam 7D + 341 Diamantes = 20% OFF</p>
+</section>
 
-<div class="card testimonios">
-  <h2>⭐ Testimonios</h2>
-  <div class="testi">"Llegó en 5 min" - @KillerLu</div>
-  <div class="testi">"Más barato que todos" - @DecanaPro</div>
-</div>
+<section class="testi-neon">
+  <h2>FEEDBACK</h2>
+  <div class="testi-card">"Llegó en 3 min" - @Killer</div>
+  <div class="testi-card">"Más barato" - @Decana</div>
+</section>
 
 <script src="script.js"></script>
 </body>
