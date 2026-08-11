@@ -62,49 +62,37 @@ const descripciones = {
 // ========== PRODUCTOS ==========
 const productosData = [
   {cat:"📢 SPAM 3H x DÍA", items:["spam_3d","spam_5d","spam_7d"]},
-  {cat:"💎 DIAMANTES CON STOCK", clase:"stock", items:["d110c","d341c","d572c","d1166c","d2398c","d6160c"]},
-  {cat:"💎 DIAMANTES SIN STOCK", clase:"no-stock", items:["d110s","d341s","d572s","d1166s","d2398s","d6160s"]},
+  {cat:"💎 DIAMANTES CON STOCK", items:["d110c","d341c","d572c","d1166c","d2398c","d6160c"]},
+  {cat:"💎 DIAMANTES SIN STOCK", items:["d110s","d341s","d572s","d1166s","d2398s","d6160s"]},
   {cat:"🖌️ LUU DESIGN", items:["logo","plantilla","caligra","jersey"]},
   {cat:"🎀 COMBO DECANA LUU", items:["decana"]},
-  {cat:"📈 SEGUIDORES INSTAGRAM", items:["seg_250","seg_500","seg_1000","seg_2000","seg_5000"]}
+  {cat:"📈 SEGUIDORES IG", items:["seg_250","seg_500","seg_1000","seg_2000","seg_5000"]}
 ]
 
-// ========== MENU HAMBURGUESA ==========
+// ========== MENU ==========
 function toggleMenu(){
-  document.getElementById("menuLateral").classList.toggle("active");
-  document.getElementById("overlayMenu").classList.toggle("active");
+  document.getElementById("menu").classList.toggle("active");
 }
 
-// ========== LOCALSTORAGE CARRITO ==========
-function guardarCarrito(){
-  localStorage.setItem("carritoGarfield", JSON.stringify(carrito));
-}
-function cargarCarritoGuardado(){
-  let guardado = localStorage.getItem("carritoGarfield");
-  if(guardado) carrito = JSON.parse(guardado);
-}
-function actualizarMenuTotal(){
-  if(document.getElementById("menuTotal"))
-    document.getElementById("menuTotal").innerText = carrito.length;
-}
+// ========== LOCALSTORAGE ==========
+function guardarCarrito(){ localStorage.setItem("carritoGarfield", JSON.stringify(carrito)); }
+function cargarCarritoGuardado(){ let guardado = localStorage.getItem("carritoGarfield"); if(guardado) carrito = JSON.parse(guardado); }
+function actualizarMenuTotal(){ if(document.getElementById("menuTotal")) document.getElementById("menuTotal").innerText = carrito.length; }
 
-// ========== CARGAR PRODUCTOS ==========
+// ========== CARGAR PRODUCTOS CYBER ==========
 function cargarProductos(){
   if(!document.getElementById("productos")) return;
   let html = "";
   productosData.forEach(cat=>{
-    html += `<div class="card"><h2 class="${cat.clase||''}">${cat.cat}</h2>`;
+    html += `<h2 style="padding:20px 20px 10px; color:#00f5ff; text-shadow:0 0 10px #00f5ff;">${cat.cat}</h2><div class="grid-productos">`;
     cat.items.forEach(id=>{
       let nombre = id.replace(/_/g,' ').toUpperCase();
-      html += `<div class="producto">
-        <div class="prod-info">
-          <b>${nombre}</b> - <span class="precio" data-precio="${id}"></span>
-          <div class="desc" id="desc-${id}" style="display:none;">${descripciones[id]}</div>
-        </div>
-        <div class="prod-btns">
-          <button class="btn-ver" onclick="toggleDesc('${id}')">Ver</button>
-          <button class="btn-add" onclick="agregarCarrito('${id}','${nombre}')">+ Añadir</button>
-        </div>
+      html += `<div class="prod-card">
+        <h3>${nombre}</h3>
+        <div class="prod-precio" data-precio="${id}">CARGANDO...</div>
+        <div class="prod-desc" id="desc-${id}">${descripciones[id]}</div>
+        <button onclick="toggleDescCyber('${id}')" style="background:none; border:none; color:#00f5ff; font-size:10px; margin-bottom:5px;">VER INFO</button>
+        <button class="btn-add-neon" onclick="agregarCarrito('${id}','${nombre}')">+ AÑADIR</button>
       </div>`;
     });
     html += `</div>`;
@@ -113,16 +101,16 @@ function cargarProductos(){
   cambiarPrecios();
 }
 
-function toggleDesc(id){
+function toggleDescCyber(id){
   let desc = document.getElementById(`desc-${id}`);
   desc.style.display = desc.style.display === 'block'? 'none' : 'block';
 }
 
 function buscarProducto(){
   let filtro = document.getElementById("buscador").value.toLowerCase();
-  document.querySelectorAll(".producto").forEach(p=>{
+  document.querySelectorAll(".prod-card").forEach(p=>{
     let texto = p.innerText.toLowerCase();
-    p.style.display = texto.includes(filtro)? 'flex' : 'none';
+    p.style.display = texto.includes(filtro)? 'block' : 'none';
   })
 }
 
@@ -136,10 +124,10 @@ function toggleMusica(){
   let btn = document.getElementById("btnMusica");
   if(audio.paused){
     audio.play();
-    btn.innerText = "🔇 Pausar Música";
+    btn.innerText = "🔇 PAUSAR AUDIO";
   } else {
     audio.pause();
-    btn.innerText = "🔊 Activar Música";
+    btn.innerText = "🔊 ACTIVAR AUDIO";
   }
 }
 
@@ -157,14 +145,13 @@ function agregarCarrito(id, nombre){
   let pais = document.getElementById("pais").value;
   let precio = precios[id][pais];
   if(id.includes('s') && id.startsWith('d')){
-    let confirmar = confirm(`⚠️ ATENCIÓN: ${nombre} SIN STOCK\n\nTodo depende de tu idea de juego. Si ya hiciste una recarga, el sin stock no está habilitado.\n\n¿Deseas añadirlo al carrito igual?`);
-    if(!confirmar) return;
+    if(!confirm(`⚠️ ATENCIÓN: ${nombre} SIN STOCK\n¿Añadir igual?`)) return;
   }
   carrito.push({nombre, precio, id});
   guardarCarrito();
   actualizarCarrito();
   actualizarMenuTotal();
-  alert(`${nombre} añadido al carrito ✅`);
+  alert(`${nombre} AÑADIDO ✅`);
 }
 
 function actualizarCarrito(){
@@ -173,15 +160,15 @@ function actualizarCarrito(){
   let html = "";
   carrito.forEach((item)=>{
     let tag = item.id.includes('s') && item.id.startsWith('d')? ' [SIN STOCK]' : ' [CON STOCK]';
-    html += `<p>${item.nombre}${tag} - ${item.precio}</p>`;
+    html += `<p style="border-bottom:1px solid #00f5ff22; padding:8px 0;">${item.nombre}${tag} - ${item.precio}</p>`;
   });
   if(document.getElementById("listaCarrito"))
-    document.getElementById("listaCarrito").innerHTML = html;
+    document.getElementById("listaCarrito").innerHTML = html || "<p>CARRITO VACIO</p>";
 }
 
 // ========== WHATSAPP ==========
 function abrirPopUpID(){
-  if(carrito.length === 0) return alert("Tu carrito está vacío");
+  if(carrito.length === 0) return alert("TU CARRITO ESTA VACIO");
   document.getElementById("popupID").style.display = "flex";
 }
 function cerrarPopUpID(){
@@ -190,14 +177,13 @@ function cerrarPopUpID(){
 
 function enviarWhatsApp(){
   let id = document.getElementById("idFinal").value;
-  if(!id) return alert("Pon tu ID");
+  if(!id) return alert("PON TU ID");
   let pais = localStorage.getItem("paisGarfield") || "PE";
-  let texto = `Hola Garfield Store 😼 Soy de ${pais}. Mi ID: ${id}\n\nMi pedido:\n`;
+  let texto = `HOLA GARFIELD STORE 😼 SOY DE ${pais}. MI ID: ${id}\n\nMI PEDIDO:\n`;
   carrito.forEach(item=>{
     let tag = item.id.includes('s') && item.id.startsWith('d')? ' [SIN STOCK]' : ' [CON STOCK]';
     texto += `- ${item.nombre}${tag}: ${item.precio}\n`
   });
-  texto += `\nNOTA: Si ya hiciste recarga, SIN STOCK no está habilitado.`;
   window.open(`https://wa.me/${numero}?text=${encodeURIComponent(texto)}`,"_blank");
   carrito = [];
   guardarCarrito();
@@ -215,5 +201,5 @@ window.onload = ()=>{
     document.getElementById("pais").value = paisGuardado;
   }
   if(document.getElementById("productos")) cargarProductos();
-  if(document.getElementById("musicaFondo")) document.getElementById("musicaFondo").volume = 0.4;
+  if(document.getElementById("musicaFondo")) document.getElementById("musicaFondo").volume = 0.3;
 }
