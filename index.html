@@ -7,22 +7,9 @@
 <link rel="stylesheet" href="style.css?v=2">
 </head>
 <body>
-
 <div class="bg-animado"></div>
-
-<header>
-  <div class="logo">GS<span>.STORE</span></div>
-  <div class="menu-btn" onclick="toggleMenu()">☰</div>
-</header>
-
-<nav id="menu">
-  <a href="index.html">INICIO</a>
-  <a href="productos.html">TIENDA</a>
-  <a href="videos.html">MEDIA</a>
-  <a href="carrito.html">CARRITO(<span id="menuTotal">0</span>)</a>
-  <a href="https://wa.me/51920726588" target="_blank">SOPORTE</a>
-</nav>
-
+<header><div class="logo">GS<span>.STORE</span></div><div class="menu-btn" onclick="toggleMenu()">☰</div></header>
+<nav id="menu"><a href="index.html">INICIO</a><a href="productos.html">TIENDA</a><a href="videos.html">MEDIA</a><a href="carrito.html">CARRITO(<span id="menuTotal">0</span>)</a><a href="https://wa.me/51920726588" target="_blank">SOPORTE</a></nav>
 <section class="hero">
   <img src="https://files.evogb.win/2gepcp.jpg" alt="Logo Garfield" class="hero-img">
   <h1>BIENVENIDO A <span>GARFIELD STORE</span></h1>
@@ -30,31 +17,13 @@
   <button onclick="window.location='productos.html'" class="btn-principal">VER TIENDA</button>
   <button id="btnMusica" onclick="toggleMusica()" class="btn-principal">🔊 ACTIVAR AUDIO</button>
 </section>
-
 <div class="perfil">
   <img src="https://files.evogb.win/Q8pffG.jpg" alt="Creador">
-  <div>
-    <h3>GARFIELD OFICIAL</h3>
-    <p>Vendedor de confianza. Entrega inmediata.</p>
-    <a href="https://wa.me/51920726588" class="btn-wsp" target="_blank">WHATSAPP</a>
-  </div>
+  <div><h3>GARFIELD OFICIAL</h3><p>Vendedor de confianza. Entrega inmediata.</p><a href="https://wa.me/51920726588" class="btn-wsp" target="_blank">WHATSAPP</a></div>
 </div>
-
-<div class="oferta-neon">
-  <h2>🔥 OFERTA DE LA SEMANA 🔥</h2>
-  <p>6160 DIAMANTES CON STOCK: S/92</p>
-</div>
-
-<div class="testi-neon">
-  <h2>LO QUE DICEN NUESTROS CLIENTES</h2>
-  <div class="testi-card">"100% Recomendado. Me llegó al instante" - Juan</div>
-  <div class="testi-card">"Los diseños están GOD" - Maria</div>
-</div>
-
-<audio id="musicaFondo" loop>
-  <source src="garfield.mp3" type="audio/mpeg">
-</audio>
-
+<div class="oferta-neon"><h2>🔥 OFERTA DE LA SEMANA 🔥</h2><p>6160 DIAMANTES CON STOCK: S/92</p></div>
+<div class="testi-neon"><h2>LO QUE DICEN NUESTROS CLIENTES</h2><div class="testi-card">"100% Recomendado. Me llegó al instante" - Juan</div><div class="testi-card">"Los diseños están GOD" - Maria</div></div>
+<audio id="musicaFondo" loop><source src="garfield.mp3" type="audio/mpeg"></audio>
 <script src="script.js?v=2"></script>
 </body>
 </html>
