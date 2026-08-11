@@ -8,98 +8,40 @@
 </head>
 <body>
 
-<!-- HEADER CON MENÚ -->
 <header class="navbar">
   <h1>😼 GARFIELD STORE</h1>
   <div class="menu-btn" onclick="toggleMenu()">☰</div>
 </header>
 
-<!-- MENÚ HAMBURGUESA -->
 <nav id="menuLateral" class="menu-lateral">
-  <a onclick="scrollToSeccion('inicio')">🏠 Inicio</a>
-  <a onclick="scrollToSeccion('productos')">💎 Productos</a>
-  <a onclick="scrollToSeccion('videos')">🎥 Videos</a>
-  <a onclick="scrollToSeccion('carrito')">🛒 Carrito</a>
+  <a href="index.html">🏠 Inicio</a>
+  <a href="productos.html">💎 Productos</a>
+  <a href="videos.html">🎥 Videos</a>
+  <a href="carrito.html">🛒 Carrito <span id="menuTotal">0</span></a>
   <a href="https://wa.me/51920726588" target="_blank">💬 Soporte</a>
 </nav>
 <div id="overlayMenu" class="overlay-menu" onclick="toggleMenu()"></div>
 
-<!-- INICIO -->
-<section id="inicio" class="card portada-img">
+<section class="card portada-img">
   <img src="https://files.evogf.win/2gepcp.jpg" alt="Garfield">
-  <h2>Entrega rápida | Soporte 24/7</h2>
+  <h2>Entrega rápida | Soporte 24/7 | Más barato</h2>
   <button id="btnMusica" onclick="toggleMusica()">🔊 Activar Música</button>
   <audio id="musicaFondo" loop><source src="garfield.mp3" type="audio/mpeg"></audio>
 </section>
 
-<!-- CREADOR -->
 <a href="https://wa.me/51920726588" target="_blank" class="card creador">
   <img src="https://files.evogf.win/Q8pffG.jpg" alt="Creador LU">
   <div><h3>Creador: LU</h3><p>Toca mi foto para hablarme 💬</p></div>
 </a>
 
-<!-- SELECTOR Y BUSCADOR -->
-<div class="top-bar">
-  <select id="pais" onchange="cambiarPrecios()">
-    <option value="PE">🇵🇪 Perú - S/</option>
-    <option value="CL">🇨🇱 Chile - $</option>
-    <option value="AR">🇦🇷 Argentina - $</option>
-    <option value="MX">🇲🇽 México - $</option>
-    <option value="BO">🇧🇴 Bolivia - Bs</option>
-    <option value="UY">🇺🇾 Uruguay - $</option>
-    <option value="US">🇺🇸 USA - $</option>
-    <option value="CO">🇨🇴 Colombia - $</option>
-  </select>
-  <input type="text" id="buscador" placeholder="🔍 Buscar..." onkeyup="buscarProducto()">
-  <button id="btnTema" onclick="toggleTema()">🌙</button>
-</div>
-
-<!-- OFERTA -->
 <div class="card oferta"><h2>🔥 OFERTA: Diamantes + Spam = 20% OFF</h2></div>
 
-<!-- PRODUCTOS -->
-<main id="productos"></main>
-
-<!-- SECCIÓN VIDEOS APARTE -->
-<section id="videos" class="card">
-  <h2>🎥 Así trabajamos</h2>
-  <div class="video-grid">
-    <div>
-      <h3>Recargas Rápidas</h3>
-      <video controls><source src="1.mp4" type="video/mp4"></video>
-    </div>
-    <div>
-      <h3>Diseños y Spam</h3>
-      <video controls><source src="2.mp4" type="video/mp4"></video>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIOS -->
 <div class="card testimonios">
   <h2>⭐ Testimonios</h2>
   <div class="testi">"Llegó en 5 min" - @KillerLu</div>
   <div class="testi">"Más barato que todos" - @DecanaPro</div>
 </div>
 
-<!-- CARRITO -->
-<section id="carrito" class="card">
-  <h2>🛒 Tu Pedido (<span id="totalItems">0</span>)</h2>
-  <div id="listaCarrito"></div>
-  <button onclick="abrirPopUpID()">Comprar por WhatsApp</button>
-</section>
-
-<!-- POPUP ID -->
-<div id="popupID" class="popup">
-  <div class="popup-content">
-    <h3>Último paso 😼</h3>
-    <input type="text" id="idFinal" placeholder="Pon tu ID de Free Fire">
-    <button onclick="enviarWhatsApp()">Enviar Pedido</button>
-    <button onclick="cerrarPopUpID()" class="btn-cerrar">Cancelar</button>
-  </div>
-</div>
-
-<a href="https://wa.me/51920726588" class="whatsapp-float" target="_blank">💬</a>
 <script src="script.js"></script>
 </body>
 </html>
