@@ -1,6 +1,7 @@
 const numero = "51920726588";
 let carrito = [];
 
+// ========== PRECIOS ==========
 const precios = {
   "spam_3d": {PE:"S/5.50", CL:"$1750", AR:"$2600", MX:"$37.5", BO:"Bs22.5", UY:"$75"},
   "spam_5d": {PE:"S/7.50", CL:"$2450", AR:"$3640", MX:"$52.5", BO:"Bs31.5", UY:"$105"},
@@ -29,6 +30,7 @@ const precios = {
   "seg_5000": {PE:"S/20", CL:"$7000", AR:"$9360", MX:"$150", BO:"Bs90", UY:"$300"},
 }
 
+// ========== DESCRIPCIONES ==========
 const descripciones = {
   "spam_3d": "3 días de spam. 3 horas por día. Puro texto. Inicio al día siguiente.",
   "spam_5d": "5 días de spam. 3 horas por día. Puro texto. Inicio al día siguiente.",
@@ -57,6 +59,7 @@ const descripciones = {
   "seg_5000": "5000 Seguidores Instagram. Entrega gradual y segura.",
 }
 
+// ========== PRODUCTOS ==========
 const productosData = [
   {cat:"📢 SPAM 3H x DÍA", items:["spam_3d","spam_5d","spam_7d"]},
   {cat:"💎 DIAMANTES CON STOCK", items:["d110c","d341c","d572c","d1166c","d2398c","d6160c"]},
@@ -66,11 +69,13 @@ const productosData = [
   {cat:"📈 SEGUIDORES IG", items:["seg_250","seg_500","seg_1000","seg_2000","seg_5000"]}
 ]
 
+// ========== FUNCIONES ==========
 function toggleMenu(){ document.getElementById("menu").classList.toggle("active"); }
 function guardarCarrito(){ localStorage.setItem("carritoGarfield", JSON.stringify(carrito)); }
 function cargarCarritoGuardado(){ let guardado = localStorage.getItem("carritoGarfield"); if(guardado) carrito = JSON.parse(guardado); }
 function actualizarMenuTotal(){ if(document.getElementById("menuTotal")) document.getElementById("menuTotal").innerText = carrito.length; }
 
+let prodSeleccionado = {};
 function cargarProductos(){
   if(!document.getElementById("productos")) return;
   let html = "";
@@ -78,18 +83,48 @@ function cargarProductos(){
     html += `<h2 style="padding:20px 15px 10px; color:#00f5ff; font-size:20px;">${cat.cat}</h2><div class="grid-productos">`;
     cat.items.forEach(id=>{
       let nombre = id.replace(/_/g,' ').toUpperCase();
-      html += `<div class="prod-card">
+      html += `<div class="prod-card" onclick="abrirOpciones('${id}','${nombre}')">
         <h3>${nombre}</h3>
         <div class="prod-precio" data-precio="${id}">CARGANDO...</div>
-        <div class="prod-desc" id="desc-${id}">${descripciones[id]}</div>
-        <button onclick="document.getElementById('desc-${id}').style.display='block'" style="background:none; border:none; color:#00f5ff; font-size:14px; margin-bottom:5px;">VER INFO</button>
-        <button class="btn-add-neon" onclick="agregarCarrito('${id}','${nombre}')">+ AÑADIR</button>
+        <p style="font-size:12px; color:#aaa; margin-top:8px;">Toca para ver opciones</p>
       </div>`;
     });
     html += `</div>`;
   });
   document.getElementById("productos").innerHTML = html;
   cambiarPrecios();
+}
+
+function abrirOpciones(id, nombre){
+  prodSeleccionado = {id, nombre};
+  let pais = document.getElementById("pais").value;
+  let precio = precios[id][pais];
+  let desc = descripciones[id];
+  document.getElementById("popupOpciones").innerHTML = `
+    <div class="popup-content">
+      <h3>${nombre}</h3>
+      <p style="color:#00f5ff; font-size:22px; font-weight:900; margin:10px 0;">${precio}</p>
+      <p style="font-size:14px; color:#ccc; margin:10px 0;">${desc}</p>
+      <button class="btn-add-neon" onclick="confirmarAgregar()">AÑADIR AL CARRITO</button>
+      <button onclick="cerrarOpciones()" class="btn-cerrar">CERRAR</button>
+    </div>
+  `;
+  document.getElementById("popupOpciones").style.display = "flex";
+}
+function cerrarOpciones(){ document.getElementById("popupOpciones").style.display = "none"; }
+
+function confirmarAgregar(){
+  let pais = document.getElementById("pais").value;
+  let precio = precios[prodSeleccionado.id][pais];
+  if(prodSeleccionado.id.includes('s') && prodSeleccionado.id.startsWith('d')){
+    if(!confirm(`⚠️ ${prodSeleccionado.nombre} SIN STOCK\n¿Añadir igual?`)) return;
+  }
+  carrito.push({nombre: prodSeleccionado.nombre, precio, id: prodSeleccionado.id});
+  guardarCarrito();
+  actualizarCarrito();
+  actualizarMenuTotal();
+  alert(`${prodSeleccionado.nombre} AÑADIDO ✅`);
+  cerrarOpciones();
 }
 
 function buscarProducto(){
@@ -99,7 +134,6 @@ function buscarProducto(){
     p.style.display = texto.includes(filtro)? 'block' : 'none';
   })
 }
-
 function toggleTema(){ document.body.classList.toggle("light"); }
 function toggleMusica(){
   let audio = document.getElementById("musicaFondo");
@@ -107,7 +141,6 @@ function toggleMusica(){
   if(audio.paused){ audio.play(); btn.innerText = "🔇 PAUSAR AUDIO"; }
   else { audio.pause(); btn.innerText = "🔊 ACTIVAR AUDIO"; }
 }
-
 function cambiarPrecios(){
   let pais = document.getElementById("pais").value;
   document.querySelectorAll("[data-precio]").forEach(el=>{
@@ -116,20 +149,6 @@ function cambiarPrecios(){
   })
   localStorage.setItem("paisGarfield", pais);
 }
-
-function agregarCarrito(id, nombre){
-  let pais = document.getElementById("pais").value;
-  let precio = precios[id][pais];
-  if(id.includes('s') && id.startsWith('d')){
-    if(!confirm(`⚠️ ${nombre} SIN STOCK\n¿Añadir igual?`)) return;
-  }
-  carrito.push({nombre, precio, id});
-  guardarCarrito();
-  actualizarCarrito();
-  actualizarMenuTotal();
-  alert(`${nombre} AÑADIDO ✅`);
-}
-
 function actualizarCarrito(){
   if(document.getElementById("totalItems")) document.getElementById("totalItems").innerText = carrito.length;
   let html = "";
@@ -139,13 +158,11 @@ function actualizarCarrito(){
   });
   if(document.getElementById("listaCarrito")) document.getElementById("listaCarrito").innerHTML = html || "<p>CARRITO VACIO</p>";
 }
-
 function abrirPopUpID(){
   if(carrito.length === 0) return alert("TU CARRITO ESTA VACIO");
   document.getElementById("popupID").style.display = "flex";
 }
 function cerrarPopUpID(){ document.getElementById("popupID").style.display = "none"; }
-
 function enviarWhatsApp(){
   let id = document.getElementById("idFinal").value;
   if(!id) return alert("PON TU ID");
@@ -162,7 +179,6 @@ function enviarWhatsApp(){
   actualizarMenuTotal();
   cerrarPopUpID();
 }
-
 window.onload = ()=>{
   cargarCarritoGuardado();
   actualizarMenuTotal();
