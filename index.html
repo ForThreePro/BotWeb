@@ -1,126 +1,85 @@
-<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>SBD - Streaming Bots Design</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap');
-:root{--prim:#FF6A00;--sec:#FFB700;--fondo:#000;--card:#111E6;--texto:#fff}
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif}
-body{background:var(--fondo);color:var(--texto);-webkit-font-smoothing:antialiased;padding-bottom:80px}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Garfield Store 😼</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="portada-video">
+  <video autoplay muted loop playsinline>
+    <source src="1.mp4" type="video/mp4">
+  </video>
+  <audio id="musicaFondo" loop>
+    <source src="garfield.mp3" type="audio/mpeg">
+  </audio>
+  <div class="overlay">
+    <h1>😼 GARFIELD STORE</h1>
+    <p>Entrega rápida | Soporte 24/7 | Más barato</p>
+    <button id="btnMusica" onclick="toggleMusica()">🔊 Música</button>
+    <button id="btnTema">🌙</button>
+  </div>
+</header>
 
-/* NAV */
-nav{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;position:sticky;top:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(20px);z-index:1000;border-bottom:1px solid #1a1a1a}
-.logo-circulo{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--prim),var(--sec));display:flex;align-items:center;justify-content:center;font-weight:800;color:#000;font-size:15px}
-.hamburguesa{display:flex;flex-direction:column;gap:6px;cursor:pointer;padding:5px}.hamburguesa span{width:24px;height:2px;background:var(--prim);border-radius:2px}
-.menu-lateral{position:fixed;top:0;left:-100%;width:85%;max-width:320px;height:100%;background:#0a0a0a;border-right:1px solid #222;padding:100px 25px;transition:0.4s;z-index:999}
-.menu-lateral.activo{left:0}.overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);display:none;z-index:998}.overlay.activo{display:block}
-.menu-lateral a{display:block;color:var(--texto);text-decoration:none;padding:16px 0;font-size:17px;font-weight:500;border-bottom:1px solid #1a1a1a}
-
-.container{max-width:900px;margin:0 auto;padding:0 24px}
-
-/* HERO */
-.hero{padding:100px 20px 60px;text-align:center;background:radial-gradient(circle at 50% 20%,rgba(255,106,0,0.15) 0%,transparent 50%)}
-.hero h1{font-size:3rem;font-weight:800;line-height:1.1;margin-bottom:20px;background:linear-gradient(135deg,var(--prim),var(--sec));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.hero p{font-size:1.2rem;color:#aaa;margin-bottom:35px;max-width:500px;margin-left:auto;margin-right:auto}
-.btn{background:linear-gradient(135deg,var(--prim),var(--sec));color:#000;padding:16px 36px;border-radius:50px;text-decoration:none;font-weight:700;font-size:17px;display:inline-block;box-shadow:0 10px 30px rgba(255,106,0,0.4)}
-
-/* SECCIONES */
-.seccion{padding:70px 0}
-.titulo-seccion{font-size:2.4rem;font-weight:800;text-align:center;margin-bottom:40px}
-
-/* CREADORES */
-.grid-creadores{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
-.card-creador{background:var(--card);backdrop-filter:blur(20px);padding:24px;border-radius:24px;border:1px solid #222;text-align:center;transition:0.3s}
-.card-creador:hover{border-color:var(--prim);transform:translateY(-4px)}
-.card-creador img{width:100px;height:100px;border-radius:50%;border:3px solid var(--prim);margin-bottom:15px;object-fit:cover}
-.card-creador h3{font-size:1.4rem;margin-bottom:8px}
-.card-creador p{color:#aaa;font-size:15px;margin-bottom:15px}
-.btn-card{background:linear-gradient(135deg,var(--prim),var(--sec));color:#000;padding:12px 24px;border-radius:50px;text-decoration:none;font-weight:700;font-size:15px;display:inline-block}
-
-/* QUIENES SOMOS */
-.card{background:var(--card);backdrop-filter:blur(20px);padding:32px;border-radius:24px;border:1px solid #222;margin-bottom:20px}
-.card p{color:#aaa;line-height:1.7;font-size:16px}
-
-/* RESEÑAS */
-.resena{background:var(--card);backdrop-filter:blur(20px);padding:24px;border-radius:20px;border:1px solid #222;margin-bottom:16px}
-.resena p{font-size:16px;margin-bottom:10px}
-.resena b{color:var(--prim)}
-
-/* FAQ */
-.faq-item{background:var(--card);backdrop-filter:blur(20px);padding:24px;border-radius:18px;margin-bottom:14px;border:1px solid #222}
-.faq-item b{font-size:17px}
-.faq-item p{color:#aaa;margin-top:8px}
-
-/* WHATSAPP FLOTANTE */
-.whatsapp-float{position:fixed;bottom:80px;right:20px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;text-decoration:none;box-shadow:0 8px 25px rgba(37,211,102,0.5);z-index:999}
-
-@media (max-width:768px){
-  .hero h1{font-size:2.3rem}
-  .titulo-seccion{font-size:1.9rem}
-  .grid-creadores{grid-template-columns:1fr}
-</style></head><body>
-<div class="overlay" onclick="toggleMenu()"></div>
-<div class="menu-lateral" id="menu">
-  <a href="index.html">🏠 Inicio</a><a href="diamantes.html">💎 Diamantes</a><a href="bots.html">🤖 Bots</a>
-  <a href="spam.html">📢 Spam</a><a href="design.html">🎨 Design</a><a href="garfield.html">🐱 Garfield</a>
-  <a href="nosotros.html">👤 Sobre Nosotros</a><a href="https://wa.me/51999999">💬 WhatsApp</a>
+<div class="top-bar">
+  <select id="pais" onchange="cambiarPrecios()">
+    <option value="PE">🇵🇪 Perú - S/</option>
+    <option value="CL">🇨🇱 Chile - $</option>
+    <option value="AR">🇦🇷 Argentina - $</option>
+    <option value="MX">🇲🇽 México - $</option>
+    <option value="BO">🇧🇴 Bolivia - Bs</option>
+    <option value="UY">🇺🇾 Uruguay - $</option>
+    <option value="US">🇺🇸 USA - $</option>
+    <option value="CO">🇨🇴 Colombia - $</option>
+  </select>
+  <input type="text" id="buscador" placeholder="🔍 Buscar producto..." onkeyup="buscarProducto()">
 </div>
 
-<nav>
-  <div class="hamburguesa" onclick="toggleMenu()"><span></span><span></span><span></span></div>
-  <div class="logo-circulo">SBD</div>
-  <div style="width:34px"></div>
-</nav>
+<a href="https://wa.me/51920726588" target="_blank" class="card creador">
+  <img src="https://files.evogf.win/Q8pffG.jpg" alt="Creador LU">
+  <div>
+    <h3>Creador: LU</h3>
+    <p>Respondo mañanas y noches. Toca mi foto 💬</p>
+  </div>
+</a>
 
-<!-- HERO -->
-<section class="hero">
-  <h1>Haz que te vean</h1>
-  <p>Herramientas reales para crecer en Twitch, YouTube y TikTok. Sin vueltas.</p>
-  <a href="#creadores" class="btn">Conoce al Equipo</a>
+<div class="card oferta">
+  <h2>🔥 OFERTA DE LA SEMANA</h2>
+  <p>1166 Diamantes CON STOCK + 3 días Spam = <b>20% OFF</b></p>
+</div>
+
+<section class="card">
+  <h2>🔥 Así trabajamos</h2>
+  <video controls style="width:100%; border-radius:12px;">
+    <source src="2.mp4" type="video/mp4">
+  </video>
 </section>
 
-<!-- CREADORES -->
-<section class="seccion" id="creadores"><div class="container">
-  <h2 class="titulo-seccion">Creadores</h2>
-  <div class="grid-creadores">
-    <div class="card-creador">
-      <img src="https://placehold.co/300x300/FF6A00/000?text=WHOIS" alt="Whois">
-      <h3>Whois</h3>
-      <p>Fundador & Bot Developer. Encargado de Twitch y YouTube.</p>
-      <a href="https://wa.me/51999999" class="btn-card">Hablar</a>
-    </div>
-    <div class="card-creador">
-      <img src="https://placehold.co/300x300/FFB700/000?text=LU" alt="Lu">
-      <h3>Lu</h3>
-      <p>Co-Fundadora & Designer. Encargada de TikTok y Diseño.</p>
-      <a href="https://wa.me/51999999" class="btn-card">Hablar</a>
-    </div>
+<div class="card testimonios">
+  <h2>⭐ Lo que dicen</h2>
+  <div class="testi">"Llegó en 5 min" - @KillerLu</div>
+  <div class="testi">"Más barato que todos" - @DecanaPro</div>
+</div>
+
+<main id="productos"></main>
+
+<section id="carrito" class="card">
+  <h2>🛒 Tu Pedido (<span id="totalItems">0</span>)</h2>
+  <div id="listaCarrito"></div>
+  <button onclick="abrirPopUpID()">Comprar por WhatsApp</button>
+</section>
+
+<div id="popupID" class="popup">
+  <div class="popup-content">
+    <h3>Último paso 😼</h3>
+    <input type="text" id="idFinal" placeholder="Pon tu ID de Free Fire">
+    <button onclick="enviarWhatsApp()">Enviar Pedido</button>
+    <button onclick="cerrarPopUpID()" class="btn-cerrar">Cancelar</button>
   </div>
-</div></section>
+</div>
 
-<!-- QUIENES SOMOS -->
-<section class="seccion" style="background:#0a0a0a"><div class="container">
-  <h2 class="titulo-seccion">Nuestra Historia</h2>
-  <div class="card">
-    <p>Somos 2 streamers de Lima 🇵🇪 que se cansaron de streamear para 0 personas. 
-    En 2024 empezamos a crear herramientas para crecer y ahora ayudamos a +500 creadores a llegar a su meta.</p>
-  </div>
-</div></section>
-
-<!-- RESEÑAS -->
-<section class="seccion"><div class="container">
-  <h2 class="titulo-seccion">Lo que dicen</h2>
-  <div class="resena"><p>"Pasé de 3 a 50 viewers en 2 semanas. Esto sí funciona"</p><b>- @streamerLima</b></div>
-  <div class="resena"><p>"El soporte responde en 5 min. 100% confiable"</p><b>- @gamerPeru</b></div>
-</div></section>
-
-<!-- FAQ -->
-<section class="seccion" id="faq" style="background:#0a0a0a"><div class="container">
-  <h2 class="titulo-seccion">Preguntas Frecuentes</h2>
-  <div class="faq-item"><b>¿Es seguro usar bots?</b><p>Si. Usamos métodos 100% seguros. Tu cuenta no corre riesgo.</p></div>
-  <div class="faq-item"><b>¿Cuánto demora la entrega?</b><p>Diamantes y Bots: 5 minutos. Diseño: 24 horas máximo.</p></div>
-</div></section>
-
-<!-- BOTON WHATSAPP FLOTANTE -->
-<a href="https://wa.me/51999999" class="whatsapp-float">💬</a>
-
-<script>function toggleMenu(){document.getElementById('menu').classList.toggle('activo');document.querySelector('.overlay').classList.toggle('activo');}</script>
-</body></html>
+<a href="https://wa.me/51920726588" class="whatsapp-float" target="_blank">💬</a>
+<script src="script.js"></script>
+</body>
+</html>
