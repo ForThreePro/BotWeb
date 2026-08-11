@@ -1,22 +1,46 @@
 <!DOCTYPE html>
 <html lang="es">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>TIENDA - GS</title><link rel="stylesheet" href="style.css"></head>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>TIENDA - GS</title>
+<link rel="stylesheet" href="style.css">
+</head>
 <body>
+
 <div class="bg-animado"></div>
-<header><div class="logo">GS<span>.STORE</span></div><div class="menu-btn" onclick="toggleMenu()">☰</div></header>
+
+<header>
+  <div class="logo">GS<span>.STORE</span></div>
+  <div class="menu-btn" onclick="toggleMenu()">☰</div>
+</header>
+
 <nav id="menu">
-  <a href="index.html">INICIO</a><a href="productos.html">TIENDA</a><a href="videos.html">MEDIA</a><a href="carrito.html">CARRITO(<span id="menuTotal">0</span>)</a><a href="https://wa.me/51920726588" target="_blank">SOPORTE</a>
+  <a href="index.html">INICIO</a>
+  <a href="productos.html">TIENDA</a>
+  <a href="videos.html">MEDIA</a>
+  <a href="carrito.html">CARRITO(<span id="menuTotal">0</span>)</a>
+  <a href="https://wa.me/51920726588" target="_blank">SOPORTE</a>
 </nav>
 
 <div class="top-bar">
   <select id="pais" onchange="cambiarPrecios()">
-    <option value="PE">🇵🇪 PE - S/</option><option value="CL">🇨🇱 CL - $</option><option value="AR">🇦🇷 AR - $</option>
-    <option value="MX">🇲🇽 MX - $</option><option value="BO">🇧🇴 BO - Bs</option><option value="UY">🇺🇾 UY - $</option>
+    <option value="PE">🇵🇪 PE - S/</option>
+    <option value="CL">🇨🇱 CL - $</option>
+    <option value="AR">🇦🇷 AR - $</option>
+    <option value="MX">🇲🇽 MX - $</option>
+    <option value="BO">🇧🇴 BO - Bs</option>
+    <option value="UY">🇺🇾 UY - $</option>
   </select>
   <input type="text" id="buscador" placeholder="BUSCAR PRODUCTO..." onkeyup="buscarProducto()">
   <button id="btnTema" onclick="toggleTema()">🌙</button>
 </div>
 
 <main id="productos" class="grid-productos"></main>
+
+<!-- POPUP PARA OPCIONES AL TOCAR TARJETA -->
+<div id="popupOpciones" class="popup"></div>
+
 <script src="script.js"></script>
-</body></html>
+</body>
+</html>
