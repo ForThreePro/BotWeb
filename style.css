@@ -7,13 +7,13 @@ header{display:flex; justify-content:space-between; align-items:center; padding:
 .logo{font-size:22px; font-weight:900; color:#fff;}
 .logo span{color:#ff8c00;}
 .menu-btn{font-size:32px; cursor:pointer; color:#ff8c00;}
-#menu{position:fixed; top:-100%; left:0; width:100%; background:#000000F0; backdrop-filter:blur(20px); transition:0.4s; z-index:98; padding-top:75px;}
+#menu{position:fixed; top:-100%; left:0; width:100%; background:#000F0; backdrop-filter:blur(20px); transition:0.4s; z-index:98; padding-top:75px;}
 #menu.active{top:0;}
 #menu a{display:block; text-align:center; padding:22px; color:#fff; text-decoration:none; font-size:18px; font-weight:700; border-bottom:1px solid #ff8c0022;}
 #menu a:hover{color:#ff8c00;}
 .hero{text-align:center; padding:110px 20px 40px;}
-.hero-img{width:160px; height:160px; border-radius:50%; border:3px solid #ff8c00; box-shadow:0 0 25px #ff8c00; object-fit:cover; margin-bottom:20px;} /* TU LOGO */
-.perfil img{width:70px; height:70px; border-radius:50%; border:2px solid #ff8c00; object-fit:cover;} /* TU FOTO */
+.hero-img{width:160px; height:160px; border-radius:50%; border:3px solid #ff8c00; box-shadow:0 0 25px #ff8c00; object-fit:cover; margin-bottom:20px;}
+.perfil img{width:70px; height:70px; border-radius:50%; border:2px solid #ff8c00; object-fit:cover;}
 .hero h1{font-size:32px; font-weight:900; color:#fff;}
 .hero h1 span{color:#ff8c00; text-shadow:0 0 10px #ff8c00;}
 .hero p{color:#ccc; margin:10px 0 25px; font-size:15px;}
