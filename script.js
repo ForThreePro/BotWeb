@@ -1,7 +1,6 @@
 const numero = "51920726588";
 let carrito = [];
 
-// ========== PRECIOS ==========
 const precios = {
   "spam_3d": {PE:"S/5.50", CL:"$1750", AR:"$2600", MX:"$37.5", BO:"Bs22.5", UY:"$75"},
   "spam_5d": {PE:"S/7.50", CL:"$2450", AR:"$3640", MX:"$52.5", BO:"Bs31.5", UY:"$105"},
@@ -30,7 +29,6 @@ const precios = {
   "seg_5000": {PE:"S/20", CL:"$7000", AR:"$9360", MX:"$150", BO:"Bs90", UY:"$300"},
 }
 
-// ========== DESCRIPCIONES ==========
 const descripciones = {
   "spam_3d": "3 días de spam. 3 horas por día. Puro texto. Inicio al día siguiente.",
   "spam_5d": "5 días de spam. 3 horas por día. Puro texto. Inicio al día siguiente.",
@@ -59,7 +57,6 @@ const descripciones = {
   "seg_5000": "5000 Seguidores Instagram. Entrega gradual y segura.",
 }
 
-// ========== PRODUCTOS ==========
 const productosData = [
   {cat:"📢 SPAM 3H x DÍA", items:["spam_3d","spam_5d","spam_7d"]},
   {cat:"💎 DIAMANTES CON STOCK", items:["d110c","d341c","d572c","d1166c","d2398c","d6160c"]},
@@ -69,7 +66,6 @@ const productosData = [
   {cat:"📈 SEGUIDORES IG", items:["seg_250","seg_500","seg_1000","seg_2000","seg_5000"]}
 ]
 
-// ========== FUNCIONES ==========
 function toggleMenu(){ document.getElementById("menu").classList.toggle("active"); }
 function guardarCarrito(){ localStorage.setItem("carritoGarfield", JSON.stringify(carrito)); }
 function cargarCarritoGuardado(){ let guardado = localStorage.getItem("carritoGarfield"); if(guardado) carrito = JSON.parse(guardado); }
@@ -80,7 +76,7 @@ function cargarProductos(){
   if(!document.getElementById("productos")) return;
   let html = "";
   productosData.forEach(cat=>{
-    html += `<h2 style="padding:20px 15px 10px; color:#00f5ff; font-size:20px;">${cat.cat}</h2><div class="grid-productos">`;
+    html += `<h2 style="padding:20px 15px 10px; color:#ff8c00; font-size:20px;">${cat.cat}</h2><div class="grid-productos">`;
     cat.items.forEach(id=>{
       let nombre = id.replace(/_/g,' ').toUpperCase();
       html += `<div class="prod-card" onclick="abrirOpciones('${id}','${nombre}')">
@@ -103,7 +99,7 @@ function abrirOpciones(id, nombre){
   document.getElementById("popupOpciones").innerHTML = `
     <div class="popup-content">
       <h3>${nombre}</h3>
-      <p style="color:#00f5ff; font-size:22px; font-weight:900; margin:10px 0;">${precio}</p>
+      <p style="color:#ff8c00; font-size:22px; font-weight:900; margin:10px 0;">${precio}</p>
       <p style="font-size:14px; color:#ccc; margin:10px 0;">${desc}</p>
       <button class="btn-add-neon" onclick="confirmarAgregar()">AÑADIR AL CARRITO</button>
       <button onclick="cerrarOpciones()" class="btn-cerrar">CERRAR</button>
@@ -154,9 +150,9 @@ function actualizarCarrito(){
   let html = "";
   carrito.forEach((item)=>{
     let tag = item.id.includes('s') && item.id.startsWith('d')? ' [SIN STOCK]' : ' [CON STOCK]';
-    html += `<p style="border-bottom:1px solid #00f5ff22; padding:10px 0; font-size:16px;">${item.nombre}${tag} - ${item.precio}</p>`;
+    html += `<p style="border-bottom:1px solid #ff8c0022; padding:10px 0; font-size:16px; color:#fff;">${item.nombre}${tag} - ${item.precio}</p>`;
   });
-  if(document.getElementById("listaCarrito")) document.getElementById("listaCarrito").innerHTML = html || "<p>CARRITO VACIO</p>";
+  if(document.getElementById("listaCarrito")) document.getElementById("listaCarrito").innerHTML = html || "<p style='color:#ccc'>CARRITO VACIO</p>";
 }
 function abrirPopUpID(){
   if(carrito.length === 0) return alert("TU CARRITO ESTA VACIO");
@@ -182,6 +178,7 @@ function enviarWhatsApp(){
 window.onload = ()=>{
   cargarCarritoGuardado();
   actualizarMenuTotal();
+  actualizarCarrito(); // <-- ESTO FALTABA PARA QUE CARGUE AL ENTRAR
   if(document.getElementById("pais")){
     let paisGuardado = localStorage.getItem("paisGarfield") || "PE";
     document.getElementById("pais").value = paisGuardado;
