@@ -1,36 +1,34 @@
 const numero = "51920726588";
 let carrito = [];
 
-// ========== PRECIOS ==========
 const precios = {
-  "spam_3d": {PE:"S/5.50", CL:"$1750", AR:"$2600", MX:"$37.5", BO:"Bs22.5", UY:"$75", US:"$2", CO:"$7500"},
-  "spam_5d": {PE:"S/7.50", CL:"$2450", AR:"$3640", MX:"$52.5", BO:"Bs31.5", UY:"$105", US:"$3", CO:"$10500"},
-  "spam_7d": {PE:"S/9.50", CL:"$3150", AR:"$4680", MX:"$67.5", BO:"Bs40.5", UY:"$135", US:"$4", CO:"$13500"},
-  "d110c": {PE:"S/2.50", CL:"$875", AR:"$1300", MX:"$18.75", BO:"Bs11.25", UY:"$37.5", US:"Consultar", CO:"Consultar"},
-  "d341c": {PE:"S/7.00", CL:"$2450", AR:"$3380", MX:"$52.50", BO:"Bs31.5", UY:"$105", US:"Consultar", CO:"Consultar"},
-  "d572c": {PE:"S/12.00", CL:"$4200", AR:"$5720", MX:"$90", BO:"Bs54", UY:"$180", US:"Consultar", CO:"Consultar"},
-  "d1166c":{PE:"S/20.00", CL:"$7000", AR:"$9880", MX:"$150", BO:"Bs90", UY:"$300", US:"Consultar", CO:"Consultar"},
-  "d2398c":{PE:"S/36.00", CL:"$12600", AR:"$18200", MX:"$270", BO:"Bs162", UY:"$540", US:"Consultar", CO:"Consultar"},
-  "d6160c":{PE:"S/92.00", CL:"$32200", AR:"$46800", MX:"$690", BO:"Bs414", UY:"$1380", US:"Consultar", CO:"Consultar"},
-  "d110s": {PE:"S/3.50", CL:"$1225", AR:"$1820", MX:"$26.25", BO:"Bs15.75", UY:"$52.5", US:"Consultar", CO:"Consultar"},
-  "d341s": {PE:"S/10.00", CL:"$3500", AR:"$4680", MX:"$75", BO:"Bs45", UY:"$150", US:"Consultar", CO:"Consultar"},
-  "d572s": {PE:"S/15.00", CL:"$5250", AR:"$7800", MX:"$112.5", BO:"Bs67.5", UY:"$225", US:"Consultar", CO:"Consultar"},
-  "d1166s":{PE:"S/26.00", CL:"$9100", AR:"$13520", MX:"$195", BO:"Bs117", UY:"$390", US:"Consultar", CO:"Consultar"},
-  "d2398s":{PE:"S/52.00", CL:"$18200", AR:"$27040", MX:"$390", BO:"Bs234", UY:"$780", US:"Consultar", CO:"Consultar"},
-  "d6160s":{PE:"S/126.00", CL:"$44100", AR:"$65520", MX:"$945", BO:"Bs567", UY:"$1890", US:"Consultar", CO:"Consultar"},
-  "logo": {PE:"S/3", CL:"$1050", AR:"$1560", MX:"$22.5", BO:"Bs13.5", UY:"$22.5", US:"$2", CO:"$4500"},
-  "plantilla":{PE:"S/4", CL:"$1050", AR:"$1560", MX:"$22.5", BO:"Bs13.5", UY:"$22.5", US:"$2", CO:"$4500"},
-  "caligra":{PE:"S/3", CL:"$1050", AR:"$1560", MX:"$22.5", BO:"Bs13.5", UY:"$22.5", US:"$2", CO:"$4500"},
-  "jersey": {PE:"S/5", CL:"$1750", AR:"$2600", MX:"$37.5", BO:"Bs22.5", UY:"$75", US:"$2", CO:"$7500"},
-  "decana": {PE:"S/15", CL:"$5000", AR:"$7000", MX:"$114", BO:"Bs55.5", UY:"$210", US:"Consultar", CO:"Consultar"},
-  "seg_250": {PE:"S/1.50", CL:"$525", AR:"$520", MX:"$11.25", BO:"Bs6.75", UY:"$22.5", US:"Consultar", CO:"Consultar"},
-  "seg_500": {PE:"S/2.50", CL:"$875", AR:"$1040", MX:"$18.75", BO:"Bs11.25",UY:"$37.5", US:"Consultar", CO:"Consultar"},
-  "seg_1000": {PE:"S/5", CL:"$1750", AR:"$2080", MX:"$37.5", BO:"Bs22.5", UY:"$75", US:"Consultar", CO:"Consultar"},
-  "seg_2000": {PE:"S/10", CL:"$3500", AR:"$4680", MX:"$75", BO:"Bs45", UY:"$150", US:"Consultar", CO:"Consultar"},
-  "seg_5000": {PE:"S/20", CL:"$7000", AR:"$9360", MX:"$150", BO:"Bs90", UY:"$300", US:"Consultar", CO:"Consultar"},
+  "spam_3d": {PE:"S/5.50", CL:"$1750", AR:"$2600", MX:"$37.5", BO:"Bs22.5", UY:"$75"},
+  "spam_5d": {PE:"S/7.50", CL:"$2450", AR:"$3640", MX:"$52.5", BO:"Bs31.5", UY:"$105"},
+  "spam_7d": {PE:"S/9.50", CL:"$3150", AR:"$4680", MX:"$67.5", BO:"Bs40.5", UY:"$135"},
+  "d110c": {PE:"S/2.50", CL:"$875", AR:"$1300", MX:"$18.75", BO:"Bs11.25", UY:"$37.5"},
+  "d341c": {PE:"S/7.00", CL:"$2450", AR:"$3380", MX:"$52.50", BO:"Bs31.5", UY:"$105"},
+  "d572c": {PE:"S/12.00", CL:"$4200", AR:"$5720", MX:"$90", BO:"Bs54", UY:"$180"},
+  "d1166c":{PE:"S/20.00", CL:"$7000", AR:"$9880", MX:"$150", BO:"Bs90", UY:"$300"},
+  "d2398c":{PE:"S/36.00", CL:"$12600", AR:"$18200", MX:"$270", BO:"Bs162", UY:"$540"},
+  "d6160c":{PE:"S/92.00", CL:"$32200", AR:"$46800", MX:"$690", BO:"Bs414", UY:"$1380"},
+  "d110s": {PE:"S/3.50", CL:"$1225", AR:"$1820", MX:"$26.25", BO:"Bs15.75", UY:"$52.5"},
+  "d341s": {PE:"S/10.00", CL:"$3500", AR:"$4680", MX:"$75", BO:"Bs45", UY:"$150"},
+  "d572s": {PE:"S/15.00", CL:"$5250", AR:"$7800", MX:"$112.5", BO:"Bs67.5", UY:"$225"},
+  "d1166s":{PE:"S/26.00", CL:"$9100", AR:"$13520", MX:"$195", BO:"Bs117", UY:"$390"},
+  "d2398s":{PE:"S/52.00", CL:"$18200", AR:"$27040", MX:"$390", BO:"Bs234", UY:"$780"},
+  "d6160s":{PE:"S/126.00", CL:"$44100", AR:"$65520", MX:"$945", BO:"Bs567", UY:"$1890"},
+  "logo": {PE:"S/3", CL:"$1050", AR:"$1560", MX:"$22.5", BO:"Bs13.5", UY:"$22.5"},
+  "plantilla":{PE:"S/4", CL:"$1050", AR:"$1560", MX:"$22.5", BO:"Bs13.5", UY:"$22.5"},
+  "caligra":{PE:"S/3", CL:"$1050", AR:"$1560", MX:"$22.5", BO:"Bs13.5", UY:"$22.5"},
+  "jersey": {PE:"S/5", CL:"$1750", AR:"$2600", MX:"$37.5", BO:"Bs22.5", UY:"$75"},
+  "decana": {PE:"S/15", CL:"$5000", AR:"$7000", MX:"$114", BO:"Bs55.5", UY:"$210"},
+  "seg_250": {PE:"S/1.50", CL:"$525", AR:"$520", MX:"$11.25", BO:"Bs6.75", UY:"$22.5"},
+  "seg_500": {PE:"S/2.50", CL:"$875", AR:"$1040", MX:"$18.75", BO:"Bs11.25",UY:"$37.5"},
+  "seg_1000": {PE:"S/5", CL:"$1750", AR:"$2080", MX:"$37.5", BO:"Bs22.5", UY:"$75"},
+  "seg_2000": {PE:"S/10", CL:"$3500", AR:"$4680", MX:"$75", BO:"Bs45", UY:"$150"},
+  "seg_5000": {PE:"S/20", CL:"$7000", AR:"$9360", MX:"$150", BO:"Bs90", UY:"$300"},
 }
 
-// ========== DESCRIPCIONES ==========
 const descripciones = {
   "spam_3d": "3 días de spam. 3 horas por día. Puro texto. Inicio al día siguiente.",
   "spam_5d": "5 días de spam. 3 horas por día. Puro texto. Inicio al día siguiente.",
@@ -59,7 +57,6 @@ const descripciones = {
   "seg_5000": "5000 Seguidores Instagram. Entrega gradual y segura.",
 }
 
-// ========== PRODUCTOS ==========
 const productosData = [
   {cat:"📢 SPAM 3H x DÍA", items:["spam_3d","spam_5d","spam_7d"]},
   {cat:"💎 DIAMANTES CON STOCK", items:["d110c","d341c","d572c","d1166c","d2398c","d6160c"]},
@@ -69,29 +66,23 @@ const productosData = [
   {cat:"📈 SEGUIDORES IG", items:["seg_250","seg_500","seg_1000","seg_2000","seg_5000"]}
 ]
 
-// ========== MENU ==========
-function toggleMenu(){
-  document.getElementById("menu").classList.toggle("active");
-}
-
-// ========== LOCALSTORAGE ==========
+function toggleMenu(){ document.getElementById("menu").classList.toggle("active"); }
 function guardarCarrito(){ localStorage.setItem("carritoGarfield", JSON.stringify(carrito)); }
 function cargarCarritoGuardado(){ let guardado = localStorage.getItem("carritoGarfield"); if(guardado) carrito = JSON.parse(guardado); }
 function actualizarMenuTotal(){ if(document.getElementById("menuTotal")) document.getElementById("menuTotal").innerText = carrito.length; }
 
-// ========== CARGAR PRODUCTOS CYBER ==========
 function cargarProductos(){
   if(!document.getElementById("productos")) return;
   let html = "";
   productosData.forEach(cat=>{
-    html += `<h2 style="padding:20px 20px 10px; color:#00f5ff; text-shadow:0 0 10px #00f5ff;">${cat.cat}</h2><div class="grid-productos">`;
+    html += `<h2 style="padding:20px 15px 10px; color:#00f5ff; font-size:20px;">${cat.cat}</h2><div class="grid-productos">`;
     cat.items.forEach(id=>{
       let nombre = id.replace(/_/g,' ').toUpperCase();
       html += `<div class="prod-card">
         <h3>${nombre}</h3>
         <div class="prod-precio" data-precio="${id}">CARGANDO...</div>
         <div class="prod-desc" id="desc-${id}">${descripciones[id]}</div>
-        <button onclick="toggleDescCyber('${id}')" style="background:none; border:none; color:#00f5ff; font-size:10px; margin-bottom:5px;">VER INFO</button>
+        <button onclick="document.getElementById('desc-${id}').style.display='block'" style="background:none; border:none; color:#00f5ff; font-size:14px; margin-bottom:5px;">VER INFO</button>
         <button class="btn-add-neon" onclick="agregarCarrito('${id}','${nombre}')">+ AÑADIR</button>
       </div>`;
     });
@@ -99,11 +90,6 @@ function cargarProductos(){
   });
   document.getElementById("productos").innerHTML = html;
   cambiarPrecios();
-}
-
-function toggleDescCyber(id){
-  let desc = document.getElementById(`desc-${id}`);
-  desc.style.display = desc.style.display === 'block'? 'none' : 'block';
 }
 
 function buscarProducto(){
@@ -114,24 +100,14 @@ function buscarProducto(){
   })
 }
 
-// ========== TEMA Y MUSICA ==========
-function toggleTema(){
-  document.body.classList.toggle("light");
-  document.getElementById("btnTema").innerText = document.body.classList.contains("light")? '☀️' : '🌙';
-}
+function toggleTema(){ document.body.classList.toggle("light"); }
 function toggleMusica(){
   let audio = document.getElementById("musicaFondo");
   let btn = document.getElementById("btnMusica");
-  if(audio.paused){
-    audio.play();
-    btn.innerText = "🔇 PAUSAR AUDIO";
-  } else {
-    audio.pause();
-    btn.innerText = "🔊 ACTIVAR AUDIO";
-  }
+  if(audio.paused){ audio.play(); btn.innerText = "🔇 PAUSAR AUDIO"; }
+  else { audio.pause(); btn.innerText = "🔊 ACTIVAR AUDIO"; }
 }
 
-// ========== PRECIOS Y CARRITO ==========
 function cambiarPrecios(){
   let pais = document.getElementById("pais").value;
   document.querySelectorAll("[data-precio]").forEach(el=>{
@@ -145,7 +121,7 @@ function agregarCarrito(id, nombre){
   let pais = document.getElementById("pais").value;
   let precio = precios[id][pais];
   if(id.includes('s') && id.startsWith('d')){
-    if(!confirm(`⚠️ ATENCIÓN: ${nombre} SIN STOCK\n¿Añadir igual?`)) return;
+    if(!confirm(`⚠️ ${nombre} SIN STOCK\n¿Añadir igual?`)) return;
   }
   carrito.push({nombre, precio, id});
   guardarCarrito();
@@ -155,25 +131,20 @@ function agregarCarrito(id, nombre){
 }
 
 function actualizarCarrito(){
-  if(document.getElementById("totalItems"))
-    document.getElementById("totalItems").innerText = carrito.length;
+  if(document.getElementById("totalItems")) document.getElementById("totalItems").innerText = carrito.length;
   let html = "";
   carrito.forEach((item)=>{
     let tag = item.id.includes('s') && item.id.startsWith('d')? ' [SIN STOCK]' : ' [CON STOCK]';
-    html += `<p style="border-bottom:1px solid #00f5ff22; padding:8px 0;">${item.nombre}${tag} - ${item.precio}</p>`;
+    html += `<p style="border-bottom:1px solid #00f5ff22; padding:10px 0; font-size:16px;">${item.nombre}${tag} - ${item.precio}</p>`;
   });
-  if(document.getElementById("listaCarrito"))
-    document.getElementById("listaCarrito").innerHTML = html || "<p>CARRITO VACIO</p>";
+  if(document.getElementById("listaCarrito")) document.getElementById("listaCarrito").innerHTML = html || "<p>CARRITO VACIO</p>";
 }
 
-// ========== WHATSAPP ==========
 function abrirPopUpID(){
   if(carrito.length === 0) return alert("TU CARRITO ESTA VACIO");
   document.getElementById("popupID").style.display = "flex";
 }
-function cerrarPopUpID(){
-  document.getElementById("popupID").style.display = "none";
-}
+function cerrarPopUpID(){ document.getElementById("popupID").style.display = "none"; }
 
 function enviarWhatsApp(){
   let id = document.getElementById("idFinal").value;
@@ -192,7 +163,6 @@ function enviarWhatsApp(){
   cerrarPopUpID();
 }
 
-// ========== INICIO ==========
 window.onload = ()=>{
   cargarCarritoGuardado();
   actualizarMenuTotal();
