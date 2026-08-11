@@ -1,44 +1,22 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Productos - Garfield Store</title>
-<link rel="stylesheet" href="style.css">
-</head>
+<head><meta charset="UTF-8"><title>TIENDA - GS</title><link rel="stylesheet" href="style.css"></head>
 <body>
-
-<header class="navbar">
-  <h1>💎 PRODUCTOS</h1>
-  <div class="menu-btn" onclick="toggleMenu()">☰</div>
-</header>
-
-<nav id="menuLateral" class="menu-lateral">
-  <a href="index.html">🏠 Inicio</a>
-  <a href="productos.html">💎 Productos</a>
-  <a href="videos.html">🎥 Videos</a>
-  <a href="carrito.html">🛒 Carrito <span id="menuTotal">0</span></a>
-  <a href="https://wa.me/51920726588" target="_blank">💬 Soporte</a>
+<div class="bg-animado"></div>
+<header><div class="logo">GS<span>.STORE</span></div><div class="menu-btn" onclick="toggleMenu()">☰</div></header>
+<nav id="menu">
+  <a href="index.html">INICIO</a><a href="productos.html">TIENDA</a><a href="videos.html">MEDIA</a><a href="carrito.html">CARRITO(<span id="menuTotal">0</span>)</a><a href="https://wa.me/51920726588" target="_blank">SOPORTE</a>
 </nav>
-<div id="overlayMenu" class="overlay-menu" onclick="toggleMenu()"></div>
 
 <div class="top-bar">
   <select id="pais" onchange="cambiarPrecios()">
-    <option value="PE">🇵🇪 Perú - S/</option>
-    <option value="CL">🇨🇱 Chile - $</option>
-    <option value="AR">🇦🇷 Argentina - $</option>
-    <option value="MX">🇲🇽 México - $</option>
-    <option value="BO">🇧🇴 Bolivia - Bs</option>
-    <option value="UY">🇺🇾 Uruguay - $</option>
-    <option value="US">🇺🇸 USA - $</option>
-    <option value="CO">🇨🇴 Colombia - $</option>
+    <option value="PE">🇵🇪 PE - S/</option><option value="CL">🇨🇱 CL - $</option><option value="AR">🇦🇷 AR - $</option>
+    <option value="MX">🇲🇽 MX - $</option><option value="BO">🇧🇴 BO - Bs</option><option value="UY">🇺🇾 UY - $</option>
   </select>
-  <input type="text" id="buscador" placeholder="🔍 Buscar..." onkeyup="buscarProducto()">
+  <input type="text" id="buscador" placeholder="BUSCAR PRODUCTO..." onkeyup="buscarProducto()">
   <button id="btnTema" onclick="toggleTema()">🌙</button>
 </div>
 
-<main id="productos"></main>
-
+<main id="productos" class="grid-productos"></main>
 <script src="script.js"></script>
-</body>
-</html>
+</body></html>
