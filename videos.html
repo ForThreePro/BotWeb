@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Videos - Garfield Store</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="navbar">
+  <h1>🎥 VIDEOS</h1>
+  <div class="menu-btn" onclick="toggleMenu()">☰</div>
+</header>
+
+<nav id="menuLateral" class="menu-lateral">
+  <a href="index.html">🏠 Inicio</a>
+  <a href="productos.html">💎 Productos</a>
+  <a href="videos.html">🎥 Videos</a>
+  <a href="carrito.html">🛒 Carrito <span id="menuTotal">0</span></a>
+  <a href="https://wa.me/51920726588" target="_blank">💬 Soporte</a>
+</nav>
+<div id="overlayMenu" class="overlay-menu" onclick="toggleMenu()"></div>
+
+<section class="card">
+  <h2>Recargas Rápidas</h2>
+  <video controls style="width:100%; border-radius:12px;"><source src="1.mp4" type="video/mp4"></video>
+</section>
+
+<section class="card">
+  <h2>Diseños y Spam</h2>
+  <video controls style="width:100%; border-radius:12px;"><source src="2.mp4" type="video/mp4"></video>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
