@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>GS | Garfield Store</title>
-<link rel="stylesheet" href="style.css">
+<title>GARFIELD STORE</title>
+<link rel="stylesheet" href="style.css?v=2">
 </head>
 <body>
 
@@ -24,28 +24,37 @@
 </nav>
 
 <section class="hero">
-  <img src="https://files.evogb.win/2gepcp.jpg" class="hero-img">
-  <h1>GARFIELD <span>STORE</span></h1>
-  <p>Recargas, Diseños y Spam al instante</p>
-  <button onclick="toggleMusica()" id="btnMusica" class="btn-principal">🔊 ACTIVAR AUDIO</button>
-  <audio id="musicaFondo" loop><source src="garfield.mp3" type="audio/mpeg"></audio>
-  <button onclick="window.location='productos.html'" class="btn-principal" style="margin-top:15px; background:linear-gradient(90deg, #00f5ff, #a855f7);">ENTRAR A LA TIENDA</button>
+  <img src="garfield.jpg" alt="Garfield" class="hero-img">
+  <h1>BIENVENIDO A <span>GARFIELD STORE</span></h1>
+  <p>LA MEJOR TIENDA DE FREE FIRE Y DISEÑOS</p>
+  <button onclick="window.location='productos.html'" class="btn-principal">VER TIENDA</button>
+  <button id="btnMusica" onclick="toggleMusica()" class="btn-principal">🔊 ACTIVAR AUDIO</button>
 </section>
 
-<section class="perfil">
-  <img src="https://files.evogb.win/Q8pffG.jpg">
+<div class="perfil">
+  <img src="garfield.jpg" alt="Perfil">
   <div>
-    <h3>LU | FUNDADOR</h3>
-    <p>Soporte 24/7 por WhatsApp</p>
-    <a href="https://wa.me/51920726588" class="btn-wsp">CHATEAR</a>
+    <h3>GARFIELD OFICIAL</h3>
+    <p>Vendedor de confianza. Entrega inmediata.</p>
+    <a href="https://wa.me/51920726588" class="btn-wsp" target="_blank">WHATSAPP</a>
   </div>
-</section>
+</div>
 
-<section class="oferta-neon">
-  <h2>🔥 COMBO NEON 🔥</h2>
-  <p>Spam 7D + 341 Diamantes = 20% OFF</p>
-</section>
+<div class="oferta-neon">
+  <h2>🔥 OFERTA DE LA SEMANA 🔥</h2>
+  <p>6160 DIAMANTES CON STOCK: S/92</p>
+</div>
 
-<script src="script.js"></script>
+<div class="testi-neon">
+  <h2>LO QUE DICEN NUESTROS CLIENTES</h2>
+  <div class="testi-card">"100% Recomendado. Me llegó al instante" - Juan</div>
+  <div class="testi-card">"Los diseños están GOD" - Maria</div>
+</div>
+
+<audio id="musicaFondo" loop>
+  <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<script src="script.js?v=2"></script>
 </body>
 </html>
