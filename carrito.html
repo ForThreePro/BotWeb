@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carrito - Garfield Store</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="navbar">
+  <h1>🛒 CARRITO</h1>
+  <div class="menu-btn" onclick="toggleMenu()">☰</div>
+</header>
+
+<nav id="menuLateral" class="menu-lateral">
+  <a href="index.html">🏠 Inicio</a>
+  <a href="productos.html">💎 Productos</a>
+  <a href="videos.html">🎥 Videos</a>
+  <a href="carrito.html">🛒 Carrito <span id="menuTotal">0</span></a>
+  <a href="https://wa.me/51920726588" target="_blank">💬 Soporte</a>
+</nav>
+<div id="overlayMenu" class="overlay-menu" onclick="toggleMenu()"></div>
+
+<section id="carrito" class="card">
+  <h2>Tu Pedido (<span id="totalItems">0</span>)</h2>
+  <div id="listaCarrito"></div>
+  <button onclick="abrirPopUpID()">Comprar por WhatsApp</button>
+</section>
+
+<div id="popupID" class="popup">
+  <div class="popup-content">
+    <h3>Último paso 😼</h3>
+    <input type="text" id="idFinal" placeholder="Pon tu ID de Free Fire">
+    <button onclick="enviarWhatsApp()">Enviar Pedido</button>
+    <button onclick="cerrarPopUpID()" class="btn-cerrar">Cancelar</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
