@@ -2,27 +2,46 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>GARFIELD STORE</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GARFIELD STORE | CYBER</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="bg-animado"></div>
-<header><div class="logo">GS<span>.STORE</span></div><div class="menu-btn" onclick="toggleMenu()">☰</div></header>
-<nav id="menu"><a href="index.html">INICIO</a><a href="productos.html">TIENDA</a><a href="videos.html">MEDIA</a><a href="carrito.html">CARRITO(<span id="menuTotal">0</span>)</a><a href="https://wa.me/51920726588" target="_blank">SOPORTE</a></nav>
-<section class="hero">
-  <img src="https://files.evogb.win/2gepcp.jpg" alt="Logo Garfield" class="hero-img">
-  <h1>BIENVENIDO A <span>GARFIELD STORE</span></h1>
-  <p>LA MEJOR TIENDA DE FREE FIRE Y DISEÑOS</p>
-  <button onclick="window.location='productos.html'" class="btn-principal">VER TIENDA</button>
-  <button id="btnMusica" onclick="toggleMusica()" class="btn-principal">🔊 ACTIVAR AUDIO</button>
+<div class="grid-bg"></div>
+<header>
+  <div class="logo-cyber">GARFIELD<span>.STORE</span></div>
+  <div class="menu-btn-cyber" onclick="toggleMenu()">☰</div>
+</header>
+<nav id="menu">
+  <a href="index.html">INICIO</a>
+  <a href="productos.html">TIENDA</a>
+  <a href="videos.html">MEDIA</a>
+  <a href="carrito.html">CARRITO [<span id="menuTotal">0</span>]</a>
+  <a href="https://wa.me/51920726588" target="_blank">SOPORTE 24/7</a>
+</nav>
+<section class="hero-cyber">
+  <div class="glitch-wrapper">
+    <img src="https://files.evogb.win/2gepcp.jpg" class="logo-3d">
+    <h1 class="glitch" data-text="GARFIELD STORE">GARFIELD STORE</h1>
+  </div>
+  <p class="sub-cyber">> ACCESO A LA MEJOR TIENDA DE FREE FIRE</p>
+  <div class="btn-group">
+    <button onclick="window.location='productos.html'" class="btn-cyber">ENTRAR A TIENDA ></button>
+    <button id="btnMusica" onclick="toggleMusica()" class="btn-cyber-outline">🔊 AUDIO</button>
+  </div>
 </section>
-<div class="perfil">
-  <img src="https://files.evogb.win/Q8pffG.jpg" alt="Creador">
-  <div><h3>GARFIELD OFICIAL</h3><p>Vendedor de confianza. Entrega inmediata.</p><a href="https://wa.me/51920726588" class="btn-wsp" target="_blank">WHATSAPP</a></div>
+<div class="card-creador">
+  <img src="https://files.evogb.win/Q8pffG.jpg">
+  <div>
+    <h3>[ADMIN] GARFIELD OFICIAL</h3>
+    <p>> Estado: ONLINE | Entrega: INMEDIATA</p>
+    <a href="https://wa.me/51920726588" class="btn-wsp-cyber" target="_blank">CONTACTAR</a>
+  </div>
 </div>
-<div class="oferta-neon"><h2>🔥 OFERTA DE LA SEMANA 🔥</h2><p>6160 DIAMANTES CON STOCK: S/92</p></div>
-<div class="testi-neon"><h2>LO QUE DICEN NUESTROS CLIENTES</h2><div class="testi-card">"100% Recomendado. Me llegó al instante" - Juan</div><div class="testi-card">"Los diseños están GOD" - Maria</div></div>
+<div class="oferta-cyber">
+  <h2>[!] OFERTA CRÍTICA [!]</h2>
+  <p>6160 DIAMANTES CON STOCK :: S/92</p>
+</div>
 <audio id="musicaFondo" loop><source src="garfield.mp3" type="audio/mpeg"></audio>
 <script src="script.js"></script>
 </body>
