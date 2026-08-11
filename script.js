@@ -66,6 +66,17 @@ const productosData = [
   {cat:"📈 SEGUIDORES INSTAGRAM", items:["seg_250","seg_500","seg_1000","seg_2000","seg_5000"]}
 ]
 
+// MENU HAMBURGUESA
+function toggleMenu(){
+  document.getElementById("menuLateral").classList.toggle("active");
+  document.getElementById("overlayMenu").classList.toggle("active");
+}
+function scrollToSeccion(id){
+  document.getElementById(id).scrollIntoView({behavior: "smooth"});
+  toggleMenu();
+}
+
+// CARGAR PRODUCTOS
 function cargarProductos(){
   let html = "";
   productosData.forEach(cat=>{
@@ -102,23 +113,24 @@ function buscarProducto(){
   })
 }
 
-document.getElementById("btnTema").onclick = ()=>{
+// TEMA Y MÚSICA
+function toggleTema(){
   document.body.classList.toggle("light");
   document.getElementById("btnTema").innerText = document.body.classList.contains("light")? '☀️' : '🌙';
 }
-
 function toggleMusica(){
   let audio = document.getElementById("musicaFondo");
   let btn = document.getElementById("btnMusica");
   if(audio.paused){
     audio.play();
-    btn.innerText = "🔊 Música ON";
+    btn.innerText = "🔇 Pausar Música";
   } else {
     audio.pause();
-    btn.innerText = "🔇 Música OFF";
+    btn.innerText = "🔊 Activar Música";
   }
 }
 
+// PRECIOS Y CARRITO
 function cambiarPrecios(){
   let pais = document.getElementById("pais").value;
   document.querySelectorAll("[data-precio]").forEach(el=>{
@@ -150,6 +162,7 @@ function actualizarCarrito(){
   document.getElementById("listaCarrito").innerHTML = html;
 }
 
+// WHATSAPP
 function abrirPopUpID(){
   if(carrito.length === 0) return alert("Tu carrito está vacío");
   document.getElementById("popupID").style.display = "flex";
@@ -172,9 +185,10 @@ function enviarWhatsApp(){
   carrito = []; actualizarCarrito(); cerrarPopUpID();
 }
 
+// INICIO
 window.onload = ()=>{
   let paisGuardado = localStorage.getItem("paisGarfield") || "PE";
   document.getElementById("pais").value = paisGuardado;
   cargarProductos();
-  document.getElementById("musicaFondo").volume = 0.3;
+  document.getElementById("musicaFondo").volume = 0.4;
 }
