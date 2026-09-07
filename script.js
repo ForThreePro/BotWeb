@@ -6,23 +6,23 @@ function abrirPopup(tipo) {
     const info = {
         mensual: {
             t: "🐱 Bot Grupo Mensual - S/ 5",
-            txt: "¿Para qué sirve?\n\nPerfecto si quieres probar Garfield Bot en tu grupo por 30 días.\n\nIncluye:\n✅ Los 150+ comandos\n✅ Antispam, Antidelete, Descargas\n✅ IA: ChatGPT4, Claude, Gemini\n✅ Soporte por WhatsApp\n✅ Actualizaciones del mes"
+            txt: "IDEAL PARA PROBAR 🔥\n\nIncluye:\n✅ 30 días de uso completo\n✅ 150+ comandos activos\n✅ AntiBan + Antispam Pro\n✅ Descargas Ilimitadas 4K\n✅ IA ChatGPT4 + Gemini\n✅ Soporte 24/7 por WhatsApp\nInstalación en 5 minutos.\nRenovación automática opcional."
         },
         permanente: {
             t: "🐱 Bot Grupo Permanente - S/ 7",
-            txt: "¿Para qué sirve?\n\nPago único y tu grupo tiene Garfield Bot de por vida. Sin renovar cada mes.\n\nIncluye todo lo del mensual +\n✅ Bot activo para siempre\n✅ Todas las actualizaciones futuras\n✅ Soporte prioritario"
+            txt: "EL MÁS VENDIDO 👑\n\nIncluye todo lo del mensual MÁS:\n✅ Pago único - Para siempre\n✅ Todas las actualizaciones futuras\n✅ Soporte prioritario 24/7\n✅ Acceso a funciones beta\n✅ Sin renovaciones\nAhorra S/ 53 al año vs mensual."
         },
         vip: {
             t: "👑 Bot Personalizado VIP - S/ 35",
-            txt: "¿Para qué sirve?\n\nTu propio bot con el nombre que quieras. El más completo.\n\nIncluye:\n✅ Nombre y logo personalizado\n✅ Comandos exclusivos para ti\n✅ Panel de control privado\n✅ Prioridad 24/7\n✅ 150+ comandos + funciones VIP"
+            txt: "TU MARCA, TU BOT ⭐\n\nIncluye:\n✅ Nombre y logo personalizado\n✅ Comandos exclusivos solo para ti\n✅ Panel de control web privado\n✅ Prioridad máxima de soporte\n✅ Funciones VIP ocultas\n✅ 150+ comandos base\n\nEntrega en 24h con tu branding."
         },
         web: {
             t: "🌐 Página Ventas Web - S/ 15",
-            txt: "¿Para qué sirve?\n\nUna página como esta para que vendas tu bot 24/7.\n\nIncluye:\n✅ Diseño Garfield profesional\n✅ Botones de WhatsApp directos\n✅ Sección de precios con pop-ups\n✅ Lista para publicar en Netlify/Vercel"
+            txt: "VENDE 24/7 SIN PARAR 🌐\n\nIncluye:\n✅ Diseño Garfield Premium como este\n✅ Botones de WhatsApp con mensaje automático\n✅ Sección de precios con pop-ups\n✅ Responsive para celular\n✅ Lista para subir a Netlify/Vercel\n✅ Edición de textos incluida"
         },
         server: {
             t: "⚡ Servidor para Bot - S/ 10",
-            txt: "¿Para qué sirve?\n\nHosting 24/7 para que tu bot nunca se caiga.\n\nIncluye:\n✅ Servidor rápido y estable\n✅ Bot online todo el día\n✅ Instalación gratis\n✅ Respaldo automático"
+            txt: "BOT SIEMPRE ONLINE ⚡\n\nIncluye:\n✅ Hosting 24/7 estable\n✅ Bot online todo el día sin caídas\n✅ Instalación y configuración gratis\n✅ Respaldo automático semanal\n✅ Soporte técnico incluido\nIdeal para 1 a 5 bots."
         }
     };
 
@@ -33,4 +33,11 @@ function abrirPopup(tipo) {
 
 function cerrarPopup() {
     document.getElementById('popup').style.display = 'none';
+}
+
+// Cerrar popup al hacer click afuera
+window.onclick = function(event) {
+    if (event.target == document.getElementById('popup')) {
+        cerrarPopup();
+    }
 }
